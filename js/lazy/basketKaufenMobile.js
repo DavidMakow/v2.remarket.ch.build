@@ -2485,9 +2485,9 @@ var Basket = exports.Basket = function (_PureComponent) {
                                     });
                                 } else if (_this9.state.payMethod.method === 'IdealPaymentRechnung') {
                                     document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/idealPaymentRechnung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
+                                    _axios2.default.get('/api/idealPaymentRechnung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (sub_result) {
                                         document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (typeof result.data.invoiceNumber === 'string' && result.data.invoiceNumber != "") {
+                                        if (typeof sub_result.data.invoiceNumber === 'string' && sub_result.data.invoiceNumber != "") {
                                             _reactRouter.browserHistory.push('/danke');
                                         } else {
                                             _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=115');
@@ -2502,10 +2502,9 @@ var Basket = exports.Basket = function (_PureComponent) {
                                     });
                                 } else if (_this9.state.payMethod.method === 'IdealPaymentRatenzahlung') {
                                     document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/idealPaymentRatenzahlung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
+                                    _axios2.default.get('/api/idealPaymentRatenzahlung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (sub_result) {
                                         document.getElementById('spinner-box-load').style.display = 'none';
-                                        debugger;
-                                        if (result.status === 200) {
+                                        if (sub_result.status === 200) {
                                             _reactRouter.browserHistory.push('/danke');
                                         } else {
                                             _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=116');
