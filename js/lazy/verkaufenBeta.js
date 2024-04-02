@@ -5607,6 +5607,7 @@ var ShowResultsPersonalData = function (_Component) {
                 goToDelivery = _this$props.goToDelivery,
                 uidNumberField = _this$props.uidNumberField,
                 handlerChangeInput = _this$props.handlerChangeInput,
+                clickBtn = _this$props.clickBtn,
                 domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1],
                 classUidNumberRow = inputCheckbox.company ? uidNumberField ? "rowInputs uid-number-wrap show-input" : "rowInputs uid-number-wrap" : "rowInputs uid-number-wrap hide";
 
@@ -5700,18 +5701,35 @@ var ShowResultsPersonalData = function (_Component) {
                                         'div',
                                         { className: 'wrapLabel' },
                                         _react2.default.createElement(
-                                            'label',
+                                            'div',
                                             null,
-                                            _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Herr', required: true }),
-                                            _react2.default.createElement('span', null),
-                                            'Herr'
-                                        ),
-                                        _react2.default.createElement(
-                                            'label',
-                                            null,
-                                            _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Frau', required: true }),
-                                            _react2.default.createElement('span', null),
-                                            'Frau'
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: _this.props.validateError.gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
+                                                _react2.default.createElement(
+                                                    'label',
+                                                    null,
+                                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Herr', onClick: function onClick() {
+                                                            return _this.props.validateForm();
+                                                        }, required: true }),
+                                                    _react2.default.createElement('span', null),
+                                                    'Herr'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'label',
+                                                    null,
+                                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Frau', onClick: function onClick() {
+                                                            return _this.props.validateForm();
+                                                        }, required: true }),
+                                                    _react2.default.createElement('span', null),
+                                                    'Frau'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.gender.msg
+                                            )
                                         ),
                                         _react2.default.createElement(
                                             'label',
@@ -5731,11 +5749,18 @@ var ShowResultsPersonalData = function (_Component) {
                                     _react2.default.createElement(
                                         'div',
                                         { className: 'input-wrapper' },
-                                        _react2.default.createElement('input', { type: 'text', name: 'companyName', placeholder: 'Firma', required: inputCheckbox.company }),
+                                        _react2.default.createElement('input', { type: 'text', name: 'companyName', className: _this.props.validateError.companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', onChange: function onChange() {
+                                                return _this.props.validateForm();
+                                            }, required: inputCheckbox.company }),
                                         _react2.default.createElement(
                                             'span',
                                             { className: 'placeholder' },
                                             'Firma'
+                                        ),
+                                        _react2.default.createElement(
+                                            'span',
+                                            { className: 'errorText' },
+                                            _this.props.validateError.companyName.msg
                                         )
                                     )
                                 ),
@@ -5790,21 +5815,35 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper adjust-wrapper' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'firstname', placeholder: 'Vorname', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'firstname', className: _this.props.validateError.firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Vorname'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.firstname.msg
                                             )
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'lastname', placeholder: 'Nachname', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'lastname', className: _this.props.validateError.lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Nachname'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.lastname.msg
                                             )
                                         )
                                     )
@@ -5818,7 +5857,9 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper adjust-wrapper' },
-                                            _react2.default.createElement('input', { type: 'email', name: 'email', className: error.info ? 'error' : null, placeholder: 'E-Mail', required: true }),
+                                            _react2.default.createElement('input', { type: 'email', name: 'email', className: error.info || _this.props.validateError.email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
@@ -5827,17 +5868,24 @@ var ShowResultsPersonalData = function (_Component) {
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'errorText' },
-                                                error.info
+                                                error.info ? error.info : _this.props.validateError.email.error ? _this.props.validateError.email.msg : ''
                                             )
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper' },
-                                            _react2.default.createElement('input', { type: 'tel', name: 'phone', placeholder: 'Telefon (mobil)', minLength: '10', required: true }),
+                                            _react2.default.createElement('input', { type: 'tel', name: 'phone', className: _this.props.validateError.phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', minLength: '10', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Telefon (mobil)'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.phone.msg
                                             )
                                         )
                                     )
@@ -5851,21 +5899,35 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper input-wrapper-lg' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'street', id: 'route', placeholder: 'Strasse', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'street', className: _this.props.validateError.street.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'route', placeholder: 'Strasse', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Strasse'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.street.msg
                                             )
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper input-wrapper-sm' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'number', id: 'street_number', placeholder: 'Nr.', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'number', className: _this.props.validateError.number.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'street_number', placeholder: 'Nr.', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Nr.'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.number.msg
                                             )
                                         )
                                     ),
@@ -5875,21 +5937,35 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper input-wrapper-sm' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'zip', placeholder: 'PLZ', id: 'postal_code', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'zip', className: _this.props.validateError.zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'postal_code', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'PLZ'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.zip.msg
                                             )
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'input-wrapper input-wrapper-lg' },
-                                            _react2.default.createElement('input', { type: 'text', name: 'city', placeholder: 'Stadt', id: 'locality', required: true }),
+                                            _react2.default.createElement('input', { type: 'text', name: 'city', className: _this.props.validateError.city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'locality', onChange: function onChange() {
+                                                    return _this.props.validateForm();
+                                                }, required: true }),
                                             _react2.default.createElement(
                                                 'span',
                                                 { className: 'placeholder' },
                                                 'Stadt'
+                                            ),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { className: 'errorText' },
+                                                _this.props.validateError.city.msg
                                             )
                                         )
                                     )
@@ -5905,21 +5981,35 @@ var ShowResultsPersonalData = function (_Component) {
                                             _react2.default.createElement(
                                                 'div',
                                                 { className: 'input-wrapper' },
-                                                _react2.default.createElement('input', { type: 'text', name: 'street', id: 'route', placeholder: 'Strasse', required: true }),
+                                                _react2.default.createElement('input', { type: 'text', name: 'street', className: _this.props.validateError.street.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'route', placeholder: 'Strasse', onChange: function onChange() {
+                                                        return _this.props.validateForm();
+                                                    }, required: true }),
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'placeholder' },
                                                     'Strasse'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'span',
+                                                    { className: 'errorText' },
+                                                    _this.props.validateError.street.msg
                                                 )
                                             ),
                                             _react2.default.createElement(
                                                 'div',
                                                 { className: 'input-wrapper input-wrapper-sm d-none' },
-                                                _react2.default.createElement('input', { type: 'text', name: 'number', id: 'street_number', placeholder: 'Nr.' }),
+                                                _react2.default.createElement('input', { type: 'text', name: 'number', className: _this.props.validateError.number.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'street_number', placeholder: 'Nr.', onChange: function onChange() {
+                                                        return _this.props.validateForm();
+                                                    }, required: true }),
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'placeholder' },
                                                     'Nr.'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'span',
+                                                    { className: 'errorText' },
+                                                    _this.props.validateError.number.msg
                                                 )
                                             )
                                         )
@@ -5933,21 +6023,35 @@ var ShowResultsPersonalData = function (_Component) {
                                             _react2.default.createElement(
                                                 'div',
                                                 { className: 'input-wrapper input-wrapper-sm d-none' },
-                                                _react2.default.createElement('input', { type: 'text', name: 'zip', placeholder: 'PLZ', id: 'postal_code' }),
+                                                _react2.default.createElement('input', { type: 'text', name: 'zip', className: _this.props.validateError.zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'postal_code', onChange: function onChange() {
+                                                        return _this.props.validateForm();
+                                                    }, required: true }),
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'placeholder' },
                                                     'PLZ'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'span',
+                                                    { className: 'errorText' },
+                                                    _this.props.validateError.zip.msg
                                                 )
                                             ),
                                             _react2.default.createElement(
                                                 'div',
                                                 { className: 'input-wrapper' },
-                                                _react2.default.createElement('input', { type: 'text', name: 'city', placeholder: 'Stadt', id: 'locality', required: true }),
+                                                _react2.default.createElement('input', { type: 'text', name: 'city', className: _this.props.validateError.city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'locality', onChange: function onChange() {
+                                                        return _this.props.validateForm();
+                                                    }, required: true }),
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'placeholder' },
                                                     'Stadt'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'span',
+                                                    { className: 'errorText' },
+                                                    _this.props.validateError.city.msg
                                                 )
                                             )
                                         )
@@ -5980,7 +6084,7 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement('input', { type: 'password',
                                             name: 'password',
                                             placeholder: 'Passwort (min. 8 Zeichen + min. 1 Nr.)',
-                                            className: error.password ? 'error' : null,
+                                            className: error.password ? clickBtn === true ? 'error purple' : 'error' : null,
                                             onChange: _this.changePassword,
                                             required: !ifErrorPayment }),
                                         _react2.default.createElement(
@@ -5991,7 +6095,7 @@ var ShowResultsPersonalData = function (_Component) {
                                         _react2.default.createElement(
                                             'span',
                                             { className: 'errorText' },
-                                            error.password
+                                            error.password ? error.password : ''
                                         )
                                     ),
                                     _react2.default.createElement('div', { className: 'statusBarPassword' })
@@ -6020,18 +6124,35 @@ var ShowResultsPersonalData = function (_Component) {
                                 'div',
                                 { className: 'wrapLabel' },
                                 _react2.default.createElement(
-                                    'label',
+                                    'div',
                                     null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Herr', required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Herr'
-                                ),
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Frau', required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Frau'
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: _this.props.validateError.customer_gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
+                                        _react2.default.createElement(
+                                            'label',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Herr', onClick: function onClick() {
+                                                    return _this.props.validateForm();
+                                                }, required: !inputCheckbox.shippingAddress }),
+                                            _react2.default.createElement('span', null),
+                                            'Herr'
+                                        ),
+                                        _react2.default.createElement(
+                                            'label',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Frau', onClick: function onClick() {
+                                                    return _this.props.validateForm();
+                                                }, required: !inputCheckbox.shippingAddress }),
+                                            _react2.default.createElement('span', null),
+                                            'Frau'
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_gender.msg
+                                    )
                                 ),
                                 _react2.default.createElement(
                                     'label',
@@ -6052,11 +6173,18 @@ var ShowResultsPersonalData = function (_Component) {
                             _react2.default.createElement(
                                 'div',
                                 { className: 'input-wrapper' },
-                                _react2.default.createElement('input', { type: 'text', name: 'customer_companyName', placeholder: 'Firma', required: inputCheckbox.customerCompanyName }),
+                                _react2.default.createElement('input', { type: 'text', name: 'customer_companyName', className: _this.props.validateError.customer_companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', required: inputCheckbox.customerCompanyName, onChange: function onChange() {
+                                        return _this.props.validateForm();
+                                    } }),
                                 _react2.default.createElement(
                                     'span',
                                     { className: 'placeholder' },
                                     'Firma'
+                                ),
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'errorText' },
+                                    _this.props.validateError.customer_companyName.msg
                                 )
                             )
                         ),
@@ -6069,21 +6197,35 @@ var ShowResultsPersonalData = function (_Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper adjust-wrapper' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_firstname', placeholder: 'Vorname', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_firstname', className: _this.props.validateError.customer_firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Vorname'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_firstname.msg
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_lastname', placeholder: 'Nachname', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_lastname', className: _this.props.validateError.customer_lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Nachname'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_lastname.msg
                                     )
                                 )
                             )
@@ -6097,21 +6239,35 @@ var ShowResultsPersonalData = function (_Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper input-wrapper-lg' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_street', id: 'customer_route', placeholder: 'Strasse', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_street', id: 'customer_route', className: _this.props.validateError.customer_street.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Strasse', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Strasse'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_street.msg
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper input-wrapper-sm' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_number', id: 'customer_street_number', placeholder: 'Nr.', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_number', id: 'customer_street_number', className: _this.props.validateError.customer_number.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nr.', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Nr.'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_number.msg
                                     )
                                 )
                             ),
@@ -6121,21 +6277,35 @@ var ShowResultsPersonalData = function (_Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper input-wrapper-sm' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_zip', placeholder: 'PLZ', id: 'customer_postal_code', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_zip', className: _this.props.validateError.customer_zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'customer_postal_code', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'PLZ'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_zip.msg
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper input-wrapper-lg' },
-                                    _react2.default.createElement('input', { type: 'text', name: 'customer_city', placeholder: 'Stadt', id: 'customer_locality', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'text', name: 'customer_city', className: _this.props.validateError.customer_city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'customer_locality', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Stadt'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_city.msg
                                     )
                                 )
                             )
@@ -6166,7 +6336,9 @@ var ShowResultsPersonalData = function (_Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper adjust-wrapper' },
-                                    _react2.default.createElement('input', { type: 'email', name: 'customer_email', placeholder: 'E-Mail', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'email', name: 'customer_email', className: error.info || _this.props.validateError.customer_email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
@@ -6175,17 +6347,24 @@ var ShowResultsPersonalData = function (_Component) {
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'errorText' },
-                                        error.info
+                                        error.info ? error.info : _this.props.validateError.customer_email.msg !== "" ? _this.props.validateError.customer_email.msg : ""
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'input-wrapper' },
-                                    _react2.default.createElement('input', { type: 'tel', name: 'customer_phone', placeholder: 'Telefon (mobil)', minLength: '10', required: !inputCheckbox.shippingAddress }),
+                                    _react2.default.createElement('input', { type: 'tel', name: 'customer_phone', className: _this.props.validateError.customer_phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', minLength: '10', onChange: function onChange() {
+                                            return _this.props.validateForm();
+                                        }, required: !inputCheckbox.shippingAddress }),
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'placeholder' },
                                         'Telefon (mobil)'
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { className: 'errorText' },
+                                        _this.props.validateError.customer_phone.msg
                                     )
                                 )
                             )
@@ -6522,6 +6701,7 @@ var ShowResultsPersonalData = function (_Component) {
             if (window.isGoogleConnection) {
                 _helpersFunction._googleAutocomplete.call(this, remarketDomainId);
             }
+            this.props.validateCheck();
         }
     }, {
         key: '_setFormFields',
@@ -17457,6 +17637,10 @@ var _toConsumableArray2 = __webpack_require__(315);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _slicedToArray2 = __webpack_require__(334);
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
 var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -17532,6 +17716,93 @@ var _chooseLocation2 = _interopRequireDefault(_chooseLocation);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultValidateError = {
+    gender: {
+        error: false,
+        msg: ""
+    },
+    companyName: {
+        error: false,
+        msg: ""
+    },
+    firstname: {
+        error: false,
+        msg: ""
+    },
+    lastname: {
+        error: false,
+        msg: ""
+    },
+    email: {
+        error: false,
+        msg: ""
+    },
+    phone: {
+        error: false,
+        msg: ""
+    },
+    street: {
+        error: false,
+        msg: ""
+    },
+    number: {
+        error: false,
+        msg: ""
+    },
+    zip: {
+        error: false,
+        msg: ""
+    },
+    city: {
+        error: false,
+        msg: ""
+    },
+    customer_gender: {
+        error: false,
+        msg: ""
+    },
+    customer_companyName: {
+        error: false,
+        msg: ""
+    },
+    customer_firstname: {
+        error: false,
+        msg: ""
+    },
+    customer_lastname: {
+        error: false,
+        msg: ""
+    },
+    customer_email: {
+        error: false,
+        msg: ""
+    },
+    customer_phone: {
+        error: false,
+        msg: ""
+    },
+    customer_street: {
+        error: false,
+        msg: ""
+    },
+    customer_number: {
+        error: false,
+        msg: ""
+    },
+    customer_zip: {
+        error: false,
+        msg: ""
+    },
+    customer_city: {
+        error: false,
+        msg: ""
+    },
+    company: {
+        error: false,
+        msg: ""
+    }
+};
 
 var ShowResults = exports.ShowResults = function (_Component) {
     (0, _inherits3.default)(ShowResults, _Component);
@@ -17622,7 +17893,10 @@ var ShowResults = exports.ShowResults = function (_Component) {
             sellDeadline:  true ? true : false,
             sellDeadlineExpired: false,
             isUnlimited: false,
-            inputCoupon: false
+            inputCoupon: false,
+            validateError: defaultValidateError,
+            isValidate: false,
+            clickBtn: false
         };
 
         _this._calculatePrice = _this._calculatePrice.bind(_this);
@@ -17642,6 +17916,12 @@ var ShowResults = exports.ShowResults = function (_Component) {
         _this.changeSummaryTabContent = _this.changeSummaryTabContent.bind(_this);
         _this._gtag_report_conversion = _this._gtag_report_conversion.bind(_this);
         _this.handlerChangeInput = _this.handlerChangeInput.bind(_this);
+        _this.clickTab = _this.clickTab.bind(_this);
+        _this.validateForm = _this.validateForm.bind(_this);
+        _this.validateEmail = _this.validateEmail.bind(_this);
+        _this.validatePhoneNumber = _this.validatePhoneNumber.bind(_this);
+        _this.validateNumeric = _this.validateNumeric.bind(_this);
+        _this.validateCheck = _this.validateCheck.bind(_this);
         return _this;
     }
 
@@ -17773,9 +18053,11 @@ var ShowResults = exports.ShowResults = function (_Component) {
             this.timer = setTimeout(function () {
                 return _this3.setState({ showOldPrice: true });
             }, 1500);
-
+            if (this.props.shippingType) {
+                this.changeSummaryTabContent(this.props.shippingType);
+            }
             if (this.props.shippingType == 'perPost') {
-                // $('.nav-pills a[href="#form"]').tab('show')
+                // $('.nav-pills a[href="#form"]').tab('show')            
                 this.setState({ currentTab: 'form' });
                 this.props.setTitle && this.props.setTitle('<span class="count">2/3</span> Persönliche Angaben');
                 this.props.setStep && this.props.setStep('form');
@@ -17783,7 +18065,6 @@ var ShowResults = exports.ShowResults = function (_Component) {
                 $('.buttonsForMobile .summary').css({ display: 'none' });
                 $('.fixedBtnVerkaufenResult').removeClass('summary');
             } else if (this.props.shippingType && window.isMobile) {
-                this.changeSummaryTabContent(this.props.shippingType);
                 $('body .verkaufenQuestion').remove();
                 this.props.setTitle && this.props.setTitle('<span class="count">1/3</span> Zusammenfassung');
                 if ($('#intercom-container').length > 0) {
@@ -17793,8 +18074,6 @@ var ShowResults = exports.ShowResults = function (_Component) {
                 if ($('#tidio-chat').length > 0) {
                     $('#tidio-chat').before('<div class="fixedBtnVerkaufenResult summary"></div>');
                 } else $('body').append('<div class="fixedBtnVerkaufenResult summary"></div>');
-            } else if (this.props.shippingType) {
-                this.changeSummaryTabContent(this.props.shippingType);
             }
         }
     }, {
@@ -18035,6 +18314,257 @@ var ShowResults = exports.ShowResults = function (_Component) {
             this.setState({ errors: (0, _extends3.default)({}, this.state.errors, { info: '', password: '', general: '' }) });
         }
     }, {
+        key: 'validateEmail',
+        value: function validateEmail(email) {
+            return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        }
+    }, {
+        key: 'validatePhoneNumber',
+        value: function validatePhoneNumber(phone) {
+            return phone.match(/^[\+]?[(]?[0-9]{4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,8}$/im);
+        }
+    }, {
+        key: 'validateNumeric',
+        value: function validateNumeric(number) {
+            if (typeof number != "string") return false;
+            return !isNaN(number) && !isNaN(parseFloat(number));
+        }
+    }, {
+        key: 'validateForm',
+        value: function validateForm() {
+            var inputCheckbox = this.state.inputCheckbox;
+
+            var personalData = this._getPersonalDataFields();
+            console.log('personalData = ', personalData);
+            var validateObj = {};
+            var validate = true;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _step$value = (0, _slicedToArray3.default)(_step.value, 2),
+                        key = _step$value[0],
+                        value = _step$value[1];
+
+                    if (inputCheckbox.company === false && key === 'companyName') {
+                        validateObj[key] = {
+                            error: false,
+                            msg: ''
+                        };
+                        continue;
+                    }
+                    if (value === "") {
+                        validate = false;
+                        validateObj[key] = {
+                            error: true,
+                            msg: ''
+                        };
+                    } else {
+                        if (key === "email" && !this.validateEmail(value)) {
+                            validate = false;
+                            validateObj[key] = {
+                                error: true,
+                                msg: 'Falsches Format'
+                            };
+                        } else if (key === "phone" && !this.validatePhoneNumber(value)) {
+                            validate = false;
+                            validateObj[key] = {
+                                error: true,
+                                msg: 'Falsches Format (mind. 10, max. 15 Zahlen)'
+                            };
+                        } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
+                            validate = false;
+                            validateObj[key] = {
+                                error: true,
+                                msg: 'Falsches Format'
+                            };
+                        } else {
+                            validateObj[key] = {
+                                error: false,
+                                msg: ''
+                            };
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (inputCheckbox.shippingAddress === false) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var _step2$value = (0, _slicedToArray3.default)(_step2.value, 2),
+                            key = _step2$value[0],
+                            value = _step2$value[1];
+
+                        if (inputCheckbox.customerCompanyName === false && key === 'customer_companyName') {
+                            validateObj[key] = {
+                                error: false,
+                                msg: ''
+                            };
+                            continue;
+                        }
+                        if (value === "" && key !== "vat") {
+                            validate = false;
+                            validateObj[key] = {
+                                error: true,
+                                msg: ''
+                            };
+                        } else {
+                            if (key === "customer_email" && !this.validateEmail(value)) {
+                                validate = false;
+                                validateObj[key] = {
+                                    error: true,
+                                    msg: 'Falsches Format'
+                                };
+                            } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
+                                validate = false;
+                                validateObj[key] = {
+                                    error: true,
+                                    msg: 'Falsches Format (mind. 10, max. 15 Zahlen)'
+                                };
+                            } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
+                                validate = false;
+                                validateObj[key] = {
+                                    error: true,
+                                    msg: 'Falsches Format'
+                                };
+                            } else {
+                                validateObj[key] = {
+                                    error: false,
+                                    msg: ''
+                                };
+                            }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+
+            this.setState({ validateError: (0, _extends3.default)({}, this.state.validateError, validateObj) });
+            this.setState({ isValidate: validate });
+            return validate;
+        }
+    }, {
+        key: 'validateCheck',
+        value: function validateCheck() {
+            var inputCheckbox = this.state.inputCheckbox;
+
+            var personalData = this._getPersonalDataFields();
+            var validate = true;
+            var _iteratorNormalCompletion3 = true;
+            var _didIteratorError3 = false;
+            var _iteratorError3 = undefined;
+
+            try {
+                for (var _iterator3 = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    var _step3$value = (0, _slicedToArray3.default)(_step3.value, 2),
+                        key = _step3$value[0],
+                        value = _step3$value[1];
+
+                    if (inputCheckbox.company === false && key === 'companyName') {
+                        continue;
+                    }
+                    if (value === "") {
+                        validate = false;
+                    } else {
+                        if (key === "email" && !this.validateEmail(value)) {
+                            validate = false;
+                        } else if (key === "phone" && !this.validatePhoneNumber(value)) {
+                            validate = false;
+                        } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
+                            validate = false;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError3 = true;
+                _iteratorError3 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                        _iterator3.return();
+                    }
+                } finally {
+                    if (_didIteratorError3) {
+                        throw _iteratorError3;
+                    }
+                }
+            }
+
+            if (inputCheckbox.shippingAddress === false) {
+                var _iteratorNormalCompletion4 = true;
+                var _didIteratorError4 = false;
+                var _iteratorError4 = undefined;
+
+                try {
+                    for (var _iterator4 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                        var _step4$value = (0, _slicedToArray3.default)(_step4.value, 2),
+                            key = _step4$value[0],
+                            value = _step4$value[1];
+
+                        if (inputCheckbox.customerCompanyName === false && key === 'customer_companyName') {
+                            continue;
+                        }
+                        if (value === "") {
+                            validate = false;
+                        } else {
+                            if (key === "customer_email" && !this.validateEmail(value)) {
+                                validate = false;
+                            } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
+                                validate = false;
+                            } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
+                                validate = false;
+                            }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError4 = true;
+                    _iteratorError4 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                            _iterator4.return();
+                        }
+                    } finally {
+                        if (_didIteratorError4) {
+                            throw _iteratorError4;
+                        }
+                    }
+                }
+            }
+            this.setState({ isValidate: validate });
+        }
+    }, {
         key: 'cancelSendByEnter',
         value: function cancelSendByEnter(e) {
             if (e.key === "Enter") {
@@ -18043,11 +18573,45 @@ var ShowResults = exports.ShowResults = function (_Component) {
             }
         }
     }, {
+        key: 'clickTab',
+        value: function clickTab(tab) {
+            console.log('tab = ', tab);
+            var currentTab = this.state.currentTab;
+
+            if (currentTab == 'summary') return;else if (currentTab == 'form') {
+                if (tab == 'summary') {
+                    this.setState({ currentTab: 'summary' });
+                    this.props.setStep && this.props.setStep('summary');
+                    this.props.setTitle && this.props.setTitle('<span class="count">1/3</span> Zusammenfassung');
+                }
+            } else if (currentTab == 'instructions') {
+                if (tab == 'summary') {
+                    this.setState({ currentTab: 'summary' });
+                    this.props.setStep && this.props.setStep('summary');
+                    this.props.setTitle && this.props.setTitle('<span class="count">1/3</span> Zusammenfassung');
+                } else if (tab == 'form') {
+                    this.setState({ currentTab: 'form' });
+                    this.props.setStep && this.props.setStep('form');
+                    this.props.setTitle && this.props.setTitle('<span class="count">2/3</span> Persönliche Angaben');
+                }
+            }
+        }
+    }, {
         key: 'send',
         value: function send(e) {
             var _this4 = this;
 
             e.preventDefault();
+
+            this.setState({ clickBtn: true });
+            setTimeout(function () {
+                _this4.setState({ clickBtn: false });
+            }, 5500);
+
+            if (!this.validateForm()) {
+                return;
+            }
+
             var domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
             var sellDeadline = JSON.parse(window.localStorage.getItem('sellDeadline'));
             var checkPrice = this._calculatePrice().price > 99;
@@ -18416,6 +18980,9 @@ var ShowResults = exports.ShowResults = function (_Component) {
                 sellDeadlineExpired = _state2.sellDeadlineExpired,
                 sellDeadline = _state2.sellDeadline,
                 isUnlimited = _state2.isUnlimited,
+                isValidate = _state2.isValidate,
+                validateError = _state2.validateError,
+                clickBtn = _state2.clickBtn,
                 price = 0,
                 showAddCoupon = this.props.basket.basketDataVerkaufen.every(function (item) {
                 return item.productTypeId != 999;
@@ -18452,7 +19019,9 @@ var ShowResults = exports.ShowResults = function (_Component) {
                             { className: 'nav nav-pills nav-justified', role: 'tablist' },
                             _react2.default.createElement(
                                 'li',
-                                { role: 'presentation', className: currentTab === 'summary' ? "active" : null },
+                                { role: 'presentation', className: currentTab === 'summary' ? "active" : null, onClick: function onClick() {
+                                        return _this8.clickTab('summary');
+                                    } },
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#summary', 'aria-controls': 'home', role: 'tab' },
@@ -18475,7 +19044,9 @@ var ShowResults = exports.ShowResults = function (_Component) {
                             ),
                             _react2.default.createElement(
                                 'li',
-                                { role: 'presentation', className: currentTab === 'form' ? "active" : null },
+                                { role: 'presentation', className: currentTab === 'form' ? "active" : null, onClick: function onClick() {
+                                        return _this8.clickTab('form');
+                                    } },
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#form', 'aria-controls': 'profile', role: 'tab' },
@@ -18501,7 +19072,9 @@ var ShowResults = exports.ShowResults = function (_Component) {
                                 { role: 'presentation', className: currentTab === 'instructions' ? "active" : null },
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '#instructions', 'aria-controls': 'messages', role: 'tab' },
+                                    { href: '#instructions', 'aria-controls': 'messages', role: 'tab', onClick: function onClick() {
+                                            return _this8.clickTab('instructions');
+                                        } },
                                     _react2.default.createElement(
                                         'span',
                                         { className: 'num' },
@@ -18562,8 +19135,7 @@ var ShowResults = exports.ShowResults = function (_Component) {
                                 _react2.default.createElement(
                                     'form',
                                     { action: '#', name: 'basketForm', onChange: this.changeForm,
-                                        onKeyPress: this.cancelSendByEnter.bind(this),
-                                        onSubmit: this.send },
+                                        onKeyPress: this.cancelSendByEnter.bind(this) },
                                     _react2.default.createElement(
                                         'div',
                                         { className: 'basketWrap' },
@@ -18584,7 +19156,12 @@ var ShowResults = exports.ShowResults = function (_Component) {
                                             coupon: coupon,
                                             changeCoupon: this.changeCoupon,
                                             inputCoupon: inputCoupon,
-                                            setInputCoupon: this.setInputCoupon
+                                            setInputCoupon: this.setInputCoupon,
+                                            validateForm: this.validateForm,
+                                            isValidate: isValidate,
+                                            validateCheck: this.validateCheck,
+                                            validateError: validateError,
+                                            clickBtn: clickBtn
                                         })
                                     ),
                                     _react2.default.createElement(
@@ -18601,7 +19178,7 @@ var ShowResults = exports.ShowResults = function (_Component) {
                                                     name: 'agree',
                                                     required: true,
                                                     onChange: this.changeCheckbox }),
-                                                _react2.default.createElement('span', { className: 'checkbox' }),
+                                                _react2.default.createElement('span', { className: clickBtn && !inputCheckbox.agree ? "checkbox button-pulse" : "checkbox" }),
                                                 _react2.default.createElement(
                                                     'span',
                                                     null,
@@ -18629,9 +19206,9 @@ var ShowResults = exports.ShowResults = function (_Component) {
                                             { className: 'text-left buttons' },
                                             _react2.default.createElement(
                                                 'button',
-                                                { type: 'submit',
+                                                { type: 'button',
                                                     className: 'btn pulsing',
-                                                    onSubmit: this.send },
+                                                    onClick: this.send },
                                                 'Abschliessen',
                                                 _react2.default.createElement(
                                                     'span',
