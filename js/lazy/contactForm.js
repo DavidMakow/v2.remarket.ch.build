@@ -49,7 +49,9 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRedux = __webpack_require__(313);
 
-var _helpersFunction = __webpack_require__(326);
+var _helpersFunction = __webpack_require__(315);
+
+var _reactI18next = __webpack_require__(322);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -194,6 +196,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                 inputCheckbox = _state.inputCheckbox,
                 captcha = _state.captcha,
                 domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
+            var t = this.props.t;
 
             return _react2.default.createElement(
                 'div',
@@ -237,7 +240,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'E-Mail'
+                                    t("contactPage.h1MainContentEmail")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -251,7 +254,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Social'
+                                    t("contactPage.h1MainContentSocial")
                                 ),
                                 _react2.default.createElement(
                                     'div',
@@ -284,7 +287,8 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 'h3',
                                 { className: 'placeDescription' },
                                 _react2.default.createElement('img', { loading: 'lazy', alt: '', src: '/images/design/contact/flag-of-canton-of-basel.svg' }),
-                                'Filiale Barf\xFCsserplatz, Basel'
+                                t("contactPage.h1MainContentBranch"),
+                                ' Barf\xFCsserplatz, Basel'
                             )
                         ),
                         _react2.default.createElement(
@@ -296,7 +300,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Adresse'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -319,7 +323,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Telefon'
+                                    t("contactPage.h1MainContentPhone")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -341,7 +345,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    '\xD6ffnungszeiten'
+                                    t("contactPage.h1MainContentOpeningHours")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -359,7 +363,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 { className: 'btn', onClick: function onClick() {
                                         return _this3.showMapHandler(1);
                                     } },
-                                'Karte anzeigen',
+                                t("contactPage.h1MainContentShowMap"),
                                 _react2.default.createElement(
                                     'span',
                                     null,
@@ -375,7 +379,8 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 'h3',
                                 { className: 'placeDescription' },
                                 _react2.default.createElement('img', { loading: 'lazy', alt: '', src: '/images/design/contact/flag-of-canton-of-basel.svg' }),
-                                'Filiale St. Jakob-Park, Basel'
+                                t("contactPage.h1MainContentBranch"),
+                                ' St. Jakob-Park, Basel'
                             )
                         ),
                         _react2.default.createElement(
@@ -387,7 +392,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Adresse'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -410,7 +415,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Telefon'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -432,7 +437,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    '\xD6ffnungszeiten'
+                                    t("contactPage.h1MainContentOpeningHours")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -450,7 +455,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 { className: 'btn', onClick: function onClick() {
                                         return _this3.showMapHandler(5);
                                     } },
-                                'Karte anzeigen',
+                                t("contactPage.h1MainContentShowMap"),
                                 _react2.default.createElement(
                                     'span',
                                     null,
@@ -466,7 +471,8 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 'h3',
                                 { className: 'placeDescription' },
                                 _react2.default.createElement('img', { loading: 'lazy', alt: '', src: '/images/design/contact/bern-logo.svg' }),
-                                'Filiale Shoppyland, Bern'
+                                t("contactPage.h1MainContentBranch"),
+                                ' Shoppyland, Bern'
                             )
                         ),
                         _react2.default.createElement(
@@ -478,7 +484,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Adresse'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -501,7 +507,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Telefon'
+                                    t("contactPage.h1MainContentPhone")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -523,7 +529,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    '\xD6ffnungszeiten'
+                                    t("contactPage.h1MainContentOpeningHours")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -546,7 +552,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 { className: 'btn', onClick: function onClick() {
                                         return _this3.showMapHandler(5);
                                     } },
-                                'Karte anzeigen',
+                                t("contactPage.h1MainContentShowMap"),
                                 _react2.default.createElement(
                                     'span',
                                     null,
@@ -562,7 +568,8 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 'h3',
                                 { className: 'placeDescription' },
                                 _react2.default.createElement('img', { loading: 'lazy', alt: '', src: '/images/design/contact/emblem-7.svg' }),
-                                'Filiale G\xE4upark, Solothurn'
+                                t("contactPage.h1MainContentBranch"),
+                                ' G\xE4upark, Solothurn'
                             )
                         ),
                         _react2.default.createElement(
@@ -574,7 +581,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Adresse'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -597,7 +604,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Telefon'
+                                    t("contactPage.h1MainContentPhone")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -619,7 +626,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    '\xD6ffnungszeiten'
+                                    t("contactPage.h1MainContentOpeningHours")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -647,7 +654,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 { className: 'btn', onClick: function onClick() {
                                         return _this3.showMapHandler(7);
                                     } },
-                                'Karte anzeigen',
+                                t("contactPage.h1MainContentShowMap"),
                                 _react2.default.createElement(
                                     'span',
                                     null,
@@ -668,7 +675,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'E-Mail'
+                                    t("contactPage.h1MainContentEmail")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -682,7 +689,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Social'
+                                    t("contactPage.h1MainContentSocial")
                                 ),
                                 _react2.default.createElement(
                                     'div',
@@ -717,7 +724,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Adresse'
+                                    t("contactPage.h1MainContentAddress")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -740,7 +747,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    'Telefon'
+                                    t("contactPage.h1MainContentPhone")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -762,7 +769,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { className: 'title' },
-                                    '\xD6ffnungszeiten'
+                                    t("contactPage.h1MainContentOpeningHours")
                                 ),
                                 _react2.default.createElement(
                                     'p',
@@ -775,7 +782,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 { className: 'btn', onClick: function onClick() {
                                         return _this3.showMapHandler(4);
                                     } },
-                                'Karte anzeigen',
+                                t("contactPage.h1MainContentShowMap"),
                                 _react2.default.createElement(
                                     'span',
                                     null,
@@ -799,12 +806,12 @@ var ContactForm = exports.ContactForm = function (_Component) {
                             _react2.default.createElement(
                                 'h3',
                                 { className: 'title' },
-                                'Telefon'
+                                t("contactPage.h1FormRightSideTelefon")
                             ),
                             _react2.default.createElement(
                                 'h2',
                                 null,
-                                'Kontaktformular'
+                                t("contactPage.h1FormRightSideContactForm")
                             ),
                             _react2.default.createElement(
                                 'form',
@@ -817,14 +824,14 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                         null,
                                         _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Herr', required: true }),
                                         _react2.default.createElement('span', null),
-                                        'Herr'
+                                        t("contactPage.h1FormRightSideMr")
                                     ),
                                     _react2.default.createElement(
                                         'label',
                                         null,
                                         _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Frau' }),
                                         _react2.default.createElement('span', null),
-                                        'Frau'
+                                        t("contactPage.h1FormRightSideMrs")
                                     ),
                                     _react2.default.createElement(
                                         'label',
@@ -834,20 +841,20 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                             checked: inputCheckbox.company,
                                             onChange: this.changeCheckbox }),
                                         _react2.default.createElement('span', { className: 'check' }),
-                                        'Firma'
+                                        t("contactPage.h1FormRightSideCompany")
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'div',
                                     { className: inputCheckbox.company ? "" : "hide" },
-                                    _react2.default.createElement('input', { type: 'text', name: 'companyName', placeholder: 'Firma', required: inputCheckbox.company })
+                                    _react2.default.createElement('input', { type: 'text', name: 'companyName', placeholder: t("contactPage.h1FormRightSideCompany"), required: inputCheckbox.company })
                                 ),
-                                _react2.default.createElement('input', { type: 'text', name: 'firstname', placeholder: 'Vorname', required: true }),
-                                _react2.default.createElement('input', { type: 'text', name: 'lastname', placeholder: 'Nachname', required: true }),
-                                _react2.default.createElement('input', { type: 'number', name: 'phone', placeholder: 'Telefon', required: true }),
-                                _react2.default.createElement('input', { type: 'email', name: 'email', placeholder: 'E-Mail', required: true }),
-                                _react2.default.createElement('input', { type: 'text', name: 'subject', placeholder: 'Betreff', required: true }),
-                                _react2.default.createElement('textarea', { name: 'message', rows: '10', placeholder: 'Nachricht', required: true }),
+                                _react2.default.createElement('input', { type: 'text', name: 'firstname', placeholder: t("contactPage.h1FormRightSideFirstName"), required: true }),
+                                _react2.default.createElement('input', { type: 'text', name: 'lastname', placeholder: t("contactPage.h1FormRightSideLastName"), required: true }),
+                                _react2.default.createElement('input', { type: 'number', name: 'phone', placeholder: t("contactPage.h1FormRightSideWiederholt"), required: true }),
+                                _react2.default.createElement('input', { type: 'email', name: 'email', placeholder: t("contactPage.h1FormRightSideEmail"), required: true }),
+                                _react2.default.createElement('input', { type: 'text', name: 'subject', placeholder: t("contactPage.h1FormRightSideSubject"), required: true }),
+                                _react2.default.createElement('textarea', { name: 'message', rows: '10', placeholder: t("contactPage.h1FormRightSideMessage"), required: true }),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'wrapLabel' },
@@ -865,12 +872,14 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                             inputCheckbox.errorAgree && _react2.default.createElement(
                                                 'a',
                                                 { href: '/ueber-uns/datenschutzerklaerung/', target: '_blank', style: { color: 'red' } },
-                                                ' Bitte lesen und akzeptieren Sie die Datenschutzerkl\xE4rung.'
+                                                ' ',
+                                                t("contactPage.h1FormRightSidePleaseRead")
                                             ),
                                             !inputCheckbox.errorAgree && _react2.default.createElement(
                                                 'a',
                                                 { href: '/ueber-uns/datenschutzerklaerung/', target: '_blank', style: { color: '#02ca95' } },
-                                                ' Bitte lesen und akzeptieren Sie die Datenschutzerkl\xE4rung.'
+                                                ' ',
+                                                t("contactPage.h1FormRightSidePleaseRead")
                                             )
                                         )
                                     )
@@ -887,7 +896,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                 captcha.errorCaptcha && _react2.default.createElement(
                                     'p',
                                     { style: { color: 'red' } },
-                                    'Bitte best\xE4tigen Sie, dass Sie kein Roboter sind.'
+                                    t("contactPage.h1FormRightSidePleaseRead")
                                 ),
                                 _react2.default.createElement(
                                     'div',
@@ -895,7 +904,7 @@ var ContactForm = exports.ContactForm = function (_Component) {
                                     _react2.default.createElement(
                                         'button',
                                         { className: 'btn', type: 'submit' },
-                                        'Senden',
+                                        t("contactPage.h1FormRightSideSend"),
                                         _react2.default.createElement(
                                             'span',
                                             null,
@@ -923,7 +932,7 @@ function mapStateToProps(state) {
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(ContactForm);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(ContactForm));
 
 /***/ }),
 
@@ -1053,7 +1062,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(316)
+  , LIBRARY        = __webpack_require__(317)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -1095,7 +1104,7 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = __webpack_require__(325)
+var $keys      = __webpack_require__(326)
   , hiddenKeys = __webpack_require__(216).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
@@ -1110,9 +1119,9 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(317)
+  , toPrimitive    = __webpack_require__(318)
   , has            = __webpack_require__(112)
-  , IE8_DOM_DEFINE = __webpack_require__(323)
+  , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(111) ? gOPD : function getOwnPropertyDescriptor(O, P){
@@ -1204,7 +1213,7 @@ var global         = __webpack_require__(67)
   , has            = __webpack_require__(112)
   , DESCRIPTORS    = __webpack_require__(111)
   , $export        = __webpack_require__(146)
-  , redefine       = __webpack_require__(324)
+  , redefine       = __webpack_require__(325)
   , META           = __webpack_require__(882).KEY
   , $fails         = __webpack_require__(151)
   , shared         = __webpack_require__(215)
@@ -1218,9 +1227,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(317)
+  , toPrimitive    = __webpack_require__(318)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(318)
+  , _create        = __webpack_require__(319)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -1349,9 +1358,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(319).f = $getOwnPropertySymbols;
+  __webpack_require__(320).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(316)){
+  if(DESCRIPTORS && !__webpack_require__(317)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -1516,7 +1525,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(319)
+  , gOPS    = __webpack_require__(320)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -1661,7 +1670,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(318)});
+$export($export.S, 'Object', {create: __webpack_require__(319)});
 
 /***/ }),
 

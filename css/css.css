@@ -557,7 +557,7 @@ display:none;
 }
 .login-box-tab-wrapper {
   width: 100%;
-  height: auto;
+  height: fit-content;
   overflow: hidden;
 }
 .login-box-tab.show {

@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(315);
+var _toConsumableArray2 = __webpack_require__(316);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -35,6 +35,8 @@ var basketActions = _interopRequireWildcard(_basket);
 var _addToBasketEffect = __webpack_require__(950);
 
 var _addToBasketEffect2 = _interopRequireDefault(_addToBasketEffect);
+
+var _helpersFunction = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -265,7 +267,7 @@ var WishlistPage = function WishlistPage(props) {
                                 _react2.default.createElement(
                                     'span',
                                     { className: 'price' },
-                                    el.discountPrice ? el.discountPrice : el.price,
+                                    el.discountPrice ? (0, _helpersFunction.formatPrice)(el.discountPrice) : (0, _helpersFunction.formatPrice)(el.price),
                                     ' ',
                                     window.currencyValue
                                 ),
@@ -317,7 +319,7 @@ var WishlistPage = function WishlistPage(props) {
                                 _react2.default.createElement(
                                     'span',
                                     { className: 'price' },
-                                    el.discountPrice ? el.discountPrice : el.price,
+                                    el.discountPrice ? (0, _helpersFunction.formatPrice)(el.discountPrice) : (0, _helpersFunction.formatPrice)(el.price),
                                     ' ',
                                     window.currencyValue
                                 ),
@@ -485,7 +487,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(316)
+  , LIBRARY        = __webpack_require__(317)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -527,7 +529,7 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = __webpack_require__(325)
+var $keys      = __webpack_require__(326)
   , hiddenKeys = __webpack_require__(216).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
@@ -542,9 +544,9 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(317)
+  , toPrimitive    = __webpack_require__(318)
   , has            = __webpack_require__(112)
-  , IE8_DOM_DEFINE = __webpack_require__(323)
+  , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(111) ? gOPD : function getOwnPropertyDescriptor(O, P){
@@ -636,7 +638,7 @@ var global         = __webpack_require__(67)
   , has            = __webpack_require__(112)
   , DESCRIPTORS    = __webpack_require__(111)
   , $export        = __webpack_require__(146)
-  , redefine       = __webpack_require__(324)
+  , redefine       = __webpack_require__(325)
   , META           = __webpack_require__(882).KEY
   , $fails         = __webpack_require__(151)
   , shared         = __webpack_require__(215)
@@ -650,9 +652,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(317)
+  , toPrimitive    = __webpack_require__(318)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(318)
+  , _create        = __webpack_require__(319)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -781,9 +783,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(319).f = $getOwnPropertySymbols;
+  __webpack_require__(320).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(316)){
+  if(DESCRIPTORS && !__webpack_require__(317)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -948,7 +950,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(319)
+  , gOPS    = __webpack_require__(320)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -1093,7 +1095,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(318)});
+$export($export.S, 'Object', {create: __webpack_require__(319)});
 
 /***/ }),
 
