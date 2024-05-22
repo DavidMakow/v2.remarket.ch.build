@@ -6,7 +6,7 @@ webpackJsonp([2,3],Array(778).concat([
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.Basket = undefined;
 
@@ -22,7 +22,7 @@ var _extends3 = __webpack_require__(66);
 
 var _extends4 = _interopRequireDefault(_extends3);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -78,7 +78,7 @@ var userActions = _interopRequireWildcard(_user);
 
 var _accessories = __webpack_require__(1284);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _listSimilarItems = __webpack_require__(1041);
 
@@ -104,2824 +104,2979 @@ var _payment = __webpack_require__(1799);
 
 var _payment2 = _interopRequireDefault(_payment);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaultValidateError = {
-    gender: {
-        error: false,
-        msg: ""
-    },
-    companyName: {
-        error: false,
-        msg: ""
-    },
-    firstname: {
-        error: false,
-        msg: ""
-    },
-    lastname: {
-        error: false,
-        msg: ""
-    },
-    email: {
-        error: false,
-        msg: ""
-    },
-    phone: {
-        error: false,
-        msg: ""
-    },
-    street: {
-        error: false,
-        msg: ""
-    },
-    number: {
-        error: false,
-        msg: ""
-    },
-    zip: {
-        error: false,
-        msg: ""
-    },
-    city: {
-        error: false,
-        msg: ""
-    },
-    customer_gender: {
-        error: false,
-        msg: ""
-    },
-    customer_companyName: {
-        error: false,
-        msg: ""
-    },
-    customer_firstname: {
-        error: false,
-        msg: ""
-    },
-    customer_lastname: {
-        error: false,
-        msg: ""
-    },
-    customer_email: {
-        error: false,
-        msg: ""
-    },
-    customer_phone: {
-        error: false,
-        msg: ""
-    },
-    customer_street: {
-        error: false,
-        msg: ""
-    },
-    customer_number: {
-        error: false,
-        msg: ""
-    },
-    customer_zip: {
-        error: false,
-        msg: ""
-    },
-    customer_city: {
-        error: false,
-        msg: ""
-    },
-    company: {
-        error: false,
-        msg: ""
-    }
+  gender: {
+    error: false,
+    msg: ""
+  },
+  companyName: {
+    error: false,
+    msg: ""
+  },
+  firstname: {
+    error: false,
+    msg: ""
+  },
+  lastname: {
+    error: false,
+    msg: ""
+  },
+  email: {
+    error: false,
+    msg: ""
+  },
+  phone: {
+    error: false,
+    msg: ""
+  },
+  street: {
+    error: false,
+    msg: ""
+  },
+  number: {
+    error: false,
+    msg: ""
+  },
+  zip: {
+    error: false,
+    msg: ""
+  },
+  city: {
+    error: false,
+    msg: ""
+  },
+  customer_gender: {
+    error: false,
+    msg: ""
+  },
+  customer_companyName: {
+    error: false,
+    msg: ""
+  },
+  customer_firstname: {
+    error: false,
+    msg: ""
+  },
+  customer_lastname: {
+    error: false,
+    msg: ""
+  },
+  customer_email: {
+    error: false,
+    msg: ""
+  },
+  customer_phone: {
+    error: false,
+    msg: ""
+  },
+  customer_street: {
+    error: false,
+    msg: ""
+  },
+  customer_number: {
+    error: false,
+    msg: ""
+  },
+  customer_zip: {
+    error: false,
+    msg: ""
+  },
+  customer_city: {
+    error: false,
+    msg: ""
+  },
+  company: {
+    error: false,
+    msg: ""
+  }
 };
 
 var Basket = exports.Basket = function (_PureComponent) {
-    (0, _inherits3.default)(Basket, _PureComponent);
+  (0, _inherits3.default)(Basket, _PureComponent);
 
-    function Basket(props) {
-        (0, _classCallCheck3.default)(this, Basket);
+  function Basket(props) {
+    (0, _classCallCheck3.default)(this, Basket);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (Basket.__proto__ || Object.getPrototypeOf(Basket)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Basket.__proto__ || Object.getPrototypeOf(Basket)).call(this, props));
 
-        _this._loadRatingData = function () {
-            _axios2.default.get('/api/getRatings?page=1&&sort=highest').then(function (result) {
-                _this.setState({
-                    infoRatings: result.data.info,
-                    rateData: result.data.items });
-            });
-        };
+    _this._loadRatingData = function () {
+      _axios2.default.get("/api/getRatings?page=1&&sort=highest").then(function (result) {
+        _this.setState({
+          infoRatings: result.data.info,
+          rateData: result.data.items
+        });
+      });
+    };
 
-        _this.snapPixelStatistic = function (result) {
-            var uniqueBasketData = [];
-            _this.props.basketData.forEach(function (item) {
-                if (uniqueBasketData.some(function (el) {
-                    return el.shortcode === item.shortcode;
-                })) {
-                    return false;
-                } else {
-                    var count = _this.props.basketData.reduce(function (s, item2) {
-                        return s += item2.shortcode === item.shortcode ? 1 : 0;
-                    }, 0);
-                    item.count = count;
-                    uniqueBasketData = [].concat((0, _toConsumableArray3.default)(uniqueBasketData), [item]);
-                }
-            });
+    _this.snapPixelStatistic = function (result) {
+      var uniqueBasketData = [];
+      _this.props.basketData.forEach(function (item) {
+        if (uniqueBasketData.some(function (el) {
+          return el.shortcode === item.shortcode;
+        })) {
+          return false;
+        } else {
+          var count = _this.props.basketData.reduce(function (s, item2) {
+            return s += item2.shortcode === item.shortcode ? 1 : 0;
+          }, 0);
+          item.count = count;
+          uniqueBasketData = [].concat((0, _toConsumableArray3.default)(uniqueBasketData), [item]);
+        }
+      });
 
-            var excludeValues = [11, 100, 500, 501, 900, 999];
-            uniqueBasketData.forEach(function (item, i) {
-                excludeValues.forEach(function (el) {
-                    if (+item.productTypeId === +el) {
-                        uniqueBasketData.splice(i, 1);
-                    }
-                });
-            });
-            var item_ids = uniqueBasketData.map(function (el) {
-                return el.shortcode;
-            });
-            return snaptr('track', 'PURCHASE', {
-                'currency': window.currencyValue,
-                'price': result.data.totalPrice,
-                'transaction_id': result.data.basketShortcode,
-                'item_ids': item_ids,
-                'number_items': item_ids.length
-            });
-        };
+      var excludeValues = [11, 100, 500, 501, 900, 999];
+      uniqueBasketData.forEach(function (item, i) {
+        excludeValues.forEach(function (el) {
+          if (+item.productTypeId === +el) {
+            uniqueBasketData.splice(i, 1);
+          }
+        });
+      });
+      var item_ids = uniqueBasketData.map(function (el) {
+        return el.shortcode;
+      });
+      return snaptr("track", "PURCHASE", {
+        currency: window.currencyValue,
+        price: result.data.totalPrice,
+        transaction_id: result.data.basketShortcode,
+        item_ids: item_ids,
+        number_items: item_ids.length
+      });
+    };
 
-        _this.gtagEnhancedEcommerce = function (item) {
+    _this.gtagEnhancedEcommerce = function (item) {
+      var brands = void 0,
+          brand = void 0,
+          category = void 0;
+      if (item.categoryName) {
+        brands = item.criterias.find(function (item) {
+          return item.id === "manufacturer";
+        }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
+      } else {
+        brand = item.deviceName, category = "";
+      }
+      gtag("event", "remove_from_cart", {
+        items: [{
+          id: item.shortcode,
+          list_name: "Kaufen",
+          quantity: 1,
+          price: item.discountPrice || item.price,
+          name: item.descriptionLong || item.model || "",
+          brand: brand,
+          category: category
+        }]
+      });
+    };
 
-            var brands = void 0,
-                brand = void 0,
-                category = void 0;
-            if (item.categoryName) {
-                brands = item.criterias.find(function (item) {
-                    return item.id === 'manufacturer';
-                }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
-            } else {
-                brand = item.deviceName, category = '';
+    _this.handleUpdateBasketData = function (count, id) {
+      if (count === "") {
+        return;
+      }
+      var basketData = _this.props.basketData,
+          newBasketData = [];
+      var alreadyAdd = false;
+      basketData.forEach(function (item) {
+        if (item.shortcode != id) {
+          newBasketData = [].concat((0, _toConsumableArray3.default)(newBasketData), [item]);
+        } else {
+          if (!alreadyAdd) {
+            for (var i = 1; i <= count; ++i) {
+              item.count = 1;
+              newBasketData = [].concat((0, _toConsumableArray3.default)(newBasketData), [item]);
             }
-            gtag('event', 'remove_from_cart', {
-                "items": [{
-                    "id": item.shortcode,
-                    "list_name": "Kaufen",
-                    "quantity": 1,
-                    "price": item.discountPrice || item.price,
-                    "name": item.descriptionLong || item.model || '',
-                    "brand": brand,
-                    "category": category
-                }]
-            });
-        };
+            alreadyAdd = true;
+          }
+        }
+      });
+      _this.props.basketActions.changeBasketData(newBasketData);
+      _this._getPrice(newBasketData, _this.state.taxValue);
+    };
 
-        _this.handleUpdateBasketData = function (count, id) {
-            if (count === '') {
-                return;
-            }
-            var basketData = _this.props.basketData,
-                newBasketData = [];
-            var alreadyAdd = false;
-            basketData.forEach(function (item) {
-                if (item.shortcode != id) {
-                    newBasketData = [].concat((0, _toConsumableArray3.default)(newBasketData), [item]);
-                } else {
-                    if (!alreadyAdd) {
-                        for (var i = 1; i <= count; ++i) {
-                            item.count = 1;
-                            newBasketData = [].concat((0, _toConsumableArray3.default)(newBasketData), [item]);
-                        }
-                        alreadyAdd = true;
-                    }
-                }
-            });
-            _this.props.basketActions.changeBasketData(newBasketData);
-            _this._getPrice(newBasketData, _this.state.taxValue);
-        };
+    _this.state = {
+      choiceShipping: false,
+      isRemarketingCampaign: false,
+      deadline: "false" || _this.props.location.query.coupon,
+      isVorauskasse: _this.props.location.query.vorauskasse,
+      deadlineIsActive: false,
+      deadlineExpired: false,
+      credits: {
+        totalCredits: 0,
+        currentValue: null,
+        errorCredits: ""
+      },
+      checkedPayByCredits: false,
+      subject: 0,
+      tax: 0,
+      taxOnlyForVat: 0,
+      taxValue: null,
+      total: 0,
+      shippingMethods: [],
+      country: {
+        countriesList: [],
+        currentCountry: {
+          inputCountry: "CH",
+          customer_inputCountry: "CH"
+        }
+      },
+      domain: null,
+      inputCheckbox: {
+        shippingAddress: true,
+        company: false,
+        customerCompanyName: false,
+        asGuest: true,
+        agree: false
+      },
+      couponError: null,
+      payMethod: {
+        method: null,
+        paymethoddatatrans: null,
+        paymethodpayrexx: null
+      },
+      autoloadPersonalData: {
+        element: null,
+        data: null
+      },
+      payForm: null,
+      errorPay: null,
+      errorNoProducts: null,
+      errors: {
+        password: "",
+        info: "",
+        general: ""
+      },
+      similarItems: [],
+      showTabs: {
+        paymentMethod: true,
+        personalData: false,
+        shippingMethod: false
+      },
+      noteShow: false,
+      noteShow1: false,
+      noteShow2: false,
+      infoRatings: {
+        total: 0,
+        average: 0,
+        statistics: [{ stars: 5, count: 0 }, { stars: 4, count: 0 }, { stars: 3, count: 0 }, { stars: 2, count: 0 }, { stars: 1, count: 0 }]
+      },
+      rateData: [],
+      uniqueSessionId: "REMARKET_SCRIPT_ISSUE",
+      userIP: "127.0.0.1",
+      userCountryCode3: "CHE",
+      userDOB: "",
+      userDOB1: "",
+      insuranceChAmount: 0,
+      dataTransSign: "180103170812117471",
+      dataTransMerchantId: "3000012768",
+      dataTransSignSandbox: "160613112229164683",
+      dataTransMerchantIdSandbox: "1100006526",
+      payMethodError: {
+        status: false,
+        msg: ""
+      },
+      validateError: defaultValidateError,
+      isValidate: false
+    };
+    _this.sendForm = _this.sendForm.bind(_this);
+    _this._getPrice = _this._getPrice.bind(_this);
+    _this._showHideBlocks = _this._showHideBlocks.bind(_this);
+    _this._goToDelivery = _this._goToDelivery.bind(_this);
+    _this.handleRemoveFromBasket = _this.handleRemoveFromBasket.bind(_this);
+    _this.addCreditsToBasket = _this.addCreditsToBasket.bind(_this);
+    _this.addInsuranceToBasket = _this.addInsuranceToBasket.bind(_this);
+    _this.addInsuranceToBasketCh = _this.addInsuranceToBasketCh.bind(_this);
+    _this.chooseShippingMethod = _this.chooseShippingMethod.bind(_this);
+    _this.choosePayMethod = _this.choosePayMethod.bind(_this);
+    _this.choosePersonalData = _this.choosePersonalData.bind(_this);
+    _this.changeCheckbox = _this.changeCheckbox.bind(_this);
+    _this.changeCountry = _this.changeCountry.bind(_this);
+    _this.changeCoupon = _this.changeCoupon.bind(_this);
+    _this.triggerChangeCoupon = _this.triggerChangeCoupon.bind(_this);
+    _this.changeNameField = _this.changeNameField.bind(_this);
+    _this.changeCreditsInput = _this.changeCreditsInput.bind(_this);
+    _this.nextTab = _this.nextTab.bind(_this);
+    _this.goToPaymentMobile = _this.goToPaymentMobile.bind(_this);
+    _this._gtag_report_conversion = _this._gtag_report_conversion.bind(_this);
+    _this.updateCountDown = _this.updateCountDown.bind(_this);
+    _this.activateCountDownCoupon = _this.activateCountDownCoupon.bind(_this);
+    _this.onNoteToggle = _this.onNoteToggle.bind(_this);
+    _this.dobChange = _this.dobChange.bind(_this);
+    _this.dobChange1 = _this.dobChange1.bind(_this);
+    _this.insuranceChAmountChange = _this.insuranceChAmountChange.bind(_this);
+    _this.goTab = _this.goTab.bind(_this);
+    _this.validateForm = _this.validateForm.bind(_this);
+    _this.validateCheck = _this.validateCheck.bind(_this);
+    _this.validateEmail = _this.validateEmail.bind(_this);
+    _this.validatePhoneNumber = _this.validatePhoneNumber.bind(_this);
+    _this.validateNumeric = _this.validateNumeric.bind(_this);
+    return _this;
+  }
 
-        _this.state = {
-            choiceShipping: false,
-            isRemarketingCampaign: false,
-            deadline: "false" || _this.props.location.query.coupon,
-            isVorauskasse: _this.props.location.query.vorauskasse,
-            deadlineIsActive: false,
-            deadlineExpired: false,
-            credits: {
-                totalCredits: 0,
-                currentValue: null,
-                errorCredits: ''
-            },
-            checkedPayByCredits: false,
-            subject: 0,
-            tax: 0,
-            taxOnlyForVat: 0,
-            taxValue: null,
-            total: 0,
-            shippingMethods: [],
-            country: {
-                countriesList: [],
-                currentCountry: {
-                    inputCountry: "CH",
-                    customer_inputCountry: "CH"
-                }
-            },
-            domain: null,
-            inputCheckbox: {
-                shippingAddress: true,
-                company: false,
-                customerCompanyName: false,
-                asGuest: true,
-                agree: false
-            },
-            couponError: null,
-            payMethod: {
-                method: null,
-                paymethoddatatrans: null,
-                paymethodpayrexx: null
-            },
-            autoloadPersonalData: {
-                element: null,
-                data: null
-            },
-            payForm: null,
-            errorPay: null,
-            errorNoProducts: null,
-            errors: {
-                password: '',
-                info: '',
-                general: ''
-            },
-            similarItems: [],
-            showTabs: {
-                paymentMethod: true,
-                personalData: false,
-                shippingMethod: false
-            },
-            noteShow: false,
-            noteShow1: false,
-            noteShow2: false,
-            infoRatings: {
-                total: 0,
-                average: 0,
-                statistics: [{ stars: 5, count: 0 }, { stars: 4, count: 0 }, { stars: 3, count: 0 }, { stars: 2, count: 0 }, { stars: 1, count: 0 }]
-            },
-            rateData: [],
-            uniqueSessionId: 'REMARKET_SCRIPT_ISSUE',
-            userIP: '127.0.0.1',
-            userCountryCode3: "CHE",
-            userDOB: '',
-            userDOB1: '',
-            insuranceChAmount: 0,
-            dataTransSign: '180103170812117471',
-            dataTransMerchantId: '3000012768',
-            dataTransSignSandbox: '160613112229164683',
-            dataTransMerchantIdSandbox: '1100006526',
-            payMethodError: {
-                status: false,
-                msg: ''
-            },
-            validateError: defaultValidateError,
-            isValidate: false
-        };
-        _this.sendForm = _this.sendForm.bind(_this);
-        _this._getPrice = _this._getPrice.bind(_this);
-        _this._showHideBlocks = _this._showHideBlocks.bind(_this);
-        _this._goToDelivery = _this._goToDelivery.bind(_this);
-        _this.handleRemoveFromBasket = _this.handleRemoveFromBasket.bind(_this);
-        _this.addCreditsToBasket = _this.addCreditsToBasket.bind(_this);
-        _this.addInsuranceToBasket = _this.addInsuranceToBasket.bind(_this);
-        _this.addInsuranceToBasketCh = _this.addInsuranceToBasketCh.bind(_this);
-        _this.chooseShippingMethod = _this.chooseShippingMethod.bind(_this);
-        _this.choosePayMethod = _this.choosePayMethod.bind(_this);
-        _this.choosePersonalData = _this.choosePersonalData.bind(_this);
-        _this.changeCheckbox = _this.changeCheckbox.bind(_this);
-        _this.changeCountry = _this.changeCountry.bind(_this);
-        _this.changeCoupon = _this.changeCoupon.bind(_this);
-        _this.triggerChangeCoupon = _this.triggerChangeCoupon.bind(_this);
-        _this.changeNameField = _this.changeNameField.bind(_this);
-        _this.changeCreditsInput = _this.changeCreditsInput.bind(_this);
-        _this.nextTab = _this.nextTab.bind(_this);
-        _this.goToPaymentMobile = _this.goToPaymentMobile.bind(_this);
-        _this._gtag_report_conversion = _this._gtag_report_conversion.bind(_this);
-        _this.updateCountDown = _this.updateCountDown.bind(_this);
-        _this.activateCountDownCoupon = _this.activateCountDownCoupon.bind(_this);
-        _this.onNoteToggle = _this.onNoteToggle.bind(_this);
-        _this.dobChange = _this.dobChange.bind(_this);
-        _this.dobChange1 = _this.dobChange1.bind(_this);
-        _this.insuranceChAmountChange = _this.insuranceChAmountChange.bind(_this);
-        _this.goTab = _this.goTab.bind(_this);
-        _this.validateForm = _this.validateForm.bind(_this);
-        _this.validateCheck = _this.validateCheck.bind(_this);
-        _this.validateEmail = _this.validateEmail.bind(_this);
-        _this.validatePhoneNumber = _this.validatePhoneNumber.bind(_this);
-        _this.validateNumeric = _this.validateNumeric.bind(_this);
-        return _this;
+  (0, _createClass3.default)(Basket, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      if (nextProps.user.isLogin !== this.props.user.isLogin && nextProps.user.isLogin === false) {
+        var inputs = document.querySelectorAll(".personalData input");
+        inputs.forEach(function (item) {
+          item.value = "";
+          item.checked = false;
+        });
+        var inputCheckbox = this.state.inputCheckbox;
+
+        inputCheckbox.company = false;
+        this.setState({ inputCheckbox: inputCheckbox });
+
+        //delete credits from basket
+        var newBasketData = this.props.basketData.filter(function (item) {
+          return item.productTypeId != 100 && item.productTypeId != 999;
+        });
+        this.props.basketActions.changeBasketData(newBasketData);
+      }
+      if (nextProps.user.isLogin !== this.props.user.isLogin && nextProps.user.isLogin === true) {
+        _axios2.default.get("/api/getTotalCredits").then(function (_ref) {
+          var data = _ref.data;
+
+          _this2.setState({ credits: (0, _extends4.default)({}, _this2.state.credits, { totalCredits: data.credits }) }, function () {
+            _this2._getPrice(_this2.props.basketData, _this2.state.taxValue);
+          });
+        }).catch(function (error) {});
+        this.setState({ errors: (0, _extends4.default)({}, this.state.errors, { info: "" }) });
+      }
+      if (nextProps.user.data !== this.props.user.data && nextProps.user.data) {
+        window.localStorage.removeItem("userDataVerkaufen");
+        window.localStorage.removeItem("userData");
+        _helpersFunction._setPersonalDataFields.call(this, nextProps.user.data);
+      }
+      if (this.props.basketData.length !== nextProps.basketData.length) {
+        this._getPrice(nextProps.basketData, this.state.taxValue);
+        if (window.isGoogleConnection) {
+          this._gtag_snippet(nextProps.basketData);
+        }
+      }
     }
-
-    (0, _createClass3.default)(Basket, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            var _this2 = this;
-
-            if (nextProps.user.isLogin !== this.props.user.isLogin && nextProps.user.isLogin === false) {
-                var inputs = document.querySelectorAll('.personalData input');
-                inputs.forEach(function (item) {
-                    item.value = "";
-                    item.checked = false;
-                });
-                var inputCheckbox = this.state.inputCheckbox;
-
-                inputCheckbox.company = false;
-                this.setState({ inputCheckbox: inputCheckbox });
-
-                //delete credits from basket
-                var newBasketData = this.props.basketData.filter(function (item) {
-                    return item.productTypeId != 100 && item.productTypeId != 999;
-                });
-                this.props.basketActions.changeBasketData(newBasketData);
-            }
-            if (nextProps.user.isLogin !== this.props.user.isLogin && nextProps.user.isLogin === true) {
-                _axios2.default.get('/api/getTotalCredits').then(function (_ref) {
-                    var data = _ref.data;
-
-                    _this2.setState({ credits: (0, _extends4.default)({}, _this2.state.credits, { totalCredits: data.credits }) }, function () {
-                        _this2._getPrice(_this2.props.basketData, _this2.state.taxValue);
-                    });
-                }).catch(function (error) {});
-                this.setState({ errors: (0, _extends4.default)({}, this.state.errors, { info: '' }) });
-            }
-            if (nextProps.user.data !== this.props.user.data && nextProps.user.data) {
-                window.localStorage.removeItem("userDataVerkaufen");
-                window.localStorage.removeItem("userData");
-                _helpersFunction._setPersonalDataFields.call(this, nextProps.user.data);
-            }
-            if (this.props.basketData.length !== nextProps.basketData.length) {
-                this._getPrice(nextProps.basketData, this.state.taxValue);
-                if (window.isGoogleConnection) {
-                    this._gtag_snippet(nextProps.basketData);
-                }
-            }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var prevBasket = prevProps.basketData.filter(function (item) {
+        return item.productTypeId != 11;
+      }),
+          currentBasket = this.props.basketData.filter(function (item) {
+        return item.productTypeId != 11;
+      });
+      if (document.forms.basketForm && prevBasket.length === 0 && currentBasket.length === 1) {
+        //!window.isMobile && this._showHideBlocks()
+        if (this.props.user.isLogin && this.props.user.data) {
+          _helpersFunction._setPersonalDataFields.call(this, this.props.user.data);
+        } else {
+          var personalData = JSON.parse(window.localStorage.getItem("userData"));
+          if (personalData) _helpersFunction._setPersonalDataFields.call(this, personalData);
         }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps) {
-            var prevBasket = prevProps.basketData.filter(function (item) {
-                return item.productTypeId != 11;
-            }),
-                currentBasket = this.props.basketData.filter(function (item) {
-                return item.productTypeId != 11;
-            });
-            if (document.forms.basketForm && prevBasket.length === 0 && currentBasket.length === 1) {
-                //!window.isMobile && this._showHideBlocks()
-                if (this.props.user.isLogin && this.props.user.data) {
-                    _helpersFunction._setPersonalDataFields.call(this, this.props.user.data);
-                } else {
-                    var personalData = JSON.parse(window.localStorage.getItem('userData'));
-                    if (personalData) _helpersFunction._setPersonalDataFields.call(this, personalData);
-                }
-                this.setState({ showTabs: (0, _extends4.default)({}, this.state.showTabs, {
-                        paymentMethod: true,
-                        personalData: false,
-                        shippingMethod: false
-                    })
-                });
-            }
+        this.setState({
+          showTabs: (0, _extends4.default)({}, this.state.showTabs, {
+            paymentMethod: true,
+            personalData: false,
+            shippingMethod: false
+          })
+        });
+      }
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      var _this5 = this;
+
+      if (window.localStorage.getItem("paymentFailedTryAgain")) {
+        this.setState({
+          showTabs: (0, _extends4.default)({}, this.state.showTabs, {
+            paymentMethod: true,
+            personalData: false,
+            shippingMethod: false
+          })
+        });
+      }
+
+      this.inputCouponCallback = (0, _debounce3.default)(function (e) {
+        var _this3 = this;
+
+        var couponType = 7;
+        if (e.target.value.toUpperCase() == "CASE43") {
+          couponType = 3;
+        } else if (e.target.value.toUpperCase() == "TEMP43") {
+          couponType = 10;
         }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            var _this5 = this;
 
-            if (window.localStorage.getItem('paymentFailedTryAgain')) {
-                this.setState({ showTabs: (0, _extends4.default)({}, this.state.showTabs, {
-                        paymentMethod: true,
-                        personalData: false,
-                        shippingMethod: false
-                    })
-                });
-            }
+        var email = document.forms.basketForm.email.value,
+            shippingAddress = this.state.inputCheckbox.shippingAddress;
 
-            this.inputCouponCallback = (0, _debounce3.default)(function (e) {
-                var _this3 = this;
+        _axios2.default.get("/api/checkCoupon?coupon=" + e.target.value.toUpperCase() + "&email=" + email + "&shippingAddress=" + shippingAddress + "&couponType=" + couponType).then(function (data) {
+          if (couponType == 3 || couponType == 10) {
+            var foundProductID = 99999;
+            var cheapestPrice = 99999;
 
-                var couponType = 7;
-                if (e.target.value.toUpperCase() == 'CASE43') {
-                    couponType = 3;
-                } else if (e.target.value.toUpperCase() == 'TEMP43') {
-                    couponType = 10;
+            for (var i = 0; i < _this3.props.basketData.length; i++) {
+              if (_this3.props.basketData[i].productTypeId == couponType) {
+                if (_this3.props.basketData[i].price < cheapestPrice) {
+                  cheapestPrice = _this3.props.basketData[i].price;
+                  foundProductID = i;
                 }
-
-                var email = document.forms.basketForm.email.value,
-                    shippingAddress = this.state.inputCheckbox.shippingAddress;
-
-                _axios2.default.get('/api/checkCoupon?coupon=' + e.target.value.toUpperCase() + '&email=' + email + '&shippingAddress=' + shippingAddress + '&couponType=' + couponType).then(function (data) {
-                    if (couponType == 3 || couponType == 10) {
-                        var foundProductID = 99999;
-                        var cheapestPrice = 99999;
-
-                        for (var i = 0; i < _this3.props.basketData.length; i++) {
-                            if (_this3.props.basketData[i].productTypeId == couponType) {
-                                if (_this3.props.basketData[i].price < cheapestPrice) {
-                                    cheapestPrice = _this3.props.basketData[i].price;
-                                    foundProductID = i;
-                                }
-                            }
-                        }
-
-                        if (foundProductID != 99999) {
-                            data.data.price = _this3.props.basketData[foundProductID].price;
-                        }
-                    } else {
-                        if (!_this3.props.basketData.some(function (item) {
-                            return item.productTypeId == 7;
-                        })) {
-                            throw new Error('Dieses Gutscheincode ist leider nicht für diese Produktkategorie gültig');
-                        }
-                        if (_this3.state.subject < data.data.minSellpriceValue) {
-                            throw new Error('Dieser Gutschein ist erst ab einem Gerätebestelltwert von ' + data.data.minSellpriceValue + ' CHF möglich');
-                        }
-                        if (data.data.newDeviceValid == '0' && _this3.props.basketData.some(function (item) {
-                            return item.productTypeId == 7;
-                        }) && (_this3.props.basketData.some(function (item) {
-                            return item.conditionId == 1;
-                        }) || _this3.props.basketData.some(function (item) {
-                            return item.conditionId == 2;
-                        }))) {
-                            throw new Error('Dieser Gutschein ist nur für gebrauchte Geräte gültig');
-                        }
-                    }
-                    if (!_this3.props.basketData.some(function (item) {
-                        return item.productTypeId == 999;
-                    })) {
-                        var newBasketData = [].concat((0, _toConsumableArray3.default)(_this3.props.basketData), [data.data]);
-                        _this3.props.basketActions.changeBasketData(newBasketData);
-                        _this3._getPrice(newBasketData, _this3.state.taxValue);
-                        e.target.value = '';
-                    } else {
-                        throw new Error('Gutschein wurde bereits benutzt oder es wurde schon ein Gutschein angewendet');
-                    }
-                }).catch(function (error) {
-                    var data = error.response ? error.response.data : error.message;
-                    _this3.setState({ couponError: data });
-                });
-            }, 1000);
-
-            this.inputNameCallback = (0, _debounce3.default)(function (e) {
-                var _this4 = this;
-
-                var formType = e.target.name.indexOf('customer') < 0 ? 'shippingAddress' : 'billingAddress';
-                _axios2.default.get('/api/autoloadAgileData?search=' + e.target.value + '&fieldName=' + e.target.name).then(function (_ref2) {
-                    var data = _ref2.data;
-
-                    if (data.length > 0) {
-                        _this4.setState({
-                            autoloadPersonalData: (0, _extends4.default)({}, _this4.state.autoloadPersonalData, {
-                                element: _react2.default.createElement(_autoloadPersonalData2.default, { data: data,
-                                    formType: formType,
-                                    choosePersonalData: _this4.choosePersonalData }),
-                                data: data
-                            })
-                        });
-                    } else {
-                        _this4.setState({
-                            autoloadPersonalData: (0, _extends4.default)({}, _this4.state.autoloadPersonalData, {
-                                element: null,
-                                data: data
-                            })
-                        });
-                    }
-                }).catch(function (error) {});
-            }, 500); //autoload user data
-            this.getShippingMethods("Normal");
-            //if user login get credits
-            if (this.props.user.isLogin) {
-                _axios2.default.get('/api/getTotalCredits').then(function (_ref3) {
-                    var data = _ref3.data;
-
-                    _this5.setState({ credits: (0, _extends4.default)({}, _this5.state.credits, { totalCredits: data.credits }) }, function () {
-                        _this5._getPrice(_this5.props.basketData, _this5.state.taxValue);
-                    });
-                }).catch(function (error) {});
+              }
             }
 
-            //connect datatrans lib
-            (function (d, s, id) {
-                var js,
-                    fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {
-                    return;
-                }
-                js = d.createElement(s);js.id = id;
-                js.src = "https://pay.datatrans.com/upp/payment/js/datatrans-2.0.0.js";
-                // js.src = "https://pay.sandbox.datatrans.com/upp/payment/js/datatrans-1.0.2.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            })(document, 'script', 'datatrans');
-
-            /*
-            var uniqueSessionId = '';
-            if(window.localStorage.hasOwnProperty("unique_session_id")) {
-              uniqueSessionId = window.localStorage.getItem("unique_session_id");
+            if (foundProductID != 99999) {
+              data.data.price = _this3.props.basketData[foundProductID].price;
             }
-            else {
-              uniqueSessionId = Math.floor((Math.random()*100000000) + 100000000).toString();
-              window.localStorage.setItem('unique_session_id', uniqueSessionId);
-            }
-            this.setState({ uniqueSessionId: uniqueSessionId })
-              var script = document.createElement('script');
-            script.src = "https://h.online-metrix.net/fp/tags.js?org_id=lq866c5i&session_id="+uniqueSessionId+"&pageid=PAGEID";
-            document.getElementsByTagName('head')[0].appendChild(script);
-              document.getElementById('unique_session_id').innerHTML = '<iframe style="width: 100px; height: 100px; border: 0; position: absolute; top: -5000px;" src="https://h.online-metrix.net/tags?org_id=ORG_ID&session_id='+uniqueSessionId+'&pageid=PAGEID"></iframe>';
-            */
-
-            (0, _reactNativeIpify2.default)().then(function (ip) {
-                _this5.setState({ userIP: ip });
-            });
-
-            //connect Bitcoin
-            /*(function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "https://bitpay.com/bitpay.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'bitcoin'));*/
-
-            var isRemarketingCampaign = this.props.location.query.coupon;
-            var deadline = JSON.parse(window.localStorage.getItem('deadline'));
-            if (true) {
-                this.setState({ deadline: true });
-                if (deadline && isRemarketingCampaign) {
-                    this.setState({ isRemarketingCampaign: true });
-                    deadline.isRemarketingCampaign = true;
-                    window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                } else if (!deadline && isRemarketingCampaign) {
-                    var countDownDate = new Date();
-                    countDownDate.setHours(countDownDate.getHours() + 3);
-                    deadline = { countDownDate: countDownDate, isActive: 0, deadlineExpired: 0, couponShortcode: '', isRemarketingCampaign: true };
-                    window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                }
-                if (deadline && deadline.isActive) {
-                    this.setState({ deadlineIsActive: true });
-                }
-                if (deadline && deadline.deadlineExpired) {
-                    this.setState({ deadlineExpired: true });
-                }
-                if (deadline && deadline.couponShortcode && deadline.isActive) {
-                    if (!this.props.basketData.find(function (item) {
-                        return item.shortcode == deadline.couponShortcode;
-                    })) {
-                        var otherCoupon = this.props.basketData.find(function (item) {
-                            return item.productTypeId == 999;
-                        });
-                        if (otherCoupon) {
-                            this.handleRemoveFromBasket(999, otherCoupon.shortcode);
-                        }
-                        this.setState({ couponError: null });
-                        this.inputCouponCallback({ 'target': { 'value': deadline.couponShortcode } });
-                    }
-                }
-            } else if (!(deadline && deadline.isRemarketingCampaign)) {
-                var basketData = this.props.basketData,
-                    newBasketData = basketData.filter(function (item) {
-                    return !(item.productTypeId == 999 && item.note == "Limitierter Gutschein");
-                });
-                this.props.basketActions.changeBasketData(newBasketData);
-                this._getPrice(newBasketData, this.state.taxValue);
-            }
-        }
-    }, {
-        key: 'loadStripe',
-        value: function loadStripe(onload) {
-            if (!window.StripeCheckout) {
-                var script = document.createElement('script');
-                script.onload = function () {
-                    onload();
-                };
-                script.src = 'https://checkout.stripe.com/checkout.js';
-                document.head.appendChild(script);
-            } else {
-                onload();
-            }
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this6 = this;
-
-            var basketShortcode = window.localStorage.getItem('basketShortcode');
-            var inputCheckbox = this.state.inputCheckbox;
-
-            if (basketShortcode) {
-                window.localStorage.removeItem('basketShortcode');
-                // axios.get(`/api/basket/failed?basketShortcode=${basketShortcode}`)
-                //     .then( result => {
-                //         window.localStorage.removeItem('basketShortcode')
-                //     })
-                //     .catch( error => {
-                //     });
-            }
-            if (this.props.user.isLogin && this.props.basketData.length > 0 && this.props.user.data) {
-                _helpersFunction._setPersonalDataFields.call(this, this.props.user.data);
-            } else {
-                var personalData = JSON.parse(window.localStorage.getItem('userData'));
-                if (typeof personalData != 'undefined' && personalData && Object.keys(personalData).length !== 0 && this.props.basketData.length > 0) {
-                    _helpersFunction._setPersonalDataFields.call(this, personalData);
-                    inputCheckbox.company = personalData.shippingAddress.company;
-                    inputCheckbox.customerCompanyName = personalData.billingAddress.customerCompanyName;
-                    inputCheckbox.shippingAddress = personalData.usingShippingAddress;
-                    this.setState({ inputCheckbox: inputCheckbox });
-                }
-            }
-            /*
-            axios.get('/api/countries')
-                .then(( { data }) => {
-                    let countriesList = data.data.map( item => { return { value: item['name-short'], label: item['name-de']}})
-                    this.setState({country: {...this.state.country, countriesList}, domain: data.meta.domainId})
-                    if(window.isGoogleConnection) {
-                        _googleAutocomplete.call(this, data.meta.domainId, 'userData')
-                    }
-                })
-            */
-
-            var remarketDomainId = 2;
-            var countriesList = [{ value: 'ch', label: 'Schweiz' }, { value: 'li', label: 'Liechtenstein' }];
-            this.setState({ country: (0, _extends4.default)({}, this.state.country, { countriesList: countriesList }), domain: remarketDomainId });
-            if (window.isGoogleConnection) {
-                _helpersFunction._googleAutocomplete.call(this, remarketDomainId, 'userData');
-            }
-            _axios2.default.post('/api/similarItems', { basketData: this.props.basketData }).then(function (data) {
-                _this6.setState({ similarItems: data.data });
-            }).catch(function () {
-                return false;
-            });
-
-            this._getPrice(this.props.basketData, this.state.taxValue);
-            if (window.isGoogleConnection) {
-                this._gtag_snippet(this.props.basketData);
-            }
-            if (window.localStorage.getItem('paymentFailedTryAgain')) {
-                var customerShortcode = window.localStorage.getItem('customerShortcode');
-                window.localStorage.removeItem('paymentFailedTryAgain');
-                window.localStorage.removeItem('customerShortcode');
-                if (!window.isMobile) {
-                    $('.paymentMethod h3.title').click();
-                    $('.shippingMethod h3.title, .personalData h3.title').addClass('answering');
-                    $(".basketSubmit.hideBtn").show();
-                    this.setState({
-                        ifErrorPayment: true,
-                        customerShortcode: customerShortcode
-                    });
-                } else {
-                    $('.productWrap, .personalData').hide();
-                    $('#accordion, .shippingMethod .wrapperItemBasket').show();
-                    this.goToPaymentMobile(true);
-                    this.setState({ ifErrorPayment: true, customerShortcode: customerShortcode });
-                }
-            }
-
-            var deadline = JSON.parse(window.localStorage.getItem('deadline'));
-
-            if (true) {
-                if (!document.getElementById("numeric-timer")) {
-                    setTimeout(function () {
-                        _this6.setState({ deadline: false });
-                        _this6.updateCountDown();
-                    }, 1000);
-                } else {
-                    this.setState({ deadline: false });
-                    this.updateCountDown();
-                }
-                // Update the count down every 1 min
-                this.countdown = setInterval(function () {
-                    _this6.setState({ deadline: false });
-                    _this6.updateCountDown();
-                }, 60000);
-            } else {
-                window.localStorage.removeItem("deadline");
-            }
-            if (window.localStorage.hasOwnProperty("coupon")) {
-                _axios2.default.get('/api/checkCoupon?coupon=' + window.localStorage.getItem("coupon") + '&couponType=7').then(function (data) {
-                    if (!_this6.props.basketData.some(function (item) {
-                        return item.productTypeId == 999;
-                    })) {
-                        var newBasketData = [].concat((0, _toConsumableArray3.default)(_this6.props.basketData), [data.data]);
-                        _this6.props.basketActions.changeBasketData(newBasketData);
-                        _this6._getPrice(newBasketData, _this6.state.taxValue);
-                    }
-                }).catch(function (error) {});
-            }
-            this._loadRatingData();
-
-            var diffX = 0;
-            var startX = 0;
-            var lastChange = 0;
-            var topButtonsCarousel = document.getElementById("topButtonsCarousel");
-            if (typeof topButtonsCarousel !== 'undefined' && topButtonsCarousel != null) {
-                topButtonsCarousel.addEventListener('touchstart', function (e) {
-                    startX = e.changedTouches[0].pageX;
-                });
-                topButtonsCarousel.addEventListener('touchmove', function (e) {
-                    diffX = lastChange + (e.changedTouches[0].pageX - startX);
-                    if (diffX > 0) {
-                        diffX = 0;
-                    } else if (diffX < -750) {
-                        diffX = -750;
-                    }
-                    topButtonsCarousel.style.transform = "translate(" + diffX + "px,0px)";
-                });
-                topButtonsCarousel.addEventListener('touchend', function (e) {
-                    lastChange = diffX;
-                });
-            }
-            this.props.basketData.forEach(function (item) {
-                if (item.productTypeId == 500 && typeof item.shortcode !== 'undefined' && (item.shortcode === 'IDK3VU' || item.shortcode === '8JXTVN')) {
-                    _this6.setState({ insuranceChAmount: item.price });
-                }
-            });
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            if (!this.props.user.isLogin) {
-                var personalData = (0, _helpersFunction._getPersonalDataFields)();
-                window.localStorage.setItem('userData', JSON.stringify(personalData));
-            }
-            document.getElementById('datatrans').remove();
-            if (this.stripeHandler) this.stripeHandler.close();
-            clearInterval(this.countdown);
-        }
-    }, {
-        key: 'updateCountDown',
-        value: function updateCountDown() {
-            this.setState({ deadline: true });
-            var deadline = JSON.parse(window.localStorage.getItem('deadline')),
-                numericTimer = document.getElementById("numeric-timer");
-            if (deadline && deadline.deadlineExpired) {
-                this.setState({ deadlineExpired: true });
-                clearInterval(this.countdown);
-                return;
-            }
-            if (deadline && deadline.isActive) {
-                this.setState({ deadlineIsActive: true });
-            }
-            if (!deadline) {
-                var countDownDate = new Date();
-                countDownDate.setHours(countDownDate.getHours() + 3);
-                deadline = { countDownDate: countDownDate, isActive: 0, deadlineExpired: 0, couponShortcode: '' };
-                window.localStorage.setItem('deadline', JSON.stringify(deadline));
-            }
-            // Get today's date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now and the count down date
-            var distance = new Date(deadline.countDownDate).getTime() - now;
-            // Time calculations for days, hours, minutes and seconds
-            var hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-            var minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
-            var seconds = Math.floor(distance % (1000 * 60) / 1000);
-            // Display the result in the element with id="numericTimer"
-
-            if (numericTimer) {
-                numericTimer.innerHTML = hours + "Std. " + minutes + "Min. verbleiben";
-            }
-
-            // If the count down is finished
-            if (distance < 0) {
-                deadline.deadlineExpired = 1;
-                window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                clearInterval(this.countdown);
-                this.setState({ deadlineExpired: true });
-            }
-        }
-    }, {
-        key: 'activateCountDownCoupon',
-        value: function activateCountDownCoupon() {
-            var _this7 = this;
-
-            var deadline = JSON.parse(window.localStorage.getItem('deadline'));
-            if (deadline) {
-                deadline.isActive = 1;
-                this.setState({ deadlineIsActive: true });
-                window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                if (!deadline.couponShortcode) {
-                    _axios2.default.get('/api/generateCountDownCoupon').then(function (result) {
-                        deadline.couponShortcode = result.data.shortcode;
-                        window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                        if (!_this7.props.basketData.find(function (item) {
-                            return item.shortcode == deadline.couponShortcode;
-                        })) {
-                            var otherCoupon = _this7.props.basketData.find(function (item) {
-                                return item.productTypeId == 999;
-                            });
-                            if (otherCoupon) {
-                                _this7.handleRemoveFromBasket(999, otherCoupon.shortcode);
-                            }
-                            _this7.setState({ couponError: null });
-                            _this7.inputCouponCallback({ 'target': { 'value': deadline.couponShortcode } });
-                        }
-                    }).catch(function (error) {
-                        console.log('error', error.response.data);
-                    });
-                } else {
-                    if (!this.props.basketData.find(function (item) {
-                        return item.shortcode == deadline.couponShortcode;
-                    })) {
-                        var otherCoupon = this.props.basketData.find(function (item) {
-                            return item.productTypeId == 999;
-                        });
-                        if (otherCoupon) {
-                            this.handleRemoveFromBasket(999, otherCoupon.shortcode);
-                        }
-                        this.setState({ couponError: null });
-                        this.inputCouponCallback({ 'target': { 'value': deadline.couponShortcode } });
-                    }
-                }
-            }
-        }
-    }, {
-        key: '_gtag_report_conversion',
-        value: function _gtag_report_conversion(value, url) {
-            var callback = function callback() {
-                if (typeof url != 'undefined') {
-                    window.location = url;
-                }
-            };
-            gtag('event', 'conversion', {
-                'send_to': 'AW-827036726/Mt4fCLj803sQtqiuigM',
-                'value': value,
-                'currency': 'CHF',
-                'transaction_id': '',
-                'event_callback': callback
-            });
-            return false;
-        }
-    }, {
-        key: '_gtag_snippet',
-        value: function _gtag_snippet(basketData) {
-            var prodIds = [],
-                totalValue = 0;
-
-            basketData.forEach(function (item) {
-                if (item.productTypeId == 7) {
-                    prodIds.push(item.shortcode);
-                    totalValue += +item.discountPrice || +item.price;
-                }
-            });
-            gtag('event', 'page_view', {
-                'send_to': 'AW-827036726',
-                'ecomm_prodid': prodIds,
-                'ecomm_pagetype': 'cart',
-                'ecomm_totalvalue': totalValue,
-                'ecomm_category': 'Electronics'
-            });
-        }
-    }, {
-        key: '_showHideBlocks',
-        value: function _showHideBlocks(e) {
-            var step = e.currentTarget.getAttribute('data-step'),
-                showTabs = (0, _extends4.default)({}, this.state.showTabs);
-            //    hide personalData section only after fill all required fields
-            if (showTabs[step] || showTabs.personalData || showTabs.shippingMethod) {
-                if ($(e.currentTarget).parent().find('.wrapperItemBasket').css('display') === 'none') {
-                    $('.wrapperItemBasket').each(function () {
-                        $(this).hide('slow');
-                        // $(this).parent().css({ paddingBottom: '28px' })
-                        $(this).parent().find('.title i.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
-                    });
-                    $(e.currentTarget).parent().find('.wrapperItemBasket').toggle('slow');
-                    $(e.currentTarget).parent().css({ paddingBottom: '44px' });
-
-                    $(e.currentTarget).parent().find('.title i.fa').removeClass('fa-angle-down').addClass('fa-angle-up');
-                }
-                showTabs.personalData = !!(step === 'personalData');
-                showTabs.shippingMethod = !!(step === 'shippingMethod');
-                showTabs.paymentMethod = !!(step === 'paymentMethod');
-                this.setState({ showTabs: showTabs });
-            }
-        }
-    }, {
-        key: '_getPrice',
-        value: function _getPrice(data, taxValue) {
-            var subject = 0,
-                total = void 0,
-                tax = void 0,
-                creditsCount = 0,
-                taxOnlyForVat = 0,
-                totalOnlyForVat = 0,
-                currentValue = this.state.credits.currentValue,
-                basketHasCreditItem = data.some(function (item) {
-                return item.productTypeId == 100;
-            });
-            data.forEach(function (item) {
-                if (item.productTypeId != 500) {
-                    if (item.productTypeId == 100 || item.productTypeId == 999) creditsCount += +item.price;else {
-                        subject += item.discountPrice ? +item.discountPrice : +item.price;
-                        if (item.euVatApplicable) totalOnlyForVat += item.price;
-                    }
-                }
-            });
-            total = subject - creditsCount;
-            tax = total / (1 + taxValue / 100) * (taxValue / 100);
-            taxOnlyForVat = totalOnlyForVat / (1 + taxValue / 100) * (taxValue / 100);
-            if (!this.state.credits.currentValue || !basketHasCreditItem) {
-                currentValue = this.state.credits.totalCredits > total ? total : this.state.credits.totalCredits;
-            }
-            if (basketHasCreditItem) {
-                data.forEach(function (item) {
-                    if (item.productTypeId == 100) currentValue = item.price;
-                });
-            }
-            this.setState({ subject: subject, total: total, tax: tax, taxOnlyForVat: taxOnlyForVat,
-                checkedPayByCredits: basketHasCreditItem,
-                credits: (0, _extends4.default)({}, this.state.credits, { currentValue: currentValue })
-            });
-        }
-    }, {
-        key: '_goToDelivery',
-        value: function _goToDelivery() {
-            var _state = this.state,
-                total = _state.total,
-                payMethod = _state.payMethod;
-
-            if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
-                return item.checked;
+          } else {
+            if (!_this3.props.basketData.some(function (item) {
+              return item.productTypeId == 7;
             })) {
-                this.setState({ payMethodError: {
-                        status: false,
-                        msg: ''
-                    } });
-                if (payMethod.method === 'Payrexx' && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
-                    this.setState({ payMethodError: {
-                            status: true,
-                            msg: 'Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich'
-                        } });
-                } else {
-                    this.props.goToDelivery();
-                }
-            } else {
-                this.setState({ payMethodError: {
-                        status: true,
-                        msg: 'Bitte Zahlungsart auswählen'
-                    } });
+              throw new Error("Dieses Gutscheincode ist leider nicht für diese Produktkategorie gültig");
             }
-        }
-    }, {
-        key: 'goToPaymentMobile',
-        value: function goToPaymentMobile(fromError) {
-            this.props.goToPayment(fromError);
-            this.setState({ showTabs: (0, _extends4.default)({}, this.state.showTabs, { personalData: false, shippingMethod: false, paymentMethod: true }) });
-        }
-    }, {
-        key: 'goTab',
-        value: function goTab(e, tabName) {
-            var _state2 = this.state,
-                total = _state2.total,
-                payMethod = _state2.payMethod;
-
-            this.setState({ payMethodError: {
-                    status: false,
-                    msg: ''
-                } });
-            this.setState({ validateError: defaultValidateError });
-
-            if (this.props.basketStep === tabName) return;
-            e.preventDefault();
-            if (tabName == 'paymentMethod') {
-                this.props.goToMethod();
-            } else if (tabName == 'personalData') {
-                this._goToDelivery();
-            } else if (tabName == 'shippingMethod') {
-                if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
-                    return item.checked;
-                })) {
-                    this.setState({ payMethodError: {
-                            status: false,
-                            msg: ''
-                        } });
-                    if (payMethod.method === 'Payrexx' && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
-                        this.setState({ payMethodError: {
-                                status: true,
-                                msg: 'Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich'
-                            } });
-                    } else {
-                        if (this.props.basketStep === 'paymentMethod') {
-                            if (!this.validateForm()) {
-                                this.setState({ payMethodError: {
-                                        status: true,
-                                        msg: 'Bitte Personalien ausfüllen'
-                                    } });
-                            } else {
-                                this.goToPaymentMobile(false);
-                            }
-                        } else {
-                            if (!this.validateForm()) {
-                                return;
-                            }
-                            this.goToPaymentMobile(false);
-                        }
-                    }
-                } else {
-                    this.setState({ payMethodError: {
-                            status: true,
-                            msg: 'Bitte Zahlungsart auswählen'
-                        } });
-                }
+            if (_this3.state.subject < data.data.minSellpriceValue) {
+              throw new Error("Dieser Gutschein ist erst ab einem Gerätebestelltwert von " + data.data.minSellpriceValue + " CHF möglich");
             }
-        }
-    }, {
-        key: 'nextTab',
-        value: function nextTab() {
-            var _state3 = this.state,
-                total = _state3.total,
-                payMethod = _state3.payMethod;
+            if (data.data.newDeviceValid == "0" && _this3.props.basketData.some(function (item) {
+              return item.productTypeId == 7;
+            }) && (_this3.props.basketData.some(function (item) {
+              return item.conditionId == 1;
+            }) || _this3.props.basketData.some(function (item) {
+              return item.conditionId == 2;
+            }))) {
+              throw new Error("Dieser Gutschein ist nur für gebrauchte Geräte gültig");
+            }
+          }
+          if (!_this3.props.basketData.some(function (item) {
+            return item.productTypeId == 999;
+          })) {
+            var newBasketData = [].concat((0, _toConsumableArray3.default)(_this3.props.basketData), [data.data]);
+            _this3.props.basketActions.changeBasketData(newBasketData);
+            _this3._getPrice(newBasketData, _this3.state.taxValue);
+            e.target.value = "";
+          } else {
+            throw new Error("Gutschein wurde bereits benutzt oder es wurde schon ein Gutschein angewendet");
+          }
+        }).catch(function (error) {
+          var data = error.response ? error.response.data : error.message;
+          _this3.setState({ couponError: data });
+        });
+      }, 1000);
 
-            this.props.basketData.map(function (el) {
-                return snaptr('track', 'START_CHECKOUT', {
-                    'shortcode or name': el.shortcode || el.name
-                });
+      this.inputNameCallback = (0, _debounce3.default)(function (e) {
+        var _this4 = this;
+
+        var formType = e.target.name.indexOf("customer") < 0 ? "shippingAddress" : "billingAddress";
+        _axios2.default.get("/api/autoloadAgileData?search=" + e.target.value + "&fieldName=" + e.target.name).then(function (_ref2) {
+          var data = _ref2.data;
+
+          if (data.length > 0) {
+            _this4.setState({
+              autoloadPersonalData: (0, _extends4.default)({}, _this4.state.autoloadPersonalData, {
+                element: _react2.default.createElement(_autoloadPersonalData2.default, {
+                  data: data,
+                  formType: formType,
+                  choosePersonalData: _this4.choosePersonalData
+                }),
+                data: data
+              })
             });
+          } else {
+            _this4.setState({
+              autoloadPersonalData: (0, _extends4.default)({}, _this4.state.autoloadPersonalData, {
+                element: null,
+                data: data
+              })
+            });
+          }
+        }).catch(function (error) {});
+      }, 500); //autoload user data
+      this.getShippingMethods("Normal");
+      //if user login get credits
+      if (this.props.user.isLogin) {
+        _axios2.default.get("/api/getTotalCredits").then(function (_ref3) {
+          var data = _ref3.data;
 
-            if (window.isFBConnection) {
-                fbq('track', 'InitiateCheckout', { value: this.state.total, currency: window.currencyValue }); // facebook pixel
+          _this5.setState({ credits: (0, _extends4.default)({}, _this5.state.credits, { totalCredits: data.credits }) }, function () {
+            _this5._getPrice(_this5.props.basketData, _this5.state.taxValue);
+          });
+        }).catch(function (error) {});
+      }
+
+      //connect datatrans lib
+      (function (d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://pay.datatrans.com/upp/payment/js/datatrans-2.0.0.js";
+        // js.src = "https://pay.sandbox.datatrans.com/upp/payment/js/datatrans-1.0.2.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "datatrans");
+
+      /*
+          var uniqueSessionId = '';
+          if(window.localStorage.hasOwnProperty("unique_session_id")) {
+            uniqueSessionId = window.localStorage.getItem("unique_session_id");
+          }
+          else {
+            uniqueSessionId = Math.floor((Math.random()*100000000) + 100000000).toString();
+            window.localStorage.setItem('unique_session_id', uniqueSessionId);
+          }
+          this.setState({ uniqueSessionId: uniqueSessionId })
+            var script = document.createElement('script');
+          script.src = "https://h.online-metrix.net/fp/tags.js?org_id=lq866c5i&session_id="+uniqueSessionId+"&pageid=PAGEID";
+          document.getElementsByTagName('head')[0].appendChild(script);
+            document.getElementById('unique_session_id').innerHTML = '<iframe style="width: 100px; height: 100px; border: 0; position: absolute; top: -5000px;" src="https://h.online-metrix.net/tags?org_id=ORG_ID&session_id='+uniqueSessionId+'&pageid=PAGEID"></iframe>';
+          */
+
+      (0, _reactNativeIpify2.default)().then(function (ip) {
+        _this5.setState({ userIP: ip });
+      });
+
+      //connect Bitcoin
+      /*(function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "https://bitpay.com/bitpay.js";
+              fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'bitcoin'));*/
+
+      var isRemarketingCampaign = this.props.location.query.coupon;
+      var deadline = JSON.parse(window.localStorage.getItem("deadline"));
+      if (true) {
+        this.setState({ deadline: true });
+        if (deadline && isRemarketingCampaign) {
+          this.setState({ isRemarketingCampaign: true });
+          deadline.isRemarketingCampaign = true;
+          window.localStorage.setItem("deadline", JSON.stringify(deadline));
+        } else if (!deadline && isRemarketingCampaign) {
+          var countDownDate = new Date();
+          countDownDate.setHours(countDownDate.getHours() + 3);
+          deadline = {
+            countDownDate: countDownDate,
+            isActive: 0,
+            deadlineExpired: 0,
+            couponShortcode: "",
+            isRemarketingCampaign: true
+          };
+          window.localStorage.setItem("deadline", JSON.stringify(deadline));
+        }
+        if (deadline && deadline.isActive) {
+          this.setState({ deadlineIsActive: true });
+        }
+        if (deadline && deadline.deadlineExpired) {
+          this.setState({ deadlineExpired: true });
+        }
+        if (deadline && deadline.couponShortcode && deadline.isActive) {
+          if (!this.props.basketData.find(function (item) {
+            return item.shortcode == deadline.couponShortcode;
+          })) {
+            var otherCoupon = this.props.basketData.find(function (item) {
+              return item.productTypeId == 999;
+            });
+            if (otherCoupon) {
+              this.handleRemoveFromBasket(999, otherCoupon.shortcode);
             }
-            var showTabs = this.state.showTabs;
+            this.setState({ couponError: null });
+            this.inputCouponCallback({
+              target: { value: deadline.couponShortcode }
+            });
+          }
+        }
+      } else if (!(deadline && deadline.isRemarketingCampaign)) {
+        var basketData = this.props.basketData,
+            newBasketData = basketData.filter(function (item) {
+          return !(item.productTypeId == 999 && item.note == "Limitierter Gutschein");
+        });
+        this.props.basketActions.changeBasketData(newBasketData);
+        this._getPrice(newBasketData, this.state.taxValue);
+      }
+    }
+  }, {
+    key: "loadStripe",
+    value: function loadStripe(onload) {
+      if (!window.StripeCheckout) {
+        var script = document.createElement("script");
+        script.onload = function () {
+          onload();
+        };
+        script.src = "https://checkout.stripe.com/checkout.js";
+        document.head.appendChild(script);
+      } else {
+        onload();
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this6 = this;
 
+      var basketShortcode = window.localStorage.getItem("basketShortcode");
+      var inputCheckbox = this.state.inputCheckbox;
 
-            var coupon = this.props.basketData.find(function (item) {
+      if (basketShortcode) {
+        window.localStorage.removeItem("basketShortcode");
+        // axios.get(`/api/basket/failed?basketShortcode=${basketShortcode}`)
+        //     .then( result => {
+        //         window.localStorage.removeItem('basketShortcode')
+        //     })
+        //     .catch( error => {
+        //     });
+      }
+      if (this.props.user.isLogin && this.props.basketData.length > 0 && this.props.user.data) {
+        _helpersFunction._setPersonalDataFields.call(this, this.props.user.data);
+      } else {
+        var personalData = JSON.parse(window.localStorage.getItem("userData"));
+        if (typeof personalData != "undefined" && personalData && Object.keys(personalData).length !== 0 && this.props.basketData.length > 0) {
+          _helpersFunction._setPersonalDataFields.call(this, personalData);
+          inputCheckbox.company = personalData.shippingAddress.company;
+          inputCheckbox.customerCompanyName = personalData.billingAddress.customerCompanyName;
+          inputCheckbox.shippingAddress = personalData.usingShippingAddress;
+          this.setState({ inputCheckbox: inputCheckbox });
+        }
+      }
+      /*
+          axios.get('/api/countries')
+              .then(( { data }) => {
+                  let countriesList = data.data.map( item => { return { value: item['name-short'], label: item['name-de']}})
+                  this.setState({country: {...this.state.country, countriesList}, domain: data.meta.domainId})
+                  if(window.isGoogleConnection) {
+                      _googleAutocomplete.call(this, data.meta.domainId, 'userData')
+                  }
+              })
+          */
+
+      var remarketDomainId = 2;
+      var countriesList = [{ value: "ch", label: "Schweiz" }, { value: "li", label: "Liechtenstein" }];
+      this.setState({
+        country: (0, _extends4.default)({}, this.state.country, { countriesList: countriesList }),
+        domain: remarketDomainId
+      });
+      if (window.isGoogleConnection) {
+        _helpersFunction._googleAutocomplete.call(this, remarketDomainId, "userData");
+      }
+      _axios2.default.post("/api/similarItems", { basketData: this.props.basketData }).then(function (data) {
+        _this6.setState({ similarItems: data.data });
+      }).catch(function () {
+        return false;
+      });
+
+      this._getPrice(this.props.basketData, this.state.taxValue);
+      if (window.isGoogleConnection) {
+        this._gtag_snippet(this.props.basketData);
+      }
+      if (window.localStorage.getItem("paymentFailedTryAgain")) {
+        var customerShortcode = window.localStorage.getItem("customerShortcode");
+        window.localStorage.removeItem("paymentFailedTryAgain");
+        window.localStorage.removeItem("customerShortcode");
+        if (!window.isMobile) {
+          $(".paymentMethod h3.title").click();
+          $(".shippingMethod h3.title, .personalData h3.title").addClass("answering");
+          $(".basketSubmit.hideBtn").show();
+          this.setState({
+            ifErrorPayment: true,
+            customerShortcode: customerShortcode
+          });
+        } else {
+          $(".productWrap, .personalData").hide();
+          $("#accordion, .shippingMethod .wrapperItemBasket").show();
+          this.goToPaymentMobile(true);
+          this.setState({ ifErrorPayment: true, customerShortcode: customerShortcode });
+        }
+      }
+
+      var deadline = JSON.parse(window.localStorage.getItem("deadline"));
+
+      if (true) {
+        if (!document.getElementById("numeric-timer")) {
+          setTimeout(function () {
+            _this6.setState({ deadline: false });
+            _this6.updateCountDown();
+          }, 1000);
+        } else {
+          this.setState({ deadline: false });
+          this.updateCountDown();
+        }
+        // Update the count down every 1 min
+        this.countdown = setInterval(function () {
+          _this6.setState({ deadline: false });
+          _this6.updateCountDown();
+        }, 60000);
+      } else {
+        window.localStorage.removeItem("deadline");
+      }
+      if (window.localStorage.hasOwnProperty("coupon")) {
+        _axios2.default.get("/api/checkCoupon?coupon=" + window.localStorage.getItem("coupon") + "&couponType=7").then(function (data) {
+          if (!_this6.props.basketData.some(function (item) {
+            return item.productTypeId == 999;
+          })) {
+            var newBasketData = [].concat((0, _toConsumableArray3.default)(_this6.props.basketData), [data.data]);
+            _this6.props.basketActions.changeBasketData(newBasketData);
+            _this6._getPrice(newBasketData, _this6.state.taxValue);
+          }
+        }).catch(function (error) {});
+      }
+      this._loadRatingData();
+
+      var diffX = 0;
+      var startX = 0;
+      var lastChange = 0;
+      var topButtonsCarousel = document.getElementById("topButtonsCarousel");
+      if (typeof topButtonsCarousel !== "undefined" && topButtonsCarousel != null) {
+        topButtonsCarousel.addEventListener("touchstart", function (e) {
+          startX = e.changedTouches[0].pageX;
+        });
+        topButtonsCarousel.addEventListener("touchmove", function (e) {
+          diffX = lastChange + (e.changedTouches[0].pageX - startX);
+          if (diffX > 0) {
+            diffX = 0;
+          } else if (diffX < -750) {
+            diffX = -750;
+          }
+          topButtonsCarousel.style.transform = "translate(" + diffX + "px,0px)";
+        });
+        topButtonsCarousel.addEventListener("touchend", function (e) {
+          lastChange = diffX;
+        });
+      }
+      this.props.basketData.forEach(function (item) {
+        if (item.productTypeId == 500 && typeof item.shortcode !== "undefined" && (item.shortcode === "IDK3VU" || item.shortcode === "8JXTVN")) {
+          _this6.setState({ insuranceChAmount: item.price });
+        }
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (!this.props.user.isLogin) {
+        var personalData = (0, _helpersFunction._getPersonalDataFields)();
+        window.localStorage.setItem("userData", JSON.stringify(personalData));
+      }
+      document.getElementById("datatrans").remove();
+      if (this.stripeHandler) this.stripeHandler.close();
+      clearInterval(this.countdown);
+    }
+  }, {
+    key: "updateCountDown",
+    value: function updateCountDown() {
+      this.setState({ deadline: true });
+      var deadline = JSON.parse(window.localStorage.getItem("deadline")),
+          numericTimer = document.getElementById("numeric-timer");
+      if (deadline && deadline.deadlineExpired) {
+        this.setState({ deadlineExpired: true });
+        clearInterval(this.countdown);
+        return;
+      }
+      if (deadline && deadline.isActive) {
+        this.setState({ deadlineIsActive: true });
+      }
+      if (!deadline) {
+        var countDownDate = new Date();
+        countDownDate.setHours(countDownDate.getHours() + 3);
+        deadline = {
+          countDownDate: countDownDate,
+          isActive: 0,
+          deadlineExpired: 0,
+          couponShortcode: ""
+        };
+        window.localStorage.setItem("deadline", JSON.stringify(deadline));
+      }
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = new Date(deadline.countDownDate).getTime() - now;
+      // Time calculations for days, hours, minutes and seconds
+      var hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+      var minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+      var seconds = Math.floor(distance % (1000 * 60) / 1000);
+      // Display the result in the element with id="numericTimer"
+
+      if (numericTimer) {
+        numericTimer.innerHTML = hours + "Std. " + minutes + "Min. verbleiben";
+      }
+
+      // If the count down is finished
+      if (distance < 0) {
+        deadline.deadlineExpired = 1;
+        window.localStorage.setItem("deadline", JSON.stringify(deadline));
+        clearInterval(this.countdown);
+        this.setState({ deadlineExpired: true });
+      }
+    }
+  }, {
+    key: "activateCountDownCoupon",
+    value: function activateCountDownCoupon() {
+      var _this7 = this;
+
+      var deadline = JSON.parse(window.localStorage.getItem("deadline"));
+      if (deadline) {
+        deadline.isActive = 1;
+        this.setState({ deadlineIsActive: true });
+        window.localStorage.setItem("deadline", JSON.stringify(deadline));
+        if (!deadline.couponShortcode) {
+          _axios2.default.get("/api/generateCountDownCoupon").then(function (result) {
+            deadline.couponShortcode = result.data.shortcode;
+            window.localStorage.setItem("deadline", JSON.stringify(deadline));
+            if (!_this7.props.basketData.find(function (item) {
+              return item.shortcode == deadline.couponShortcode;
+            })) {
+              var otherCoupon = _this7.props.basketData.find(function (item) {
                 return item.productTypeId == 999;
-            }),
-                data = this.props.basketData.filter(function (item) {
-                return ![11, 100, 999, 500, 501].includes(item.productTypeId);
-            }),
-                items = data.map(function (item) {
-                var brands = void 0,
-                    brand = void 0,
-                    category = void 0;
-                if (item.categoryName) {
-                    brands = item.criterias.find(function (item) {
-                        return item.id === 'manufacturer';
-                    }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
-                } else {
-                    brand = item.deviceName, category = '';
-                }
-                return {
-                    "id": item.shortcode,
-                    "name": item.descriptionLong || item.model || '',
-                    "list_name": "Kaufen",
-                    "quantity": 1,
-                    "brand": brand,
-                    "category": category,
-                    "price": item.discountPrice || item.price
-                };
-            });
-
-            if (showTabs.paymentMethod) {
-                if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
-                    return item.checked;
-                })) {
-                    this.setState({ payMethodError: {
-                            status: false,
-                            msg: ''
-                        } });
-                    if (payMethod.method === 'Payrexx' && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
-                        this.setState({ payMethodError: {
-                                status: true,
-                                msg: 'Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich'
-                            } });
-                    } else {
-                        showTabs.personalData = true;
-                        showTabs.shippingMethod = false;
-                        showTabs.paymentMethod = false;
-                        this.setState({ showTabs: showTabs });
-                        if (payMethod.method == 'IdealPaymentRechnung' || payMethod.method == 'IdealPaymentRatenzahlung') {
-                            var inputCheckbox = this.state.inputCheckbox;
-
-                            inputCheckbox.shippingAddress = true;
-                            this.setState({ inputCheckbox: inputCheckbox });
-                        }
-                        $('.personalData h3.title').click();
-                        $('.paymentMethod h3.title').addClass('answering');
-                    }
-                } else {
-                    this.setState({ payMethodError: {
-                            status: true,
-                            msg: 'Bitte Zahlungsart auswählen'
-                        } });
-                }
-            } else if (showTabs.personalData) {
-                var itemNames = [];
-                var klavioItems = data.map(function (item) {
-                    var url = '';
-                    if (_accessories.ACCESSORIES_ID.includes(item.productTypeId)) {
-                        // if item 'accessories' 3 = cases / 4 = accessories / 5 = software / 9 = spare parts / 10 = temperd glass
-                        var modelName = item.model ? item.model.split(" ").join('-').toLowerCase().replace(/\//g, '--') : 'model',
-                            deviceName = item.deviceName ? item.deviceName.toLowerCase().replace(/ /g, '-') : 'device';
-                        url = '/kaufen/detail/zubehoer/' + deviceName + '/' + modelName + '/' + item.shortcode;
-                    } else {
-                        var _modelName = item.model.replace(/ /g, '-').toLowerCase(),
-                            color = item.color ? item.color.toLowerCase() : 'color',
-                            capacity = item.capacity ? item.capacity.toLowerCase() : 'capacity',
-                            _deviceName = item.deviceName.replace(/ /g, '-').toLowerCase();
-                        url = '/kaufen/detail/' + _deviceName + '/' + _modelName + '/' + capacity + '/' + color + '/' + item.shortcode;
-                    }
-                    var brands = void 0,
-                        brand = void 0,
-                        category = void 0;
-                    if (item.categoryName) {
-                        brands = item.criterias.find(function (item) {
-                            return item.id === 'manufacturer';
-                        }).values;
-                        brand = brands.length ? brands[0].name : "";
-                        category = item.categoryName;
-                    } else {
-                        brand = item.deviceName;
-                        category = '';
-                    }
-                    itemNames.push(item.descriptionLong || item.model);
-                    return {
-                        "ProductID": item.shortcode,
-                        "ProductName": item.descriptionLong || item.model || '',
-                        "Quantity": 1,
-                        "ProductBrand": brand,
-                        "ProductURL": url,
-                        "ImageURL": item.deviceImages ? item.deviceImages.mainImg.src : '',
-                        "ProductCategories": [category],
-                        "ItemPrice": item.discountPrice || item.price
-                    };
-                });
-                (0, _helpersFunction.pushKlavioIdentify)();
-                _learnq.push(["track", "Started Checkout", {
-                    "$event_id": this.props.total + Date.now(),
-                    "$value": this.props.total,
-                    "ItemNames": itemNames,
-                    "CheckoutURL": window.location.href,
-                    "Items": [klavioItems]
-                }]);
-
-                if (document.querySelector('input[name="shippingAddress"]').checked) {
-                    if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData input:not([type="radio"])[required]'))).every(function (item) {
-                        return item.value.trim() !== '';
-                    }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .billingForm input[type="radio"][required]'))).some(function (item) {
-                        return item.checked;
-                    }) && $('input[name="inputCountry"]').length > 0) {
-                        showTabs.personalData = false;
-                        showTabs.shippingMethod = true;
-                        showTabs.paymentMethod = false;
-                        this.setState({ showTabs: showTabs });
-                        $('.shippingMethod h3.title').click();
-                        $('.personalData h3.title').addClass('answering');
-                        $(".basketSubmit.hideBtn").show();
-                        gtag('event', 'begin_checkout', {
-                            "items": items,
-                            "coupon": coupon ? coupon.shortcоde : ""
-                        });
-                        gtag('event', 'set_checkout_option', {
-                            "checkout_step": 1,
-                            "checkout_option": "personal data"
-                        });
-                    } else $(".basketSubmit").click();
-                } else {
-                    if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData input:not([type="radio"])[required]'))).every(function (item) {
-                        return item.value.trim() !== '';
-                    }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .shippingForm input[type="radio"][required]'))).some(function (item) {
-                        return item.checked;
-                    }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .billingForm input[type="radio"][required]'))).some(function (item) {
-                        return item.checked;
-                    })) {
-                        showTabs.personalData = false;
-                        showTabs.shippingMethod = true;
-                        showTabs.paymentMethod = false;
-                        this.setState({ showTabs: showTabs });
-                        $('.shippingMethod h3.title').click();
-                        $('.personalData h3.title').addClass('answering');
-                        $(".basketSubmit.hideBtn").show();
-
-                        gtag('event', 'begin_checkout', {
-                            "items": items,
-                            "coupon": coupon ? coupon.shortcоde : ""
-                        });
-                        gtag('event', 'set_checkout_option', {
-                            "checkout_step": 1,
-                            "checkout_option": "personal data"
-                        });
-                    } else $(".basketSubmit").click();
-                }
-            } else if (showTabs.shippingMethod) {
-                if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.shippingMethod input[type="radio"][required]'))).some(function (item) {
-                    return item.checked;
-                })) {
-                    showTabs.personalData = false;
-                    showTabs.shippingMethod = false;
-                    showTabs.paymentMethod = true;
-                    this.setState({ showTabs: showTabs });
-                    if (this.state.total !== 0) $('.paymentMethod h3.title').click();
-                    $('.shippingMethod h3.title').addClass('answering');
-
-                    gtag('event', 'set_checkout_option', {
-                        "checkout_step": 2,
-                        "checkout_option": "shipping method",
-                        "value": [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.shippingMethod input[type="radio"][required]'))).find(function (item) {
-                            return item.checked;
-                        }).value
-                    });
-                } else $(".basketSubmit").click();
+              });
+              if (otherCoupon) {
+                _this7.handleRemoveFromBasket(999, otherCoupon.shortcode);
+              }
+              _this7.setState({ couponError: null });
+              _this7.inputCouponCallback({
+                target: { value: deadline.couponShortcode }
+              });
             }
+          }).catch(function (error) {
+            console.log("error", error.response.data);
+          });
+        } else {
+          if (!this.props.basketData.find(function (item) {
+            return item.shortcode == deadline.couponShortcode;
+          })) {
+            var otherCoupon = this.props.basketData.find(function (item) {
+              return item.productTypeId == 999;
+            });
+            if (otherCoupon) {
+              this.handleRemoveFromBasket(999, otherCoupon.shortcode);
+            }
+            this.setState({ couponError: null });
+            this.inputCouponCallback({
+              target: { value: deadline.couponShortcode }
+            });
+          }
+        }
+      }
+    }
+  }, {
+    key: "_gtag_report_conversion",
+    value: function _gtag_report_conversion(value, url) {
+      var callback = function callback() {
+        if (typeof url != "undefined") {
+          window.location = url;
+        }
+      };
+      gtag("event", "conversion", {
+        send_to: "AW-827036726/Mt4fCLj803sQtqiuigM",
+        value: value,
+        currency: "CHF",
+        transaction_id: "",
+        event_callback: callback
+      });
+      return false;
+    }
+  }, {
+    key: "_gtag_snippet",
+    value: function _gtag_snippet(basketData) {
+      var prodIds = [],
+          totalValue = 0;
+
+      basketData.forEach(function (item) {
+        if (item.productTypeId == 7) {
+          prodIds.push(item.shortcode);
+          totalValue += +item.discountPrice || +item.price;
+        }
+      });
+      gtag("event", "page_view", {
+        send_to: "AW-827036726",
+        ecomm_prodid: prodIds,
+        ecomm_pagetype: "cart",
+        ecomm_totalvalue: totalValue,
+        ecomm_category: "Electronics"
+      });
+    }
+  }, {
+    key: "_showHideBlocks",
+    value: function _showHideBlocks(e) {
+      var step = e.currentTarget.getAttribute("data-step"),
+          showTabs = (0, _extends4.default)({}, this.state.showTabs);
+      //    hide personalData section only after fill all required fields
+      if (showTabs[step] || showTabs.personalData || showTabs.shippingMethod) {
+        if ($(e.currentTarget).parent().find(".wrapperItemBasket").css("display") === "none") {
+          $(".wrapperItemBasket").each(function () {
+            $(this).hide("slow");
+            // $(this).parent().css({ paddingBottom: '28px' })
+            $(this).parent().find(".title i.fa").removeClass("fa-angle-up").addClass("fa-angle-down");
+          });
+          $(e.currentTarget).parent().find(".wrapperItemBasket").toggle("slow");
+          $(e.currentTarget).parent().css({ paddingBottom: "44px" });
+
+          $(e.currentTarget).parent().find(".title i.fa").removeClass("fa-angle-down").addClass("fa-angle-up");
+        }
+        showTabs.personalData = !!(step === "personalData");
+        showTabs.shippingMethod = !!(step === "shippingMethod");
+        showTabs.paymentMethod = !!(step === "paymentMethod");
+        this.setState({ showTabs: showTabs });
+      }
+    }
+  }, {
+    key: "_getPrice",
+    value: function _getPrice(data, taxValue) {
+      var subject = 0,
+          total = void 0,
+          tax = void 0,
+          creditsCount = 0,
+          taxOnlyForVat = 0,
+          totalOnlyForVat = 0,
+          currentValue = this.state.credits.currentValue,
+          basketHasCreditItem = data.some(function (item) {
+        return item.productTypeId == 100;
+      });
+      data.forEach(function (item) {
+        if (item.productTypeId != 500) {
+          if (item.productTypeId == 100 || item.productTypeId == 999) creditsCount += +item.price;else {
+            subject += item.discountPrice ? +item.discountPrice : +item.price;
+            if (item.euVatApplicable) totalOnlyForVat += item.price;
+          }
+        }
+      });
+      total = subject - creditsCount;
+      tax = total / (1 + taxValue / 100) * (taxValue / 100);
+      taxOnlyForVat = totalOnlyForVat / (1 + taxValue / 100) * (taxValue / 100);
+      if (!this.state.credits.currentValue || !basketHasCreditItem) {
+        currentValue = this.state.credits.totalCredits > total ? total : this.state.credits.totalCredits;
+      }
+      if (basketHasCreditItem) {
+        data.forEach(function (item) {
+          if (item.productTypeId == 100) currentValue = item.price;
+        });
+      }
+      this.setState({
+        subject: subject,
+        total: total,
+        tax: tax,
+        taxOnlyForVat: taxOnlyForVat,
+        checkedPayByCredits: basketHasCreditItem,
+        credits: (0, _extends4.default)({}, this.state.credits, { currentValue: currentValue })
+      });
+    }
+  }, {
+    key: "_goToDelivery",
+    value: function _goToDelivery() {
+      var _state = this.state,
+          total = _state.total,
+          payMethod = _state.payMethod;
+
+      if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
+        return item.checked;
+      })) {
+        this.setState({
+          payMethodError: {
+            status: false,
+            msg: ""
+          }
+        });
+        if (payMethod.method === "Payrexx" && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
+          this.setState({
+            payMethodError: {
+              status: true,
+              msg: "Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich"
+            }
+          });
+        } else {
+          this.props.goToDelivery();
+        }
+      } else {
+        this.setState({
+          payMethodError: {
+            status: true,
+            msg: "Bitte Zahlungsart auswählen"
+          }
+        });
+      }
+    }
+  }, {
+    key: "goToPaymentMobile",
+    value: function goToPaymentMobile(fromError) {
+      this.props.goToPayment(fromError);
+      this.setState({
+        showTabs: (0, _extends4.default)({}, this.state.showTabs, {
+          personalData: false,
+          shippingMethod: false,
+          paymentMethod: true
+        })
+      });
+    }
+  }, {
+    key: "goTab",
+    value: function goTab(e, tabName) {
+      var _state2 = this.state,
+          total = _state2.total,
+          payMethod = _state2.payMethod;
+
+      this.setState({
+        payMethodError: {
+          status: false,
+          msg: ""
+        }
+      });
+      this.setState({ validateError: defaultValidateError });
+
+      if (this.props.basketStep === tabName) return;
+      e.preventDefault();
+      if (tabName == "paymentMethod") {
+        this.props.goToMethod();
+      } else if (tabName == "personalData") {
+        this._goToDelivery();
+      } else if (tabName == "shippingMethod") {
+        if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
+          return item.checked;
+        })) {
+          this.setState({
+            payMethodError: {
+              status: false,
+              msg: ""
+            }
+          });
+          if (payMethod.method === "Payrexx" && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
+            this.setState({
+              payMethodError: {
+                status: true,
+                msg: "Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich"
+              }
+            });
+          } else {
+            if (this.props.basketStep === "paymentMethod") {
+              if (!this.validateForm()) {
+                this.setState({
+                  payMethodError: {
+                    status: true,
+                    msg: "Bitte Personalien ausfüllen"
+                  }
+                });
+              } else {
+                this.goToPaymentMobile(false);
+              }
+            } else {
+              if (!this.validateForm()) {
+                return;
+              }
+              this.goToPaymentMobile(false);
+            }
+          }
+        } else {
+          this.setState({
+            payMethodError: {
+              status: true,
+              msg: "Bitte Zahlungsart auswählen"
+            }
+          });
+        }
+      }
+    }
+  }, {
+    key: "nextTab",
+    value: function nextTab() {
+      var _state3 = this.state,
+          total = _state3.total,
+          payMethod = _state3.payMethod;
+
+      this.props.basketData.map(function (el) {
+        return snaptr("track", "START_CHECKOUT", {
+          "shortcode or name": el.shortcode || el.name
+        });
+      });
+
+      if (window.isFBConnection) {
+        fbq("track", "InitiateCheckout", {
+          value: this.state.total,
+          currency: window.currencyValue
+        }); // facebook pixel
+      }
+      var showTabs = this.state.showTabs;
+
+
+      var coupon = this.props.basketData.find(function (item) {
+        return item.productTypeId == 999;
+      }),
+          data = this.props.basketData.filter(function (item) {
+        return ![11, 100, 999, 500, 501].includes(item.productTypeId);
+      }),
+          items = data.map(function (item) {
+        var brands = void 0,
+            brand = void 0,
+            category = void 0;
+        if (item.categoryName) {
+          brands = item.criterias.find(function (item) {
+            return item.id === "manufacturer";
+          }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
+        } else {
+          brand = item.deviceName, category = "";
+        }
+        return {
+          id: item.shortcode,
+          name: item.descriptionLong || item.model || "",
+          list_name: "Kaufen",
+          quantity: 1,
+          brand: brand,
+          category: category,
+          price: item.discountPrice || item.price
+        };
+      });
+
+      if (showTabs.paymentMethod) {
+        if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.paymentMethod input[type="radio"][required]'))).some(function (item) {
+          return item.checked;
+        })) {
+          this.setState({
+            payMethodError: {
+              status: false,
+              msg: ""
+            }
+          });
+          if (payMethod.method === "Payrexx" && (parseFloat(total) < 50 || parseFloat(total) > 999)) {
+            this.setState({
+              payMethodError: {
+                status: true,
+                msg: "Die Zahlung per Rechnung mit Bobfinance ist ab 50.00 CHF und bis maximal 1000.00 CHF möglich"
+              }
+            });
+          } else {
+            showTabs.personalData = true;
+            showTabs.shippingMethod = false;
+            showTabs.paymentMethod = false;
             this.setState({ showTabs: showTabs });
+            if (payMethod.method == "IdealPaymentRechnung" || payMethod.method == "IdealPaymentRatenzahlung") {
+              var inputCheckbox = this.state.inputCheckbox;
+
+              inputCheckbox.shippingAddress = true;
+              this.setState({ inputCheckbox: inputCheckbox });
+            }
+            $(".personalData h3.title").click();
+            $(".paymentMethod h3.title").addClass("answering");
+          }
+        } else {
+          this.setState({
+            payMethodError: {
+              status: true,
+              msg: "Bitte Zahlungsart auswählen"
+            }
+          });
         }
-    }, {
-        key: 'changeCoupon',
-        value: function changeCoupon(e) {
-            this.setState({ couponError: null });
-            e.persist();
-            this.inputCouponCallback(e);
-        }
-    }, {
-        key: 'getShippingMethods',
-        value: function getShippingMethods(paymentType) {
-            var _this8 = this;
+      } else if (showTabs.personalData) {
+        var itemNames = [];
+        var klavioItems = data.map(function (item) {
+          var url = "";
+          if (_accessories.ACCESSORIES_ID.includes(item.productTypeId)) {
+            // if item 'accessories' 3 = cases / 4 = accessories / 5 = software / 9 = spare parts / 10 = temperd glass
+            var modelName = item.model ? item.model.split(" ").join("-").toLowerCase().replace(/\//g, "--") : "model",
+                deviceName = item.deviceName ? item.deviceName.toLowerCase().replace(/ /g, "-") : "device";
+            url = "/kaufen/detail/zubehoer/" + deviceName + "/" + modelName + "/" + item.shortcode;
+          } else {
+            var _modelName = item.model.replace(/ /g, "-").toLowerCase(),
+                color = item.color ? item.color.toLowerCase() : "color",
+                capacity = item.capacity ? item.capacity.toLowerCase() : "capacity",
+                _deviceName = item.deviceName.replace(/ /g, "-").toLowerCase();
+            url = "/kaufen/detail/" + _deviceName + "/" + _modelName + "/" + capacity + "/" + color + "/" + item.shortcode;
+          }
+          var brands = void 0,
+              brand = void 0,
+              category = void 0;
+          if (item.categoryName) {
+            brands = item.criterias.find(function (item) {
+              return item.id === "manufacturer";
+            }).values;
+            brand = brands.length ? brands[0].name : "";
+            category = item.categoryName;
+          } else {
+            brand = item.deviceName;
+            category = "";
+          }
+          itemNames.push(item.descriptionLong || item.model);
+          return {
+            ProductID: item.shortcode,
+            ProductName: item.descriptionLong || item.model || "",
+            Quantity: 1,
+            ProductBrand: brand,
+            ProductURL: url,
+            ImageURL: item.deviceImages ? item.deviceImages.mainImg.src : "",
+            ProductCategories: [category],
+            ItemPrice: item.discountPrice || item.price
+          };
+        });
+        (0, _helpersFunction.pushKlavioIdentify)();
+        _learnq.push(["track", "Started Checkout", {
+          $event_id: this.props.total + Date.now(),
+          $value: this.props.total,
+          ItemNames: itemNames,
+          CheckoutURL: window.location.href,
+          Items: [klavioItems]
+        }]);
 
-            _axios2.default.get('/api/shippingMethods').then(function (data) {
-                var defaultMethod = null,
-                    basketData = _this8.props.basketData,
-                    newBasketData = [],
-                    showPickasShippingMethod = true,
-                    shippingMethods = data.data.shippingMethods.filter(function (item) {
-                    return item != pickasShippingMethod;
-                });
-
-                var pickasShippingMethod = shippingMethods.find(function (item) {
-                    return item.shortcode === 'PICKAS';
-                }); //'get in location' shipping method
-                if (basketData.find(function (item) {
-                    return _accessories.ACCESSORIES_ID.includes(item.productTypeId);
-                })) {
-                    // if in basket isset accessories - don't show 'get in location' shipping method
-                    showPickasShippingMethod = false;
-                }
-
-                var deviceBasketItems = basketData.filter(function (item) {
-                    return item.productTypeId == 7;
-                });
-
-                if (deviceBasketItems.length > 1) {
-                    //  if in basket  more than one devise-model and they are from different locations - don't show 'get in location' shipping method
-                    var placeId = deviceBasketItems[0].placeId;
-
-                    if (!deviceBasketItems.every(function (item) {
-                        return item.placeId == placeId;
-                    })) {
-                        showPickasShippingMethod = false;
-                    }
-                }
-
-                if (!showPickasShippingMethod) {
-                    shippingMethods = shippingMethods.filter(function (item) {
-                        return item != pickasShippingMethod;
-                    });
-                }
-
-                if (paymentType === "SWB" && deviceBasketItems.length > 0) {
-                    shippingMethods = shippingMethods.filter(function (item) {
-                        return item.shortcode === 'PRIRMP';
-                    });
-                    shippingMethods.forEach(function (item) {
-                        if (item.shortcode === 'PRIRMP') defaultMethod = item;
-                    });
-                } else {
-                    shippingMethods = shippingMethods.filter(function (item) {
-                        return item.shortcode !== 'PRIRMP';
-                    });
-                    shippingMethods.forEach(function (item) {
-                        if (item.shortcode === 'GRVERS') defaultMethod = item;
-                    });
-                }
-                if (defaultMethod) {
-                    newBasketData = basketData.filter(function (item) {
-                        return item.productTypeId != 11;
-                    });
-                    newBasketData.push(defaultMethod);
-                    _this8._getPrice(newBasketData, data.data.tax);
-                } else _this8._getPrice(basketData, data.data.tax);
-
-                _this8.setState({ shippingMethods: shippingMethods,
-                    taxValue: data.data.tax
-                }, function () {
-                    if (defaultMethod) {
-                        _this8.props.basketActions.changeBasketData(newBasketData);
-                        _this8.props.basketActions.changeShippingMethod({ selected: true, value: defaultMethod });
-                    }
-                });
+        if (document.querySelector('input[name="shippingAddress"]').checked) {
+          if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData input:not([type="radio"])[required]'))).every(function (item) {
+            return item.value.trim() !== "";
+          }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .billingForm input[type="radio"][required]'))).some(function (item) {
+            return item.checked;
+          }) && $('input[name="inputCountry"]').length > 0) {
+            showTabs.personalData = false;
+            showTabs.shippingMethod = true;
+            showTabs.paymentMethod = false;
+            this.setState({ showTabs: showTabs });
+            $(".shippingMethod h3.title").click();
+            $(".personalData h3.title").addClass("answering");
+            $(".basketSubmit.hideBtn").show();
+            gtag("event", "begin_checkout", {
+              items: items,
+              coupon: coupon ? coupon.shortcоde : ""
             });
+            gtag("event", "set_checkout_option", {
+              checkout_step: 1,
+              checkout_option: "personal data"
+            });
+          } else $(".basketSubmit").click();
+        } else {
+          if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData input:not([type="radio"])[required]'))).every(function (item) {
+            return item.value.trim() !== "";
+          }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .shippingForm input[type="radio"][required]'))).some(function (item) {
+            return item.checked;
+          }) && [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.personalData .billingForm input[type="radio"][required]'))).some(function (item) {
+            return item.checked;
+          })) {
+            showTabs.personalData = false;
+            showTabs.shippingMethod = true;
+            showTabs.paymentMethod = false;
+            this.setState({ showTabs: showTabs });
+            $(".shippingMethod h3.title").click();
+            $(".personalData h3.title").addClass("answering");
+            $(".basketSubmit.hideBtn").show();
+
+            gtag("event", "begin_checkout", {
+              items: items,
+              coupon: coupon ? coupon.shortcоde : ""
+            });
+            gtag("event", "set_checkout_option", {
+              checkout_step: 1,
+              checkout_option: "personal data"
+            });
+          } else $(".basketSubmit").click();
         }
-    }, {
-        key: 'triggerChangeCoupon',
-        value: function triggerChangeCoupon() {
-            if ($('#input_coupon').val() == "") {
-                this.setState({ couponError: 'Bitte Gutscheincode eingeben' });
-                return;
-            }
-            this.setState({ couponError: null });
-            this.inputCouponCallback({ 'target': { 'value': $('#input_coupon').val() } });
+      } else if (showTabs.shippingMethod) {
+        if ([].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.shippingMethod input[type="radio"][required]'))).some(function (item) {
+          return item.checked;
+        })) {
+          showTabs.personalData = false;
+          showTabs.shippingMethod = false;
+          showTabs.paymentMethod = true;
+          this.setState({ showTabs: showTabs });
+          if (this.state.total !== 0) $(".paymentMethod h3.title").click();
+          $(".shippingMethod h3.title").addClass("answering");
+
+          gtag("event", "set_checkout_option", {
+            checkout_step: 2,
+            checkout_option: "shipping method",
+            value: [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.shippingMethod input[type="radio"][required]'))).find(function (item) {
+              return item.checked;
+            }).value
+          });
+        } else $(".basketSubmit").click();
+      }
+      this.setState({ showTabs: showTabs });
+    }
+  }, {
+    key: "changeCoupon",
+    value: function changeCoupon(e) {
+      this.setState({ couponError: null });
+      e.persist();
+      this.inputCouponCallback(e);
+    }
+  }, {
+    key: "getShippingMethods",
+    value: function getShippingMethods(paymentType) {
+      var _this8 = this;
+
+      _axios2.default.get("/api/shippingMethods").then(function (data) {
+        var defaultMethod = null,
+            basketData = _this8.props.basketData,
+            newBasketData = [],
+            showPickasShippingMethod = true,
+            shippingMethods = data.data.shippingMethods.filter(function (item) {
+          return item != pickasShippingMethod;
+        });
+
+        var pickasShippingMethod = shippingMethods.find(function (item) {
+          return item.shortcode === "PICKAS";
+        }); //'get in location' shipping method
+        if (basketData.find(function (item) {
+          return _accessories.ACCESSORIES_ID.includes(item.productTypeId);
+        })) {
+          // if in basket isset accessories - don't show 'get in location' shipping method
+          showPickasShippingMethod = false;
         }
-    }, {
-        key: 'changeCreditsInput',
-        value: function changeCreditsInput(e) {
-            this.setState({ credits: (0, _extends4.default)({}, this.state.credits, { errorCredits: null, currentValue: e.target.value }) });
+
+        var deviceBasketItems = basketData.filter(function (item) {
+          return item.productTypeId == 7;
+        });
+
+        if (deviceBasketItems.length > 1) {
+          //  if in basket  more than one devise-model and they are from different locations - don't show 'get in location' shipping method
+          var placeId = deviceBasketItems[0].placeId;
+
+          if (!deviceBasketItems.every(function (item) {
+            return item.placeId == placeId;
+          })) {
+            showPickasShippingMethod = false;
+          }
         }
-    }, {
-        key: 'sendForm',
-        value: function sendForm(e) {
-            var _this9 = this;
 
-            var personalData = (0, _helpersFunction._getPersonalDataFields)();
-            var _state4 = this.state,
-                shippingMethods = _state4.shippingMethods,
-                dataTransSign = _state4.dataTransSign,
-                dataTransMerchantId = _state4.dataTransMerchantId,
-                dataTransSignSandbox = _state4.dataTransSignSandbox,
-                dataTransMerchantIdSandbox = _state4.dataTransMerchantIdSandbox;
-            var shippingMethod = this.props.shippingMethod;
-            // let realDataTransSign = dataTransSignSandbox;
-            // let realDataTransMerchantId = dataTransMerchantIdSandbox;
+        if (!showPickasShippingMethod) {
+          shippingMethods = shippingMethods.filter(function (item) {
+            return item != pickasShippingMethod;
+          });
+        }
 
-            var realDataTransSign = dataTransSign;
-            var realDataTransMerchantId = dataTransMerchantId;
+        if (paymentType === "SWB" && deviceBasketItems.length > 0) {
+          shippingMethods = shippingMethods.filter(function (item) {
+            return item.shortcode === "PRIRMP";
+          });
+          shippingMethods.forEach(function (item) {
+            if (item.shortcode === "PRIRMP") defaultMethod = item;
+          });
+        } else {
+          shippingMethods = shippingMethods.filter(function (item) {
+            return item.shortcode !== "PRIRMP";
+          });
+          shippingMethods.forEach(function (item) {
+            if (item.shortcode === "GRVERS") defaultMethod = item;
+          });
+        }
+        if (defaultMethod) {
+          newBasketData = basketData.filter(function (item) {
+            return item.productTypeId != 11;
+          });
+          newBasketData.push(defaultMethod);
+          _this8._getPrice(newBasketData, data.data.tax);
+        } else _this8._getPrice(basketData, data.data.tax);
 
-            e.preventDefault();
+        _this8.setState({ shippingMethods: shippingMethods, taxValue: data.data.tax }, function () {
+          if (defaultMethod) {
+            _this8.props.basketActions.changeBasketData(newBasketData);
+            _this8.props.basketActions.changeShippingMethod({
+              selected: true,
+              value: defaultMethod
+            });
+          }
+        });
+      });
+    }
+  }, {
+    key: "triggerChangeCoupon",
+    value: function triggerChangeCoupon() {
+      if ($("#input_coupon").val() == "") {
+        this.setState({ couponError: "Bitte Gutscheincode eingeben" });
+        return;
+      }
+      this.setState({ couponError: null });
+      this.inputCouponCallback({ target: { value: $("#input_coupon").val() } });
+    }
+  }, {
+    key: "changeCreditsInput",
+    value: function changeCreditsInput(e) {
+      this.setState({
+        credits: (0, _extends4.default)({}, this.state.credits, {
+          errorCredits: null,
+          currentValue: e.target.value
+        })
+      });
+    }
+  }, {
+    key: "sendForm",
+    value: function sendForm(e) {
+      var _this9 = this;
 
-            window.localStorage.removeItem('bankPaymentData');
+      var personalData = (0, _helpersFunction._getPersonalDataFields)();
+      var _state4 = this.state,
+          shippingMethods = _state4.shippingMethods,
+          dataTransSign = _state4.dataTransSign,
+          dataTransMerchantId = _state4.dataTransMerchantId,
+          dataTransSignSandbox = _state4.dataTransSignSandbox,
+          dataTransMerchantIdSandbox = _state4.dataTransMerchantIdSandbox;
+      var shippingMethod = this.props.shippingMethod;
+      // let realDataTransSign = dataTransSignSandbox;
+      // let realDataTransMerchantId = dataTransMerchantIdSandbox;
 
-            if (shippingMethods.length > 0 && shippingMethod.selected === false) {
-                this.setState({ choiceShipping: true });
-                return;
-            }
+      var realDataTransSign = dataTransSign;
+      var realDataTransMerchantId = dataTransMerchantId;
 
-            if (this.state.inputCheckbox.agree && personalData) {
-                if (this.state.payMethod.method === 'Datatrans' && this.state.payMethod.paymethoddatatrans == 'SWB' && this.state.userDOB == '') {
-                    document.getElementById("dob-field").scrollIntoView(false);
-                    document.getElementById("dob-field").style.color = "red";
-                    document.getElementById("dob-field").style.fontSize = "14px";
-                    $("#paymentPanel").click();
-                    return;
+      e.preventDefault();
+
+      window.localStorage.removeItem("bankPaymentData");
+
+      if (shippingMethods.length > 0 && shippingMethod.selected === false) {
+        this.setState({ choiceShipping: true });
+        return;
+      }
+
+      if (this.state.inputCheckbox.agree && personalData) {
+        if (this.state.payMethod.method === "Datatrans" && this.state.payMethod.paymethoddatatrans == "SWB" && this.state.userDOB == "") {
+          document.getElementById("dob-field").scrollIntoView(false);
+          document.getElementById("dob-field").style.color = "red";
+          document.getElementById("dob-field").style.fontSize = "14px";
+          $("#paymentPanel").click();
+          return;
+        }
+
+        var shippingAddress = this.state.inputCheckbox.shippingAddress,
+            productTypeIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 20, 996],
+            data = new FormData(document.forms.basketForm);
+
+        data.append("basketData", JSON.stringify(this.props.basketData));
+        data.append("addressType", shippingAddress === true ? "custom" : "billing");
+        data.append("totalPrice", this.state.total);
+        data.append("clientIp", this.state.userIP);
+        data.append("userAgent", JSON.stringify(this.props.ua));
+        data.append("payMethod", JSON.stringify(this.state.payMethod));
+
+        this.state.ifErrorPayment && data.append("errorPayment", true);
+        this.state.ifErrorPayment && data.append("customerShortcode", this.state.customerShortcode);
+
+        var fullStoryUserId = personalData.billingAddress.customer_email;
+        var fullStoryData = {
+          displayName: personalData.billingAddress.customer_firstname + " " + personalData.billingAddress.customer_lastname,
+          email: personalData.billingAddress.customer_email
+        };
+        (0, _reactFullstory.FullStoryAPI)("identify", fullStoryUserId, fullStoryData);
+        if (this.props.basketData.some(function (item) {
+          return productTypeIds.some(function (id) {
+            return item.productTypeId == id;
+          });
+        })) {
+          document.getElementById("spinner-box-load").style.display = "block";
+          gtag("event", "set_checkout_option", {
+            checkout_step: 3,
+            checkout_option: "payment method",
+            value: this.state.payMethod.method
+          });
+          _axios2.default.post("/api/basket/add", data).then(function (result) {
+            if (result.status === 200) {
+              _this9.snapPixelStatistic(result);
+              window.localStorage.setItem("customerShortcode", result.data.customerShortcode);
+              window.localStorage.setItem("asGuest", JSON.stringify(_this9.state.inputCheckbox.asGuest));
+              document.getElementById("spinner-box-load").style.display = "none";
+              window.localStorage.setItem("userData", JSON.stringify(personalData));
+              window.localStorage.setItem("basketShortcode", result.data.basketShortcode);
+              window.localStorage.setItem("snaptrUserEmail", personalData.billingAddress.customer_email);
+              var totalPrice = result.data.totalPrice;
+              if (window.isGoogleConnection) {
+                _this9._gtag_report_conversion(totalPrice); //google adwords
+              }
+              if (Math.round(totalPrice) === 0) {
+                document.getElementById("spinner-box-load").style.display = "block";
+                _axios2.default.get("/api/successPaymentByCredits?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&paymentPrice=" + result.data.paymentPrice).then(function (result) {
+                  document.getElementById("spinner-box-load").style.display = "none";
+                  if (result.status === 200) _reactRouter.browserHistory.push("/danke");
+                });
+              } else {
+                var customer_gender = "";
+                if (personalData && personalData.billingAddress.customer_gender == "Frau") {
+                  customer_gender = "female";
+                } else if (personalData && personalData.billingAddress.customer_gender == "Herr") {
+                  customer_gender = "male";
                 }
-
-                var shippingAddress = this.state.inputCheckbox.shippingAddress,
-                    productTypeIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 20, 996],
-                    data = new FormData(document.forms.basketForm);
-
-                data.append("basketData", JSON.stringify(this.props.basketData));
-                data.append("addressType", shippingAddress === true ? 'custom' : 'billing');
-                data.append("totalPrice", this.state.total);
-                data.append("clientIp", this.state.userIP);
-                data.append("userAgent", JSON.stringify(this.props.ua));
-                data.append("payMethod", JSON.stringify(this.state.payMethod));
-
-                this.state.ifErrorPayment && data.append("errorPayment", true);
-                this.state.ifErrorPayment && data.append("customerShortcode", this.state.customerShortcode);
-
-                var fullStoryUserId = personalData.billingAddress.customer_email;
-                var fullStoryData = {
-                    displayName: personalData.billingAddress.customer_firstname + ' ' + personalData.billingAddress.customer_lastname,
-                    email: personalData.billingAddress.customer_email
-                };
-                (0, _reactFullstory.FullStoryAPI)('identify', fullStoryUserId, fullStoryData);
-                if (this.props.basketData.some(function (item) {
-                    return productTypeIds.some(function (id) {
-                        return item.productTypeId == id;
-                    });
-                })) {
-                    document.getElementById('spinner-box-load').style.display = 'block';
-                    gtag('event', 'set_checkout_option', {
-                        "checkout_step": 3,
-                        "checkout_option": "payment method",
-                        "value": this.state.payMethod.method
-                    });
-                    _axios2.default.post('/api/basket/add', data).then(function (result) {
-                        if (result.status === 200) {
-                            _this9.snapPixelStatistic(result);
-                            window.localStorage.setItem('customerShortcode', result.data.customerShortcode);
-                            window.localStorage.setItem('asGuest', JSON.stringify(_this9.state.inputCheckbox.asGuest));
-                            document.getElementById('spinner-box-load').style.display = 'none';
-                            window.localStorage.setItem('userData', JSON.stringify(personalData));
-                            window.localStorage.setItem('basketShortcode', result.data.basketShortcode);
-                            window.localStorage.setItem('snaptrUserEmail', personalData.billingAddress.customer_email);
-                            var totalPrice = result.data.totalPrice;
-                            if (window.isGoogleConnection) {
-                                _this9._gtag_report_conversion(totalPrice); //google adwords
-                            }
-                            if (Math.round(totalPrice) === 0) {
-                                document.getElementById('spinner-box-load').style.display = 'block';
-                                _axios2.default.get('/api/successPaymentByCredits?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&paymentPrice=' + result.data.paymentPrice).then(function (result) {
-                                    document.getElementById('spinner-box-load').style.display = 'none';
-                                    if (result.status === 200) _reactRouter.browserHistory.push('/danke');
-                                });
-                            } else {
-                                var customer_gender = '';
-                                if (personalData && personalData.billingAddress.customer_gender == 'Frau') {
-                                    customer_gender = 'female';
-                                } else if (personalData && personalData.billingAddress.customer_gender == 'Herr') {
-                                    customer_gender = 'male';
-                                }
-                                if (_this9.state.payMethod.method === 'Datatrans') {
-                                    realDataTransSign = result.data.hmac !== '' ? result.data.hmac : realDataTransSign;
-                                    var transactionId = result.data.transactionId;
-                                    if (_this9.state.payMethod.paymethoddatatrans == 'INT') {
-                                        if (_this9.state.userDOB == '') {
-                                            document.getElementById("dob-field").scrollIntoView(false);
-                                            document.getElementById("dob-field").style.color = "red";
-                                            document.getElementById("dob-field").style.fontSize = "14px";
-                                        } else {
-                                            _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                    'data-merchant-id': realDataTransMerchantId,
-                                                    'data-amount': Math.round(totalPrice * 100),
-                                                    'data-currency': 'CHF',
-                                                    'data-paymentmethod': _this9.state.payMethod.paymethoddatatrans,
-                                                    'data-refno': result.data.basketShortcode,
-                                                    'data-refno2': result.data.basketOrderInfoId,
-                                                    'data-upp-customer-gender': customer_gender,
-                                                    'data-upp-customer-first-name': personalData.billingAddress.customer_firstname,
-                                                    'data-upp-customer-last-name': personalData.billingAddress.customer_lastname,
-                                                    'data-upp-customer-street': personalData.billingAddress.customer_street,
-                                                    'data-upp-customer-street2': personalData.billingAddress.customer_number,
-                                                    'data-upp-customer-city': personalData.billingAddress.customer_city,
-                                                    'data-upp-customer-zip-code': personalData.billingAddress.customer_zip,
-                                                    'data-upp-customer-language': 'de',
-                                                    'data-upp-customer-phone': personalData.billingAddress.customer_phone,
-                                                    'data-upp-customer-email': personalData.billingAddress.customer_email,
-
-                                                    'data-language': 'de',
-                                                    'data-upp-customer-country': _this9.state.userCountryCode3,
-                                                    'data-upp-customer-id': result.data.basketShortcode,
-                                                    'data-upp-customer-type': 'P',
-                                                    'data-upp-customer-birth-date': _this9.state.userDOB,
-                                                    'data-pmethod': _this9.state.payMethod.paymethoddatatrans,
-                                                    'data-sub_pmethod': 'BYJUNO-INVOICE',
-                                                    'data-upp-customer-details': 'yes',
-                                                    'data-upp-customer-name': personalData.billingAddress.customer_firstname + ' ' + personalData.billingAddress.customer_lastname,
-                                                    'data-intrum-device-fingerprint-id': _this9.state.uniqueSessionId,
-                                                    'data-intrum-delivery-method': 'POST',
-                                                    'data-upp-shipping-details': 'no',
-                                                    'data-upp-customer-ip-address': _this9.state.userIP,
-                                                    'data-intrum-risk-owner': 'IJ',
-                                                    'data-intrum-repayment-type': '4',
-                                                    'data-upp-customer-cell-phone': personalData.billingAddress.customer_phone,
-                                                    'data-sign': realDataTransSign })
-                                            });
-                                            console.log("Datatrans.startPayment started");
-                                            Datatrans.startPayment({ 'form': '#paymentForm',
-                                                transactionId: transactionId,
-                                                'opened': function opened() {
-                                                    console.log('payment-form opened');
-                                                },
-                                                'loaded': function loaded() {
-                                                    console.log('payment-form loaded');
-                                                },
-                                                /*'closed': function() {axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
-                                                        this.setState({ payForm: null })
-                                                },*/
-                                                'closed': function closed() {
-                                                    _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                    //this.setState({ payForm: null })
-                                                },
-                                                'error': function error() {
-                                                    console.log('error');
-                                                }
-                                            });
-                                        }
-                                    } else if (_this9.state.payMethod.paymethoddatatrans == 'INT1') {
-                                        if (_this9.state.userDOB1 == '') {
-                                            document.getElementById("dob-field1").scrollIntoView(false);
-                                            document.getElementById("dob-field1").style.color = "red";
-                                            document.getElementById("dob-field1").style.fontSize = "14px";
-                                        } else {
-                                            _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                    'data-merchant-id': realDataTransMerchantId,
-                                                    'data-amount': Math.round(totalPrice * 100),
-                                                    'data-currency': 'CHF',
-                                                    'data-paymentmethod': 'INT',
-                                                    'data-refno': result.data.basketShortcode,
-                                                    'data-refno2': result.data.basketOrderInfoId,
-                                                    'data-upp-customer-gender': customer_gender,
-                                                    'data-upp-customer-first-name': personalData.billingAddress.customer_firstname,
-                                                    'data-upp-customer-last-name': personalData.billingAddress.customer_lastname,
-                                                    'data-upp-customer-street': personalData.billingAddress.customer_street,
-                                                    'data-upp-customer-street2': personalData.billingAddress.customer_number,
-                                                    'data-upp-customer-city': personalData.billingAddress.customer_city,
-                                                    'data-upp-customer-zip-code': personalData.billingAddress.customer_zip,
-                                                    'data-upp-customer-language': 'de',
-                                                    'data-upp-customer-phone': personalData.billingAddress.customer_phone,
-                                                    'data-upp-customer-email': personalData.billingAddress.customer_email,
-
-                                                    'data-language': 'de',
-                                                    'data-upp-customer-country': _this9.state.userCountryCode3,
-                                                    'data-upp-customer-id': result.data.basketShortcode,
-                                                    'data-upp-customer-type': 'P',
-                                                    'data-upp-customer-birth-date': _this9.state.userDOB1,
-                                                    'data-pmethod': 'INT',
-                                                    'data-sub_pmethod': 'BYJUNO-INVOICE',
-                                                    'data-upp-customer-details': 'yes',
-                                                    'data-upp-customer-name': personalData.billingAddress.customer_firstname + ' ' + personalData.billingAddress.customer_lastname,
-                                                    'data-intrum-device-fingerprint-id': _this9.state.uniqueSessionId,
-                                                    'data-intrum-delivery-method': 'POST',
-                                                    'data-upp-shipping-details': 'no',
-                                                    'data-upp-customer-ip-address': _this9.state.userIP,
-                                                    'data-intrum-risk-owner': 'IJ',
-                                                    'data-intrum-repayment-type': '4',
-                                                    'data-upp-customer-cell-phone': personalData.billingAddress.customer_phone,
-                                                    'data-sign': realDataTransSign })
-                                            });
-                                            console.log("Datatrans.startPayment started");
-                                            Datatrans.startPayment({ 'form': '#paymentForm',
-                                                transactionId: transactionId,
-                                                'opened': function opened() {
-                                                    console.log('payment-form opened');
-                                                },
-                                                'loaded': function loaded() {
-                                                    console.log('payment-form loaded');
-                                                },
-                                                'closed': function closed() {
-                                                    _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                    //this.setState({ payForm: null })
-                                                },
-                                                'error': function error() {
-                                                    console.log('error');
-                                                }
-                                            });
-                                        }
-                                    }if (_this9.state.payMethod.paymethoddatatrans == 'SWB') {
-                                        if (_this9.state.userDOB == '') {
-                                            document.getElementById("dob-field").scrollIntoView(false);
-                                            document.getElementById("dob-field").style.color = "red";
-                                            document.getElementById("dob-field").style.fontSize = "14px";
-                                        } else {
-                                            var totalTaxAmount = result.data.taxTotalAmount;
-                                            var articleItems = result.data.articleItems;
-                                            var swbParams = {
-                                                "merchantId": realDataTransMerchantId,
-                                                "sign": realDataTransSign,
-                                                "uppShippingDetails": "no",
-                                                "refno": '' + result.data.basketShortcode,
-                                                "language": "de",
-                                                "hiddenMode": "yes",
-                                                "reqtype": "CAA",
-                                                "currency": "CHF",
-                                                "theme": "DT2015",
-                                                "taxAmount": '' + Math.round(totalTaxAmount * 100),
-                                                "amount": '' + Math.round(totalPrice * 100),
-                                                "uppMsgType": "web",
-                                                "uppCustomerDetails": "yes",
-                                                "uppCustomerId": '' + result.data.basketShortcode,
-                                                "uppCustomerTitle": "",
-                                                "uppCustomerName": personalData.billingAddress.customer_firstname + ' ' + personalData.billingAddress.customer_lastname,
-                                                "uppCustomerFirstName": '' + personalData.billingAddress.customer_firstname,
-                                                "uppCustomerLastName": '' + personalData.billingAddress.customer_lastname,
-                                                "uppCustomerType": "P",
-                                                "uppCustomerStreet": '' + (personalData.billingAddress.customer_street + ' ' + personalData.billingAddress.customer_number),
-                                                "uppCustomerStreet2": "",
-                                                "uppCustomerCity": '' + personalData.billingAddress.customer_city,
-                                                "uppCustomerCountry": '' + _this9.state.userCountryCode3,
-                                                "uppCustomerZipCode": '' + personalData.billingAddress.customer_zip,
-                                                "uppCustomerState": "",
-                                                "uppCustomerPhone": '' + personalData.billingAddress.customer_phone,
-                                                "uppCustomerFax": "",
-                                                "uppCustomerEmail": '' + personalData.billingAddress.customer_email,
-                                                "uppCustomerGender": '' + customer_gender,
-                                                "uppCustomerBirthDate": '' + _this9.state.userDOB,
-                                                "uppCustomerLanguage": "de",
-                                                "uppCustomerOccurence": "EXISTING",
-                                                "uppCustomerSubscription": "",
-                                                "uppCustomerIpAddress": '' + _this9.state.userIP
-                                            };
-
-                                            articleItems.forEach(function (articleItem, i) {
-                                                var _extends2;
-
-                                                swbParams = (0, _extends4.default)({}, swbParams, (_extends2 = {}, (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Id", '' + articleItem.article_id), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Name", '' + articleItem.article_desc), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Description", '' + articleItem.article_desc), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Type", "goods"), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Quantity", '' + articleItem.count), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_PriceGross", '' + Math.round(articleItem.price * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Price", '' + Math.round(articleItem.price * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Tax", "7.7"), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_PriceWithoutVAT", '' + Math.round(articleItem.priceWithoutVat * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_TaxAmount", '' + Math.round(articleItem.taxAmount * 100)), _extends2));
-                                            });
-                                            _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                    'data-merchant-id': realDataTransMerchantId,
-                                                    'data-amount': Math.round(totalPrice * 100),
-                                                    'data-currency': 'CHF',
-                                                    'data-refno': result.data.basketShortcode,
-                                                    'data-refno2': result.data.basketOrderInfoId,
-                                                    'data-sign': realDataTransSign,
-                                                    'data-paymentmethod': 'SWB',
-                                                    'data-upp-web-response-method': 'POST'
-                                                })
-                                            });
-                                            console.log("Datatrans.startPayment started");
-                                            Datatrans.startPayment({ 'form': '#paymentForm',
-                                                transactionId: transactionId,
-                                                'params': swbParams,
-                                                'opened': function opened() {
-                                                    console.log('payment-form opened');
-                                                },
-                                                'loaded': function loaded() {
-                                                    console.log('payment-form loaded');
-                                                },
-                                                'closed': function closed() {
-                                                    _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                },
-                                                'error': function error() {
-                                                    console.log('error');
-                                                }
-                                            });
-                                        }
-                                    } else if (_this9.state.payMethod.paymethoddatatrans == 'SAM') {
-                                        _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                'data-merchant-id': realDataTransMerchantId,
-                                                'data-amount': Math.round(totalPrice * 100),
-                                                'data-currency': 'CHF',
-                                                'data-paymentmethod': 'SAM',
-                                                'data-refno': result.data.basketShortcode,
-                                                'data-refno2': result.data.basketOrderInfoId,
-                                                'data-upp-customer-gender': customer_gender,
-                                                'data-upp-customer-first-name': personalData.billingAddress.customer_firstname,
-                                                'data-upp-customer-last-name': personalData.billingAddress.customer_lastname,
-                                                'data-upp-customer-street': personalData.billingAddress.customer_street + ', ' + personalData.billingAddress.customer_number,
-                                                'data-upp-customer-city': personalData.billingAddress.customer_city,
-                                                'data-upp-customer-zip-code': personalData.billingAddress.customer_zip,
-                                                'data-upp-customer-language': 'de',
-                                                'data-upp-customer-phone': personalData.billingAddress.customer_phone,
-                                                'data-upp-customer-email': personalData.billingAddress.customer_email,
-                                                'data-sign': realDataTransSign })
-                                        });
-                                        Datatrans.startPayment({ 'form': '#paymentForm',
-                                            transactionId: transactionId,
-                                            'opened': function opened() {
-                                                console.log('payment-form opened');
-                                            },
-                                            'loaded': function loaded() {
-                                                console.log('payment-form loaded');
-                                            },
-                                            'closed': function closed() {
-                                                _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                //this.setState({ payForm: null })
-                                            },
-                                            'error': function error() {
-                                                console.log('error');
-                                            }
-                                        });
-                                    } else if (_this9.state.payMethod.paymethoddatatrans == 'APL') {
-                                        _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                'data-merchant-id': realDataTransMerchantId,
-                                                'data-amount': Math.round(totalPrice * 100),
-                                                'data-currency': 'CHF',
-                                                'data-paymentmethod': 'APL',
-                                                'data-refno': result.data.basketShortcode,
-                                                'data-refno2': result.data.basketOrderInfoId,
-                                                'data-upp-customer-gender': customer_gender,
-                                                'data-upp-customer-first-name': personalData.billingAddress.customer_firstname,
-                                                'data-upp-customer-last-name': personalData.billingAddress.customer_lastname,
-                                                'data-upp-customer-street': personalData.billingAddress.customer_street + ', ' + personalData.billingAddress.customer_number,
-                                                'data-upp-customer-city': personalData.billingAddress.customer_city,
-                                                'data-upp-customer-zip-code': personalData.billingAddress.customer_zip,
-                                                'data-upp-customer-language': 'de',
-                                                'data-upp-customer-phone': personalData.billingAddress.customer_phone,
-                                                'data-upp-customer-email': personalData.billingAddress.customer_email,
-                                                'data-sign': realDataTransSign })
-                                        });
-                                        Datatrans.startPayment({ 'form': '#paymentForm',
-                                            transactionId: transactionId,
-                                            'opened': function opened() {
-                                                console.log('payment-form opened');
-                                            },
-                                            'loaded': function loaded() {
-                                                console.log('payment-form loaded');
-                                            },
-                                            'closed': function closed() {
-                                                _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                //this.setState({ payForm: null })
-                                            },
-                                            'error': function error() {
-                                                console.log('error');
-                                            }
-                                        });
-                                    } else {
-                                        _this9.setState({ payForm: _react2.default.createElement('form', { id: 'paymentForm',
-                                                'data-merchant-id': realDataTransMerchantId,
-                                                'data-amount': Math.round(totalPrice * 100),
-                                                'data-currency': 'CHF',
-                                                'data-paymentmethod': _this9.state.payMethod.paymethoddatatrans,
-                                                'data-refno': result.data.basketShortcode,
-                                                'data-refno2': result.data.basketOrderInfoId,
-                                                'data-upp-customer-gender': customer_gender,
-                                                'data-upp-customer-first-name': personalData.billingAddress.customer_firstname,
-                                                'data-upp-customer-last-name': personalData.billingAddress.customer_lastname,
-                                                'data-upp-customer-street': personalData.billingAddress.customer_street + ', ' + personalData.billingAddress.customer_number,
-                                                'data-upp-customer-city': personalData.billingAddress.customer_city,
-                                                'data-upp-customer-zip-code': personalData.billingAddress.customer_zip,
-                                                'data-upp-customer-language': 'de',
-                                                'data-upp-customer-phone': personalData.billingAddress.customer_phone,
-                                                'data-upp-customer-email': personalData.billingAddress.customer_email,
-                                                'data-sign': realDataTransSign })
-                                        });
-                                        console.log("Datatrans.startPayment started");
-                                        Datatrans.startPayment({ 'form': '#paymentForm',
-                                            transactionId: transactionId,
-                                            'opened': function opened() {
-                                                console.log('payment-form opened');
-                                            },
-                                            'loaded': function loaded() {
-                                                console.log('payment-form loaded');
-                                            },
-                                            /*'closed': function() {axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
+                if (_this9.state.payMethod.method === "Datatrans") {
+                  realDataTransSign = result.data.hmac !== "" ? result.data.hmac : realDataTransSign;
+                  var transactionId = result.data.transactionId;
+                  if (_this9.state.payMethod.paymethoddatatrans == "INT") {
+                    if (_this9.state.userDOB == "") {
+                      document.getElementById("dob-field").scrollIntoView(false);
+                      document.getElementById("dob-field").style.color = "red";
+                      document.getElementById("dob-field").style.fontSize = "14px";
+                    } else {
+                      _this9.setState({
+                        payForm: _react2.default.createElement("form", {
+                          id: "paymentForm",
+                          "data-merchant-id": realDataTransMerchantId,
+                          "data-amount": Math.round(totalPrice * 100),
+                          "data-currency": "CHF",
+                          "data-paymentmethod": _this9.state.payMethod.paymethoddatatrans,
+                          "data-refno": result.data.basketShortcode,
+                          "data-refno2": result.data.basketOrderInfoId,
+                          "data-upp-customer-gender": customer_gender,
+                          "data-upp-customer-first-name": personalData.billingAddress.customer_firstname,
+                          "data-upp-customer-last-name": personalData.billingAddress.customer_lastname,
+                          "data-upp-customer-street": personalData.billingAddress.customer_street,
+                          "data-upp-customer-street2": personalData.billingAddress.customer_number,
+                          "data-upp-customer-city": personalData.billingAddress.customer_city,
+                          "data-upp-customer-zip-code": personalData.billingAddress.customer_zip,
+                          "data-upp-customer-language": "de",
+                          "data-upp-customer-phone": personalData.billingAddress.customer_phone,
+                          "data-upp-customer-email": personalData.billingAddress.customer_email,
+                          "data-language": "de",
+                          "data-upp-customer-country": _this9.state.userCountryCode3,
+                          "data-upp-customer-id": result.data.basketShortcode,
+                          "data-upp-customer-type": "P",
+                          "data-upp-customer-birth-date": _this9.state.userDOB,
+                          "data-pmethod": _this9.state.payMethod.paymethoddatatrans,
+                          "data-sub_pmethod": "BYJUNO-INVOICE",
+                          "data-upp-customer-details": "yes",
+                          "data-upp-customer-name": personalData.billingAddress.customer_firstname + " " + personalData.billingAddress.customer_lastname,
+                          "data-intrum-device-fingerprint-id": _this9.state.uniqueSessionId,
+                          "data-intrum-delivery-method": "POST",
+                          "data-upp-shipping-details": "no",
+                          "data-upp-customer-ip-address": _this9.state.userIP,
+                          "data-intrum-risk-owner": "IJ",
+                          "data-intrum-repayment-type": "4",
+                          "data-upp-customer-cell-phone": personalData.billingAddress.customer_phone,
+                          "data-sign": realDataTransSign
+                        })
+                      });
+                      console.log("Datatrans.startPayment started");
+                      Datatrans.startPayment({
+                        form: "#paymentForm",
+                        transactionId: transactionId,
+                        opened: function opened() {
+                          console.log("payment-form opened");
+                        },
+                        loaded: function loaded() {
+                          console.log("payment-form loaded");
+                        },
+                        /*'closed': function() {axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
                                                     this.setState({ payForm: null })
                                             },*/
-                                            'closed': function closed() {
-                                                _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                //this.setState({ payForm: null })
-                                            },
-                                            'error': function error() {
-                                                console.log('error');
-                                            }
-                                        });
-                                    }
-                                } else if (_this9.state.payMethod.method === 'Bitcoin') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/bitpayPayment?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        window.open(result.data.url, '_self');
-                                    });
-                                } else if (_this9.state.payMethod.method === 'Stripe') {
-                                    _this9.loadStripe(function () {
-                                        var ifPay = false;
-                                        _this9.stripeHandler = window.StripeCheckout.configure({
-                                            key: window.stripeKey.key,
-                                            image: '/images/logo.png',
-                                            locale: 'auto',
-                                            currency: 'EUR',
-                                            token: function token(_token) {
-                                                if (_token.id) {
-                                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                                    _axios2.default.get('/api/stripePayment?tokenId=' + _token.id + '&basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&email=' + _token.email).then(function (result) {
-                                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                                        if (result.status === 200) _reactRouter.browserHistory.push('/danke');
-                                                    }).catch(function (error) {
-                                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                                        if (error.response.status === 404) {
-                                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=20');
-                                                            _reactRouter.browserHistory.push('/error-payment');
-                                                        }
-                                                    });
-                                                    ifPay = true;
-                                                }
-                                            },
-                                            closed: function closed() {
-                                                if (!ifPay) {
-                                                    //axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
-                                                    _axios2.default.get('/api/closePaymentWindow?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId + '&totalPrice=' + totalPrice);
-                                                }
-                                            }
-                                        });
-                                        if (document.querySelector('.stripe-button-el')) document.querySelector('.stripe-button-el').style.display = 'none';
-                                        _this9.stripeHandler.open({
-                                            amount: totalPrice * 100,
-                                            name: 'Remarket',
-                                            allowRememberMe: false
-                                        });
-                                    });
-                                } else if (_this9.state.payMethod.method === 'Vorauskasse/Überweisung') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    window.localStorage.setItem('isVorauskasse', true);
-                                    _axios2.default.get('/api/bankPayment?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        window.localStorage.setItem('bankPaymentData', JSON.stringify(result.data));
-                                        if (result.status === 200) _reactRouter.browserHistory.push('/danke');
-                                    }).catch(function (error) {
-                                        window.localStorage.removeItem('isVorauskasse');
-                                        if (error.response.status === 404) {
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=19');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    });
-                                } else if (_this9.state.payMethod.method === 'PayPal') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/paypalPayment?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        window.open(result.data.link, '_self');
-                                    });
-                                } else if (_this9.state.payMethod.method === 'Payrexx') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/payrexxPayment?paymethodpayrexx=' + _this9.state.payMethod.paymethodpayrexx + '&basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        window.open(result.data.link, '_self');
-                                    });
-                                } else if (_this9.state.payMethod.method === 'payInShop') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/paymentByCash?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (result.status === 200) _reactRouter.browserHistory.push('/danke');
-                                    }).catch(function (error) {
-                                        if (error.response.status === 404) {
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=21');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    });
-                                } else if (_this9.state.payMethod.method === 'payByCredits') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.post('/api/paymentByCredits', { basketShortcode: result.data.basketShortcode, basketOrderInfoId: result.data.basketOrderInfoId }).then(function (result) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (result.status === 200) _reactRouter.browserHistory.push('/danke');
-                                    }).catch(function (error) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (error.response.status === 404) _reactRouter.browserHistory.push('/error-payment');
-                                    });
-                                } else if (_this9.state.payMethod.method === 'HeidiPay') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/heidipayPayment?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (result) {
-                                        if (typeof result.data.link === 'string') {
-                                            window.open(result.data.link, '_self');
-                                        } else {
-                                            console.log(result);
-                                            //throw new Error('Zahlungsfehler');
-                                        }
-                                    }).catch(function (error) {
-                                        if (error.status !== 200) {
-                                            document.getElementById('spinner-box-load').style.display = 'none';
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=108');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    });
-                                } else if (_this9.state.payMethod.method === 'IdealPaymentRechnung') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/idealPaymentRechnung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (sub_result) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (typeof sub_result.data.invoiceNumber === 'string' && sub_result.data.invoiceNumber != "") {
-                                            _reactRouter.browserHistory.push('/danke');
-                                        } else {
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=115');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    }).catch(function (error) {
-                                        if (error.status !== 200) {
-                                            document.getElementById('spinner-box-load').style.display = 'none';
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=115');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    });
-                                } else if (_this9.state.payMethod.method === 'IdealPaymentRatenzahlung') {
-                                    document.getElementById('spinner-box-load').style.display = 'block';
-                                    _axios2.default.get('/api/idealPaymentRatenzahlung?basketShortcode=' + result.data.basketShortcode + '&basketOrderInfoId=' + result.data.basketOrderInfoId).then(function (sub_result) {
-                                        document.getElementById('spinner-box-load').style.display = 'none';
-                                        if (sub_result.status === 200) {
-                                            _reactRouter.browserHistory.push('/danke');
-                                        } else {
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=116');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    }).catch(function (error) {
-                                        if (error.status !== 200) {
-                                            document.getElementById('spinner-box-load').style.display = 'none';
-                                            _axios2.default.get('/api/errorOrder?basketOrderInfoId=' + result.data.basketOrderInfoId + '&payment_type_id=116');
-                                            _reactRouter.browserHistory.push('/error-payment');
-                                        }
-                                    });
-                                }
-                            }
+                        closed: function closed() {
+                          _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                          //this.setState({ payForm: null })
+                        },
+                        error: function error() {
+                          console.log("error");
                         }
-                    }).catch(function (error) {
-                        var err = error.response.data.errors,
-                            info = void 0,
-                            password = void 0,
-                            credits = void 0,
-                            general = void 0;
-                        if (err) {
-                            err.email ? info = err.email : '';
-                            err.password ? password = err.password : '';
-                            err.general ? general = err.general : '';
-                            err.credits ? credits = err.credits : '';
-                            if (info || password) {
-                                $('.personalData h3.title').click().removeClass('answering');
-                                $(window).scrollTop(0);
-                            }
-                        }
-                        _this9.setState({ errors: (0, _extends4.default)({}, _this9.state.errors, { info: info, password: password, general: general }),
-                            credits: (0, _extends4.default)({}, _this9.state.credits, { errorCredits: credits })
-                        });
-                        document.getElementById('spinner-box-load').style.display = 'none';
-                    });
-                } else this.setState({ errorNoProducts: 'Es muss mindestens ein Produkt dem Warenkorb hinzugefügt werden' });
-            }
-        }
-    }, {
-        key: 'changeCountry',
-        value: function changeCountry(val, name) {
-            var value = val.value,
-                currentCountry = this.state.country.currentCountry;
-
-            currentCountry[name] = value;
-            this.setState({ country: (0, _extends4.default)({}, this.state.country, { currentCountry: currentCountry }) });
-            if (val.value == 'li') {
-                this.setState({ userCountryCode3: "LIE" });
-            } else if (val.value == 'de') {
-                this.setState({ userCountryCode3: "DEU" });
-            } else {
-                this.setState({ userCountryCode3: "CHE" });
-            }
-        }
-    }, {
-        key: 'changeCheckbox',
-        value: function changeCheckbox(e) {
-            var _state5 = this.state,
-                inputCheckbox = _state5.inputCheckbox,
-                payMethod = _state5.payMethod,
-                name = e.target.name;
-
-            if ((payMethod.method == 'IdealPaymentRechnung' || payMethod.method == 'IdealPaymentRatenzahlung') && name == 'shippingAddress') {
-                inputCheckbox[name] = true;
-                this.setState({ payMethodError: {
-                        status: true,
-                        msg: 'Mit der Zahlungsmethode per Rechnung / Ratenzahlung kann keine abweichende Rechnungsadresse gewählt werden'
-                    } });
-            } else {
-                inputCheckbox[name] = !inputCheckbox[name];
-            }
-            this.setState({ inputCheckbox: inputCheckbox });
-        }
-    }, {
-        key: 'addInsuranceToBasket',
-        value: function addInsuranceToBasket(e, deviceShortcode) {
-            var _this10 = this;
-
-            if (e.target.checked) {
-                document.getElementById('spinner-box-load').style.display = 'block';
-                _axios2.default.get('/api/getInsuranceInfo?deviceShortcode=' + deviceShortcode).then(function (result) {
-                    document.getElementById('spinner-box-load').style.display = 'none';
-                    result.data.productTypeId = 501;
-                    result.data.deviceShortcode = deviceShortcode;
-                    var newBasketData = [].concat((0, _toConsumableArray3.default)(_this10.props.basketData), [result.data]);
-                    _this10.props.basketActions.changeBasketData(newBasketData);
-                    _this10._getPrice(newBasketData, _this10.state.taxValue);
-                }).catch(function (error) {
-                    document.getElementById('spinner-box-load').style.display = 'none';
-                    _this10.setState({ errors: (0, _extends4.default)({}, _this10.state.errors, { general: 'Kann Versicherungszertifikat nicht erstellen' }) });
-                });
-            } else {
-                this.handleRemoveFromBasket(501, deviceShortcode);
-            }
-        }
-    }, {
-        key: 'addInsuranceToBasketCh',
-        value: function addInsuranceToBasketCh(e) {
-            var _this11 = this;
-
-            if (this.state.insuranceChAmount !== 0) {
-                var productShortcode = '';
-                if (this.state.insuranceChAmount === 60) {
-                    productShortcode = 'IDK3VU';
-                } else if (this.state.insuranceChAmount === 120) {
-                    productShortcode = '8JXTVN';
-                }
-                if (productShortcode !== '') {
-                    if (e.target.checked) {
-                        document.getElementById('spinner-box-load').style.display = 'block';
-                        _axios2.default.get('/api/getInsuranceInfoCh?productShortcode=' + productShortcode).then(function (result) {
-                            document.getElementById('spinner-box-load').style.display = 'none';
-                            result.data.productTypeId = 500;
-                            result.data.shortcode = productShortcode;
-                            result.data.price = _this11.state.insuranceChAmount;
-                            var newBasketData = [].concat((0, _toConsumableArray3.default)(_this11.props.basketData), [result.data]);
-                            _this11.props.basketActions.changeBasketData(newBasketData);
-                            _this11._getPrice(newBasketData, _this11.state.taxValue);
-                        }).catch(function (error) {
-                            document.getElementById('spinner-box-load').style.display = 'none';
-                            _this11.setState({ errors: (0, _extends4.default)({}, _this11.state.errors, { general: 'Kann Versicherungszertifikat nicht erstellen' }) });
-                        });
-                    } else {
-                        this.handleRemoveFromBasket(500, productShortcode);
-                        this.setState({ insuranceChAmount: 0 });
+                      });
                     }
+                  } else if (_this9.state.payMethod.paymethoddatatrans == "INT1") {
+                    if (_this9.state.userDOB1 == "") {
+                      document.getElementById("dob-field1").scrollIntoView(false);
+                      document.getElementById("dob-field1").style.color = "red";
+                      document.getElementById("dob-field1").style.fontSize = "14px";
+                    } else {
+                      _this9.setState({
+                        payForm: _react2.default.createElement("form", {
+                          id: "paymentForm",
+                          "data-merchant-id": realDataTransMerchantId,
+                          "data-amount": Math.round(totalPrice * 100),
+                          "data-currency": "CHF",
+                          "data-paymentmethod": "INT",
+                          "data-refno": result.data.basketShortcode,
+                          "data-refno2": result.data.basketOrderInfoId,
+                          "data-upp-customer-gender": customer_gender,
+                          "data-upp-customer-first-name": personalData.billingAddress.customer_firstname,
+                          "data-upp-customer-last-name": personalData.billingAddress.customer_lastname,
+                          "data-upp-customer-street": personalData.billingAddress.customer_street,
+                          "data-upp-customer-street2": personalData.billingAddress.customer_number,
+                          "data-upp-customer-city": personalData.billingAddress.customer_city,
+                          "data-upp-customer-zip-code": personalData.billingAddress.customer_zip,
+                          "data-upp-customer-language": "de",
+                          "data-upp-customer-phone": personalData.billingAddress.customer_phone,
+                          "data-upp-customer-email": personalData.billingAddress.customer_email,
+                          "data-language": "de",
+                          "data-upp-customer-country": _this9.state.userCountryCode3,
+                          "data-upp-customer-id": result.data.basketShortcode,
+                          "data-upp-customer-type": "P",
+                          "data-upp-customer-birth-date": _this9.state.userDOB1,
+                          "data-pmethod": "INT",
+                          "data-sub_pmethod": "BYJUNO-INVOICE",
+                          "data-upp-customer-details": "yes",
+                          "data-upp-customer-name": personalData.billingAddress.customer_firstname + " " + personalData.billingAddress.customer_lastname,
+                          "data-intrum-device-fingerprint-id": _this9.state.uniqueSessionId,
+                          "data-intrum-delivery-method": "POST",
+                          "data-upp-shipping-details": "no",
+                          "data-upp-customer-ip-address": _this9.state.userIP,
+                          "data-intrum-risk-owner": "IJ",
+                          "data-intrum-repayment-type": "4",
+                          "data-upp-customer-cell-phone": personalData.billingAddress.customer_phone,
+                          "data-sign": realDataTransSign
+                        })
+                      });
+                      console.log("Datatrans.startPayment started");
+                      Datatrans.startPayment({
+                        form: "#paymentForm",
+                        transactionId: transactionId,
+                        opened: function opened() {
+                          console.log("payment-form opened");
+                        },
+                        loaded: function loaded() {
+                          console.log("payment-form loaded");
+                        },
+                        closed: function closed() {
+                          _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                          //this.setState({ payForm: null })
+                        },
+                        error: function error() {
+                          console.log("error");
+                        }
+                      });
+                    }
+                  }
+                  if (_this9.state.payMethod.paymethoddatatrans == "SWB") {
+                    if (_this9.state.userDOB == "") {
+                      document.getElementById("dob-field").scrollIntoView(false);
+                      document.getElementById("dob-field").style.color = "red";
+                      document.getElementById("dob-field").style.fontSize = "14px";
+                    } else {
+                      var totalTaxAmount = result.data.taxTotalAmount;
+                      var articleItems = result.data.articleItems;
+                      var swbParams = {
+                        merchantId: realDataTransMerchantId,
+                        sign: realDataTransSign,
+                        uppShippingDetails: "no",
+                        refno: "" + result.data.basketShortcode,
+                        language: "de",
+                        hiddenMode: "yes",
+                        reqtype: "CAA",
+                        currency: "CHF",
+                        theme: "DT2015",
+                        taxAmount: "" + Math.round(totalTaxAmount * 100),
+                        amount: "" + Math.round(totalPrice * 100),
+                        uppMsgType: "web",
+                        uppCustomerDetails: "yes",
+                        uppCustomerId: "" + result.data.basketShortcode,
+                        uppCustomerTitle: "",
+                        uppCustomerName: personalData.billingAddress.customer_firstname + " " + personalData.billingAddress.customer_lastname,
+                        uppCustomerFirstName: "" + personalData.billingAddress.customer_firstname,
+                        uppCustomerLastName: "" + personalData.billingAddress.customer_lastname,
+                        uppCustomerType: "P",
+                        uppCustomerStreet: "" + (personalData.billingAddress.customer_street + " " + personalData.billingAddress.customer_number),
+                        uppCustomerStreet2: "",
+                        uppCustomerCity: "" + personalData.billingAddress.customer_city,
+                        uppCustomerCountry: "" + _this9.state.userCountryCode3,
+                        uppCustomerZipCode: "" + personalData.billingAddress.customer_zip,
+                        uppCustomerState: "",
+                        uppCustomerPhone: "" + personalData.billingAddress.customer_phone,
+                        uppCustomerFax: "",
+                        uppCustomerEmail: "" + personalData.billingAddress.customer_email,
+                        uppCustomerGender: "" + customer_gender,
+                        uppCustomerBirthDate: "" + _this9.state.userDOB,
+                        uppCustomerLanguage: "de",
+                        uppCustomerOccurence: "EXISTING",
+                        uppCustomerSubscription: "",
+                        uppCustomerIpAddress: "" + _this9.state.userIP
+                      };
+
+                      articleItems.forEach(function (articleItem, i) {
+                        var _extends2;
+
+                        swbParams = (0, _extends4.default)({}, swbParams, (_extends2 = {}, (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Id", "" + articleItem.article_id), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Name", "" + articleItem.article_desc), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Description", "" + articleItem.article_desc), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Type", "goods"), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Quantity", "" + articleItem.count), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_PriceGross", "" + Math.round(articleItem.price * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Price", "" + Math.round(articleItem.price * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_Tax", "7.7"), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_PriceWithoutVAT", "" + Math.round(articleItem.priceWithoutVat * 100)), (0, _defineProperty3.default)(_extends2, "uppArticle_" + (i + 1) + "_TaxAmount", "" + Math.round(articleItem.taxAmount * 100)), _extends2));
+                      });
+                      _this9.setState({
+                        payForm: _react2.default.createElement("form", {
+                          id: "paymentForm",
+                          "data-merchant-id": realDataTransMerchantId,
+                          "data-amount": Math.round(totalPrice * 100),
+                          "data-currency": "CHF",
+                          "data-refno": result.data.basketShortcode,
+                          "data-refno2": result.data.basketOrderInfoId,
+                          "data-sign": realDataTransSign,
+                          "data-paymentmethod": "SWB",
+                          "data-upp-web-response-method": "POST"
+                        })
+                      });
+                      console.log("Datatrans.startPayment started");
+                      Datatrans.startPayment({
+                        form: "#paymentForm",
+                        transactionId: transactionId,
+                        params: swbParams,
+                        opened: function opened() {
+                          console.log("payment-form opened");
+                        },
+                        loaded: function loaded() {
+                          console.log("payment-form loaded");
+                        },
+                        closed: function closed() {
+                          _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                        },
+                        error: function error() {
+                          console.log("error");
+                        }
+                      });
+                    }
+                  } else if (_this9.state.payMethod.paymethoddatatrans == "SAM") {
+                    _this9.setState({
+                      payForm: _react2.default.createElement("form", {
+                        id: "paymentForm",
+                        "data-merchant-id": realDataTransMerchantId,
+                        "data-amount": Math.round(totalPrice * 100),
+                        "data-currency": "CHF",
+                        "data-paymentmethod": "SAM",
+                        "data-refno": result.data.basketShortcode,
+                        "data-refno2": result.data.basketOrderInfoId,
+                        "data-upp-customer-gender": customer_gender,
+                        "data-upp-customer-first-name": personalData.billingAddress.customer_firstname,
+                        "data-upp-customer-last-name": personalData.billingAddress.customer_lastname,
+                        "data-upp-customer-street": personalData.billingAddress.customer_street + ", " + personalData.billingAddress.customer_number,
+                        "data-upp-customer-city": personalData.billingAddress.customer_city,
+                        "data-upp-customer-zip-code": personalData.billingAddress.customer_zip,
+                        "data-upp-customer-language": "de",
+                        "data-upp-customer-phone": personalData.billingAddress.customer_phone,
+                        "data-upp-customer-email": personalData.billingAddress.customer_email,
+                        "data-sign": realDataTransSign
+                      })
+                    });
+                    Datatrans.startPayment({
+                      form: "#paymentForm",
+                      transactionId: transactionId,
+                      opened: function opened() {
+                        console.log("payment-form opened");
+                      },
+                      loaded: function loaded() {
+                        console.log("payment-form loaded");
+                      },
+                      closed: function closed() {
+                        _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                        //this.setState({ payForm: null })
+                      },
+                      error: function error() {
+                        console.log("error");
+                      }
+                    });
+                  } else if (_this9.state.payMethod.paymethoddatatrans == "APL") {
+                    _this9.setState({
+                      payForm: _react2.default.createElement("form", {
+                        id: "paymentForm",
+                        "data-merchant-id": realDataTransMerchantId,
+                        "data-amount": Math.round(totalPrice * 100),
+                        "data-currency": "CHF",
+                        "data-paymentmethod": "APL",
+                        "data-refno": result.data.basketShortcode,
+                        "data-refno2": result.data.basketOrderInfoId,
+                        "data-upp-customer-gender": customer_gender,
+                        "data-upp-customer-first-name": personalData.billingAddress.customer_firstname,
+                        "data-upp-customer-last-name": personalData.billingAddress.customer_lastname,
+                        "data-upp-customer-street": personalData.billingAddress.customer_street + ", " + personalData.billingAddress.customer_number,
+                        "data-upp-customer-city": personalData.billingAddress.customer_city,
+                        "data-upp-customer-zip-code": personalData.billingAddress.customer_zip,
+                        "data-upp-customer-language": "de",
+                        "data-upp-customer-phone": personalData.billingAddress.customer_phone,
+                        "data-upp-customer-email": personalData.billingAddress.customer_email,
+                        "data-sign": realDataTransSign
+                      })
+                    });
+                    Datatrans.startPayment({
+                      form: "#paymentForm",
+                      transactionId: transactionId,
+                      opened: function opened() {
+                        console.log("payment-form opened");
+                      },
+                      loaded: function loaded() {
+                        console.log("payment-form loaded");
+                      },
+                      closed: function closed() {
+                        _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                        //this.setState({ payForm: null })
+                      },
+                      error: function error() {
+                        console.log("error");
+                      }
+                    });
+                  } else {
+                    _this9.setState({
+                      payForm: _react2.default.createElement("form", {
+                        id: "paymentForm",
+                        "data-merchant-id": realDataTransMerchantId,
+                        "data-amount": Math.round(totalPrice * 100),
+                        "data-currency": "CHF",
+                        "data-paymentmethod": _this9.state.payMethod.paymethoddatatrans,
+                        "data-refno": result.data.basketShortcode,
+                        "data-refno2": result.data.basketOrderInfoId,
+                        "data-upp-customer-gender": customer_gender,
+                        "data-upp-customer-first-name": personalData.billingAddress.customer_firstname,
+                        "data-upp-customer-last-name": personalData.billingAddress.customer_lastname,
+                        "data-upp-customer-street": personalData.billingAddress.customer_street + ", " + personalData.billingAddress.customer_number,
+                        "data-upp-customer-city": personalData.billingAddress.customer_city,
+                        "data-upp-customer-zip-code": personalData.billingAddress.customer_zip,
+                        "data-upp-customer-language": "de",
+                        "data-upp-customer-phone": personalData.billingAddress.customer_phone,
+                        "data-upp-customer-email": personalData.billingAddress.customer_email,
+                        "data-sign": realDataTransSign
+                      })
+                    });
+                    console.log("Datatrans.startPayment started");
+                    Datatrans.startPayment({
+                      form: "#paymentForm",
+                      transactionId: transactionId,
+                      opened: function opened() {
+                        console.log("payment-form opened");
+                      },
+                      loaded: function loaded() {
+                        console.log("payment-form loaded");
+                      },
+                      /*'closed': function() {axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
+                                                  this.setState({ payForm: null })
+                                          },*/
+                      closed: function closed() {
+                        _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                        //this.setState({ payForm: null })
+                      },
+                      error: function error() {
+                        console.log("error");
+                      }
+                    });
+                  }
+                } else if (_this9.state.payMethod.method === "Bitcoin") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/bitpayPayment?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    window.open(result.data.url, "_self");
+                  });
+                } else if (_this9.state.payMethod.method === "Stripe") {
+                  _this9.loadStripe(function () {
+                    var ifPay = false;
+                    _this9.stripeHandler = window.StripeCheckout.configure({
+                      key: window.stripeKey.key,
+                      image: "/images/logo.png",
+                      locale: "auto",
+                      currency: "EUR",
+                      token: function token(_token) {
+                        if (_token.id) {
+                          document.getElementById("spinner-box-load").style.display = "block";
+                          _axios2.default.get("/api/stripePayment?tokenId=" + _token.id + "&basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&email=" + _token.email).then(function (result) {
+                            document.getElementById("spinner-box-load").style.display = "none";
+                            if (result.status === 200) _reactRouter.browserHistory.push("/danke");
+                          }).catch(function (error) {
+                            document.getElementById("spinner-box-load").style.display = "none";
+                            if (error.response.status === 404) {
+                              _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=20");
+                              _reactRouter.browserHistory.push("/error-payment");
+                            }
+                          });
+                          ifPay = true;
+                        }
+                      },
+                      closed: function closed() {
+                        if (!ifPay) {
+                          //axios.get(`/api/closePaymentWindow?basketShortcode=${result.data.basketShortcode}&basketOrderInfoId=${result.data.basketOrderInfoId}&totalPrice=${result.data.totalPrice}&paymentMethod=${this.state.payMethod.paymethoddatatrans}`)
+                          _axios2.default.get("/api/closePaymentWindow?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId + "&totalPrice=" + totalPrice);
+                        }
+                      }
+                    });
+                    if (document.querySelector(".stripe-button-el")) document.querySelector(".stripe-button-el").style.display = "none";
+                    _this9.stripeHandler.open({
+                      amount: totalPrice * 100,
+                      name: "Remarket",
+                      allowRememberMe: false
+                    });
+                  });
+                } else if (_this9.state.payMethod.method === "Vorauskasse/Überweisung") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  window.localStorage.setItem("isVorauskasse", true);
+                  _axios2.default.get("/api/bankPayment?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    window.localStorage.setItem("bankPaymentData", JSON.stringify(result.data));
+                    if (result.status === 200) _reactRouter.browserHistory.push("/danke");
+                  }).catch(function (error) {
+                    window.localStorage.removeItem("isVorauskasse");
+                    if (error.response.status === 404) {
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=19");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  });
+                } else if (_this9.state.payMethod.method === "PayPal") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/paypalPayment?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    window.open(result.data.link, "_self");
+                  });
+                } else if (_this9.state.payMethod.method === "Payrexx") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/payrexxPayment?paymethodpayrexx=" + _this9.state.payMethod.paymethodpayrexx + "&basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    window.open(result.data.link, "_self");
+                  });
+                } else if (_this9.state.payMethod.method === "payInShop") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/paymentByCash?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    if (result.status === 200) _reactRouter.browserHistory.push("/danke");
+                  }).catch(function (error) {
+                    if (error.response.status === 404) {
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=21");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  });
+                } else if (_this9.state.payMethod.method === "payByCredits") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.post("/api/paymentByCredits", {
+                    basketShortcode: result.data.basketShortcode,
+                    basketOrderInfoId: result.data.basketOrderInfoId
+                  }).then(function (result) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    if (result.status === 200) _reactRouter.browserHistory.push("/danke");
+                  }).catch(function (error) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    if (error.response.status === 404) _reactRouter.browserHistory.push("/error-payment");
+                  });
+                } else if (_this9.state.payMethod.method === "HeidiPay") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/heidipayPayment?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (result) {
+                    if (typeof result.data.link === "string") {
+                      window.open(result.data.link, "_self");
+                    } else {
+                      console.log(result);
+                      //throw new Error('Zahlungsfehler');
+                    }
+                  }).catch(function (error) {
+                    if (error.status !== 200) {
+                      document.getElementById("spinner-box-load").style.display = "none";
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=108");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  });
+                } else if (_this9.state.payMethod.method === "IdealPaymentRechnung") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/idealPaymentRechnung?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (sub_result) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    if (typeof sub_result.data.invoiceNumber === "string" && sub_result.data.invoiceNumber != "") {
+                      _reactRouter.browserHistory.push("/danke");
+                    } else {
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=115");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  }).catch(function (error) {
+                    if (error.status !== 200) {
+                      document.getElementById("spinner-box-load").style.display = "none";
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=115");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  });
+                } else if (_this9.state.payMethod.method === "IdealPaymentRatenzahlung") {
+                  document.getElementById("spinner-box-load").style.display = "block";
+                  _axios2.default.get("/api/idealPaymentRatenzahlung?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (sub_result) {
+                    document.getElementById("spinner-box-load").style.display = "none";
+                    if (sub_result.status === 200) {
+                      _reactRouter.browserHistory.push("/danke");
+                    } else {
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=116");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  }).catch(function (error) {
+                    if (error.status !== 200) {
+                      document.getElementById("spinner-box-load").style.display = "none";
+                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=116");
+                      _reactRouter.browserHistory.push("/error-payment");
+                    }
+                  });
                 }
+              }
             }
+          }).catch(function (error) {
+            var err = error.response.data.errors,
+                info = void 0,
+                password = void 0,
+                credits = void 0,
+                general = void 0;
+            if (err) {
+              err.email ? info = err.email : "";
+              err.password ? password = err.password : "";
+              err.general ? general = err.general : "";
+              err.credits ? credits = err.credits : "";
+              if (info || password) {
+                $(".personalData h3.title").click().removeClass("answering");
+                $(window).scrollTop(0);
+              }
+            }
+            _this9.setState({
+              errors: (0, _extends4.default)({}, _this9.state.errors, { info: info, password: password, general: general }),
+              credits: (0, _extends4.default)({}, _this9.state.credits, { errorCredits: credits })
+            });
+            document.getElementById("spinner-box-load").style.display = "none";
+          });
+        } else this.setState({
+          errorNoProducts: "Es muss mindestens ein Produkt dem Warenkorb hinzugefügt werden"
+        });
+      }
+    }
+  }, {
+    key: "changeCountry",
+    value: function changeCountry(val, name) {
+      var value = val.value,
+          currentCountry = this.state.country.currentCountry;
+
+      currentCountry[name] = value;
+      this.setState({ country: (0, _extends4.default)({}, this.state.country, { currentCountry: currentCountry }) });
+      if (val.value == "li") {
+        this.setState({ userCountryCode3: "LIE" });
+      } else if (val.value == "de") {
+        this.setState({ userCountryCode3: "DEU" });
+      } else {
+        this.setState({ userCountryCode3: "CHE" });
+      }
+    }
+  }, {
+    key: "changeCheckbox",
+    value: function changeCheckbox(e) {
+      var _state5 = this.state,
+          inputCheckbox = _state5.inputCheckbox,
+          payMethod = _state5.payMethod,
+          name = e.target.name;
+
+      if ((payMethod.method == "IdealPaymentRechnung" || payMethod.method == "IdealPaymentRatenzahlung") && name == "shippingAddress") {
+        inputCheckbox[name] = true;
+        this.setState({
+          payMethodError: {
+            status: true,
+            msg: "Mit der Zahlungsmethode per Rechnung / Ratenzahlung kann keine abweichende Rechnungsadresse gewählt werden"
+          }
+        });
+      } else {
+        inputCheckbox[name] = !inputCheckbox[name];
+      }
+      this.setState({ inputCheckbox: inputCheckbox });
+    }
+  }, {
+    key: "addInsuranceToBasket",
+    value: function addInsuranceToBasket(e, deviceShortcode) {
+      var _this10 = this;
+
+      if (e.target.checked) {
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.get("/api/getInsuranceInfo?deviceShortcode=" + deviceShortcode).then(function (result) {
+          document.getElementById("spinner-box-load").style.display = "none";
+          result.data.productTypeId = 501;
+          result.data.deviceShortcode = deviceShortcode;
+          var newBasketData = [].concat((0, _toConsumableArray3.default)(_this10.props.basketData), [result.data]);
+          _this10.props.basketActions.changeBasketData(newBasketData);
+          _this10._getPrice(newBasketData, _this10.state.taxValue);
+        }).catch(function (error) {
+          document.getElementById("spinner-box-load").style.display = "none";
+          _this10.setState({
+            errors: (0, _extends4.default)({}, _this10.state.errors, {
+              general: "Kann Versicherungszertifikat nicht erstellen"
+            })
+          });
+        });
+      } else {
+        this.handleRemoveFromBasket(501, deviceShortcode);
+      }
+    }
+  }, {
+    key: "addInsuranceToBasketCh",
+    value: function addInsuranceToBasketCh(e) {
+      var _this11 = this;
+
+      if (this.state.insuranceChAmount !== 0) {
+        var productShortcode = "";
+        if (this.state.insuranceChAmount === 60) {
+          productShortcode = "IDK3VU";
+        } else if (this.state.insuranceChAmount === 120) {
+          productShortcode = "8JXTVN";
         }
-    }, {
-        key: 'addCreditsToBasket',
-        value: function addCreditsToBasket() {
-            var _this12 = this;
-
-            var currentValue = this.state.credits.currentValue,
-                data = {
-                credits: currentValue,
-                basketData: this.props.basketData
-            };
-
-            _axios2.default.post('/api/validateCredits', data).then(function (_ref4) {
-                var data = _ref4.data;
-
-                var itemBasket = {
-                    productTypeId: 100,
-                    price: currentValue
-                };
-                var newBasketData = [].concat((0, _toConsumableArray3.default)(_this12.props.basketData), [itemBasket]);
-                _this12.props.basketActions.changeBasketData(newBasketData);
-                _this12._getPrice(newBasketData, _this12.state.taxValue);
-                _this12.setState({ checkedPayByCredits: true });
+        if (productShortcode !== "") {
+          if (e.target.checked) {
+            document.getElementById("spinner-box-load").style.display = "block";
+            _axios2.default.get("/api/getInsuranceInfoCh?productShortcode=" + productShortcode).then(function (result) {
+              document.getElementById("spinner-box-load").style.display = "none";
+              result.data.productTypeId = 500;
+              result.data.shortcode = productShortcode;
+              result.data.price = _this11.state.insuranceChAmount;
+              var newBasketData = [].concat((0, _toConsumableArray3.default)(_this11.props.basketData), [result.data]);
+              _this11.props.basketActions.changeBasketData(newBasketData);
+              _this11._getPrice(newBasketData, _this11.state.taxValue);
             }).catch(function (error) {
-                var errorCredits = error.response.data;
-                _this12.setState({ credits: (0, _extends4.default)({}, _this12.state.credits, { errorCredits: errorCredits }) });
+              document.getElementById("spinner-box-load").style.display = "none";
+              _this11.setState({
+                errors: (0, _extends4.default)({}, _this11.state.errors, {
+                  general: "Kann Versicherungszertifikat nicht erstellen"
+                })
+              });
             });
+          } else {
+            this.handleRemoveFromBasket(500, productShortcode);
+            this.setState({ insuranceChAmount: 0 });
+          }
         }
-    }, {
-        key: 'choosePayMethod',
-        value: function choosePayMethod(e) {
-            if (e.target.value == 'Payrexx' || e.target.value == 'payByCredits' || e.target.value == 'payInShop' || e.target.value == 'PayPal' || e.target.value == 'Vorauskasse/Überweisung' || e.target.value == 'Stripe' || e.target.value == 'Bitcoin' || e.target.value == 'HeidiPay' || e.target.value == 'IdealPaymentRechnung' || e.target.value == 'IdealPaymentRatenzahlung' || e.target.value == 'Datatrans') {
-                if (e.target.value === 'payByCredits') {
-                    if (e.target.checked) {
-                        this.addCreditsToBasket();
-                    } else this.handleRemoveFromBasket(100);
-                } else if (e.target.id != 'creditsInput') {
-                    var method = e.target.value,
-                        paymethoddatatrans = e.target.getAttribute('data-paymethoddatatrans'),
-                        paymethodpayrexx = e.target.getAttribute('data-paymethodpayrexx');
-                    this.setState({ payMethod: (0, _extends4.default)({}, this.state.payMethod, { method: method, paymethoddatatrans: paymethoddatatrans, paymethodpayrexx: paymethodpayrexx }) });
-                    $('.paymentMethod h3.title').addClass('answering');
-                }
-            }
-        }
-    }, {
-        key: 'chooseShippingMethod',
-        value: function chooseShippingMethod(e) {
-            var value = e.currentTarget.firstChild.getAttribute("data-value"),
-                basketData = this.props.basketData;
+      }
+    }
+  }, {
+    key: "addCreditsToBasket",
+    value: function addCreditsToBasket() {
+      var _this12 = this;
 
-            var data = this.state.shippingMethods.filter(function (item) {
-                return item.name === value;
-            });
-            var newBasketData = basketData.filter(function (item) {
-                return item.productTypeId != 11;
-            });
-            newBasketData.push(data[0]);
-            this.props.basketActions.changeBasketData(newBasketData);
-            this.props.basketActions.changeShippingMethod({ selected: true, value: data[0] });
-            this._getPrice(newBasketData, this.state.taxValue);
-            this.setState({ choiceShipping: false });
-        }
-    }, {
-        key: 'choosePersonalData',
-        value: function choosePersonalData(e) {
-            var position = e.target.getAttribute('data-position'),
-                data = this.state.autoloadPersonalData.data[position];
-            _helpersFunction._setPersonalDataFields.call(this, data);
-            window.localStorage.setItem('userData', JSON.stringify(data));
-        }
-    }, {
-        key: 'handleRemoveFromBasket',
-        value: function handleRemoveFromBasket(productTypeId, id) {
-            var _this13 = this;
+      var currentValue = this.state.credits.currentValue,
+          data = {
+        credits: currentValue,
+        basketData: this.props.basketData
+      };
 
-            var basketData = this.props.basketData,
-                newBasketData = [],
-                deadline = JSON.parse(window.localStorage.getItem('deadline'));
-            if (productTypeId == 11) {
-                // if item 'Shipping Method'
-                newBasketData = basketData.filter(function (item) {
-                    return item.productTypeId != '11';
-                });
-                this.props.basketActions.changeShippingMethod({ selected: false, value: {} });
-            } else if (productTypeId == 10 || productTypeId == 3) {
-                var pItem = basketData.filter(function (item) {
-                    return item.shortcode == id;
-                });
-                if (pItem && pItem.length > 0) {
-                    if (window.isGoogleConnection) this.gtagEnhancedEcommerce(pItem[0]);
-                    newBasketData = basketData.filter(function (item) {
-                        return item.shortcode != id;
-                    });
-                    if (productTypeId == 10) newBasketData = newBasketData.filter(function (item) {
-                        return !(item.shortcode == 'TEMP43' && item.price == pItem[0].price);
-                    });
-                    if (productTypeId == 3) newBasketData = newBasketData.filter(function (item) {
-                        return !(item.shortcode == 'CASE43' && item.price == pItem[0].price);
-                    });
-                }
-            } else if (productTypeId == 999) {
-                // if item "Coupon"
-                if (deadline && deadline.couponShortcode == id) {
-                    deadline.isActive = 0;
-                    this.setState({ deadlineIsActive: false });
-                    window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                    setTimeout(function () {
-                        _this13.setState({ deadline: false });
-                        _this13.updateCountDown();
-                    }, 1000);
-                }
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != id;
-                });
-            } else if (productTypeId == 100) {
-                newBasketData = basketData.filter(function (item) {
-                    return item.productTypeId != productTypeId;
-                });
-                this.setState({ checkedPayByCredits: false });
-            } else if (productTypeId == 501) {
-                // for germany
-                newBasketData = basketData.filter(function (item) {
-                    return item.deviceShortcode != id;
-                });
-            } else if (productTypeId == 500) {
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != id;
-                });
-            } else if (_accessories.ACCESSORIES_ID.includes(productTypeId)) {
-                var item = basketData.filter(function (item) {
-                    return item.shortcode == id;
-                });
-                if (window.isGoogleConnection) this.gtagEnhancedEcommerce(item[0]);
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != id;
-                });
+      _axios2.default.post("/api/validateCredits", data).then(function (_ref4) {
+        var data = _ref4.data;
+
+        var itemBasket = {
+          productTypeId: 100,
+          price: currentValue
+        };
+        var newBasketData = [].concat((0, _toConsumableArray3.default)(_this12.props.basketData), [itemBasket]);
+        _this12.props.basketActions.changeBasketData(newBasketData);
+        _this12._getPrice(newBasketData, _this12.state.taxValue);
+        _this12.setState({ checkedPayByCredits: true });
+      }).catch(function (error) {
+        var errorCredits = error.response.data;
+        _this12.setState({ credits: (0, _extends4.default)({}, _this12.state.credits, { errorCredits: errorCredits }) });
+      });
+    }
+  }, {
+    key: "choosePayMethod",
+    value: function choosePayMethod(e) {
+      if (e.target.value == "Payrexx" || e.target.value == "payByCredits" || e.target.value == "payInShop" || e.target.value == "PayPal" || e.target.value == "Vorauskasse/Überweisung" || e.target.value == "Stripe" || e.target.value == "Bitcoin" || e.target.value == "HeidiPay" || e.target.value == "IdealPaymentRechnung" || e.target.value == "IdealPaymentRatenzahlung" || e.target.value == "Datatrans") {
+        if (e.target.value === "payByCredits") {
+          if (e.target.checked) {
+            this.addCreditsToBasket();
+          } else this.handleRemoveFromBasket(100);
+        } else if (e.target.id != "creditsInput") {
+          var method = e.target.value,
+              paymethoddatatrans = e.target.getAttribute("data-paymethoddatatrans"),
+              paymethodpayrexx = e.target.getAttribute("data-paymethodpayrexx");
+          this.setState({
+            payMethod: (0, _extends4.default)({}, this.state.payMethod, {
+              method: method,
+              paymethoddatatrans: paymethoddatatrans,
+              paymethodpayrexx: paymethodpayrexx
+            })
+          });
+          $(".paymentMethod h3.title").addClass("answering");
+        }
+      }
+    }
+  }, {
+    key: "chooseShippingMethod",
+    value: function chooseShippingMethod(e) {
+      var value = e.currentTarget.firstChild.getAttribute("data-value"),
+          basketData = this.props.basketData;
+
+      var data = this.state.shippingMethods.filter(function (item) {
+        return item.name === value;
+      });
+      var newBasketData = basketData.filter(function (item) {
+        return item.productTypeId != 11;
+      });
+      newBasketData.push(data[0]);
+      this.props.basketActions.changeBasketData(newBasketData);
+      this.props.basketActions.changeShippingMethod({
+        selected: true,
+        value: data[0]
+      });
+      this._getPrice(newBasketData, this.state.taxValue);
+      this.setState({ choiceShipping: false });
+    }
+  }, {
+    key: "choosePersonalData",
+    value: function choosePersonalData(e) {
+      var position = e.target.getAttribute("data-position"),
+          data = this.state.autoloadPersonalData.data[position];
+      _helpersFunction._setPersonalDataFields.call(this, data);
+      window.localStorage.setItem("userData", JSON.stringify(data));
+    }
+  }, {
+    key: "handleRemoveFromBasket",
+    value: function handleRemoveFromBasket(productTypeId, id) {
+      var _this13 = this;
+
+      var basketData = this.props.basketData,
+          newBasketData = [],
+          deadline = JSON.parse(window.localStorage.getItem("deadline"));
+      if (productTypeId == 11) {
+        // if item 'Shipping Method'
+        newBasketData = basketData.filter(function (item) {
+          return item.productTypeId != "11";
+        });
+        this.props.basketActions.changeShippingMethod({
+          selected: false,
+          value: {}
+        });
+      } else if (productTypeId == 10 || productTypeId == 3) {
+        var pItem = basketData.filter(function (item) {
+          return item.shortcode == id;
+        });
+        if (pItem && pItem.length > 0) {
+          if (window.isGoogleConnection) this.gtagEnhancedEcommerce(pItem[0]);
+          newBasketData = basketData.filter(function (item) {
+            return item.shortcode != id;
+          });
+          if (productTypeId == 10) newBasketData = newBasketData.filter(function (item) {
+            return !(item.shortcode == "TEMP43" && item.price == pItem[0].price);
+          });
+          if (productTypeId == 3) newBasketData = newBasketData.filter(function (item) {
+            return !(item.shortcode == "CASE43" && item.price == pItem[0].price);
+          });
+        }
+      } else if (productTypeId == 999) {
+        // if item "Coupon"
+        if (deadline && deadline.couponShortcode == id) {
+          deadline.isActive = 0;
+          this.setState({ deadlineIsActive: false });
+          window.localStorage.setItem("deadline", JSON.stringify(deadline));
+          setTimeout(function () {
+            _this13.setState({ deadline: false });
+            _this13.updateCountDown();
+          }, 1000);
+        }
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != id;
+        });
+      } else if (productTypeId == 100) {
+        newBasketData = basketData.filter(function (item) {
+          return item.productTypeId != productTypeId;
+        });
+        this.setState({ checkedPayByCredits: false });
+      } else if (productTypeId == 501) {
+        // for germany
+        newBasketData = basketData.filter(function (item) {
+          return item.deviceShortcode != id;
+        });
+      } else if (productTypeId == 500) {
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != id;
+        });
+      } else if (_accessories.ACCESSORIES_ID.includes(productTypeId)) {
+        var item = basketData.filter(function (item) {
+          return item.shortcode == id;
+        });
+        if (window.isGoogleConnection) this.gtagEnhancedEcommerce(item[0]);
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != id;
+        });
+      } else {
+        var _item = basketData.filter(function (item) {
+          return item.shortcode == id;
+        });
+        if (window.isGoogleConnection) this.gtagEnhancedEcommerce(_item[0]);
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != id;
+        });
+      }
+      if (!newBasketData.some(function (item) {
+        return item.productTypeId == 7;
+      }) && newBasketData.some(function (item) {
+        return item.productTypeId == 999;
+      })) {
+        newBasketData = newBasketData.filter(function (item) {
+          return item.productTypeId != 999;
+        });
+      }
+      if (!newBasketData.some(function (item) {
+        return item.productTypeId == 7;
+      })) {
+        if (deadline) {
+          deadline ? deadline.isActive = 0 : "";
+          window.localStorage.setItem("deadline", JSON.stringify(deadline));
+          this.setState({ deadlineIsActive: false });
+        }
+      }
+      this.props.basketActions.changeBasketData(newBasketData);
+      this._getPrice(newBasketData, this.state.taxValue);
+    }
+  }, {
+    key: "changeNameField",
+    value: function changeNameField(e) {
+      e.persist();
+      this.inputNameCallback(e);
+    }
+  }, {
+    key: "changeForm",
+    value: function changeForm() {
+      var personalData = (0, _helpersFunction._getPersonalDataFields)();
+      window.localStorage.setItem("userData", JSON.stringify(personalData));
+      this.setState({
+        errorSendForm: null,
+        errors: (0, _extends4.default)({}, this.state.errors, { info: "", password: "", general: "" })
+      });
+    }
+  }, {
+    key: "cancelSendByEnter",
+    value: function cancelSendByEnter(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+      }
+    }
+  }, {
+    key: "onNoteToggle",
+    value: function onNoteToggle(e) {
+      this.setState({
+        payMethodError: {
+          status: false,
+          msg: ""
+        }
+      });
+      this.setState({
+        noteShow: e.currentTarget.getAttribute("data-paymethoddatatrans") === "INT" ? true : false
+      });
+      this.setState({
+        noteShow1: e.currentTarget.getAttribute("data-paymethoddatatrans") === "INT1" ? true : false
+      });
+      this.setState({
+        noteShow: e.currentTarget.getAttribute("data-paymethoddatatrans") === "SWB" ? true : false
+      });
+      this.setState({
+        noteShow2: e.currentTarget.getAttribute("data-paymethoddatatrans") === "BNK" ? true : false
+      });
+      if (e.currentTarget.getAttribute("data-paymethoddatatrans") === "SWB") {
+        this.getShippingMethods("SWB");
+      } else {
+        this.getShippingMethods("Normal");
+      }
+    }
+  }, {
+    key: "dobChange",
+    value: function dobChange(date) {
+      if (date) {
+        var dob = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+        this.setState({ userDOB: dob });
+      } else {
+        this.setState({ userDOB: "" });
+      }
+    }
+  }, {
+    key: "dobChange1",
+    value: function dobChange1(date) {
+      if (date) {
+        var dob = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+        this.setState({ userDOB1: dob });
+      } else {
+        this.setState({ userDOB1: "" });
+      }
+    }
+  }, {
+    key: "insuranceChAmountChange",
+    value: function insuranceChAmountChange(e) {
+      e.persist();
+      if (e.target.dataset.insuranceamount === "60") {
+        this.setState({
+          insuranceChAmount: this.state.insuranceChAmount === 0 || this.state.insuranceChAmount === 120 ? 60 : 0
+        });
+      } else if (e.target.dataset.insuranceamount === "120") {
+        this.setState({
+          insuranceChAmount: this.state.insuranceChAmount === 0 || this.state.insuranceChAmount === 60 ? 120 : 0
+        });
+      }
+    }
+  }, {
+    key: "validateForm",
+    value: function validateForm() {
+      var inputCheckbox = this.state.inputCheckbox;
+
+      var personalData = (0, _helpersFunction._getPersonalDataFields)();
+      var validateObj = {};
+      var validate = true;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _step$value = (0, _slicedToArray3.default)(_step.value, 2),
+              key = _step$value[0],
+              value = _step$value[1];
+
+          if (inputCheckbox.company === false && key === "companyName") {
+            validateObj[key] = {
+              error: false,
+              msg: ""
+            };
+            continue;
+          }
+          if (value === "") {
+            validate = false;
+            validateObj[key] = {
+              error: true,
+              msg: ""
+            };
+          } else {
+            if (key === "email" && !this.validateEmail(value)) {
+              validate = false;
+              validateObj[key] = {
+                error: true,
+                msg: "Falsches Format"
+              };
+            } else if (key === "phone" && !this.validatePhoneNumber(value)) {
+              validate = false;
+              validateObj[key] = {
+                error: true,
+                msg: "Falsches Format (mind. 10, max. 15 Zahlen)"
+              };
+            } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
+              validate = false;
+              validateObj[key] = {
+                error: true,
+                msg: "Falsches Format"
+              };
             } else {
-                var _item = basketData.filter(function (item) {
-                    return item.shortcode == id;
-                });
-                if (window.isGoogleConnection) this.gtagEnhancedEcommerce(_item[0]);
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != id;
-                });
+              validateObj[key] = {
+                error: false,
+                msg: ""
+              };
             }
-            if (!newBasketData.some(function (item) {
-                return item.productTypeId == 7;
-            }) && newBasketData.some(function (item) {
-                return item.productTypeId == 999;
-            })) {
-                newBasketData = newBasketData.filter(function (item) {
-                    return item.productTypeId != 999;
-                });
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      if (inputCheckbox.shippingAddress === false) {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var _step2$value = (0, _slicedToArray3.default)(_step2.value, 2),
+                key = _step2$value[0],
+                value = _step2$value[1];
+
+            if (inputCheckbox.customerCompanyName === false && key === "customer_companyName") {
+              validateObj[key] = {
+                error: false,
+                msg: ""
+              };
+              continue;
             }
-            if (!newBasketData.some(function (item) {
-                return item.productTypeId == 7;
-            })) {
-                if (deadline) {
-                    deadline ? deadline.isActive = 0 : '';
-                    window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                    this.setState({ deadlineIsActive: false });
-                }
-            }
-            this.props.basketActions.changeBasketData(newBasketData);
-            this._getPrice(newBasketData, this.state.taxValue);
-        }
-    }, {
-        key: 'changeNameField',
-        value: function changeNameField(e) {
-            e.persist();
-            this.inputNameCallback(e);
-        }
-    }, {
-        key: 'changeForm',
-        value: function changeForm() {
-            var personalData = (0, _helpersFunction._getPersonalDataFields)();
-            window.localStorage.setItem('userData', JSON.stringify(personalData));
-            this.setState({ errorSendForm: null,
-                errors: (0, _extends4.default)({}, this.state.errors, { info: '', password: '', general: '' })
-            });
-        }
-    }, {
-        key: 'cancelSendByEnter',
-        value: function cancelSendByEnter(e) {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                return false;
-            }
-        }
-    }, {
-        key: 'onNoteToggle',
-        value: function onNoteToggle(e) {
-            this.setState({ payMethodError: {
-                    status: false,
-                    msg: ''
-                } });
-            this.setState({ noteShow: e.currentTarget.getAttribute('data-paymethoddatatrans') === "INT" ? true : false });
-            this.setState({ noteShow1: e.currentTarget.getAttribute('data-paymethoddatatrans') === "INT1" ? true : false });
-            this.setState({ noteShow: e.currentTarget.getAttribute('data-paymethoddatatrans') === "SWB" ? true : false });
-            this.setState({ noteShow2: e.currentTarget.getAttribute('data-paymethoddatatrans') === "BNK" ? true : false });
-            if (e.currentTarget.getAttribute('data-paymethoddatatrans') === "SWB") {
-                this.getShippingMethods("SWB");
+            if (value === "") {
+              validate = false;
+              validateObj[key] = {
+                error: true,
+                msg: ""
+              };
             } else {
-                this.getShippingMethods("Normal");
+              if (key === "customer_email" && !this.validateEmail(value)) {
+                validate = false;
+                validateObj[key] = {
+                  error: true,
+                  msg: "Falsches Format"
+                };
+              } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
+                validate = false;
+                validateObj[key] = {
+                  error: true,
+                  msg: "Falsches Format (mind. 10, max. 15 Zahlen)"
+                };
+              } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
+                validate = false;
+                validateObj[key] = {
+                  error: true,
+                  msg: "Falsches Format"
+                };
+              } else {
+                validateObj[key] = {
+                  error: false,
+                  msg: ""
+                };
+              }
             }
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
         }
-    }, {
-        key: 'dobChange',
-        value: function dobChange(date) {
-            if (date) {
-                var dob = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
-                this.setState({ userDOB: dob });
+      }
+      this.setState({
+        validateError: (0, _extends4.default)({}, this.state.validateError, validateObj)
+      });
+      this.setState({ isValidate: validate });
+      return validate;
+    }
+  }, {
+    key: "validateCheck",
+    value: function validateCheck() {
+      var inputCheckbox = this.state.inputCheckbox;
+
+      var personalData = (0, _helpersFunction._getPersonalDataFields)();
+      var validate = true;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var _step3$value = (0, _slicedToArray3.default)(_step3.value, 2),
+              key = _step3$value[0],
+              value = _step3$value[1];
+
+          if (inputCheckbox.company === false && key === "companyName") {
+            continue;
+          }
+          if (value === "") {
+            validate = false;
+          } else {
+            if (key === "email" && !this.validateEmail(value)) {
+              validate = false;
+            } else if (key === "phone" && !this.validatePhoneNumber(value)) {
+              validate = false;
+            } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
+              validate = false;
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      if (inputCheckbox.shippingAddress === false) {
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
+
+        try {
+          for (var _iterator4 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var _step4$value = (0, _slicedToArray3.default)(_step4.value, 2),
+                key = _step4$value[0],
+                value = _step4$value[1];
+
+            if (inputCheckbox.customerCompanyName === false && key === "customer_companyName") {
+              continue;
+            }
+            if (value === "") {
+              validate = false;
             } else {
-                this.setState({ userDOB: '' });
+              if (key === "customer_email" && !this.validateEmail(value)) {
+                validate = false;
+              } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
+                validate = false;
+              } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
+                validate = false;
+              }
             }
-        }
-    }, {
-        key: 'dobChange1',
-        value: function dobChange1(date) {
-            if (date) {
-                var dob = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
-                this.setState({ userDOB1: dob });
-            } else {
-                this.setState({ userDOB1: '' });
+          }
+        } catch (err) {
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+              _iterator4.return();
             }
-        }
-    }, {
-        key: 'insuranceChAmountChange',
-        value: function insuranceChAmountChange(e) {
-            e.persist();
-            if (e.target.dataset.insuranceamount === '60') {
-                this.setState({ insuranceChAmount: this.state.insuranceChAmount === 0 || this.state.insuranceChAmount === 120 ? 60 : 0 });
-            } else if (e.target.dataset.insuranceamount === '120') {
-                this.setState({ insuranceChAmount: this.state.insuranceChAmount === 0 || this.state.insuranceChAmount === 60 ? 120 : 0 });
+          } finally {
+            if (_didIteratorError4) {
+              throw _iteratorError4;
             }
+          }
         }
-    }, {
-        key: 'validateForm',
-        value: function validateForm() {
-            var inputCheckbox = this.state.inputCheckbox;
+      }
+      this.setState({ isValidate: validate });
+    }
+  }, {
+    key: "validateEmail",
+    value: function validateEmail(email) {
+      return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    }
+  }, {
+    key: "validatePhoneNumber",
+    value: function validatePhoneNumber(phone) {
+      return phone.match(/^[\+]?[(]?[0-9]{4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,8}$/im);
+    }
+  }, {
+    key: "validateNumeric",
+    value: function validateNumeric(number) {
+      if (typeof number != "string") return false;
+      return !isNaN(number) && !isNaN(parseFloat(number));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this14 = this;
 
-            var personalData = (0, _helpersFunction._getPersonalDataFields)();
-            var validateObj = {};
-            var validate = true;
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+      var _state6 = this.state,
+          subject = _state6.subject,
+          tax = _state6.tax,
+          total = _state6.total,
+          country = _state6.country,
+          inputCheckbox = _state6.inputCheckbox,
+          couponError = _state6.couponError,
+          shippingMethods = _state6.shippingMethods,
+          autoloadPersonalData = _state6.autoloadPersonalData,
+          errors = _state6.errors,
+          credits = _state6.credits,
+          domain = _state6.domain,
+          errorNoProducts = _state6.errorNoProducts,
+          showTabs = _state6.showTabs,
+          checkedPayByCredits = _state6.checkedPayByCredits,
+          taxValue = _state6.taxValue,
+          taxOnlyForVat = _state6.taxOnlyForVat,
+          noteShow = _state6.noteShow,
+          noteShow1 = _state6.noteShow1,
+          noteShow2 = _state6.noteShow2,
+          isVorauskasse = _state6.isVorauskasse,
+          infoRatings = _state6.infoRatings,
+          rateData = _state6.rateData,
+          _props = this.props,
+          basketData = _props.basketData,
+          user = _props.user,
+          t = _props.t;
 
-            try {
-                for (var _iterator = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var _step$value = (0, _slicedToArray3.default)(_step.value, 2),
-                        key = _step$value[0],
-                        value = _step$value[1];
-
-                    if (inputCheckbox.company === false && key === 'companyName') {
-                        validateObj[key] = {
-                            error: false,
-                            msg: ''
-                        };
-                        continue;
-                    }
-                    if (value === "") {
-                        validate = false;
-                        validateObj[key] = {
-                            error: true,
-                            msg: ''
-                        };
-                    } else {
-                        if (key === "email" && !this.validateEmail(value)) {
-                            validate = false;
-                            validateObj[key] = {
-                                error: true,
-                                msg: 'Falsches Format'
-                            };
-                        } else if (key === "phone" && !this.validatePhoneNumber(value)) {
-                            validate = false;
-                            validateObj[key] = {
-                                error: true,
-                                msg: 'Falsches Format (mind. 10, max. 15 Zahlen)'
-                            };
-                        } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
-                            validate = false;
-                            validateObj[key] = {
-                                error: true,
-                                msg: 'Falsches Format'
-                            };
-                        } else {
-                            validateObj[key] = {
-                                error: false,
-                                msg: ''
-                            };
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            if (inputCheckbox.shippingAddress === false) {
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
-
-                try {
-                    for (var _iterator2 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var _step2$value = (0, _slicedToArray3.default)(_step2.value, 2),
-                            key = _step2$value[0],
-                            value = _step2$value[1];
-
-                        if (inputCheckbox.customerCompanyName === false && key === 'customer_companyName') {
-                            validateObj[key] = {
-                                error: false,
-                                msg: ''
-                            };
-                            continue;
-                        }
-                        if (value === "") {
-                            validate = false;
-                            validateObj[key] = {
-                                error: true,
-                                msg: ''
-                            };
-                        } else {
-                            if (key === "customer_email" && !this.validateEmail(value)) {
-                                validate = false;
-                                validateObj[key] = {
-                                    error: true,
-                                    msg: 'Falsches Format'
-                                };
-                            } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
-                                validate = false;
-                                validateObj[key] = {
-                                    error: true,
-                                    msg: 'Falsches Format (mind. 10, max. 15 Zahlen)'
-                                };
-                            } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
-                                validate = false;
-                                validateObj[key] = {
-                                    error: true,
-                                    msg: 'Falsches Format'
-                                };
-                            } else {
-                                validateObj[key] = {
-                                    error: false,
-                                    msg: ''
-                                };
-                            }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
-                        }
-                    } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
-                        }
-                    }
-                }
-            }
-            this.setState({ validateError: (0, _extends4.default)({}, this.state.validateError, validateObj) });
-            this.setState({ isValidate: validate });
-            return validate;
-        }
-    }, {
-        key: 'validateCheck',
-        value: function validateCheck() {
-            var inputCheckbox = this.state.inputCheckbox;
-
-            var personalData = (0, _helpersFunction._getPersonalDataFields)();
-            var validate = true;
-            var _iteratorNormalCompletion3 = true;
-            var _didIteratorError3 = false;
-            var _iteratorError3 = undefined;
-
-            try {
-                for (var _iterator3 = Object.entries(personalData.shippingAddress)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                    var _step3$value = (0, _slicedToArray3.default)(_step3.value, 2),
-                        key = _step3$value[0],
-                        value = _step3$value[1];
-
-                    if (inputCheckbox.company === false && key === 'companyName') {
-                        continue;
-                    }
-                    if (value === "") {
-                        validate = false;
-                    } else {
-                        if (key === "email" && !this.validateEmail(value)) {
-                            validate = false;
-                        } else if (key === "phone" && !this.validatePhoneNumber(value)) {
-                            validate = false;
-                        } else if ((key === "number" || key === "zip") && !this.validateNumeric(value)) {
-                            validate = false;
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                        _iterator3.return();
-                    }
-                } finally {
-                    if (_didIteratorError3) {
-                        throw _iteratorError3;
-                    }
-                }
-            }
-
-            if (inputCheckbox.shippingAddress === false) {
-                var _iteratorNormalCompletion4 = true;
-                var _didIteratorError4 = false;
-                var _iteratorError4 = undefined;
-
-                try {
-                    for (var _iterator4 = Object.entries(personalData.billingAddress)[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                        var _step4$value = (0, _slicedToArray3.default)(_step4.value, 2),
-                            key = _step4$value[0],
-                            value = _step4$value[1];
-
-                        if (inputCheckbox.customerCompanyName === false && key === 'customer_companyName') {
-                            continue;
-                        }
-                        if (value === "") {
-                            validate = false;
-                        } else {
-                            if (key === "customer_email" && !this.validateEmail(value)) {
-                                validate = false;
-                            } else if (key === "customer_phone" && !this.validatePhoneNumber(value)) {
-                                validate = false;
-                            } else if ((key === "customer_number" || key === "customer_zip") && !this.validateNumeric(value)) {
-                                validate = false;
-                            }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError4 = true;
-                    _iteratorError4 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                            _iterator4.return();
-                        }
-                    } finally {
-                        if (_didIteratorError4) {
-                            throw _iteratorError4;
-                        }
-                    }
-                }
-            }
-            this.setState({ isValidate: validate });
-        }
-    }, {
-        key: 'validateEmail',
-        value: function validateEmail(email) {
-            return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        }
-    }, {
-        key: 'validatePhoneNumber',
-        value: function validatePhoneNumber(phone) {
-            return phone.match(/^[\+]?[(]?[0-9]{4}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,8}$/im);
-        }
-    }, {
-        key: 'validateNumeric',
-        value: function validateNumeric(number) {
-            if (typeof number != "string") return false;
-            return !isNaN(number) && !isNaN(parseFloat(number));
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this14 = this;
-
-            var _state6 = this.state,
-                subject = _state6.subject,
-                tax = _state6.tax,
-                total = _state6.total,
-                country = _state6.country,
-                inputCheckbox = _state6.inputCheckbox,
-                couponError = _state6.couponError,
-                shippingMethods = _state6.shippingMethods,
-                autoloadPersonalData = _state6.autoloadPersonalData,
-                errors = _state6.errors,
-                credits = _state6.credits,
-                domain = _state6.domain,
-                errorNoProducts = _state6.errorNoProducts,
-                showTabs = _state6.showTabs,
-                checkedPayByCredits = _state6.checkedPayByCredits,
-                taxValue = _state6.taxValue,
-                taxOnlyForVat = _state6.taxOnlyForVat,
-                noteShow = _state6.noteShow,
-                noteShow1 = _state6.noteShow1,
-                noteShow2 = _state6.noteShow2,
-                isVorauskasse = _state6.isVorauskasse,
-                infoRatings = _state6.infoRatings,
-                rateData = _state6.rateData,
-                _props = this.props,
-                basketData = _props.basketData,
-                user = _props.user;
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'basketWrap' },
+      return _react2.default.createElement(
+        "div",
+        { className: "basketWrap" },
+        _react2.default.createElement(
+          "div",
+          { className: "container" },
+          window.isMobile ? _react2.default.createElement(
+            "div",
+            { className: "process-bar" },
+            _react2.default.createElement(
+              "div",
+              { className: "process-bar-title" },
+              this.props.basketStep !== "paymentMethod" && _react2.default.createElement("img", {
+                loading: "lazy",
+                src: "/images/design/mobile/back-btn-arrow.svg",
+                onClick: this.props.handlerBack,
+                alt: ""
+              }),
+              _react2.default.createElement(
+                "h3",
+                null,
+                "Kauf\xFCbersicht"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "process-items" },
+              _react2.default.createElement(
+                "div",
+                {
+                  className: "process-item " + (this.props.basketStep === "paymentMethod" ? "step-active" : "step-done"),
+                  onClick: function onClick(e) {
+                    return _this14.goTab(e, "paymentMethod");
+                  }
+                },
+                _react2.default.createElement("div", { className: "round" }),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container' },
-                    window.isMobile ? _react2.default.createElement(
-                        'div',
-                        { className: 'process-bar' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'process-bar-title' },
-                            this.props.basketStep !== 'paymentMethod' && _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/mobile/back-btn-arrow.svg',
-                                onClick: this.props.handlerBack,
-                                alt: '' }),
-                            _react2.default.createElement(
-                                'h3',
-                                null,
-                                'Kauf\xFCbersicht'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'process-items' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'process-item ' + (this.props.basketStep === 'paymentMethod' ? 'step-active' : 'step-done'), onClick: function onClick(e) {
-                                        return _this14.goTab(e, 'paymentMethod');
-                                    } },
-                                _react2.default.createElement('div', { className: 'round' }),
-                                _react2.default.createElement(
-                                    'span',
-                                    null,
-                                    'Zahlungsart'
-                                )
-                            ),
-                            _react2.default.createElement('div', { className: 'separator' }),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'process-item ' + (this.props.basketStep === 'personalData' ? 'step-active' : this.props.basketStep === 'shippingMethod' ? 'step-done' : 'step-disable'), onClick: function onClick(e) {
-                                        return _this14.goTab(e, 'personalData');
-                                    } },
-                                _react2.default.createElement('div', { className: 'round' }),
-                                _react2.default.createElement(
-                                    'span',
-                                    null,
-                                    'Pers\xF6nliche Daten'
-                                )
-                            ),
-                            _react2.default.createElement('div', { className: 'separator' }),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'process-item ' + (this.props.basketStep === 'shippingMethod' ? 'step-active' : 'step-disable'), onClick: function onClick(e) {
-                                        return _this14.goTab(e, 'shippingMethod');
-                                    } },
-                                _react2.default.createElement('div', { className: 'round' }),
-                                _react2.default.createElement(
-                                    'span',
-                                    null,
-                                    'Versand'
-                                )
-                            )
-                        )
-                    ) : '',
-                    this.state.errorPay && _react2.default.createElement(
-                        'p',
-                        { className: 'errorPay' },
-                        'Zahlungsfehler: ',
-                        this.state.errorPay
-                    ),
-                    basketData.filter(function (item) {
-                        return item.productTypeId != 11;
-                    }).length > 0 ? _react2.default.createElement(
-                        _react.Fragment,
-                        null,
-                        _react2.default.createElement(
-                            'form',
-                            { action: '#', name: 'basketForm', onChange: this.changeForm.bind(this), onSubmit: this.sendForm, onKeyPress: this.cancelSendByEnter.bind(this) },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row formWrap' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-md-7', id: 'accordion' },
-                                    _react2.default.createElement(_payment2.default, {
-                                        isVorauskasse: isVorauskasse,
-                                        credits: credits,
-                                        total: total,
-                                        userIsLogin: user.isLogin,
-                                        totalPrice: total,
-                                        domain: domain,
-                                        shippingMethods: shippingMethods,
-                                        choosePayMethod: this.choosePayMethod,
-                                        checkedPayByCredits: checkedPayByCredits,
-                                        changeCreditsInput: this.changeCreditsInput,
-                                        showTabs: showTabs,
-                                        handlerNextTab: this.nextTab,
-                                        handlerShowHideBlocks: this._showHideBlocks,
-                                        handlerSendForm: this.sendForm,
-                                        shippingMethod: this.props.shippingMethod,
-                                        placeDescription: basketData[0].placeDescription,
-                                        goToDelivery: this._goToDelivery,
-                                        changeCheckbox: this.changeCheckbox,
-                                        onNoteToggle: this.onNoteToggle,
-                                        dobChange: this.dobChange,
-                                        dobChange1: this.dobChange1,
-                                        payMethod: this.state.payMethod,
-                                        payMethodError: this.state.payMethodError,
-                                        noteShow: noteShow,
-                                        noteShow1: noteShow1,
-                                        noteShow2: noteShow2
-                                    }),
-                                    _react2.default.createElement(_personalData2.default, { country: country,
-                                        cancelRedirect: this.props.userActions.cancelRedirectToMyAccount,
-                                        ifErrorPayment: this.state.ifErrorPayment,
-                                        user: user,
-                                        error: errors,
-                                        inputCheckbox: inputCheckbox,
-                                        changeCountry: this.changeCountry,
-                                        showTabs: showTabs,
-                                        handlerNextTab: this.nextTab,
-                                        handlerShowHideBlocks: this._showHideBlocks,
-                                        handlerSendForm: this.sendForm,
-                                        total: total,
-                                        goToPayment: this.goToPaymentMobile,
-                                        changeCheckbox: this.changeCheckbox,
-                                        validateError: this.state.validateError,
-                                        validateForm: this.validateForm,
-                                        validateCheck: this.validateCheck,
-                                        isValidate: this.state.isValidate,
-                                        payMethodError: this.state.payMethodError
-                                    }),
-                                    _react2.default.createElement(_shipping2.default, { chooseShippingMethod: this.chooseShippingMethod,
-                                        choiceShipping: this.state.choiceShipping,
-                                        isVorauskasse: isVorauskasse,
-                                        credits: credits,
-                                        total: total,
-                                        userIsLogin: user.isLogin,
-                                        totalPrice: total,
-                                        domain: domain,
-                                        shippingMethods: shippingMethods,
-                                        checkedPayByCredits: checkedPayByCredits,
-                                        changeCreditsInput: this.changeCreditsInput,
-                                        showTabs: showTabs,
-                                        handlerNextTab: this.nextTab,
-                                        handlerShowHideBlocks: this._showHideBlocks,
-                                        handlerSendForm: this.sendForm,
-                                        shippingMethod: this.props.shippingMethod,
-                                        placeDescription: basketData[0].placeDescription,
-                                        changeCheckbox: this.changeCheckbox,
-                                        onNoteToggle: this.onNoteToggle,
-                                        inputCheckbox: inputCheckbox,
-                                        error: errors,
-                                        errorNoProducts: errorNoProducts
-                                    }),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'offer-tab basket-offer-tab' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'item' },
-                                            _react2.default.createElement(
-                                                'div',
-                                                { className: 'img' },
-                                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/offer9.svg', alt: '' })
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Auf Rechnung in'
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Raten bezahlen'
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'item' },
-                                            _react2.default.createElement(
-                                                'div',
-                                                { className: 'img' },
-                                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/offer2.svg', alt: '' })
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                '1 Jahr Garantie auf Occassionen'
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                '2 Jahre auf Neuger\xE4te'
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'item' },
-                                            _react2.default.createElement(
-                                                'div',
-                                                { className: 'img' },
-                                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/offer10.svg', alt: '' })
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                '14 Tage'
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Zufriedenheitsgarantie'
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'item' },
-                                            _react2.default.createElement(
-                                                'div',
-                                                { className: 'img' },
-                                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/offer4.svg', alt: '' })
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Schnelle'
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Lieferung'
-                                            )
-                                        )
-                                    )
-                                ),
-                                _react2.default.createElement(_productOverview2.default, { basketData: basketData,
-                                    addCreditsToBasket: this.addCreditsToBasket,
-                                    addInsuranceToBasket: this.addInsuranceToBasket,
-                                    addInsuranceToBasketCh: this.addInsuranceToBasketCh,
-                                    credits: credits,
-                                    changeCreditsInput: this.changeCreditsInput,
-                                    removeFromBasket: this.handleRemoveFromBasket,
-                                    changeCoupon: this.changeCoupon,
-                                    triggerChangeCoupon: this.triggerChangeCoupon,
-                                    couponError: couponError,
-                                    user: user,
-                                    subject: subject,
-                                    tax: tax,
-                                    taxValue: taxValue,
-                                    taxOnlyForVat: taxOnlyForVat,
-                                    total: total,
-                                    goToCheckoutMobile: this.props.goToCheckout,
-                                    updateBasketData: this.handleUpdateBasketData,
-                                    deadline: this.state.deadline,
-                                    activateCountDownCoupon: this.activateCountDownCoupon,
-                                    deadlineIsActive: this.state.deadlineIsActive,
-                                    deadlineExpired: this.state.deadlineExpired,
-                                    infoRatings: infoRatings,
-                                    rateData: rateData,
-                                    insuranceChAmountChange: this.insuranceChAmountChange,
-                                    insuranceChAmount: this.state.insuranceChAmount
-                                })
-                            )
-                        )
-                    ) : _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Warenkorb'
-                        ),
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'emptyBasket' },
-                            'Ihr Warenkorb ist noch leer.'
-                        )
-                    ),
-                    this.state.payForm,
-                    autoloadPersonalData.element
-                ),
-                !window.isMobile && _react2.default.createElement(
-                    'div',
-                    { className: 'similar' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container' },
-                        _react2.default.createElement(_listSimilarItems2.default, { similarItems: this.state.similarItems }),
-                        _react2.default.createElement('div', { className: 'cb' })
-                    )
+                  "span",
+                  null,
+                  t("basketPage.paymentMethod")
                 )
-            );
-        }
-    }]);
-    return Basket;
+              ),
+              _react2.default.createElement("div", { className: "separator" }),
+              _react2.default.createElement(
+                "div",
+                {
+                  className: "process-item " + (this.props.basketStep === "personalData" ? "step-active" : this.props.basketStep === "shippingMethod" ? "step-done" : "step-disable"),
+                  onClick: function onClick(e) {
+                    return _this14.goTab(e, "personalData");
+                  }
+                },
+                _react2.default.createElement("div", { className: "round" }),
+                _react2.default.createElement(
+                  "span",
+                  null,
+                  t("basketPage.personalData")
+                )
+              ),
+              _react2.default.createElement("div", { className: "separator" }),
+              _react2.default.createElement(
+                "div",
+                {
+                  className: "process-item " + (this.props.basketStep === "shippingMethod" ? "step-active" : "step-disable"),
+                  onClick: function onClick(e) {
+                    return _this14.goTab(e, "shippingMethod");
+                  }
+                },
+                _react2.default.createElement("div", { className: "round" }),
+                _react2.default.createElement(
+                  "span",
+                  null,
+                  t("basketPage.shipping")
+                )
+              )
+            )
+          ) : "",
+          this.state.errorPay && _react2.default.createElement(
+            "p",
+            { className: "errorPay" },
+            "Zahlungsfehler: ",
+            this.state.errorPay
+          ),
+          basketData.filter(function (item) {
+            return item.productTypeId != 11;
+          }).length > 0 ? _react2.default.createElement(
+            _react.Fragment,
+            null,
+            _react2.default.createElement(
+              "form",
+              {
+                action: "#",
+                name: "basketForm",
+                onChange: this.changeForm.bind(this),
+                onSubmit: this.sendForm,
+                onKeyPress: this.cancelSendByEnter.bind(this)
+              },
+              _react2.default.createElement(
+                "div",
+                { className: "row formWrap" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-md-7", id: "accordion" },
+                  _react2.default.createElement(_payment2.default, {
+                    isVorauskasse: isVorauskasse,
+                    credits: credits,
+                    total: total,
+                    userIsLogin: user.isLogin,
+                    totalPrice: total,
+                    domain: domain,
+                    shippingMethods: shippingMethods,
+                    choosePayMethod: this.choosePayMethod,
+                    checkedPayByCredits: checkedPayByCredits,
+                    changeCreditsInput: this.changeCreditsInput,
+                    showTabs: showTabs,
+                    handlerNextTab: this.nextTab,
+                    handlerShowHideBlocks: this._showHideBlocks,
+                    handlerSendForm: this.sendForm,
+                    shippingMethod: this.props.shippingMethod,
+                    placeDescription: basketData[0].placeDescription,
+                    goToDelivery: this._goToDelivery,
+                    changeCheckbox: this.changeCheckbox,
+                    onNoteToggle: this.onNoteToggle,
+                    dobChange: this.dobChange,
+                    dobChange1: this.dobChange1,
+                    payMethod: this.state.payMethod,
+                    payMethodError: this.state.payMethodError,
+                    noteShow: noteShow,
+                    noteShow1: noteShow1,
+                    noteShow2: noteShow2
+                  }),
+                  _react2.default.createElement(_personalData2.default, {
+                    country: country,
+                    cancelRedirect: this.props.userActions.cancelRedirectToMyAccount,
+                    ifErrorPayment: this.state.ifErrorPayment,
+                    user: user,
+                    error: errors,
+                    inputCheckbox: inputCheckbox,
+                    changeCountry: this.changeCountry,
+                    showTabs: showTabs,
+                    handlerNextTab: this.nextTab,
+                    handlerShowHideBlocks: this._showHideBlocks,
+                    handlerSendForm: this.sendForm,
+                    total: total,
+                    goToPayment: this.goToPaymentMobile,
+                    changeCheckbox: this.changeCheckbox,
+                    validateError: this.state.validateError,
+                    validateForm: this.validateForm,
+                    validateCheck: this.validateCheck,
+                    isValidate: this.state.isValidate,
+                    payMethodError: this.state.payMethodError
+                  }),
+                  _react2.default.createElement(_shipping2.default, {
+                    chooseShippingMethod: this.chooseShippingMethod,
+                    choiceShipping: this.state.choiceShipping,
+                    isVorauskasse: isVorauskasse,
+                    credits: credits,
+                    total: total,
+                    userIsLogin: user.isLogin,
+                    totalPrice: total,
+                    domain: domain,
+                    shippingMethods: shippingMethods,
+                    checkedPayByCredits: checkedPayByCredits,
+                    changeCreditsInput: this.changeCreditsInput,
+                    showTabs: showTabs,
+                    handlerNextTab: this.nextTab,
+                    handlerShowHideBlocks: this._showHideBlocks,
+                    handlerSendForm: this.sendForm,
+                    shippingMethod: this.props.shippingMethod,
+                    placeDescription: basketData[0].placeDescription,
+                    changeCheckbox: this.changeCheckbox,
+                    onNoteToggle: this.onNoteToggle,
+                    inputCheckbox: inputCheckbox,
+                    error: errors,
+                    errorNoProducts: errorNoProducts
+                  }),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "offer-tab basket-offer-tab" },
+                    _react2.default.createElement(
+                      "div",
+                      { className: "item" },
+                      _react2.default.createElement(
+                        "div",
+                        { className: "img" },
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/offer9.svg",
+                          alt: ""
+                        })
+                      ),
+                      _react2.default.createElement("p", {
+                        dangerouslySetInnerHTML: {
+                          __html: t("basketPage.squareDesign1")
+                        }
+                      })
+                    ),
+                    _react2.default.createElement(
+                      "div",
+                      { className: "item" },
+                      _react2.default.createElement(
+                        "div",
+                        { className: "img" },
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/offer2.svg",
+                          alt: ""
+                        })
+                      ),
+                      _react2.default.createElement("p", {
+                        dangerouslySetInnerHTML: {
+                          __html: t("basketPage.squareDesign2")
+                        }
+                      })
+                    ),
+                    _react2.default.createElement(
+                      "div",
+                      { className: "item" },
+                      _react2.default.createElement(
+                        "div",
+                        { className: "img" },
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/offer10.svg",
+                          alt: ""
+                        })
+                      ),
+                      _react2.default.createElement("p", {
+                        dangerouslySetInnerHTML: {
+                          __html: t("basketPage.squareDesign3")
+                        }
+                      })
+                    ),
+                    _react2.default.createElement(
+                      "div",
+                      { className: "item" },
+                      _react2.default.createElement(
+                        "div",
+                        { className: "img" },
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/offer4.svg",
+                          alt: ""
+                        })
+                      ),
+                      _react2.default.createElement("p", {
+                        dangerouslySetInnerHTML: {
+                          __html: t("basketPage.squareDesign4")
+                        }
+                      })
+                    )
+                  )
+                ),
+                _react2.default.createElement(_productOverview2.default, {
+                  basketData: basketData,
+                  addCreditsToBasket: this.addCreditsToBasket,
+                  addInsuranceToBasket: this.addInsuranceToBasket,
+                  addInsuranceToBasketCh: this.addInsuranceToBasketCh,
+                  credits: credits,
+                  changeCreditsInput: this.changeCreditsInput,
+                  removeFromBasket: this.handleRemoveFromBasket,
+                  changeCoupon: this.changeCoupon,
+                  triggerChangeCoupon: this.triggerChangeCoupon,
+                  couponError: couponError,
+                  user: user,
+                  subject: subject,
+                  tax: tax,
+                  taxValue: taxValue,
+                  taxOnlyForVat: taxOnlyForVat,
+                  total: total,
+                  goToCheckoutMobile: this.props.goToCheckout,
+                  updateBasketData: this.handleUpdateBasketData,
+                  deadline: this.state.deadline,
+                  activateCountDownCoupon: this.activateCountDownCoupon,
+                  deadlineIsActive: this.state.deadlineIsActive,
+                  deadlineExpired: this.state.deadlineExpired,
+                  infoRatings: infoRatings,
+                  rateData: rateData,
+                  insuranceChAmountChange: this.insuranceChAmountChange,
+                  insuranceChAmount: this.state.insuranceChAmount
+                })
+              )
+            )
+          ) : _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+              "h1",
+              null,
+              "Warenkorb"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "emptyBasket" },
+              "Ihr Warenkorb ist noch leer."
+            )
+          ),
+          this.state.payForm,
+          autoloadPersonalData.element
+        ),
+        !window.isMobile && _react2.default.createElement(
+          "div",
+          { className: "similar" },
+          _react2.default.createElement(
+            "div",
+            { className: "container" },
+            _react2.default.createElement(_listSimilarItems2.default, { similarItems: this.state.similarItems }),
+            _react2.default.createElement("div", { className: "cb" })
+          )
+        )
+      );
+    }
+  }]);
+  return Basket;
 }(_react.PureComponent);
 
 Basket.propTypes = {};
 Basket.defaultProps = {};
 
 function mapStateToProps(state) {
-    return {
-        basketData: state.basket.basketData,
-        shippingMethod: state.basket.shippingMethod,
-        user: state.user
-    };
+  return {
+    basketData: state.basket.basketData,
+    shippingMethod: state.basket.shippingMethod,
+    user: state.user
+  };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch),
-        userActions: (0, _redux.bindActionCreators)(userActions, dispatch)
-    };
+  return {
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch),
+    userActions: (0, _redux.bindActionCreators)(userActions, dispatch)
+  };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps, null, { pure: false })((0, _reactUseragent.withUserAgent)(Basket));
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps, null, {
+  pure: false
+})((0, _reactUseragent.withUserAgent)((0, _reactI18next.withTranslation)()(Basket)));
 
 /***/ }),
 /* 779 */,
@@ -2989,7 +3144,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3423,7 +3578,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -3518,7 +3673,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -3694,7 +3849,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3881,9 +4036,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -4012,9 +4167,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -4176,7 +4331,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -4310,7 +4465,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 /* 896 */
@@ -5611,7 +5766,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -12006,11 +12161,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -12169,6 +12324,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -12317,7 +12474,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12339,7 +12497,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12361,7 +12520,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12383,7 +12543,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12405,7 +12566,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12427,7 +12589,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -12483,7 +12646,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 /* 931 */
@@ -12501,7 +12664,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -12547,7 +12710,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -13154,11 +13317,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13295,6 +13460,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -13307,7 +13474,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -13463,7 +13630,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 /* 933 */
@@ -13499,11 +13666,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14336,7 +14503,7 @@ function createSvgIcon(path, displayName) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__responsivePropType__ = __webpack_require__(1137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breakpoints__ = __webpack_require__(1090);
 
@@ -20846,11 +21013,11 @@ exports.default = function (obj, key, value) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.ListSimilarItems = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -20892,291 +21059,341 @@ var _addToBasketEffect = __webpack_require__(950);
 
 var _addToBasketEffect2 = _interopRequireDefault(_addToBasketEffect);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ListSimilarItems = exports.ListSimilarItems = function (_Component) {
-    (0, _inherits3.default)(ListSimilarItems, _Component);
+  (0, _inherits3.default)(ListSimilarItems, _Component);
 
-    function ListSimilarItems(props) {
-        (0, _classCallCheck3.default)(this, ListSimilarItems);
+  function ListSimilarItems(props) {
+    (0, _classCallCheck3.default)(this, ListSimilarItems);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
 
-        _this.gtagEnhancedEcommerce = function (item, tag) {
-            var brands = item.criterias.find(function (item) {
-                return item.id === 'manufacturer';
-            }).values,
-                brand = brands.length ? brands[0].name : "",
-                items = [{
-                "id": item.shortcode,
-                "name": item.descriptionLong || item.model || '',
-                "list_name": "Kaufen",
-                "quantity": 1,
-                "brand": brand,
-                "price": item.discountPrice || item.price,
-                "category": item.categoryName
-            }];
+    _this.gtagEnhancedEcommerce = function (item, tag) {
+      var brands = item.criterias.find(function (item) {
+        return item.id === "manufacturer";
+      }).values,
+          brand = brands.length ? brands[0].name : "",
+          items = [{
+        id: item.shortcode,
+        name: item.descriptionLong || item.model || "",
+        list_name: "Kaufen",
+        quantity: 1,
+        brand: brand,
+        price: item.discountPrice || item.price,
+        category: item.categoryName
+      }];
 
-            if (tag == 'select_content') {
-                gtag('event', tag, {
-                    "content_type": "product",
-                    "items": items
-                });
+      if (tag == "select_content") {
+        gtag("event", tag, {
+          content_type: "product",
+          items: items
+        });
 
-                var gtagData = { "category": item.categoryName };
-                window.localStorage.setItem('gtag', JSON.stringify(gtagData));
-            } else {
-                gtag('event', tag, {
-                    "items": items
-                });
-            }
-        };
+        var gtagData = { category: item.categoryName };
+        window.localStorage.setItem("gtag", JSON.stringify(gtagData));
+      } else {
+        gtag("event", tag, {
+          items: items
+        });
+      }
+    };
 
-        _this.clickOnLink = function (e, item) {
-            if (e.target.tagName === "BUTTON") {
-                e.preventDefault();
-            } else {
-                if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, 'select_content');
-            }
-        };
+    _this.clickOnLink = function (e, item) {
+      if (e.target.tagName === "BUTTON") {
+        e.preventDefault();
+      } else {
+        if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, "select_content");
+      }
+    };
 
-        _this.state = {};
-        _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
-        _this.addModelToBasket = _this.addModelToBasket.bind(_this);
-        return _this;
+    _this.setShowHoverBasket = function (e) {
+      _this.setState({
+        showHoverBasket: e
+      });
+    };
+
+    _this.state = {
+      showHoverBasket: null
+    };
+    _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
+    _this.addModelToBasket = _this.addModelToBasket.bind(_this);
+    return _this;
+  }
+
+  (0, _createClass3.default)(ListSimilarItems, [{
+    key: "addModelToBasket",
+    value: function addModelToBasket(e, model) {
+      var _this2 = this;
+
+      var status = e.target.getAttribute("data-status"),
+          basketData = this.props.basketData,
+          newBasketData = null,
+          accessoriesDetailPage = this.props.accessoriesDetailPage,
+          productTypeId = accessoriesDetailPage ? 3 : 7;
+
+
+      if (basketData.every(function (item) {
+        return item.id != model.id;
+      })) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
+      } else {
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
+        });
+      }
+
+      this.props.basketActions.changeBasketData(newBasketData);
+
+      if (status === "out") {
+        if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, "add_to_cart");
+        if (!window.isMobile) {
+          this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+            startPosition: $(e.target).offset(),
+            image: model.colorImage,
+            basketType: "kaufen"
+          }));
+          setTimeout(function () {
+            _reactRouter.browserHistory.push("/warenkorb");
+            _this2.props.basketActions.basketAddEffect(null);
+          }, 2000);
+        } else _reactRouter.browserHistory.push("/warenkorb");
+      }
     }
+  }, {
+    key: "mapSimilarItems",
+    value: function mapSimilarItems(model, i) {
+      var _this3 = this;
 
-    (0, _createClass3.default)(ListSimilarItems, [{
-        key: 'addModelToBasket',
-        value: function addModelToBasket(e, model) {
-            var _this2 = this;
-
-            var status = e.target.getAttribute('data-status'),
-                basketData = this.props.basketData,
-                newBasketData = null,
-                accessoriesDetailPage = this.props.accessoriesDetailPage,
-                productTypeId = accessoriesDetailPage ? 3 : 7;
+      var url = "",
+          accessoriesDetailPage = this.props.accessoriesDetailPage;
 
 
-            if (basketData.every(function (item) {
-                return item.id != model.id;
-            })) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
-            } else {
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
-                });
-            }
+      if (accessoriesDetailPage) {
+        var modelName = model.model.split(" ").join("-").toLowerCase().replace(/\//g, "--"),
+            deviceName = model.deviceName.toLowerCase().replace(/ /g, "-");
 
-            this.props.basketActions.changeBasketData(newBasketData);
+        url = "/kaufen/detail/zubehoer/" + deviceName + "/" + modelName + "/" + model.shortcode;
+      } else {
+        var _modelName = model.model.split(" ").join("-").toLowerCase(),
+            color = model.color.toLowerCase() || "color",
+            capacity = model.capacity.toLowerCase() || "capacity",
+            _deviceName = model.deviceName.replace(/ /g, "-").toLowerCase();
+        url = "/kaufen/detail/" + _deviceName + "/" + _modelName + "/" + capacity + "/" + color + "/" + model.shortcode;
+      }
+      var showHoverBasketStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(10%) translateY(-120%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        fontFamily: "Raleway",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        textTransform: "initial",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
-            if (status === 'out') {
-                if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, 'add_to_cart');
-                if (!window.isMobile) {
-                    this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: $(e.target).offset(),
-                        image: model.colorImage,
-                        basketType: 'kaufen' }));
-                    setTimeout(function () {
-                        _reactRouter.browserHistory.push('/warenkorb');
-                        _this2.props.basketActions.basketAddEffect(null);
-                    }, 2000);
-                } else _reactRouter.browserHistory.push('/warenkorb');
-            }
-        }
-    }, {
-        key: 'mapSimilarItems',
-        value: function mapSimilarItems(model, i) {
-            var _this3 = this;
-
-            var url = '',
-                accessoriesDetailPage = this.props.accessoriesDetailPage;
-
-
-            if (accessoriesDetailPage) {
-                var modelName = model.model.split(" ").join('-').toLowerCase().replace(/\//g, '--'),
-                    deviceName = model.deviceName.toLowerCase().replace(/ /g, '-');
-
-                url = '/kaufen/detail/zubehoer/' + deviceName + '/' + modelName + '/' + model.shortcode;
-            } else {
-                var _modelName = model.model.split(" ").join('-').toLowerCase(),
-                    color = model.color.toLowerCase() || 'color',
-                    capacity = model.capacity.toLowerCase() || 'capacity',
-                    _deviceName = model.deviceName.replace(/ /g, '-').toLowerCase();
-                url = '/kaufen/detail/' + _deviceName + '/' + _modelName + '/' + capacity + '/' + color + '/' + model.shortcode;
-            }
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'col-md-3 col-sm-6', key: i },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'itemModelWrap' },
-                    _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: url,
-                            onClick: function onClick(e) {
-                                return _this3.clickOnLink(e, model);
-                            },
-                            key: i },
-                        _react2.default.createElement(
-                            'div',
-                            { style: { width: '100%' } },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'image' },
-                                _react2.default.createElement('img', { loading: 'lazy', src: model.colorImage || model.deviceImages.mainImg.src, alt: '' })
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'modelName' },
-                                model.model,
-                                model.extendedTitle && ' (' + model.extendedTitle + ')'
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'div',
-                                null,
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'modelValues' },
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.capacity,
-                                        model.capacityImage && _react2.default.createElement('img', { loading: 'lazy', src: model.capacityImage, alt: '' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.color,
-                                        '\xA0',
-                                        model.colorCode && _react2.default.createElement('span', { className: 'colorPic',
-                                            style: { backgroundColor: model.colorCode } })
-                                    )
-                                )
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'p',
-                                { className: 'condition' },
-                                'Zustand: ',
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    model.condition
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'bottomRow' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 price' },
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-head' },
-                                        'Preis'
-                                    ),
-                                    model.discountPrice && _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-value discount-price' },
-                                        (0, _helpersFunction.formatPrice)(model.discountPrice),
-                                        ' ',
-                                        window.currencyValue
-                                    ),
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: model.discountPrice ? 'price-value old-price' : 'price-value' },
-                                        (0, _helpersFunction.formatPrice)(model.price),
-                                        ' ',
-                                        window.currencyValue
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 text-right' },
-                                    _react2.default.createElement('button', { 'data-status': this.props.basketData.some(function (item) {
-                                            return item.id === model.id;
-                                        }) ? 'in' : 'out',
-                                        className: 'btn addToBasket',
-                                        onClick: function onClick(e) {
-                                            return _this3.addModelToBasket(e, model);
-                                        } })
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var similarItems = this.props.similarItems,
-                settings = {
-                dots: true,
-                arrows: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1
-            };
-
-            return _react2.default.createElement(
-                'div',
+      return _react2.default.createElement(
+        "div",
+        { className: "col-md-3 col-sm-6", key: i },
+        _react2.default.createElement(
+          "div",
+          { className: "itemModelWrap" },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: url, onClick: function onClick(e) {
+                return _this3.clickOnLink(e, model);
+              }, key: i },
+            _react2.default.createElement(
+              "div",
+              { style: { width: "100%" } },
+              _react2.default.createElement(
+                "div",
+                { className: "image" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: model.colorImage || model.deviceImages.mainImg.src,
+                  alt: ""
+                })
+              ),
+              _react2.default.createElement(
+                "p",
+                { className: "modelName" },
+                model.model,
+                model.extendedTitle && " (" + model.extendedTitle + ")"
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "div",
                 null,
-                similarItems.length > 0 && _react2.default.createElement(
-                    'div',
-                    { className: 'listSimilarItems' },
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'tag' },
-                        'Weitere Produkte'
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'head' },
-                        'Folgendes k\xF6nnte Sie auch interessieren'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row wrapItems' },
-                        !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
-                            _reactSlick2.default,
-                            settings,
-                            similarItems.map(this.mapSimilarItems)
-                        )
-                    )
+                _react2.default.createElement(
+                  "span",
+                  { className: "modelValues" },
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.capacity,
+                    model.capacityImage && _react2.default.createElement("img", { loading: "lazy", src: model.capacityImage, alt: "" })
+                  ),
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.color,
+                    "\xA0",
+                    model.colorCode && _react2.default.createElement("span", {
+                      className: "colorPic",
+                      style: { backgroundColor: model.colorCode }
+                    })
+                  )
                 )
-            );
-        }
-    }]);
-    return ListSimilarItems;
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "p",
+                { className: "condition" },
+                "Zustand: ",
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  model.condition
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "bottomRow" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 price" },
+                  _react2.default.createElement(
+                    "p",
+                    { className: "price-head" },
+                    "Preis"
+                  ),
+                  model.discountPrice && _react2.default.createElement(
+                    "p",
+                    { className: "price-value discount-price" },
+                    (0, _helpersFunction.formatPrice)(model.discountPrice),
+                    " ",
+                    window.currencyValue
+                  ),
+                  _react2.default.createElement(
+                    "p",
+                    {
+                      className: model.discountPrice ? "price-value old-price" : "price-value"
+                    },
+                    (0, _helpersFunction.formatPrice)(model.price),
+                    " ",
+                    window.currencyValue
+                  )
+                ),
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 text-right" },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      "data-status": this.props.basketData.some(function (item) {
+                        return item.id === model.id;
+                      }) ? "in" : "out",
+                      className: "btn addToBasket",
+                      onMouseEnter: function onMouseEnter() {
+                        return _this3.setShowHoverBasket(i);
+                      },
+                      onMouseLeave: function onMouseLeave() {
+                        return _this3.setShowHoverBasket(null);
+                      },
+                      onClick: function onClick(e) {
+                        return _this3.addModelToBasket(e, model);
+                      }
+                    },
+                    this.state.showHoverBasket === i && _react2.default.createElement("div", { style: showHoverBasketStyle, dangerouslySetInnerHTML: {
+                        __html: t('addToBasket')
+                      } })
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var similarItems = this.props.similarItems,
+          settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
+      return _react2.default.createElement(
+        "div",
+        null,
+        similarItems.length > 0 && _react2.default.createElement(
+          "div",
+          { className: "listSimilarItems" },
+          _react2.default.createElement(
+            "h2",
+            { className: "tag" },
+            "Weitere Produkte"
+          ),
+          _react2.default.createElement(
+            "h2",
+            { className: "head" },
+            "Folgendes k\xF6nnte Sie auch interessieren"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "row wrapItems" },
+            !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
+              _reactSlick2.default,
+              settings,
+              similarItems.map(this.mapSimilarItems)
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return ListSimilarItems;
 }(_react.Component);
 
 ListSimilarItems.propTypes = {};
 ListSimilarItems.defaultProps = {
-    accessoriesDetailPage: false
+  accessoriesDetailPage: false
 };
 
 function mapStateToProps(state) {
-    return {
-        basketData: state.basket.basketData
-    };
+  return {
+    basketData: state.basket.basketData
+  };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
-    };
+  return {
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
+  };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListSimilarItems);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(ListSimilarItems));
 
 /***/ }),
 /* 1042 */,
@@ -21413,7 +21630,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["a"] = useIsFocusVisible;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 // based on https://github.com/WICG/focus-visible/blob/v4.1.5/src/focus-visible.js
 
@@ -21870,7 +22087,7 @@ function warning(condition, message) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = createMuiTheme;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__material_ui_utils__ = __webpack_require__(865);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createBreakpoints__ = __webpack_require__(1187);
@@ -22091,7 +22308,7 @@ function breakpoints(styleFunction) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config__ = __webpack_require__(1147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_PropTypes__ = __webpack_require__(1148);
@@ -24919,7 +25136,7 @@ var NativeSelectInput = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwar
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return pick12hOr24hFormat; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return usePickerState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return validate; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
@@ -26416,7 +26633,7 @@ var styled = function styled(Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__styles_withStyles__ = __webpack_require__(862);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Popover__ = __webpack_require__(1046);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__MenuList__ = __webpack_require__(1117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_setRef__ = __webpack_require__(991);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__styles_useTheme__ = __webpack_require__(937);
@@ -27240,7 +27457,7 @@ function (_React$Component) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return dateTimePickerDefaultProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return datePickerDefaultProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return timePickerDefaultProps; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
@@ -29613,7 +29830,7 @@ function elementTypeAcceptingRef(props, propName, componentName, location, propF
 "use strict";
 /* unused harmony export specialProperty */
 /* harmony export (immutable) */ __webpack_exports__["a"] = exactProp;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 
 
@@ -32592,7 +32809,7 @@ var withStyles = function withStyles(stylesOrCreator) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = createMixins;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 
 
@@ -33354,7 +33571,7 @@ function responsiveFontSizes(themeInput) {
 /* harmony export (immutable) */ __webpack_exports__["a"] = alignProperty;
 /* harmony export (immutable) */ __webpack_exports__["c"] = fontGrid;
 /* harmony export (immutable) */ __webpack_exports__["e"] = responsiveProperty;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 
 function isUnitless(value) {
   return String(parseFloat(value)).length === String(value).length;
@@ -33963,7 +34180,7 @@ var Button = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwardRef"](func
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_clsx__ = __webpack_require__(861);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__material_ui_utils__ = __webpack_require__(865);
@@ -35305,7 +35522,7 @@ function removeClass(element, className) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__TransitionGroup__ = __webpack_require__(1149);
 
@@ -35987,7 +36204,7 @@ function Ripple(props) {
 /* unused harmony export styles */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(28);
@@ -36257,7 +36474,7 @@ var DialogContent = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwardRef
 /* unused harmony export styles */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(28);
@@ -36713,7 +36930,7 @@ var Dialog = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_react__["forwardRef"](func
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
@@ -37133,7 +37350,7 @@ var Modal = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwardRef"](funct
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
@@ -37257,7 +37474,7 @@ if (true) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
@@ -38003,7 +38220,7 @@ var Paper = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwardRef"](funct
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__material_ui_utils__ = __webpack_require__(865);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_debounce__ = __webpack_require__(985);
@@ -41184,7 +41401,7 @@ OutlinedInput.muiName = 'Input';
 
 "use strict";
 /* unused harmony export styles */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
@@ -43364,7 +43581,7 @@ exports.typeOf = typeOf;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_is__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_ownerDocument__ = __webpack_require__(954);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__List__ = __webpack_require__(1118);
@@ -45043,7 +45260,7 @@ if (true) {
 "use strict";
 /* unused harmony export styles */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
@@ -45321,7 +45538,7 @@ var Tab = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_react__["forwardRef"](functio
 /* unused harmony export styles */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_extends__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_objectWithoutProperties__ = __webpack_require__(860);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_is__ = __webpack_require__(958);
@@ -46458,7 +46675,7 @@ var TabScrollButton = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_2_react__["forwardR
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _slicedToArray2 = __webpack_require__(334);
@@ -46469,6 +46686,8 @@ var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactI18next = __webpack_require__(315);
+
 var _reactSelect = __webpack_require__(902);
 
 var _reactSelect2 = _interopRequireDefault(_reactSelect);
@@ -46476,759 +46695,962 @@ var _reactSelect2 = _interopRequireDefault(_reactSelect);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PersonalData = function PersonalData(_ref) {
-    var changeCountry = _ref.changeCountry,
-        country = _ref.country,
-        inputCheckbox = _ref.inputCheckbox,
-        changeCheckbox = _ref.changeCheckbox,
-        ifErrorPayment = _ref.ifErrorPayment,
-        error = _ref.error,
-        user = _ref.user,
-        goToPayment = _ref.goToPayment,
-        cancelRedirect = _ref.cancelRedirect,
-        handlerSendSellBasket = _ref.handlerSendSellBasket,
-        handlerNextTab = _ref.handlerNextTab,
-        handlerShowHideBlocks = _ref.handlerShowHideBlocks,
-        validateError = _ref.validateError,
-        validateForm = _ref.validateForm,
-        validateCheck = _ref.validateCheck,
-        isValidate = _ref.isValidate,
-        payMethodError = _ref.payMethodError;
+  var changeCountry = _ref.changeCountry,
+      country = _ref.country,
+      inputCheckbox = _ref.inputCheckbox,
+      changeCheckbox = _ref.changeCheckbox,
+      ifErrorPayment = _ref.ifErrorPayment,
+      error = _ref.error,
+      user = _ref.user,
+      goToPayment = _ref.goToPayment,
+      cancelRedirect = _ref.cancelRedirect,
+      handlerSendSellBasket = _ref.handlerSendSellBasket,
+      handlerNextTab = _ref.handlerNextTab,
+      handlerShowHideBlocks = _ref.handlerShowHideBlocks,
+      validateError = _ref.validateError,
+      validateForm = _ref.validateForm,
+      validateCheck = _ref.validateCheck,
+      isValidate = _ref.isValidate,
+      payMethodError = _ref.payMethodError,
+      t = _ref.t;
 
-    var _useState = (0, _react.useState)(false),
-        _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-        clickBtn = _useState2[0],
-        setClickBtn = _useState2[1];
+  var _useState = (0, _react.useState)(false),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      clickBtn = _useState2[0],
+      setClickBtn = _useState2[1];
 
-    (0, _react.useEffect)(function () {
-        validateCheck();
-    }, []);
-    function changePassword(e) {
-        var value = e.target.value,
-            regular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
+  (0, _react.useEffect)(function () {
+    validateCheck();
+  }, []);
+  function changePassword(e) {
+    var value = e.target.value,
+        regular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
 
-        if (regular.test(value.trim())) {
-            $(e.target).parents('.inputFullWidth').find('.statusBarPassword').css({ background: '#00cb94' });
-        } else {
-            $(e.target).parents('.inputFullWidth').find('.statusBarPassword').css({ background: '#ff0000' });
-        }
+    if (regular.test(value.trim())) {
+      $(e.target).parents(".inputFullWidth").find(".statusBarPassword").css({ background: "#00cb94" });
+    } else {
+      $(e.target).parents(".inputFullWidth").find(".statusBarPassword").css({ background: "#ff0000" });
     }
-    function showLoginForm() {
-        cancelRedirect(true);
-        document.getElementById("op").checked = true;
-        $('.login-box-wrapper').css({ display: 'block' });
+  }
+  function showLoginForm() {
+    cancelRedirect(true);
+    document.getElementById("op").checked = true;
+    $(".login-box-wrapper").css({ display: "block" });
+  }
+
+  var onClickButton = function onClickButton() {
+    setClickBtn(true);
+    setTimeout(function () {
+      setClickBtn(false);
+    }, 5500);
+    if (!validateForm()) {
+      return;
     }
+    if (window.isMobile) {
+      goToPayment();
+    } else {
+      handlerNextTab();
+    }
+  };
 
-    var onClickButton = function onClickButton() {
-        setClickBtn(true);
-        setTimeout(function () {
-            setClickBtn(false);
-        }, 5500);
-        if (!validateForm()) {
-            return;
-        }
-        if (window.isMobile) {
-            goToPayment();
-        } else {
-            handlerNextTab();
-        }
-    };
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'personalData' },
+  return _react2.default.createElement(
+    "div",
+    { className: "personalData" },
+    _react2.default.createElement(
+      "h3",
+      {
+        className: "title",
+        onClick: function onClick(e) {
+          return handlerShowHideBlocks(e);
+        },
+        "data-step": "personalData"
+      },
+      _react2.default.createElement(
+        "span",
+        { className: "num" },
+        "2"
+      ),
+      _react2.default.createElement(
+        "span",
+        { className: "text" },
+        t("basketPage.personalData")
+      ),
+      _react2.default.createElement(
+        "span",
+        { className: "arrow" },
+        _react2.default.createElement("i", { className: "fa fa-angle-down", "aria-hidden": "true" })
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "wrapperItemBasket" },
+      _react2.default.createElement(
+        "div",
+        { className: "billingForm" },
         _react2.default.createElement(
-            'h3',
-            { className: 'title',
-                onClick: function onClick(e) {
-                    return handlerShowHideBlocks(e);
-                },
-                'data-step': 'personalData' },
+          "div",
+          { className: "topPersonalData" },
+          !user.isLogin && _react2.default.createElement(
+            "div",
+            { className: "login-buttons buy-form" },
             _react2.default.createElement(
-                'span',
-                { className: 'num' },
-                '2'
+              "div",
+              { className: "buttons-row" },
+              window.isMobile && _react2.default.createElement(
+                "label",
+                null,
+                _react2.default.createElement("input", {
+                  type: "checkbox",
+                  onChange: changeCheckbox,
+                  name: "asGuest",
+                  className: "checkbox-login-as-guest",
+                  defaultChecked: true
+                }),
+                _react2.default.createElement("span", { className: "check" }),
+                "Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt"
+              )
             ),
-            _react2.default.createElement(
-                'span',
-                { className: 'text' },
-                'Pers\xF6nliche Daten'
-            ),
-            _react2.default.createElement(
-                'span',
-                { className: 'arrow' },
-                _react2.default.createElement('i', { className: 'fa fa-angle-down', 'aria-hidden': 'true' })
+            !window.isMobile && _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                onChange: changeCheckbox,
+                name: "asGuest",
+                className: "checkbox-login-as-guest",
+                defaultChecked: true
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt"
             )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "form-subheading" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/basket-form1.svg", alt: "" }),
+            _react2.default.createElement(
+              "h3",
+              null,
+              "Lieferadresse"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wrapLabel" },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                "div",
+                {
+                  className: validateError.gender.error ? clickBtn === true ? "genderArea genderError purple" : "genderArea genderError" : "genderArea"
+                },
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "gender",
+                    value: "Herr",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: true
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Herr"
+                ),
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "gender",
+                    value: "Frau",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: true
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Frau"
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.gender.msg
+              )
+            ),
+            _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                name: "company",
+                checked: inputCheckbox.company === true ? "true" : null,
+                onChange: changeCheckbox
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Firma"
+            )
+          ),
+          !user.isLogin && _react2.default.createElement(
+            "span",
+            { className: "loginForSellForm", onClick: showLoginForm },
+            "Sie haben bereits ein Konto? Jetzt einloggen"
+          )
         ),
         _react2.default.createElement(
-            'div',
-            { className: 'wrapperItemBasket' },
+          "div",
+          {
+            className: inputCheckbox.company ? " rowInputs" : " rowInputs hide"
+          },
+          _react2.default.createElement(
+            "div",
+            { className: "input-wrapper" },
+            _react2.default.createElement("input", {
+              type: "text",
+              name: "companyName",
+              className: validateError.companyName.error ? clickBtn === true ? "error purple" : "error" : null,
+              placeholder: "Firma",
+              onChange: function onChange() {
+                return validateForm();
+              },
+              required: inputCheckbox.company
+            }),
             _react2.default.createElement(
-                'div',
-                { className: 'billingForm' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'topPersonalData' },
-                    !user.isLogin && _react2.default.createElement(
-                        'div',
-                        { className: 'login-buttons buy-form' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'buttons-row' },
-                            window.isMobile && _react2.default.createElement(
-                                'label',
-                                null,
-                                _react2.default.createElement('input', { type: 'checkbox',
-                                    onChange: changeCheckbox,
-                                    name: 'asGuest',
-                                    className: 'checkbox-login-as-guest', defaultChecked: true }),
-                                _react2.default.createElement('span', { className: 'check' }),
-                                'Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt'
-                            )
-                        ),
-                        !window.isMobile && _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                onChange: changeCheckbox,
-                                name: 'asGuest',
-                                className: 'checkbox-login-as-guest', defaultChecked: true }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'form-subheading' },
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/basket-form1.svg', alt: '' }),
-                        _react2.default.createElement(
-                            'h3',
-                            null,
-                            'Lieferadresse'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'wrapLabel' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'div',
-                                { className: validateError.gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Herr', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: true }),
-                                    _react2.default.createElement('span', null),
-                                    'Herr'
-                                ),
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Frau', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: true }),
-                                    _react2.default.createElement('span', null),
-                                    'Frau'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.gender.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                name: 'company',
-                                checked: inputCheckbox.company === true ? "true" : null,
-                                onChange: changeCheckbox }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Firma'
-                        )
-                    ),
-                    !user.isLogin && _react2.default.createElement(
-                        'span',
-                        { className: 'loginForSellForm',
-                            onClick: showLoginForm },
-                        'Sie haben bereits ein Konto? Jetzt einloggen'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: inputCheckbox.company ? " rowInputs" : " rowInputs hide" },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-wrapper' },
-                        _react2.default.createElement('input', { type: 'text', name: 'companyName', className: validateError.companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', onChange: function onChange() {
-                                return validateForm();
-                            }, required: inputCheckbox.company }),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'placeholder' },
-                            'Firma'
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'errorText' },
-                            validateError.companyName.msg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: ' rowInputs' /*onChange={changeNameField}*/ },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'firstname', className: validateError.firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Vorname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.firstname.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'lastname', className: validateError.lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nachname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.lastname.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'email', name: 'email', className: error.info || validateError.email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'E-Mail'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                error.info ? error.info : validateError.email.error ? validateError.email.msg : ''
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'tel', name: 'phone', className: validateError.phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', minLength: '10', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Telefon (mobil)'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.phone.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataAddress rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'street', className: validateError.street.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'route', placeholder: 'Strasse', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Strasse'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.street.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'number', className: validateError.number.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'street_number', placeholder: 'Nr.', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nr.'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.number.msg
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataCity rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'zip', className: validateError.zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'postal_code', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'PLZ'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.zip.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'city', className: validateError.city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'locality', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Stadt'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.city.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'select' },
-                    !country.countriesList.some(function (item) {
-                        return item.value === country.currentCountry.inputCountry.toLowerCase();
-                    }) && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
-                    _react2.default.createElement(_reactSelect2.default, {
-                        placeholder: 'Land',
-                        value: country.currentCountry.inputCountry.toLowerCase(),
-                        name: 'inputCountry',
-                        clearable: false,
-                        options: country.countriesList,
-                        searchable: false,
-                        required: true,
-                        onChange: function onChange(val) {
-                            return changeCountry(val, "inputCountry");
-                        } }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'placeholder' },
-                        'Ausw\xE4hlen'
-                    )
-                ),
-                !user.isLogin && !inputCheckbox.asGuest && _react2.default.createElement(
-                    'div',
-                    { className: 'inputFullWidth rowInputs' },
-                    _react2.default.createElement('input', { type: 'password',
-                        name: 'password',
-                        placeholder: 'Password (min. 8 Zeichen + min. 1 Nr. )',
-                        className: error.password ? 'error' : null,
-                        onChange: changePassword,
-                        required: !ifErrorPayment }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'errorText' },
-                        error.password
-                    ),
-                    _react2.default.createElement('div', { className: 'statusBarPassword' })
-                ),
-                _react2.default.createElement(
-                    'label',
-                    { className: "shippingAddressCheck" },
-                    _react2.default.createElement('input', { type: 'checkbox', name: 'shippingAddress', checked: inputCheckbox.shippingAddress === true ? true : false, onChange: changeCheckbox }),
-                    _react2.default.createElement('span', null),
-                    ' Diese Lieferadresse auch als Rechnungsadresse benutzen'
-                )
+              "span",
+              { className: "placeholder" },
+              "Firma"
             ),
             _react2.default.createElement(
-                'div',
-                { className: inputCheckbox.shippingAddress === true ? 'hide shippingForm' : 'shippingForm' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'form-subheading' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/basket-form2.svg', alt: '' }),
-                    _react2.default.createElement(
-                        'h3',
-                        null,
-                        'Rechnungsadresse'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'topPersonalData' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'wrapLabel' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'div',
-                                { className: validateError.customer_gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Herr', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Herr'
-                                ),
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Frau', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Frau'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_gender.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                name: 'customerCompanyName',
-                                value: '1',
-                                checked: inputCheckbox.customerCompanyName === true ? "true" : null,
-                                onClick: changeCheckbox }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Firma'
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: inputCheckbox.customerCompanyName ? "rowInputs" : "rowInputs hide" },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-wrapper' },
-                        _react2.default.createElement('input', { type: 'text', name: 'customer_companyName', className: validateError.customer_companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', onChange: function onChange() {
-                                return validateForm();
-                            }, required: inputCheckbox.customerCompanyName }),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'placeholder' },
-                            'Firma'
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'errorText' },
-                            validateError.customer_companyName.msg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' /*onChange={changeNameField}*/ },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_firstname', className: validateError.customer_firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Vorname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_firstname.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_lastname', className: validateError.customer_lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nachname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_lastname.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'email', name: 'customer_email', className: error.info || validateError.customer_email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'E-Mail'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                error.info ? error.info : validateError.customer_email.msg !== "" ? validateError.customer_email.msg : ""
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'tel', name: 'customer_phone', className: validateError.customer_phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Telefon (mobil)'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_phone.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataAddress rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_street', id: 'customer_route', className: validateError.customer_street.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Strasse', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Strasse'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_street.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_number', id: 'customer_street_number', className: validateError.customer_number.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nr.', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nr.'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_number.msg
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataCity rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_zip', className: validateError.customer_zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'customer_postal_code', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'PLZ'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_zip.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_city', className: validateError.customer_city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'customer_locality', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Stadt'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_city.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'select' },
-                    !country.countriesList.some(function (item) {
-                        return item.value === country.currentCountry.customer_inputCountry.toLowerCase();
-                    }) && inputCheckbox.shippingAddress !== true && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
-                    _react2.default.createElement(_reactSelect2.default, {
-                        placeholder: 'Ausw\xE4hlen...',
-                        value: country.currentCountry.customer_inputCountry.toLowerCase(),
-                        name: 'customer_inputCountry',
-                        clearable: false,
-                        options: country.countriesList,
-                        searchable: false,
-                        onChange: function onChange(val) {
-                            return changeCountry(val, "customer_inputCountry");
-                        } }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'placeholder' },
-                        'Ausw\xE4hlen'
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'basketMobileBottom' },
-                payMethodError && payMethodError.status && _react2.default.createElement(
-                    'div',
-                    { className: 'basketError' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/warning.svg', alt: '', style: { marginRight: "10px" } }),
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        payMethodError.msg
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'text-right button-row' },
-                    !handlerSendSellBasket && _react2.default.createElement(
-                        'button',
-                        { type: 'button', className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn", onClick: function onClick() {
-                                return onClickButton();
-                            } },
-                        'Weiter',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                        )
-                    ),
-                    handlerSendSellBasket && _react2.default.createElement(
-                        'button',
-                        { type: 'submit',
-                            className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
-                            onSubmit: handlerSendSellBasket },
-                        'Absenden',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('i', { className: 'fa fa-long-arrow-right', 'aria-hidden': 'true' })
-                        )
-                    )
-                ),
-                window.isMobile && _react2.default.createElement(
-                    'div',
-                    { className: 'toPaymentWrap' },
-                    _react2.default.createElement(
-                        'button',
-                        { className: isValidate ? "btn toPayment button-pulse" : "btn toPayment",
-                            type: 'button',
-                            onClick: function onClick() {
-                                return onClickButton();
-                            } },
-                        'Weiter',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                        )
-                    )
-                )
+              "span",
+              { className: "errorText" },
+              validateError.companyName.msg
             )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: " rowInputs" /*onChange={changeNameField}*/ },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "firstname",
+                className: validateError.firstname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Vorname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Vorname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.firstname.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "lastname",
+                className: validateError.lastname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nachname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nachname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.lastname.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "email",
+                name: "email",
+                className: error.info || validateError.email.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "E-Mail",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "E-Mail"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                error.info ? error.info : validateError.email.error ? validateError.email.msg : ""
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "tel",
+                name: "phone",
+                className: validateError.phone.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Telefon (mobil)",
+                minLength: "10",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Telefon (mobil)"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.phone.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataAddress rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "street",
+                className: validateError.street.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "route",
+                placeholder: "Strasse",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Strasse"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.street.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "number",
+                className: validateError.number.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "street_number",
+                placeholder: "Nr.",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nr."
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.number.msg
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataCity rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "zip",
+                className: validateError.zip.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "PLZ",
+                id: "postal_code",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "PLZ"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.zip.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "city",
+                className: validateError.city.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Stadt",
+                id: "locality",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Stadt"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.city.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "select" },
+          !country.countriesList.some(function (item) {
+            return item.value === country.currentCountry.inputCountry.toLowerCase();
+          }) && _react2.default.createElement("input", { className: "requiredSelect", type: "text", required: true }),
+          _react2.default.createElement(_reactSelect2.default, {
+            placeholder: "Land",
+            value: country.currentCountry.inputCountry.toLowerCase(),
+            name: "inputCountry",
+            clearable: false,
+            options: country.countriesList,
+            searchable: false,
+            required: true,
+            onChange: function onChange(val) {
+              return changeCountry(val, "inputCountry");
+            }
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "placeholder" },
+            "Ausw\xE4hlen"
+          )
+        ),
+        !user.isLogin && !inputCheckbox.asGuest && _react2.default.createElement(
+          "div",
+          { className: "inputFullWidth rowInputs" },
+          _react2.default.createElement("input", {
+            type: "password",
+            name: "password",
+            placeholder: "Password (min. 8 Zeichen + min. 1 Nr. )",
+            className: error.password ? "error" : null,
+            onChange: changePassword,
+            required: !ifErrorPayment
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "errorText" },
+            error.password
+          ),
+          _react2.default.createElement("div", { className: "statusBarPassword" })
+        ),
+        _react2.default.createElement(
+          "label",
+          { className: "shippingAddressCheck" },
+          _react2.default.createElement("input", {
+            type: "checkbox",
+            name: "shippingAddress",
+            checked: inputCheckbox.shippingAddress === true ? true : false,
+            onChange: changeCheckbox
+          }),
+          _react2.default.createElement("span", null),
+          " Diese Lieferadresse auch als Rechnungsadresse benutzen"
         )
-    );
+      ),
+      _react2.default.createElement(
+        "div",
+        {
+          className: inputCheckbox.shippingAddress === true ? "hide shippingForm" : "shippingForm"
+        },
+        _react2.default.createElement(
+          "div",
+          { className: "form-subheading" },
+          _react2.default.createElement("img", { loading: "lazy", src: "/images/basket-form2.svg", alt: "" }),
+          _react2.default.createElement(
+            "h3",
+            null,
+            "Rechnungsadresse"
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "topPersonalData" },
+          _react2.default.createElement(
+            "div",
+            { className: "wrapLabel" },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                "div",
+                {
+                  className: validateError.customer_gender.error ? clickBtn === true ? "genderArea genderError purple" : "genderArea genderError" : "genderArea"
+                },
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "customer_gender",
+                    value: "Herr",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: !inputCheckbox.shippingAddress
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Herr"
+                ),
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "customer_gender",
+                    value: "Frau",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: !inputCheckbox.shippingAddress
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Frau"
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_gender.msg
+              )
+            ),
+            _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                name: "customerCompanyName",
+                value: "1",
+                checked: inputCheckbox.customerCompanyName === true ? "true" : null,
+                onClick: changeCheckbox
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Firma"
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          {
+            className: inputCheckbox.customerCompanyName ? "rowInputs" : "rowInputs hide"
+          },
+          _react2.default.createElement(
+            "div",
+            { className: "input-wrapper" },
+            _react2.default.createElement("input", {
+              type: "text",
+              name: "customer_companyName",
+              className: validateError.customer_companyName.error ? clickBtn === true ? "error purple" : "error" : null,
+              placeholder: "Firma",
+              onChange: function onChange() {
+                return validateForm();
+              },
+              required: inputCheckbox.customerCompanyName
+            }),
+            _react2.default.createElement(
+              "span",
+              { className: "placeholder" },
+              "Firma"
+            ),
+            _react2.default.createElement(
+              "span",
+              { className: "errorText" },
+              validateError.customer_companyName.msg
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" /*onChange={changeNameField}*/ },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_firstname",
+                className: validateError.customer_firstname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Vorname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Vorname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_firstname.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_lastname",
+                className: validateError.customer_lastname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nachname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nachname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_lastname.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "email",
+                name: "customer_email",
+                className: error.info || validateError.customer_email.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "E-Mail",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "E-Mail"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                error.info ? error.info : validateError.customer_email.msg !== "" ? validateError.customer_email.msg : ""
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "tel",
+                name: "customer_phone",
+                className: validateError.customer_phone.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Telefon (mobil)",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Telefon (mobil)"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_phone.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataAddress rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_street",
+                id: "customer_route",
+                className: validateError.customer_street.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Strasse",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Strasse"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_street.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_number",
+                id: "customer_street_number",
+                className: validateError.customer_number.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nr.",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nr."
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_number.msg
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataCity rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_zip",
+                className: validateError.customer_zip.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "PLZ",
+                id: "customer_postal_code",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "PLZ"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_zip.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_city",
+                className: validateError.customer_city.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Stadt",
+                id: "customer_locality",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Stadt"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_city.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "select" },
+          !country.countriesList.some(function (item) {
+            return item.value === country.currentCountry.customer_inputCountry.toLowerCase();
+          }) && inputCheckbox.shippingAddress !== true && _react2.default.createElement("input", { className: "requiredSelect", type: "text", required: true }),
+          _react2.default.createElement(_reactSelect2.default, {
+            placeholder: "Ausw\xE4hlen...",
+            value: country.currentCountry.customer_inputCountry.toLowerCase(),
+            name: "customer_inputCountry",
+            clearable: false,
+            options: country.countriesList,
+            searchable: false,
+            onChange: function onChange(val) {
+              return changeCountry(val, "customer_inputCountry");
+            }
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "placeholder" },
+            "Ausw\xE4hlen"
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "basketMobileBottom" },
+        payMethodError && payMethodError.status && _react2.default.createElement(
+          "div",
+          { className: "basketError" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/design/warning.svg",
+            alt: "",
+            style: { marginRight: "10px" }
+          }),
+          _react2.default.createElement(
+            "span",
+            null,
+            payMethodError.msg
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "text-right button-row" },
+          !handlerSendSellBasket && _react2.default.createElement(
+            "button",
+            {
+              type: "button",
+              className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
+              onClick: function onClick() {
+                return onClickButton();
+              }
+            },
+            t("basketPage.continue"),
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+            )
+          ),
+          handlerSendSellBasket && _react2.default.createElement(
+            "button",
+            {
+              type: "submit",
+              className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
+              onSubmit: handlerSendSellBasket
+            },
+            "Absenden",
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("i", { className: "fa fa-long-arrow-right", "aria-hidden": "true" })
+            )
+          )
+        ),
+        window.isMobile && _react2.default.createElement(
+          "div",
+          { className: "toPaymentWrap" },
+          _react2.default.createElement(
+            "button",
+            {
+              className: isValidate ? "btn toPayment button-pulse" : "btn toPayment",
+              type: "button",
+              onClick: function onClick() {
+                return onClickButton();
+              }
+            },
+            t("basketPage.continue"),
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+            )
+          )
+        )
+      )
+    )
+  );
 };
 
 PersonalData.propTypes = {};
 PersonalData.defaultProps = {};
 
-exports.default = PersonalData;
+exports.default = (0, _reactI18next.withTranslation)()(PersonalData);
 
 /***/ }),
 /* 1484 */
@@ -48098,7 +48520,7 @@ function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config__ = __webpack_require__(1565);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_PropTypes__ = __webpack_require__(1566);
@@ -49349,7 +49771,7 @@ if(false) {
 /* 1516 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {!function(e,t){ true?t(exports,__webpack_require__(16),__webpack_require__(28),__webpack_require__(869),__webpack_require__(1517),__webpack_require__(1484),__webpack_require__(1518),__webpack_require__(1531),__webpack_require__(1532),__webpack_require__(1288),__webpack_require__(1533),__webpack_require__(1289),__webpack_require__(1487),__webpack_require__(1735),__webpack_require__(1736),__webpack_require__(1737),__webpack_require__(1738),__webpack_require__(1739),__webpack_require__(1740),__webpack_require__(1534),__webpack_require__(1741),__webpack_require__(1535),__webpack_require__(1742),__webpack_require__(1743),__webpack_require__(1744),__webpack_require__(1747),__webpack_require__(1748),__webpack_require__(1536),__webpack_require__(1749),__webpack_require__(1537),__webpack_require__(1538),__webpack_require__(1539),__webpack_require__(1489),__webpack_require__(1751),__webpack_require__(1540),__webpack_require__(1752),__webpack_require__(1753),__webpack_require__(1754),__webpack_require__(1755),__webpack_require__(1756),__webpack_require__(1757),__webpack_require__(1291),__webpack_require__(1290),__webpack_require__(1541),__webpack_require__(1542),__webpack_require__(1543),__webpack_require__(1544),__webpack_require__(1545),__webpack_require__(1546),__webpack_require__(1547),__webpack_require__(1548),__webpack_require__(1549),__webpack_require__(1550),__webpack_require__(1758),__webpack_require__(1551),__webpack_require__(1552),__webpack_require__(1759),__webpack_require__(901),__webpack_require__(1553),__webpack_require__(1766),__webpack_require__(1768),__webpack_require__(1769),__webpack_require__(321)):"function"==typeof define&&define.amd?define(["exports","react","prop-types","classnames","date-fns/isDate","date-fns/isValid","date-fns/format","date-fns/addMinutes","date-fns/addHours","date-fns/addDays","date-fns/addWeeks","date-fns/addMonths","date-fns/addYears","date-fns/subMinutes","date-fns/subHours","date-fns/subDays","date-fns/subWeeks","date-fns/subMonths","date-fns/subYears","date-fns/getSeconds","date-fns/getMinutes","date-fns/getHours","date-fns/getDay","date-fns/getDate","date-fns/getISOWeek","date-fns/getMonth","date-fns/getQuarter","date-fns/getYear","date-fns/getTime","date-fns/setSeconds","date-fns/setMinutes","date-fns/setHours","date-fns/setMonth","date-fns/setQuarter","date-fns/setYear","date-fns/min","date-fns/max","date-fns/differenceInCalendarDays","date-fns/differenceInCalendarMonths","date-fns/differenceInCalendarWeeks","date-fns/differenceInCalendarYears","date-fns/startOfDay","date-fns/startOfWeek","date-fns/startOfMonth","date-fns/startOfQuarter","date-fns/startOfYear","date-fns/endOfDay","date-fns/endOfWeek","date-fns/endOfMonth","date-fns/isEqual","date-fns/isSameDay","date-fns/isSameMonth","date-fns/isSameYear","date-fns/isSameQuarter","date-fns/isAfter","date-fns/isBefore","date-fns/isWithinInterval","date-fns/toDate","date-fns/parse","date-fns/parseISO","react-onclickoutside","react-popper","react-dom"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).DatePicker={},e.React,e.PropTypes,e.classNames,e.isDate,e.isValidDate,e.format,e.addMinutes,e.addHours,e.addDays,e.addWeeks,e.addMonths,e.addYears,null,null,e.subDays,e.subWeeks,e.subMonths,e.subYears,e.getSeconds,e.getMinutes,e.getHours,e.getDay,e.getDate,e.getISOWeek,e.getMonth,e.getQuarter,e.getYear,e.getTime,e.setSeconds,e.setMinutes,e.setHours,e.setMonth,e.setQuarter,e.setYear,e.min,e.max,e.differenceInCalendarDays,e.differenceInCalendarMonths,null,e.differenceInCalendarYears,e.startOfDay,e.startOfWeek,e.startOfMonth,e.startOfQuarter,e.startOfYear,e.endOfDay,null,null,e.dfIsEqual,e.dfIsSameDay,e.dfIsSameMonth,e.dfIsSameYear,e.dfIsSameQuarter,e.isAfter,e.isBefore,e.isWithinInterval,e.toDate,e.parse,e.parseISO,e.onClickOutside,e.ReactPopper,e.ReactDOM)}(this,(function(e,t,r,a,n,o,s,i,p,l,d,c,u,f,h,m,y,v,D,w,k,g,b,C,S,_,M,P,E,N,O,Y,x,T,I,L,F,R,q,A,W,B,j,H,K,Q,V,U,$,z,G,J,X,Z,ee,te,re,ae,ne,oe,se,ie,pe){"use strict";function le(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var de=le(t),ce=le(a),ue=le(n),fe=le(o),he=le(s),me=le(i),ye=le(p),ve=le(l),De=le(d),we=le(c),ke=le(u),ge=le(m),be=le(y),Ce=le(v),Se=le(D),_e=le(w),Me=le(k),Pe=le(g),Ee=le(b),Ne=le(C),Oe=le(S),Ye=le(_),xe=le(M),Te=le(P),Ie=le(E),Le=le(N),Fe=le(O),Re=le(Y),qe=le(x),Ae=le(T),We=le(I),Be=le(L),je=le(F),He=le(R),Ke=le(q),Qe=le(W),Ve=le(B),Ue=le(j),$e=le(H),ze=le(K),Ge=le(Q),Je=le(V),Xe=le(z),Ze=le(G),et=le(J),tt=le(X),rt=le(Z),at=le(ee),nt=le(te),ot=le(re),st=le(ae),it=le(ne),pt=le(oe),lt=le(se),dt=le(pe);function ct(e){return(ct="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function ut(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function ft(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}function ht(e,t,r){return t&&ft(e.prototype,t),r&&ft(e,r),e}function mt(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function yt(){return(yt=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)Object.prototype.hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e}).apply(this,arguments)}function vt(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(e);t&&(a=a.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,a)}return r}function Dt(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?vt(Object(r),!0).forEach((function(t){mt(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):vt(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function wt(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&gt(e,t)}function kt(e){return(kt=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function gt(e,t){return(gt=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function bt(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function Ct(e,t){return!t||"object"!=typeof t&&"function"!=typeof t?bt(e):t}function St(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}();return function(){var r,a=kt(e);if(t){var n=kt(this).constructor;r=Reflect.construct(a,arguments,n)}else r=a.apply(this,arguments);return Ct(this,r)}}function _t(e){return function(e){if(Array.isArray(e))return Mt(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(!e)return;if("string"==typeof e)return Mt(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);"Object"===r&&e.constructor&&(r=e.constructor.name);if("Map"===r||"Set"===r)return Array.from(e);if("Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r))return Mt(e,t)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function Mt(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,a=new Array(t);r<t;r++)a[r]=e[r];return a}function Pt(e,t){switch(e){case"P":return t.date({width:"short"});case"PP":return t.date({width:"medium"});case"PPP":return t.date({width:"long"});case"PPPP":default:return t.date({width:"full"})}}function Et(e,t){switch(e){case"p":return t.time({width:"short"});case"pp":return t.time({width:"medium"});case"ppp":return t.time({width:"long"});case"pppp":default:return t.time({width:"full"})}}var Nt={p:Et,P:function(e,t){var r,a=e.match(/(P+)(p+)?/),n=a[1],o=a[2];if(!o)return Pt(e,t);switch(n){case"P":r=t.dateTime({width:"short"});break;case"PP":r=t.dateTime({width:"medium"});break;case"PPP":r=t.dateTime({width:"long"});break;case"PPPP":default:r=t.dateTime({width:"full"})}return r.replace("{{date}}",Pt(n,t)).replace("{{time}}",Et(o,t))}},Ot=12,Yt=/P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;function xt(e){var t=e?"string"==typeof e||e instanceof String?pt.default(e):st.default(e):new Date;return It(t)?t:null}function Tt(e,t,r,a){var n=null,o=Jt(r)||Jt(Gt()),s=!0;return Array.isArray(t)?(t.forEach((function(t){var r=it.default(e,t,new Date,{locale:o});a&&(s=It(r)&&e===he.default(r,t,{awareOfUnicodeTokens:!0})),It(r)&&s&&(n=r)})),n):(n=it.default(e,t,new Date,{locale:o}),a?s=It(n)&&e===he.default(n,t,{awareOfUnicodeTokens:!0}):It(n)||(t=t.match(Yt).map((function(e){var t=e[0];return"p"===t||"P"===t?o?(0,Nt[t])(e,o.formatLong):t:e})).join(""),e.length>0&&(n=it.default(e,t.slice(0,e.length),new Date)),It(n)||(n=new Date(e))),It(n)&&s?n:null)}function It(e){return fe.default(e)&&at.default(e,new Date("1/1/1000"))}function Lt(e,t,r){if("en"===r)return he.default(e,t,{awareOfUnicodeTokens:!0});var a=Jt(r);return r&&!a&&console.warn('A locale object was not found for the provided string ["'.concat(r,'"].')),!a&&Gt()&&Jt(Gt())&&(a=Jt(Gt())),he.default(e,t,{locale:a||null,awareOfUnicodeTokens:!0})}function Ft(e,t){var r=t.hour,a=void 0===r?0:r,n=t.minute,o=void 0===n?0:n,s=t.second,i=void 0===s?0:s;return Re.default(Fe.default(Le.default(e,i),o),a)}function Rt(e,t){var r=t&&Jt(t)||Gt()&&Jt(Gt());return Oe.default(e,r?{locale:r}:null)}function qt(e,t){return Lt(e,"ddd",t)}function At(e){return Ve.default(e)}function Wt(e,t){var r=Jt(t||Gt());return Ue.default(e,{locale:r})}function Bt(e){return $e.default(e)}function jt(e){return Ge.default(e)}function Ht(e){return ze.default(e)}function Kt(e,t){return e&&t?tt.default(e,t):!e&&!t}function Qt(e,t){return e&&t?et.default(e,t):!e&&!t}function Vt(e,t){return e&&t?rt.default(e,t):!e&&!t}function Ut(e,t){return e&&t?Ze.default(e,t):!e&&!t}function $t(e,t){return e&&t?Xe.default(e,t):!e&&!t}function zt(e,t,r){var a,n=Ve.default(t),o=Je.default(r);try{a=ot.default(e,{start:n,end:o})}catch(e){a=!1}return a}function Gt(){return("undefined"!=typeof window?window:global).__localeId__}function Jt(e){if("string"==typeof e){var t="undefined"!=typeof window?window:global;return t.__localeData__?t.__localeData__[e]:null}return e}function Xt(e,t){return Lt(qe.default(xt(),e),"LLLL",t)}function Zt(e,t){return Lt(qe.default(xt(),e),"LLL",t)}function er(e,t){return Lt(Ae.default(xt(),e),"QQQ",t)}function tr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Ut(e,t)}))||o&&!o.some((function(t){return Ut(e,t)}))||s&&!s(xt(e))||!1}function rr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.excludeDates;return r&&r.some((function(t){return Ut(e,t)}))||!1}function ar(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Qt(e,t)}))||o&&!o.some((function(t){return Qt(e,t)}))||s&&!s(xt(e))||!1}function nr(e,t,r,a){var n=Te.default(e),o=Ye.default(e),s=Te.default(t),i=Ye.default(t),p=Te.default(a);return n===s&&n===p?o<=r&&r<=i:n<s?p===n&&o<=r||p===s&&i>=r||p<s&&p>n:void 0}function or(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Vt(e,t)}))||o&&!o.some((function(t){return Vt(e,t)}))||s&&!s(xt(e))||!1}function sr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=new Date(e,0,1);return pr(n,{minDate:r,maxDate:a})||!1}function ir(e,t,r,a){var n=Te.default(e),o=xe.default(e),s=Te.default(t),i=xe.default(t),p=Te.default(a);return n===s&&n===p?o<=r&&r<=i:n<s?p===n&&o<=r||p===s&&i>=r||p<s&&p>n:void 0}function pr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate;return r&&He.default(e,r)<0||a&&He.default(e,a)>0}function lr(e,t){return t.some((function(t){return Pe.default(t)===Pe.default(e)&&Me.default(t)===Me.default(e)}))}function dr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.excludeTimes,a=t.includeTimes,n=t.filterTime;return r&&lr(e,r)||a&&!lr(e,a)||n&&!n(e)||!1}function cr(e,t){var r=t.minTime,a=t.maxTime;if(!r||!a)throw new Error("Both minTime and maxTime props required");var n,o=xt(),s=Re.default(Fe.default(o,Me.default(e)),Pe.default(e)),i=Re.default(Fe.default(o,Me.default(r)),Pe.default(r)),p=Re.default(Fe.default(o,Me.default(a)),Pe.default(a));try{n=!ot.default(s,{start:i,end:p})}catch(e){n=!1}return n}function ur(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.includeDates,n=Ce.default(e,1);return r&&Ke.default(r,n)>0||a&&a.every((function(e){return Ke.default(e,n)>0}))||!1}function fr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.includeDates,n=we.default(e,1);return r&&Ke.default(n,r)>0||a&&a.every((function(e){return Ke.default(n,e)>0}))||!1}function hr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.includeDates,n=Se.default(e,1);return r&&Qe.default(r,n)>0||a&&a.every((function(e){return Qe.default(e,n)>0}))||!1}function mr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.includeDates,n=ke.default(e,1);return r&&Qe.default(n,r)>0||a&&a.every((function(e){return Qe.default(n,e)>0}))||!1}function yr(e){var t=e.minDate,r=e.includeDates;if(r&&t){var a=r.filter((function(e){return He.default(e,t)>=0}));return Be.default(a)}return r?Be.default(r):t}function vr(e){var t=e.maxDate,r=e.includeDates;if(r&&t){var a=r.filter((function(e){return He.default(e,t)<=0}));return je.default(a)}return r?je.default(r):t}function Dr(){for(var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[],t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"react-datepicker__day--highlighted",r=new Map,a=0,n=e.length;a<n;a++){var o=e[a];if(ue.default(o)){var s=Lt(o,"MM.dd.yyyy"),i=r.get(s)||[];i.includes(t)||(i.push(t),r.set(s,i))}else if("object"===ct(o)){var p=Object.keys(o),l=p[0],d=o[p[0]];if("string"==typeof l&&d.constructor===Array)for(var c=0,u=d.length;c<u;c++){var f=Lt(d[c],"MM.dd.yyyy"),h=r.get(f)||[];h.includes(l)||(h.push(l),r.set(f,h))}}}return r}function wr(e,t,r,a,n){for(var o=n.length,s=[],i=0;i<o;i++){var p=me.default(ye.default(e,Pe.default(n[i])),Me.default(n[i])),l=me.default(e,(r+1)*a);at.default(p,t)&&nt.default(p,l)&&s.push(n[i])}return s}function kr(e){return e<10?"0".concat(e):"".concat(e)}function gr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:Ot,r=Math.ceil(Te.default(e)/t)*t,a=r-(t-1);return{startPeriod:a,endPeriod:r}}function br(e,t,r,a){for(var n=[],o=0;o<2*t+1;o++){var s=e+t-o,i=!0;r&&(i=Te.default(r)<=s),a&&i&&(i=Te.default(a)>=s),i&&n.push(s)}return n}var Cr=function(e){wt(r,e);var t=St(r);function r(e){var a;ut(this,r),mt(bt(a=t.call(this,e)),"renderOptions",(function(){var e=a.props.year,t=a.state.yearsList.map((function(t){return de.default.createElement("div",{className:e===t?"react-datepicker__year-option react-datepicker__year-option--selected_year":"react-datepicker__year-option",key:t,onClick:a.onChange.bind(bt(a),t)},e===t?de.default.createElement("span",{className:"react-datepicker__year-option--selected"},"✓"):"",t)})),r=a.props.minDate?Te.default(a.props.minDate):null,n=a.props.maxDate?Te.default(a.props.maxDate):null;return n&&a.state.yearsList.find((function(e){return e===n}))||t.unshift(de.default.createElement("div",{className:"react-datepicker__year-option",key:"upcoming",onClick:a.incrementYears},de.default.createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-upcoming"}))),r&&a.state.yearsList.find((function(e){return e===r}))||t.push(de.default.createElement("div",{className:"react-datepicker__year-option",key:"previous",onClick:a.decrementYears},de.default.createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-previous"}))),t})),mt(bt(a),"onChange",(function(e){a.props.onChange(e)})),mt(bt(a),"handleClickOutside",(function(){a.props.onCancel()})),mt(bt(a),"shiftYears",(function(e){var t=a.state.yearsList.map((function(t){return t+e}));a.setState({yearsList:t})})),mt(bt(a),"incrementYears",(function(){return a.shiftYears(1)})),mt(bt(a),"decrementYears",(function(){return a.shiftYears(-1)}));var n=e.yearDropdownItemNumber,o=e.scrollableYearDropdown,s=n||(o?10:5);return a.state={yearsList:br(a.props.year,s,a.props.minDate,a.props.maxDate)},a}return ht(r,[{key:"render",value:function(){var e=ce.default({"react-datepicker__year-dropdown":!0,"react-datepicker__year-dropdown--scrollable":this.props.scrollableYearDropdown});return de.default.createElement("div",{className:e},this.renderOptions())}}]),r}(de.default.Component),Sr=lt.default(Cr),_r=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(){for(var t=e.props.minDate?Te.default(e.props.minDate):1900,r=e.props.maxDate?Te.default(e.props.maxDate):2100,a=[],n=t;n<=r;n++)a.push(de.default.createElement("option",{key:n,value:n},n));return a})),mt(bt(e),"onSelectChange",(function(t){e.onChange(t.target.value)})),mt(bt(e),"renderSelectMode",(function(){return de.default.createElement("select",{value:e.props.year,className:"react-datepicker__year-select",onChange:e.onSelectChange},e.renderSelectOptions())})),mt(bt(e),"renderReadView",(function(t){return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__year-read-view",onClick:function(t){return e.toggleDropdown(t)}},de.default.createElement("span",{className:"react-datepicker__year-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__year-read-view--selected-year"},e.props.year))})),mt(bt(e),"renderDropdown",(function(){return de.default.createElement(Sr,{key:"dropdown",year:e.props.year,onChange:e.onChange,onCancel:e.toggleDropdown,minDate:e.props.minDate,maxDate:e.props.maxDate,scrollableYearDropdown:e.props.scrollableYearDropdown,yearDropdownItemNumber:e.props.yearDropdownItemNumber})})),mt(bt(e),"renderScrollMode",(function(){var t=e.state.dropdownVisible,r=[e.renderReadView(!t)];return t&&r.unshift(e.renderDropdown()),r})),mt(bt(e),"onChange",(function(t){e.toggleDropdown(),t!==e.props.year&&e.props.onChange(t)})),mt(bt(e),"toggleDropdown",(function(t){e.setState({dropdownVisible:!e.state.dropdownVisible},(function(){e.props.adjustDateOnChange&&e.handleYearChange(e.props.date,t)}))})),mt(bt(e),"handleYearChange",(function(t,r){e.onSelect(t,r),e.setOpen()})),mt(bt(e),"onSelect",(function(t,r){e.props.onSelect&&e.props.onSelect(t,r)})),mt(bt(e),"setOpen",(function(){e.props.setOpen&&e.props.setOpen(!0)})),e}return ht(r,[{key:"render",value:function(){var e;switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode();break;case"select":e=this.renderSelectMode()}return de.default.createElement("div",{className:"react-datepicker__year-dropdown-container react-datepicker__year-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component),Mr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"renderOptions",(function(){return e.props.monthNames.map((function(t,r){return de.default.createElement("div",{className:e.props.month===r?"react-datepicker__month-option react-datepicker__month-option--selected_month":"react-datepicker__month-option",key:t,onClick:e.onChange.bind(bt(e),r)},e.props.month===r?de.default.createElement("span",{className:"react-datepicker__month-option--selected"},"✓"):"",t)}))})),mt(bt(e),"onChange",(function(t){return e.props.onChange(t)})),mt(bt(e),"handleClickOutside",(function(){return e.props.onCancel()})),e}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__month-dropdown"},this.renderOptions())}}]),r}(de.default.Component),Pr=lt.default(Mr),Er=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(e){return e.map((function(e,t){return de.default.createElement("option",{key:t,value:t},e)}))})),mt(bt(e),"renderSelectMode",(function(t){return de.default.createElement("select",{value:e.props.month,className:"react-datepicker__month-select",onChange:function(t){return e.onChange(t.target.value)}},e.renderSelectOptions(t))})),mt(bt(e),"renderReadView",(function(t,r){return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__month-read-view",onClick:e.toggleDropdown},de.default.createElement("span",{className:"react-datepicker__month-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__month-read-view--selected-month"},r[e.props.month]))})),mt(bt(e),"renderDropdown",(function(t){return de.default.createElement(Pr,{key:"dropdown",month:e.props.month,monthNames:t,onChange:e.onChange,onCancel:e.toggleDropdown})})),mt(bt(e),"renderScrollMode",(function(t){var r=e.state.dropdownVisible,a=[e.renderReadView(!r,t)];return r&&a.unshift(e.renderDropdown(t)),a})),mt(bt(e),"onChange",(function(t){e.toggleDropdown(),t!==e.props.month&&e.props.onChange(t)})),mt(bt(e),"toggleDropdown",(function(){return e.setState({dropdownVisible:!e.state.dropdownVisible})})),e}return ht(r,[{key:"render",value:function(){var e,t=this,r=[0,1,2,3,4,5,6,7,8,9,10,11].map(this.props.useShortMonthInDropdown?function(e){return Zt(e,t.props.locale)}:function(e){return Xt(e,t.props.locale)});switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode(r);break;case"select":e=this.renderSelectMode(r)}return de.default.createElement("div",{className:"react-datepicker__month-dropdown-container react-datepicker__month-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component);function Nr(e,t){for(var r=[],a=Bt(e),n=Bt(t);!at.default(a,n);)r.push(xt(a)),a=we.default(a,1);return r}var Or=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"renderOptions",(function(){return a.state.monthYearsList.map((function(e){var t=Ie.default(e),r=Kt(a.props.date,e)&&Qt(a.props.date,e);return de.default.createElement("div",{className:r?"react-datepicker__month-year-option --selected_month-year":"react-datepicker__month-year-option",key:t,onClick:a.onChange.bind(bt(a),t)},r?de.default.createElement("span",{className:"react-datepicker__month-year-option--selected"},"✓"):"",Lt(e,a.props.dateFormat,a.props.locale))}))})),mt(bt(a),"onChange",(function(e){return a.props.onChange(e)})),mt(bt(a),"handleClickOutside",(function(){a.props.onCancel()})),a.state={monthYearsList:Nr(a.props.minDate,a.props.maxDate)},a}return ht(r,[{key:"render",value:function(){var e=ce.default({"react-datepicker__month-year-dropdown":!0,"react-datepicker__month-year-dropdown--scrollable":this.props.scrollableMonthYearDropdown});return de.default.createElement("div",{className:e},this.renderOptions())}}]),r}(de.default.Component),Yr=lt.default(Or),xr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(){for(var t=Bt(e.props.minDate),r=Bt(e.props.maxDate),a=[];!at.default(t,r);){var n=Ie.default(t);a.push(de.default.createElement("option",{key:n,value:n},Lt(t,e.props.dateFormat,e.props.locale))),t=we.default(t,1)}return a})),mt(bt(e),"onSelectChange",(function(t){e.onChange(t.target.value)})),mt(bt(e),"renderSelectMode",(function(){return de.default.createElement("select",{value:Ie.default(Bt(e.props.date)),className:"react-datepicker__month-year-select",onChange:e.onSelectChange},e.renderSelectOptions())})),mt(bt(e),"renderReadView",(function(t){var r=Lt(e.props.date,e.props.dateFormat,e.props.locale);return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__month-year-read-view",onClick:function(t){return e.toggleDropdown(t)}},de.default.createElement("span",{className:"react-datepicker__month-year-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__month-year-read-view--selected-month-year"},r))})),mt(bt(e),"renderDropdown",(function(){return de.default.createElement(Yr,{key:"dropdown",date:e.props.date,dateFormat:e.props.dateFormat,onChange:e.onChange,onCancel:e.toggleDropdown,minDate:e.props.minDate,maxDate:e.props.maxDate,scrollableMonthYearDropdown:e.props.scrollableMonthYearDropdown,locale:e.props.locale})})),mt(bt(e),"renderScrollMode",(function(){var t=e.state.dropdownVisible,r=[e.renderReadView(!t)];return t&&r.unshift(e.renderDropdown()),r})),mt(bt(e),"onChange",(function(t){e.toggleDropdown();var r=xt(parseInt(t));Kt(e.props.date,r)&&Qt(e.props.date,r)||e.props.onChange(r)})),mt(bt(e),"toggleDropdown",(function(){return e.setState({dropdownVisible:!e.state.dropdownVisible})})),e}return ht(r,[{key:"render",value:function(){var e;switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode();break;case"select":e=this.renderSelectMode()}return de.default.createElement("div",{className:"react-datepicker__month-year-dropdown-container react-datepicker__month-year-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component),Tr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"dayEl",de.default.createRef()),mt(bt(e),"handleClick",(function(t){!e.isDisabled()&&e.props.onClick&&e.props.onClick(t)})),mt(bt(e),"handleMouseEnter",(function(t){!e.isDisabled()&&e.props.onMouseEnter&&e.props.onMouseEnter(t)})),mt(bt(e),"handleOnKeyDown",(function(t){" "===t.key&&(t.preventDefault(),t.key="Enter"),e.props.handleOnKeyDown(t)})),mt(bt(e),"isSameDay",(function(t){return Ut(e.props.day,t)})),mt(bt(e),"isKeyboardSelected",(function(){return!e.props.disabledKeyboardNavigation&&!e.isSameDay(e.props.selected)&&e.isSameDay(e.props.preSelection)})),mt(bt(e),"isDisabled",(function(){return tr(e.props.day,e.props)})),mt(bt(e),"isExcluded",(function(){return rr(e.props.day,e.props)})),mt(bt(e),"getHighLightedClass",(function(t){var r=e.props,a=r.day,n=r.highlightDates;if(!n)return!1;var o=Lt(a,"MM.dd.yyyy");return n.get(o)})),mt(bt(e),"isInRange",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&zt(r,a,n)})),mt(bt(e),"isInSelectingRange",(function(){var t=e.props,r=t.day,a=t.selectsStart,n=t.selectsEnd,o=t.selectsRange,s=t.selectingDate,i=t.startDate,p=t.endDate;return!(!(a||n||o)||!s||e.isDisabled())&&(a&&p&&(nt.default(s,p)||$t(s,p))?zt(r,s,p):(n&&i&&(at.default(s,i)||$t(s,i))||!(!o||!i||p||!at.default(s,i)&&!$t(s,i)))&&zt(r,i,s))})),mt(bt(e),"isSelectingRangeStart",(function(){if(!e.isInSelectingRange())return!1;var t=e.props,r=t.day,a=t.selectingDate,n=t.startDate;return Ut(r,t.selectsStart?a:n)})),mt(bt(e),"isSelectingRangeEnd",(function(){if(!e.isInSelectingRange())return!1;var t=e.props,r=t.day,a=t.selectingDate,n=t.endDate;return Ut(r,t.selectsEnd?a:n)})),mt(bt(e),"isRangeStart",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&Ut(a,r)})),mt(bt(e),"isRangeEnd",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&Ut(n,r)})),mt(bt(e),"isWeekend",(function(){var t=Ee.default(e.props.day);return 0===t||6===t})),mt(bt(e),"isOutsideMonth",(function(){return void 0!==e.props.month&&e.props.month!==Ye.default(e.props.day)})),mt(bt(e),"getClassNames",(function(t){var r=e.props.dayClassName?e.props.dayClassName(t):void 0;return ce.default("react-datepicker__day",r,"react-datepicker__day--"+qt(e.props.day),{"react-datepicker__day--disabled":e.isDisabled(),"react-datepicker__day--excluded":e.isExcluded(),"react-datepicker__day--selected":e.isSameDay(e.props.selected),"react-datepicker__day--keyboard-selected":e.isKeyboardSelected(),"react-datepicker__day--range-start":e.isRangeStart(),"react-datepicker__day--range-end":e.isRangeEnd(),"react-datepicker__day--in-range":e.isInRange(),"react-datepicker__day--in-selecting-range":e.isInSelectingRange(),"react-datepicker__day--selecting-range-start":e.isSelectingRangeStart(),"react-datepicker__day--selecting-range-end":e.isSelectingRangeEnd(),"react-datepicker__day--today":e.isSameDay(xt()),"react-datepicker__day--weekend":e.isWeekend(),"react-datepicker__day--outside-month":e.isOutsideMonth()},e.getHighLightedClass("react-datepicker__day--highlighted"))})),mt(bt(e),"getAriaLabel",(function(){var t=e.props,r=t.day,a=t.ariaLabelPrefixWhenEnabled,n=void 0===a?"Choose":a,o=t.ariaLabelPrefixWhenDisabled,s=void 0===o?"Not available":o,i=e.isDisabled()||e.isExcluded()?s:n;return"".concat(i," ").concat(Lt(r,"PPPP"))})),mt(bt(e),"getTabIndex",(function(t,r){var a=t||e.props.selected,n=r||e.props.preSelection;return e.isKeyboardSelected()||e.isSameDay(a)&&Ut(n,a)?0:-1})),mt(bt(e),"handleFocusDay",(function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},r=!1;0===e.getTabIndex()&&!t.isInputFocused&&e.isSameDay(e.props.preSelection)&&(document.activeElement&&document.activeElement!==document.body||(r=!0),e.props.inline&&!e.props.shouldFocusDayInline&&(r=!1),e.props.containerRef&&e.props.containerRef.current&&e.props.containerRef.current.contains(document.activeElement)&&document.activeElement.classList.contains("react-datepicker__day")&&(r=!0)),r&&e.dayEl.current.focus({preventScroll:!0})})),mt(bt(e),"renderDayContents",(function(){if(e.isOutsideMonth()){if(e.props.monthShowsDuplicateDaysEnd&&Ne.default(e.props.day)<10)return null;if(e.props.monthShowsDuplicateDaysStart&&Ne.default(e.props.day)>20)return null}return e.props.renderDayContents?e.props.renderDayContents(Ne.default(e.props.day),e.props.day):Ne.default(e.props.day)})),mt(bt(e),"render",(function(){return de.default.createElement("div",{ref:e.dayEl,className:e.getClassNames(e.props.day),onKeyDown:e.handleOnKeyDown,onClick:e.handleClick,onMouseEnter:e.handleMouseEnter,tabIndex:e.getTabIndex(),"aria-label":e.getAriaLabel(),role:"button","aria-disabled":e.isDisabled()},e.renderDayContents())})),e}return ht(r,[{key:"componentDidMount",value:function(){this.handleFocusDay()}},{key:"componentDidUpdate",value:function(e){this.handleFocusDay(e)}}]),r}(de.default.Component),Ir=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"handleClick",(function(t){e.props.onClick&&e.props.onClick(t)})),e}return ht(r,[{key:"render",value:function(){var e=this.props,t=e.weekNumber,r=e.ariaLabelPrefix,a=void 0===r?"week ":r,n={"react-datepicker__week-number":!0,"react-datepicker__week-number--clickable":!!e.onClick};return de.default.createElement("div",{className:ce.default(n),"aria-label":"".concat(a," ").concat(this.props.weekNumber),onClick:this.handleClick},t)}}]),r}(de.default.Component),Lr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"handleDayClick",(function(t,r){e.props.onDayClick&&e.props.onDayClick(t,r)})),mt(bt(e),"handleDayMouseEnter",(function(t){e.props.onDayMouseEnter&&e.props.onDayMouseEnter(t)})),mt(bt(e),"handleWeekClick",(function(t,r,a){"function"==typeof e.props.onWeekSelect&&e.props.onWeekSelect(t,r,a),e.props.shouldCloseOnSelect&&e.props.setOpen(!1)})),mt(bt(e),"formatWeekNumber",(function(t){return e.props.formatWeekNumber?e.props.formatWeekNumber(t):Rt(t)})),mt(bt(e),"renderDays",(function(){var t=Wt(e.props.day,e.props.locale),r=[],a=e.formatWeekNumber(t);if(e.props.showWeekNumber){var n=e.props.onWeekSelect?e.handleWeekClick.bind(bt(e),t,a):void 0;r.push(de.default.createElement(Ir,{key:"W",weekNumber:a,onClick:n,ariaLabelPrefix:e.props.ariaLabelPrefix}))}return r.concat([0,1,2,3,4,5,6].map((function(r){var a=ve.default(t,r);return de.default.createElement(Tr,{ariaLabelPrefixWhenEnabled:e.props.chooseDayAriaLabelPrefix,ariaLabelPrefixWhenDisabled:e.props.disabledDayAriaLabelPrefix,key:a.valueOf(),day:a,month:e.props.month,onClick:e.handleDayClick.bind(bt(e),a),onMouseEnter:e.handleDayMouseEnter.bind(bt(e),a),minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,highlightDates:e.props.highlightDates,selectingDate:e.props.selectingDate,filterDate:e.props.filterDate,preSelection:e.props.preSelection,selected:e.props.selected,selectsStart:e.props.selectsStart,selectsEnd:e.props.selectsEnd,selectsRange:e.props.selectsRange,startDate:e.props.startDate,endDate:e.props.endDate,dayClassName:e.props.dayClassName,renderDayContents:e.props.renderDayContents,disabledKeyboardNavigation:e.props.disabledKeyboardNavigation,handleOnKeyDown:e.props.handleOnKeyDown,isInputFocused:e.props.isInputFocused,containerRef:e.props.containerRef,inline:e.props.inline,shouldFocusDayInline:e.props.shouldFocusDayInline,monthShowsDuplicateDaysEnd:e.props.monthShowsDuplicateDaysEnd,monthShowsDuplicateDaysStart:e.props.monthShowsDuplicateDaysStart})})))})),e}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__week"},this.renderDays())}}],[{key:"defaultProps",get:function(){return{shouldCloseOnSelect:!0}}}]),r}(de.default.Component),Fr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"MONTH_REFS",_t(Array(12)).map((function(){return de.default.createRef()}))),mt(bt(e),"isDisabled",(function(t){return tr(t,e.props)})),mt(bt(e),"isExcluded",(function(t){return rr(t,e.props)})),mt(bt(e),"handleDayClick",(function(t,r){e.props.onDayClick&&e.props.onDayClick(t,r,e.props.orderInDisplay)})),mt(bt(e),"handleDayMouseEnter",(function(t){e.props.onDayMouseEnter&&e.props.onDayMouseEnter(t)})),mt(bt(e),"handleMouseLeave",(function(){e.props.onMouseLeave&&e.props.onMouseLeave()})),mt(bt(e),"isRangeStartMonth",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Qt(qe.default(a,t),n)})),mt(bt(e),"isRangeStartQuarter",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Vt(Ae.default(a,t),n)})),mt(bt(e),"isRangeEndMonth",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Qt(qe.default(a,t),o)})),mt(bt(e),"isRangeEndQuarter",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Vt(Ae.default(a,t),o)})),mt(bt(e),"isWeekInMonth",(function(t){var r=e.props.day,a=ve.default(t,6);return Qt(t,r)||Qt(a,r)})),mt(bt(e),"renderWeeks",(function(){for(var t=[],r=e.props.fixedHeight,a=Wt(Bt(e.props.day),e.props.locale),n=0,o=!1;t.push(de.default.createElement(Lr,{ariaLabelPrefix:e.props.weekAriaLabelPrefix,chooseDayAriaLabelPrefix:e.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:e.props.disabledDayAriaLabelPrefix,key:n,day:a,month:Ye.default(e.props.day),onDayClick:e.handleDayClick,onDayMouseEnter:e.handleDayMouseEnter,onWeekSelect:e.props.onWeekSelect,formatWeekNumber:e.props.formatWeekNumber,locale:e.props.locale,minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,inline:e.props.inline,shouldFocusDayInline:e.props.shouldFocusDayInline,highlightDates:e.props.highlightDates,selectingDate:e.props.selectingDate,filterDate:e.props.filterDate,preSelection:e.props.preSelection,selected:e.props.selected,selectsStart:e.props.selectsStart,selectsEnd:e.props.selectsEnd,selectsRange:e.props.selectsRange,showWeekNumber:e.props.showWeekNumbers,startDate:e.props.startDate,endDate:e.props.endDate,dayClassName:e.props.dayClassName,setOpen:e.props.setOpen,shouldCloseOnSelect:e.props.shouldCloseOnSelect,disabledKeyboardNavigation:e.props.disabledKeyboardNavigation,renderDayContents:e.props.renderDayContents,handleOnKeyDown:e.props.handleOnKeyDown,isInputFocused:e.props.isInputFocused,containerRef:e.props.containerRef,monthShowsDuplicateDaysEnd:e.props.monthShowsDuplicateDaysEnd,monthShowsDuplicateDaysStart:e.props.monthShowsDuplicateDaysStart})),!o;){n++,a=De.default(a,1);var s=r&&n>=6,i=!r&&!e.isWeekInMonth(a);if(s||i){if(!e.props.peekNextMonth)break;o=!0}}return t})),mt(bt(e),"onMonthClick",(function(t,r){e.handleDayClick(Bt(qe.default(e.props.day,r)),t)})),mt(bt(e),"handleMonthNavigation",(function(t,r){e.isDisabled(r)||e.isExcluded(r)||(e.props.setPreSelection(r),e.MONTH_REFS[t].current&&e.MONTH_REFS[t].current.focus())})),mt(bt(e),"onMonthKeyDown",(function(t,r){var a=t.key;if(!e.props.disabledKeyboardNavigation)switch(a){case"Enter":e.onMonthClick(t,r),e.props.setPreSelection(e.props.selected);break;case"ArrowRight":e.handleMonthNavigation(11===r?0:r+1,we.default(e.props.preSelection,1));break;case"ArrowLeft":e.handleMonthNavigation(0===r?11:r-1,Ce.default(e.props.preSelection,1))}})),mt(bt(e),"onQuarterClick",(function(t,r){e.handleDayClick(Ht(Ae.default(e.props.day,r)),t)})),mt(bt(e),"getMonthClassNames",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate,s=r.selected,i=r.minDate,p=r.maxDate,l=r.preSelection,d=r.monthClassName,c=d?d(a):void 0;return ce.default("react-datepicker__month-text","react-datepicker__month-".concat(t),c,{"react-datepicker__month--disabled":(i||p)&&ar(qe.default(a,t),e.props),"react-datepicker__month--selected":Ye.default(a)===t&&Te.default(a)===Te.default(s),"react-datepicker__month-text--keyboard-selected":Ye.default(l)===t,"react-datepicker__month--in-range":nr(n,o,t,a),"react-datepicker__month--range-start":e.isRangeStartMonth(t),"react-datepicker__month--range-end":e.isRangeEndMonth(t)})})),mt(bt(e),"getTabIndex",(function(t){var r=Ye.default(e.props.preSelection);return e.props.disabledKeyboardNavigation||t!==r?"-1":"0"})),mt(bt(e),"getAriaLabel",(function(t){var r=e.props,a=r.ariaLabelPrefix,n=void 0===a?"Choose":a,o=r.disabledDayAriaLabelPrefix,s=void 0===o?"Not available":o,i=r.day,p=qe.default(i,t),l=e.isDisabled(p)||e.isExcluded(p)?s:n;return"".concat(l," ").concat(Lt(p,"MMMM yyyy"))})),mt(bt(e),"getQuarterClassNames",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate,s=r.selected,i=r.minDate,p=r.maxDate;return ce.default("react-datepicker__quarter-text","react-datepicker__quarter-".concat(t),{"react-datepicker__quarter--disabled":(i||p)&&or(Ae.default(a,t),e.props),"react-datepicker__quarter--selected":xe.default(a)===t&&Te.default(a)===Te.default(s),"react-datepicker__quarter--in-range":ir(n,o,t,a),"react-datepicker__quarter--range-start":e.isRangeStartQuarter(t),"react-datepicker__quarter--range-end":e.isRangeEndQuarter(t)})})),mt(bt(e),"renderMonths",(function(){var t=e.props,r=t.showFullMonthYearPicker,a=t.showTwoColumnMonthYearPicker,n=t.showFourColumnMonthYearPicker,o=t.locale;return(n?[[0,1,2,3],[4,5,6,7],[8,9,10,11]]:a?[[0,1],[2,3],[4,5],[6,7],[8,9],[10,11]]:[[0,1,2],[3,4,5],[6,7,8],[9,10,11]]).map((function(t,a){return de.default.createElement("div",{className:"react-datepicker__month-wrapper",key:a},t.map((function(t,a){return de.default.createElement("div",{ref:e.MONTH_REFS[t],key:a,onClick:function(r){e.onMonthClick(r,t)},onKeyDown:function(r){e.onMonthKeyDown(r,t)},tabIndex:e.getTabIndex(t),className:e.getMonthClassNames(t),role:"button","aria-label":e.getAriaLabel(t)},r?Xt(t,o):Zt(t,o))})))}))})),mt(bt(e),"renderQuarters",(function(){return de.default.createElement("div",{className:"react-datepicker__quarter-wrapper"},[1,2,3,4].map((function(t,r){return de.default.createElement("div",{key:r,onClick:function(r){e.onQuarterClick(r,t)},className:e.getQuarterClassNames(t)},er(t,e.props.locale))})))})),mt(bt(e),"getClassNames",(function(){var t=e.props;t.day;var r=t.selectingDate,a=t.selectsStart,n=t.selectsEnd,o=t.showMonthYearPicker,s=t.showQuarterYearPicker;return ce.default("react-datepicker__month",{"react-datepicker__month--selecting-range":r&&(a||n)},{"react-datepicker__monthPicker":o},{"react-datepicker__quarterPicker":s})})),e}return ht(r,[{key:"render",value:function(){var e=this.props,t=e.showMonthYearPicker,r=e.showQuarterYearPicker,a=e.day,n=e.ariaLabelPrefix,o=void 0===n?"month ":n;return de.default.createElement("div",{className:this.getClassNames(),onMouseLeave:this.handleMouseLeave,"aria-label":"".concat(o," ").concat(Lt(a,"yyyy-MM"))},t?this.renderMonths():r?this.renderQuarters():this.renderWeeks())}}]),r}(de.default.Component),Rr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{height:null}),mt(bt(e),"handleClick",(function(t){(e.props.minTime||e.props.maxTime)&&cr(t,e.props)||(e.props.excludeTimes||e.props.includeTimes||e.props.filterTime)&&dr(t,e.props)||e.props.onChange(t)})),mt(bt(e),"liClasses",(function(t,r,a){var n=["react-datepicker__time-list-item",e.props.timeClassName?e.props.timeClassName(t,r,a):void 0];return e.props.selected&&r===Pe.default(t)&&a===Me.default(t)&&n.push("react-datepicker__time-list-item--selected"),((e.props.minTime||e.props.maxTime)&&cr(t,e.props)||(e.props.excludeTimes||e.props.includeTimes||e.props.filterTime)&&dr(t,e.props))&&n.push("react-datepicker__time-list-item--disabled"),e.props.injectTimes&&(60*Pe.default(t)+Me.default(t))%e.props.intervals!=0&&n.push("react-datepicker__time-list-item--injected"),n.join(" ")})),mt(bt(e),"renderTimes",(function(){for(var t=[],r=e.props.format?e.props.format:"p",a=e.props.intervals,n=At(xt(e.props.selected)),o=1440/a,s=e.props.injectTimes&&e.props.injectTimes.sort((function(e,t){return e-t})),i=e.props.selected||e.props.openToDate||xt(),p=Pe.default(i),l=Me.default(i),d=Re.default(Fe.default(n,l),p),c=0;c<o;c++){var u=me.default(n,c*a);if(t.push(u),s){var f=wr(n,u,c,a,s);t=t.concat(f)}}return t.map((function(t,a){return de.default.createElement("li",{key:a,onClick:e.handleClick.bind(bt(e),t),className:e.liClasses(t,p,l),ref:function(r){(nt.default(t,d)||$t(t,d))&&(e.centerLi=r)},tabIndex:"0"},Lt(t,r,e.props.locale))}))})),e}return ht(r,[{key:"componentDidMount",value:function(){this.list.scrollTop=r.calcCenterPosition(this.props.monthRef?this.props.monthRef.clientHeight-this.header.clientHeight:this.list.clientHeight,this.centerLi),this.props.monthRef&&this.header&&this.setState({height:this.props.monthRef.clientHeight-this.header.clientHeight})}},{key:"render",value:function(){var e=this,t=this.state.height;return de.default.createElement("div",{className:"react-datepicker__time-container ".concat(this.props.todayButton?"react-datepicker__time-container--with-today-button":"")},de.default.createElement("div",{className:"react-datepicker__header react-datepicker__header--time ".concat(this.props.showTimeSelectOnly?"react-datepicker__header--time--only":""),ref:function(t){e.header=t}},de.default.createElement("div",{className:"react-datepicker-time__header"},this.props.timeCaption)),de.default.createElement("div",{className:"react-datepicker__time"},de.default.createElement("div",{className:"react-datepicker__time-box"},de.default.createElement("ul",{className:"react-datepicker__time-list",ref:function(t){e.list=t},style:t?{height:t}:{},tabIndex:"0"},this.renderTimes()))))}}],[{key:"defaultProps",get:function(){return{intervals:30,onTimeChange:function(){},todayButton:null,timeCaption:"Time"}}}]),r}(de.default.Component);mt(Rr,"calcCenterPosition",(function(e,t){return t.offsetTop-(e/2-t.clientHeight/2)}));var qr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"handleYearClick",(function(e,t){a.props.onDayClick&&a.props.onDayClick(e,t)})),mt(bt(a),"isSameDay",(function(e,t){return Ut(e,t)})),mt(bt(a),"isKeyboardSelected",(function(e){var t=jt(We.default(a.props.date,e));return!a.props.disabledKeyboardNavigation&&!a.props.inline&&!Ut(t,jt(a.props.selected))&&Ut(t,jt(a.props.preSelection))})),mt(bt(a),"onYearClick",(function(e,t){var r=a.props.date;a.handleYearClick(jt(We.default(r,t)),e)})),mt(bt(a),"getYearClassNames",(function(e){var t=a.props,r=t.minDate,n=t.maxDate,o=t.selected;return ce.default("react-datepicker__year-text",{"react-datepicker__year-text--selected":e===Te.default(o),"react-datepicker__year-text--disabled":(r||n)&&sr(e,a.props),"react-datepicker__year-text--keyboard-selected":a.isKeyboardSelected(e),"react-datepicker__year-text--today":e===Te.default(xt())})})),a}return ht(r,[{key:"render",value:function(){for(var e=this,t=[],r=this.props,a=gr(r.date,r.yearItemNumber),n=a.startPeriod,o=a.endPeriod,s=function(r){t.push(de.default.createElement("div",{onClick:function(t){e.onYearClick(t,r)},className:e.getYearClassNames(r),key:r},r))},i=n;i<=o;i++)s(i);return de.default.createElement("div",{className:"react-datepicker__year"},de.default.createElement("div",{className:"react-datepicker__year-wrapper"},t))}}]),r}(de.default.Component),Ar=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"onTimeChange",(function(e){a.setState({time:e});var t=new Date;t.setHours(e.split(":")[0]),t.setMinutes(e.split(":")[1]),a.props.onChange(t)})),mt(bt(a),"renderTimeInput",(function(){var e=a.state.time,t=a.props,r=t.date,n=t.timeString,o=t.customTimeInput;return o?de.default.cloneElement(o,{date:r,value:e,onChange:a.onTimeChange}):de.default.createElement("input",{type:"time",className:"react-datepicker-time__input",placeholder:"Time",name:"time-input",required:!0,value:e,onChange:function(e){a.onTimeChange(e.target.value||n)}})})),a.state={time:a.props.timeString},a}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__input-time-container"},de.default.createElement("div",{className:"react-datepicker-time__caption"},this.props.timeInputLabel),de.default.createElement("div",{className:"react-datepicker-time__input-container"},de.default.createElement("div",{className:"react-datepicker-time__input"},this.renderTimeInput())))}}],[{key:"getDerivedStateFromProps",value:function(e,t){return e.timeString!==t.time?{time:e.timeString}:null}}]),r}(de.default.Component);function Wr(e){var t=e.className,r=e.children,a=e.showPopperArrow,n=e.arrowProps,o=void 0===n?{}:n;return de.default.createElement("div",{className:t},a&&de.default.createElement("div",yt({className:"react-datepicker__triangle"},o)),r)}var Br=["react-datepicker__year-select","react-datepicker__month-select","react-datepicker__month-year-select"],jr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"handleClickOutside",(function(e){a.props.onClickOutside(e)})),mt(bt(a),"setClickOutsideRef",(function(){return a.containerRef.current})),mt(bt(a),"handleDropdownFocus",(function(e){(function(){var e=((arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}).className||"").split(/\s+/);return Br.some((function(t){return e.indexOf(t)>=0}))})(e.target)&&a.props.onDropdownFocus()})),mt(bt(a),"getDateInView",(function(){var e=a.props,t=e.preSelection,r=e.selected,n=e.openToDate,o=yr(a.props),s=vr(a.props),i=xt(),p=n||r||t;return p||(o&&nt.default(i,o)?o:s&&at.default(i,s)?s:i)})),mt(bt(a),"increaseMonth",(function(){a.setState((function(e){var t=e.date;return{date:we.default(t,1)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"decreaseMonth",(function(){a.setState((function(e){var t=e.date;return{date:Ce.default(t,1)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"handleDayClick",(function(e,t,r){a.props.onSelect(e,t,r),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleDayMouseEnter",(function(e){a.setState({selectingDate:e}),a.props.onDayMouseEnter&&a.props.onDayMouseEnter(e)})),mt(bt(a),"handleMonthMouseLeave",(function(){a.setState({selectingDate:null}),a.props.onMonthMouseLeave&&a.props.onMonthMouseLeave()})),mt(bt(a),"handleYearChange",(function(e){a.props.onYearChange&&a.props.onYearChange(e),a.props.adjustDateOnChange&&(a.props.onSelect&&a.props.onSelect(e),a.props.setOpen&&a.props.setOpen(!0)),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleMonthChange",(function(e){a.props.onMonthChange&&a.props.onMonthChange(e),a.props.adjustDateOnChange&&(a.props.onSelect&&a.props.onSelect(e),a.props.setOpen&&a.props.setOpen(!0)),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleMonthYearChange",(function(e){a.handleYearChange(e),a.handleMonthChange(e)})),mt(bt(a),"changeYear",(function(e){a.setState((function(t){var r=t.date;return{date:We.default(r,e)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"changeMonth",(function(e){a.setState((function(t){var r=t.date;return{date:qe.default(r,e)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"changeMonthYear",(function(e){a.setState((function(t){var r=t.date;return{date:We.default(qe.default(r,Ye.default(e)),Te.default(e))}}),(function(){return a.handleMonthYearChange(a.state.date)}))})),mt(bt(a),"header",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a.state.date,t=Wt(e,a.props.locale),r=[];return a.props.showWeekNumbers&&r.push(de.default.createElement("div",{key:"W",className:"react-datepicker__day-name"},a.props.weekLabel||"#")),r.concat([0,1,2,3,4,5,6].map((function(e){var r=ve.default(t,e),n=a.formatWeekday(r,a.props.locale),o=a.props.weekDayClassName?a.props.weekDayClassName(r):void 0;return de.default.createElement("div",{key:e,className:ce.default("react-datepicker__day-name",o)},n)})))})),mt(bt(a),"formatWeekday",(function(e,t){return a.props.formatWeekDay?function(e,t,r){return t(Lt(e,"EEEE",r))}(e,a.props.formatWeekDay,t):a.props.useWeekdaysShort?function(e,t){return Lt(e,"EEE",t)}(e,t):function(e,t){return Lt(e,"EEEEEE",t)}(e,t)})),mt(bt(a),"decreaseYear",(function(){a.setState((function(e){var t=e.date;return{date:Se.default(t,a.props.showYearPicker?a.props.yearItemNumber:1)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"renderPreviousButton",(function(){if(!a.props.renderCustomHeader){var e;switch(!0){case a.props.showMonthYearPicker:e=hr(a.state.date,a.props);break;case a.props.showYearPicker:e=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.yearItemNumber,n=void 0===a?Ot:a,o=gr(jt(Se.default(e,n)),n).endPeriod,s=r&&Te.default(r);return s&&s>o||!1}(a.state.date,a.props);break;default:e=ur(a.state.date,a.props)}if((a.props.forceShowMonthNavigation||a.props.showDisabledMonthNavigation||!e)&&!a.props.showTimeSelectOnly){var t=["react-datepicker__navigation","react-datepicker__navigation--previous"],r=a.decreaseMonth;(a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker)&&(r=a.decreaseYear),e&&a.props.showDisabledMonthNavigation&&(t.push("react-datepicker__navigation--previous--disabled"),r=null);var n=a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker,o=a.props,s=o.previousMonthAriaLabel,i=void 0===s?"Previous Month":s,p=o.previousYearAriaLabel,l=void 0===p?"Previous Year":p;return de.default.createElement("button",{type:"button",className:t.join(" "),onClick:r,"aria-label":n?l:i},n?a.props.previousYearButtonLabel:a.props.previousMonthButtonLabel)}}})),mt(bt(a),"increaseYear",(function(){a.setState((function(e){var t=e.date;return{date:ke.default(t,a.props.showYearPicker?a.props.yearItemNumber:1)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"renderNextButton",(function(){if(!a.props.renderCustomHeader){var e;switch(!0){case a.props.showMonthYearPicker:e=mr(a.state.date,a.props);break;case a.props.showYearPicker:e=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.yearItemNumber,n=void 0===a?Ot:a,o=gr(ke.default(e,n),n).startPeriod,s=r&&Te.default(r);return s&&s<o||!1}(a.state.date,a.props);break;default:e=fr(a.state.date,a.props)}if((a.props.forceShowMonthNavigation||a.props.showDisabledMonthNavigation||!e)&&!a.props.showTimeSelectOnly){var t=["react-datepicker__navigation","react-datepicker__navigation--next"];a.props.showTimeSelect&&t.push("react-datepicker__navigation--next--with-time"),a.props.todayButton&&t.push("react-datepicker__navigation--next--with-today-button");var r=a.increaseMonth;(a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker)&&(r=a.increaseYear),e&&a.props.showDisabledMonthNavigation&&(t.push("react-datepicker__navigation--next--disabled"),r=null);var n=a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker,o=a.props,s=o.nextMonthAriaLabel,i=void 0===s?"Next Month":s,p=o.nextYearAriaLabel,l=void 0===p?"Next Year":p;return de.default.createElement("button",{type:"button",className:t.join(" "),onClick:r,"aria-label":n?l:i},n?a.props.nextYearButtonLabel:a.props.nextMonthButtonLabel)}}})),mt(bt(a),"renderCurrentMonth",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a.state.date,t=["react-datepicker__current-month"];return a.props.showYearDropdown&&t.push("react-datepicker__current-month--hasYearDropdown"),a.props.showMonthDropdown&&t.push("react-datepicker__current-month--hasMonthDropdown"),a.props.showMonthYearDropdown&&t.push("react-datepicker__current-month--hasMonthYearDropdown"),de.default.createElement("div",{className:t.join(" ")},Lt(e,a.props.dateFormat,a.props.locale))})),mt(bt(a),"renderYearDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showYearDropdown&&!e)return de.default.createElement(_r,{adjustDateOnChange:a.props.adjustDateOnChange,date:a.state.date,onSelect:a.props.onSelect,setOpen:a.props.setOpen,dropdownMode:a.props.dropdownMode,onChange:a.changeYear,minDate:a.props.minDate,maxDate:a.props.maxDate,year:Te.default(a.state.date),scrollableYearDropdown:a.props.scrollableYearDropdown,yearDropdownItemNumber:a.props.yearDropdownItemNumber})})),mt(bt(a),"renderMonthDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showMonthDropdown&&!e)return de.default.createElement(Er,{dropdownMode:a.props.dropdownMode,locale:a.props.locale,onChange:a.changeMonth,month:Ye.default(a.state.date),useShortMonthInDropdown:a.props.useShortMonthInDropdown})})),mt(bt(a),"renderMonthYearDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showMonthYearDropdown&&!e)return de.default.createElement(xr,{dropdownMode:a.props.dropdownMode,locale:a.props.locale,dateFormat:a.props.dateFormat,onChange:a.changeMonthYear,minDate:a.props.minDate,maxDate:a.props.maxDate,date:a.state.date,scrollableMonthYearDropdown:a.props.scrollableMonthYearDropdown})})),mt(bt(a),"renderTodayButton",(function(){if(a.props.todayButton&&!a.props.showTimeSelectOnly)return de.default.createElement("div",{className:"react-datepicker__today-button",onClick:function(e){return a.props.onSelect(Ve.default(xt()),e)}},a.props.todayButton)})),mt(bt(a),"renderDefaultHeader",(function(e){var t=e.monthDate,r=e.i;return de.default.createElement("div",{className:"react-datepicker__header ".concat(a.props.showTimeSelect?"react-datepicker__header--has-time-select":"")},a.renderCurrentMonth(t),de.default.createElement("div",{className:"react-datepicker__header__dropdown react-datepicker__header__dropdown--".concat(a.props.dropdownMode),onFocus:a.handleDropdownFocus},a.renderMonthDropdown(0!==r),a.renderMonthYearDropdown(0!==r),a.renderYearDropdown(0!==r)),de.default.createElement("div",{className:"react-datepicker__day-names"},a.header(t)))})),mt(bt(a),"renderCustomHeader",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.monthDate,r=e.i;if(a.props.showTimeSelect&&!a.state.monthContainer||a.props.showTimeSelectOnly)return null;var n=ur(a.state.date,a.props),o=fr(a.state.date,a.props),s=hr(a.state.date,a.props),i=mr(a.state.date,a.props),p=!a.props.showMonthYearPicker&&!a.props.showQuarterYearPicker&&!a.props.showYearPicker;return de.default.createElement("div",{className:"react-datepicker__header react-datepicker__header--custom",onFocus:a.props.onDropdownFocus},a.props.renderCustomHeader(Dt(Dt({},a.state),{},{customHeaderCount:r,changeMonth:a.changeMonth,changeYear:a.changeYear,decreaseMonth:a.decreaseMonth,increaseMonth:a.increaseMonth,decreaseYear:a.decreaseYear,increaseYear:a.increaseYear,prevMonthButtonDisabled:n,nextMonthButtonDisabled:o,prevYearButtonDisabled:s,nextYearButtonDisabled:i})),p&&de.default.createElement("div",{className:"react-datepicker__day-names"},a.header(t)))})),mt(bt(a),"renderYearHeader",(function(){var e=a.state.date,t=a.props,r=t.showYearPicker,n=gr(e,t.yearItemNumber),o=n.startPeriod,s=n.endPeriod;return de.default.createElement("div",{className:"react-datepicker__header react-datepicker-year-header"},r?"".concat(o," - ").concat(s):Te.default(e))})),mt(bt(a),"renderHeader",(function(e){switch(!0){case void 0!==a.props.renderCustomHeader:return a.renderCustomHeader(e);case a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker:return a.renderYearHeader(e);default:return a.renderDefaultHeader(e)}})),mt(bt(a),"renderMonths",(function(){if(!a.props.showTimeSelectOnly&&!a.props.showYearPicker){for(var e=[],t=a.props.showPreviousMonths?a.props.monthsShown-1:0,r=Ce.default(a.state.date,t),n=0;n<a.props.monthsShown;++n){var o=n-a.props.monthSelectedIn,s=we.default(r,o),i="month-".concat(n),p=n<a.props.monthsShown-1,l=n>0;e.push(de.default.createElement("div",{key:i,ref:function(e){a.monthContainer=e},className:"react-datepicker__month-container"},a.renderHeader({monthDate:s,i:n}),de.default.createElement(Fr,{chooseDayAriaLabelPrefix:a.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:a.props.disabledDayAriaLabelPrefix,weekAriaLabelPrefix:a.props.weekAriaLabelPrefix,onChange:a.changeMonthYear,day:s,dayClassName:a.props.dayClassName,monthClassName:a.props.monthClassName,onDayClick:a.handleDayClick,handleOnKeyDown:a.props.handleOnKeyDown,onDayMouseEnter:a.handleDayMouseEnter,onMouseLeave:a.handleMonthMouseLeave,onWeekSelect:a.props.onWeekSelect,orderInDisplay:n,formatWeekNumber:a.props.formatWeekNumber,locale:a.props.locale,minDate:a.props.minDate,maxDate:a.props.maxDate,excludeDates:a.props.excludeDates,highlightDates:a.props.highlightDates,selectingDate:a.state.selectingDate,includeDates:a.props.includeDates,inline:a.props.inline,shouldFocusDayInline:a.props.shouldFocusDayInline,fixedHeight:a.props.fixedHeight,filterDate:a.props.filterDate,preSelection:a.props.preSelection,setPreSelection:a.props.setPreSelection,selected:a.props.selected,selectsStart:a.props.selectsStart,selectsEnd:a.props.selectsEnd,selectsRange:a.props.selectsRange,showWeekNumbers:a.props.showWeekNumbers,startDate:a.props.startDate,endDate:a.props.endDate,peekNextMonth:a.props.peekNextMonth,setOpen:a.props.setOpen,shouldCloseOnSelect:a.props.shouldCloseOnSelect,renderDayContents:a.props.renderDayContents,disabledKeyboardNavigation:a.props.disabledKeyboardNavigation,showMonthYearPicker:a.props.showMonthYearPicker,showFullMonthYearPicker:a.props.showFullMonthYearPicker,showTwoColumnMonthYearPicker:a.props.showTwoColumnMonthYearPicker,showFourColumnMonthYearPicker:a.props.showFourColumnMonthYearPicker,showYearPicker:a.props.showYearPicker,showQuarterYearPicker:a.props.showQuarterYearPicker,isInputFocused:a.props.isInputFocused,containerRef:a.containerRef,monthShowsDuplicateDaysEnd:p,monthShowsDuplicateDaysStart:l})))}return e}})),mt(bt(a),"renderYears",(function(){if(!a.props.showTimeSelectOnly)return a.props.showYearPicker?de.default.createElement("div",{className:"react-datepicker__year--container"},a.renderHeader(),de.default.createElement(qr,yt({onDayClick:a.handleDayClick,date:a.state.date},a.props))):void 0})),mt(bt(a),"renderTimeSection",(function(){if(a.props.showTimeSelect&&(a.state.monthContainer||a.props.showTimeSelectOnly))return de.default.createElement(Rr,{selected:a.props.selected,openToDate:a.props.openToDate,onChange:a.props.onTimeChange,timeClassName:a.props.timeClassName,format:a.props.timeFormat,includeTimes:a.props.includeTimes,intervals:a.props.timeIntervals,minTime:a.props.minTime,maxTime:a.props.maxTime,excludeTimes:a.props.excludeTimes,filterTime:a.props.filterTime,timeCaption:a.props.timeCaption,todayButton:a.props.todayButton,showMonthDropdown:a.props.showMonthDropdown,showMonthYearDropdown:a.props.showMonthYearDropdown,showYearDropdown:a.props.showYearDropdown,withPortal:a.props.withPortal,monthRef:a.state.monthContainer,injectTimes:a.props.injectTimes,locale:a.props.locale,showTimeSelectOnly:a.props.showTimeSelectOnly})})),mt(bt(a),"renderInputTimeSection",(function(){var e=new Date(a.props.selected),t=It(e)&&Boolean(a.props.selected)?"".concat(kr(e.getHours()),":").concat(kr(e.getMinutes())):"";if(a.props.showTimeInput)return de.default.createElement(Ar,{date:e,timeString:t,timeInputLabel:a.props.timeInputLabel,onChange:a.props.onTimeChange,customTimeInput:a.props.customTimeInput})})),a.containerRef=de.default.createRef(),a.state={date:a.getDateInView(),selectingDate:null,monthContainer:null},a}return ht(r,[{key:"componentDidMount",value:function(){var e=this;this.props.showTimeSelect&&(this.assignMonthContainer=void e.setState({monthContainer:e.monthContainer}))}},{key:"componentDidUpdate",value:function(e){this.props.preSelection&&!Ut(this.props.preSelection,e.preSelection)?this.setState({date:this.props.preSelection}):this.props.openToDate&&!Ut(this.props.openToDate,e.openToDate)&&this.setState({date:this.props.openToDate})}},{key:"render",value:function(){var e=this.props.container||Wr;return de.default.createElement("div",{ref:this.containerRef},de.default.createElement(e,{className:ce.default("react-datepicker",this.props.className,{"react-datepicker--time-only":this.props.showTimeSelectOnly}),showPopperArrow:this.props.showPopperArrow,arrowProps:this.props.arrowProps},this.renderPreviousButton(),this.renderNextButton(),this.renderMonths(),this.renderYears(),this.renderTodayButton(),this.renderTimeSection(),this.renderInputTimeSection(),this.props.children))}}],[{key:"defaultProps",get:function(){return{onDropdownFocus:function(){},monthsShown:1,monthSelectedIn:0,forceShowMonthNavigation:!1,timeCaption:"Time",previousYearButtonLabel:"Previous Year",nextYearButtonLabel:"Next Year",previousMonthButtonLabel:"Previous Month",nextMonthButtonLabel:"Next Month",customTimeInput:null,yearItemNumber:Ot}}}]),r}(de.default.Component),Hr=function(e){return!e.disabled&&-1!==e.tabIndex},Kr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"getTabChildren",(function(){return Array.prototype.slice.call(a.tabLoopRef.current.querySelectorAll("[tabindex], a, button, input, select, textarea"),1,-1).filter(Hr)})),mt(bt(a),"handleFocusStart",(function(e){var t=a.getTabChildren();t&&t.length>1&&t[t.length-1].focus()})),mt(bt(a),"handleFocusEnd",(function(e){var t=a.getTabChildren();t&&t.length>1&&t[0].focus()})),a.tabLoopRef=de.default.createRef(),a}return ht(r,[{key:"render",value:function(){return this.props.enableTabLoop?de.default.createElement("div",{className:"react-datepicker__tab-loop",ref:this.tabLoopRef},de.default.createElement("div",{className:"react-datepicker__tab-loop__start",tabIndex:"0",onFocus:this.handleFocusStart}),this.props.children,de.default.createElement("div",{className:"react-datepicker__tab-loop__end",tabIndex:"0",onFocus:this.handleFocusEnd})):this.props.children}}],[{key:"defaultProps",get:function(){return{enableTabLoop:!0}}}]),r}(de.default.Component),Qr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),(a=t.call(this,e)).el=document.createElement("div"),a}return ht(r,[{key:"componentDidMount",value:function(){this.portalRoot=document.getElementById(this.props.portalId),this.portalRoot||(this.portalRoot=document.createElement("div"),this.portalRoot.setAttribute("id",this.props.portalId),document.body.appendChild(this.portalRoot)),this.portalRoot.appendChild(this.el)}},{key:"componentWillUnmount",value:function(){this.portalRoot.removeChild(this.el)}},{key:"render",value:function(){return dt.default.createPortal(this.props.children,this.el)}}]),r}(de.default.Component),Vr=function(e){wt(r,e);var t=St(r);function r(){return ut(this,r),t.apply(this,arguments)}return ht(r,[{key:"render",value:function(){var e,t=this.props,r=t.className,a=t.wrapperClassName,n=t.hidePopper,o=t.popperComponent,s=t.popperModifiers,i=t.popperPlacement,p=t.popperProps,l=t.targetComponent,d=t.enableTabLoop,c=t.popperOnKeyDown,u=t.portalId;if(!n){var f=ce.default("react-datepicker-popper",r);e=de.default.createElement(ie.Popper,yt({modifiers:s,placement:i},p),(function(e){var t=e.ref,r=e.style,a=e.placement,n=e.arrowProps;return de.default.createElement(Kr,{enableTabLoop:d},de.default.createElement("div",{ref:t,style:r,className:f,"data-placement":a,onKeyDown:c},de.default.cloneElement(o,{arrowProps:n})))}))}this.props.popperContainer&&(e=de.default.createElement(this.props.popperContainer,{},e)),u&&!n&&(e=de.default.createElement(Qr,{portalId:u},e));var h=ce.default("react-datepicker-wrapper",a);return de.default.createElement(ie.Manager,{className:"react-datepicker-manager"},de.default.createElement(ie.Reference,null,(function(e){var t=e.ref;return de.default.createElement("div",{ref:t,className:h},l)})),e)}}],[{key:"defaultProps",get:function(){return{hidePopper:!0,popperModifiers:{preventOverflow:{enabled:!0,escapeWithReference:!0,boundariesElement:"viewport"}},popperProps:{},popperPlacement:"bottom-start"}}}]),r}(de.default.Component),Ur="react-datepicker-ignore-onclickoutside",$r=lt.default(jr);var zr="Date input not valid.",Gr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"getPreSelection",(function(){return a.props.openToDate?a.props.openToDate:a.props.selectsEnd&&a.props.startDate?a.props.startDate:a.props.selectsStart&&a.props.endDate?a.props.endDate:xt()})),mt(bt(a),"calcInitialState",(function(){var e=a.getPreSelection(),t=yr(a.props),r=vr(a.props),n=t&&nt.default(e,Ve.default(t))?t:r&&at.default(e,Je.default(r))?r:e;return{open:a.props.startOpen||!1,preventFocus:!1,preSelection:a.props.selected?a.props.selected:n,highlightDates:Dr(a.props.highlightDates),focused:!1,shouldFocusDayInline:!1}})),mt(bt(a),"clearPreventFocusTimeout",(function(){a.preventFocusTimeout&&clearTimeout(a.preventFocusTimeout)})),mt(bt(a),"setFocus",(function(){a.input&&a.input.focus&&a.input.focus({preventScroll:!0})})),mt(bt(a),"setBlur",(function(){a.input&&a.input.blur&&a.input.blur(),a.cancelFocusInput()})),mt(bt(a),"setOpen",(function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];a.setState({open:e,preSelection:e&&a.state.open?a.state.preSelection:a.calcInitialState().preSelection,lastPreSelectChange:Xr},(function(){e||a.setState((function(e){return{focused:!!t&&e.focused}}),(function(){!t&&a.setBlur(),a.setState({inputValue:null})}))}))})),mt(bt(a),"inputOk",(function(){return ue.default(a.state.preSelection)})),mt(bt(a),"isCalendarOpen",(function(){return void 0===a.props.open?a.state.open&&!a.props.disabled&&!a.props.readOnly:a.props.open})),mt(bt(a),"handleFocus",(function(e){a.state.preventFocus||(a.props.onFocus(e),a.props.preventOpenOnFocus||a.props.readOnly||a.setOpen(!0)),a.setState({focused:!0})})),mt(bt(a),"cancelFocusInput",(function(){clearTimeout(a.inputFocusTimeout),a.inputFocusTimeout=null})),mt(bt(a),"deferFocusInput",(function(){a.cancelFocusInput(),a.inputFocusTimeout=setTimeout((function(){return a.setFocus()}),1)})),mt(bt(a),"handleDropdownFocus",(function(){a.cancelFocusInput()})),mt(bt(a),"handleBlur",(function(e){(!a.state.open||a.props.withPortal||a.props.showTimeInput)&&a.props.onBlur(e),a.setState({focused:!1})})),mt(bt(a),"handleCalendarClickOutside",(function(e){a.props.inline||a.setOpen(!1),a.props.onClickOutside(e),a.props.withPortal&&e.preventDefault()})),mt(bt(a),"handleChange",(function(){for(var e=arguments.length,t=new Array(e),r=0;r<e;r++)t[r]=arguments[r];var n=t[0];if(!a.props.onChangeRaw||(a.props.onChangeRaw.apply(bt(a),t),"function"==typeof n.isDefaultPrevented&&!n.isDefaultPrevented())){a.setState({inputValue:n.target.value,lastPreSelectChange:Jr});var o=Tt(n.target.value,a.props.dateFormat,a.props.locale,a.props.strictParsing);!o&&n.target.value||a.setSelected(o,n,!0)}})),mt(bt(a),"handleSelect",(function(e,t,r){a.setState({preventFocus:!0},(function(){return a.preventFocusTimeout=setTimeout((function(){return a.setState({preventFocus:!1})}),50),a.preventFocusTimeout})),a.props.onChangeRaw&&a.props.onChangeRaw(t),a.setSelected(e,t,!1,r),!a.props.shouldCloseOnSelect||a.props.showTimeSelect?a.setPreSelection(e):a.props.inline||a.setOpen(!1)})),mt(bt(a),"setSelected",(function(e,t,r,n){var o=e;if(null===o||!tr(o,a.props)){var s=a.props,i=s.onChange,p=s.selectsRange,l=s.startDate,d=s.endDate;if(!$t(a.props.selected,o)||a.props.allowSameDay||p)if(null!==o&&(!a.props.selected||r&&(a.props.showTimeSelect||a.props.showTimeSelectOnly||a.props.showTimeInput)||(o=Ft(o,{hour:Pe.default(a.props.selected),minute:Me.default(a.props.selected),second:_e.default(a.props.selected)})),a.props.inline||a.setState({preSelection:o}),a.props.focusSelectedMonth||a.setState({monthSelectedIn:n})),p){var c=l&&!d,u=l&&d;!l&&!d?i([o,null],t):c&&(nt.default(o,l)?i([o,null],t):i([l,o],t)),u&&i([o,null],t)}else i(o,t);r||(a.props.onSelect(o,t),a.setState({inputValue:null}))}})),mt(bt(a),"setPreSelection",(function(e){var t=void 0!==a.props.minDate,r=void 0!==a.props.maxDate,n=!0;if(e){var o=Ve.default(e);if(t&&r)n=zt(e,a.props.minDate,a.props.maxDate);else if(t){var s=Ve.default(a.props.minDate);n=at.default(e,s)||$t(o,s)}else if(r){var i=Je.default(a.props.maxDate);n=nt.default(e,i)||$t(o,i)}}n&&a.setState({preSelection:e})})),mt(bt(a),"handleTimeChange",(function(e){var t=Ft(a.props.selected?a.props.selected:a.getPreSelection(),{hour:Pe.default(e),minute:Me.default(e)});a.setState({preSelection:t}),a.props.onChange(t),a.props.shouldCloseOnSelect&&a.setOpen(!1),a.props.showTimeInput&&a.setOpen(!0),a.setState({inputValue:null})})),mt(bt(a),"onInputClick",(function(){a.props.disabled||a.props.readOnly||a.setOpen(!0),a.props.onInputClick()})),mt(bt(a),"onInputKeyDown",(function(e){a.props.onKeyDown(e);var t=e.key;if(a.state.open||a.props.inline||a.props.preventOpenOnFocus){if(a.state.open){if("ArrowDown"===t||"ArrowUp"===t){e.preventDefault();var r=a.calendar.componentNode&&a.calendar.componentNode.querySelector('.react-datepicker__day[tabindex="0"]');return void(r&&r.focus({preventScroll:!0}))}var n=xt(a.state.preSelection);"Enter"===t?(e.preventDefault(),a.inputOk()&&a.state.lastPreSelectChange===Xr?(a.handleSelect(n,e),!a.props.shouldCloseOnSelect&&a.setPreSelection(n)):a.setOpen(!1)):"Escape"===t&&(e.preventDefault(),a.setOpen(!1)),a.inputOk()||a.props.onInputError({code:1,msg:zr})}}else"ArrowDown"!==t&&"ArrowUp"!==t&&"Enter"!==t||a.onInputClick()})),mt(bt(a),"onDayKeyDown",(function(e){a.props.onKeyDown(e);var t=e.key,r=xt(a.state.preSelection);if("Enter"===t)e.preventDefault(),a.handleSelect(r,e),!a.props.shouldCloseOnSelect&&a.setPreSelection(r);else if("Escape"===t)e.preventDefault(),a.setOpen(!1),a.inputOk()||a.props.onInputError({code:1,msg:zr});else if(!a.props.disabledKeyboardNavigation){var n;switch(t){case"ArrowLeft":n=ge.default(r,1);break;case"ArrowRight":n=ve.default(r,1);break;case"ArrowUp":n=be.default(r,1);break;case"ArrowDown":n=De.default(r,1);break;case"PageUp":n=Ce.default(r,1);break;case"PageDown":n=we.default(r,1);break;case"Home":n=Se.default(r,1);break;case"End":n=ke.default(r,1)}if(!n)return void(a.props.onInputError&&a.props.onInputError({code:1,msg:zr}));if(e.preventDefault(),a.setState({lastPreSelectChange:Xr}),a.props.adjustDateOnChange&&a.setSelected(n),a.setPreSelection(n),a.props.inline){var o=Ye.default(r),s=Ye.default(n),i=Te.default(r),p=Te.default(n);o!==s||i!==p?a.setState({shouldFocusDayInline:!0}):a.setState({shouldFocusDayInline:!1})}}})),mt(bt(a),"onPopperKeyDown",(function(e){"Escape"===e.key&&(e.preventDefault(),a.setState({preventFocus:!0},(function(){a.setOpen(!1),setTimeout((function(){a.setFocus(),a.setState({preventFocus:!1})}))})))})),mt(bt(a),"onClearClick",(function(e){e&&e.preventDefault&&e.preventDefault(),a.props.onChange(null,e),a.setState({inputValue:null})})),mt(bt(a),"clear",(function(){a.onClearClick()})),mt(bt(a),"onScroll",(function(e){"boolean"==typeof a.props.closeOnScroll&&a.props.closeOnScroll?e.target!==document&&e.target!==document.documentElement&&e.target!==document.body||a.setOpen(!1):"function"==typeof a.props.closeOnScroll&&a.props.closeOnScroll(e)&&a.setOpen(!1)})),mt(bt(a),"renderCalendar",(function(){return a.props.inline||a.isCalendarOpen()?de.default.createElement($r,{ref:function(e){a.calendar=e},locale:a.props.locale,chooseDayAriaLabelPrefix:a.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:a.props.disabledDayAriaLabelPrefix,weekAriaLabelPrefix:a.props.weekAriaLabelPrefix,adjustDateOnChange:a.props.adjustDateOnChange,setOpen:a.setOpen,shouldCloseOnSelect:a.props.shouldCloseOnSelect,dateFormat:a.props.dateFormatCalendar,useWeekdaysShort:a.props.useWeekdaysShort,formatWeekDay:a.props.formatWeekDay,dropdownMode:a.props.dropdownMode,selected:a.props.selected,preSelection:a.state.preSelection,onSelect:a.handleSelect,onWeekSelect:a.props.onWeekSelect,openToDate:a.props.openToDate,minDate:a.props.minDate,maxDate:a.props.maxDate,selectsStart:a.props.selectsStart,selectsEnd:a.props.selectsEnd,selectsRange:a.props.selectsRange,startDate:a.props.startDate,endDate:a.props.endDate,excludeDates:a.props.excludeDates,filterDate:a.props.filterDate,onClickOutside:a.handleCalendarClickOutside,formatWeekNumber:a.props.formatWeekNumber,highlightDates:a.state.highlightDates,includeDates:a.props.includeDates,includeTimes:a.props.includeTimes,injectTimes:a.props.injectTimes,inline:a.props.inline,shouldFocusDayInline:a.state.shouldFocusDayInline,peekNextMonth:a.props.peekNextMonth,showMonthDropdown:a.props.showMonthDropdown,showPreviousMonths:a.props.showPreviousMonths,useShortMonthInDropdown:a.props.useShortMonthInDropdown,showMonthYearDropdown:a.props.showMonthYearDropdown,showWeekNumbers:a.props.showWeekNumbers,showYearDropdown:a.props.showYearDropdown,withPortal:a.props.withPortal,forceShowMonthNavigation:a.props.forceShowMonthNavigation,showDisabledMonthNavigation:a.props.showDisabledMonthNavigation,scrollableYearDropdown:a.props.scrollableYearDropdown,scrollableMonthYearDropdown:a.props.scrollableMonthYearDropdown,todayButton:a.props.todayButton,weekLabel:a.props.weekLabel,outsideClickIgnoreClass:Ur,fixedHeight:a.props.fixedHeight,monthsShown:a.props.monthsShown,monthSelectedIn:a.state.monthSelectedIn,onDropdownFocus:a.handleDropdownFocus,onMonthChange:a.props.onMonthChange,onYearChange:a.props.onYearChange,dayClassName:a.props.dayClassName,weekDayClassName:a.props.weekDayClassName,monthClassName:a.props.monthClassName,timeClassName:a.props.timeClassName,showTimeSelect:a.props.showTimeSelect,showTimeSelectOnly:a.props.showTimeSelectOnly,onTimeChange:a.handleTimeChange,timeFormat:a.props.timeFormat,timeIntervals:a.props.timeIntervals,minTime:a.props.minTime,maxTime:a.props.maxTime,excludeTimes:a.props.excludeTimes,filterTime:a.props.filterTime,timeCaption:a.props.timeCaption,className:a.props.calendarClassName,container:a.props.calendarContainer,yearItemNumber:a.props.yearItemNumber,yearDropdownItemNumber:a.props.yearDropdownItemNumber,previousMonthButtonLabel:a.props.previousMonthButtonLabel,nextMonthButtonLabel:a.props.nextMonthButtonLabel,previousYearButtonLabel:a.props.previousYearButtonLabel,nextYearButtonLabel:a.props.nextYearButtonLabel,timeInputLabel:a.props.timeInputLabel,disabledKeyboardNavigation:a.props.disabledKeyboardNavigation,renderCustomHeader:a.props.renderCustomHeader,popperProps:a.props.popperProps,renderDayContents:a.props.renderDayContents,onDayMouseEnter:a.props.onDayMouseEnter,onMonthMouseLeave:a.props.onMonthMouseLeave,showTimeInput:a.props.showTimeInput,showMonthYearPicker:a.props.showMonthYearPicker,showFullMonthYearPicker:a.props.showFullMonthYearPicker,showTwoColumnMonthYearPicker:a.props.showTwoColumnMonthYearPicker,showFourColumnMonthYearPicker:a.props.showFourColumnMonthYearPicker,showYearPicker:a.props.showYearPicker,showQuarterYearPicker:a.props.showQuarterYearPicker,showPopperArrow:a.props.showPopperArrow,excludeScrollbar:a.props.excludeScrollbar,handleOnKeyDown:a.onDayKeyDown,isInputFocused:a.state.focused,customTimeInput:a.props.customTimeInput,setPreSelection:a.setPreSelection},a.props.children):null})),mt(bt(a),"renderDateInput",(function(){var e,t,r,n,o,s=ce.default(a.props.className,mt({},Ur,a.state.open)),i=a.props.customInput||de.default.createElement("input",{type:"text"}),p=a.props.customInputRef||"ref",l="string"==typeof a.props.value?a.props.value:"string"==typeof a.state.inputValue?a.state.inputValue:(t=a.props.selected,r=a.props,n=r.dateFormat,o=r.locale,t&&Lt(t,Array.isArray(n)?n[0]:n,o)||"");return de.default.cloneElement(i,(mt(e={},p,(function(e){a.input=e})),mt(e,"value",l),mt(e,"onBlur",a.handleBlur),mt(e,"onChange",a.handleChange),mt(e,"onClick",a.onInputClick),mt(e,"onFocus",a.handleFocus),mt(e,"onKeyDown",a.onInputKeyDown),mt(e,"id",a.props.id),mt(e,"name",a.props.name),mt(e,"autoFocus",a.props.autoFocus),mt(e,"placeholder",a.props.placeholderText),mt(e,"disabled",a.props.disabled),mt(e,"autoComplete",a.props.autoComplete),mt(e,"className",ce.default(i.props.className,s)),mt(e,"title",a.props.title),mt(e,"readOnly",a.props.readOnly),mt(e,"required",a.props.required),mt(e,"tabIndex",a.props.tabIndex),mt(e,"aria-describedby",a.props.ariaDescribedBy),mt(e,"aria-invalid",a.props.ariaInvalid),mt(e,"aria-labelledby",a.props.ariaLabelledBy),mt(e,"aria-required",a.props.ariaRequired),e))})),mt(bt(a),"renderClearButton",(function(){var e=a.props,t=e.isClearable,r=e.selected,n=e.clearButtonTitle,o=e.clearButtonClassName,s=e.ariaLabelClose,i=void 0===s?"Close":s;return t&&null!=r?de.default.createElement("button",{type:"button",className:"react-datepicker__close-icon ".concat(o),"aria-label":i,onClick:a.onClearClick,title:n,tabIndex:-1}):null})),a.state=a.calcInitialState(),a}return ht(r,[{key:"componentDidMount",value:function(){window.addEventListener("scroll",this.onScroll,!0)}},{key:"componentDidUpdate",value:function(e,t){var r,a;e.inline&&(r=e.selected,a=this.props.selected,r&&a?Ye.default(r)!==Ye.default(a)||Te.default(r)!==Te.default(a):r!==a)&&this.setPreSelection(this.props.selected),void 0!==this.state.monthSelectedIn&&e.monthsShown!==this.props.monthsShown&&this.setState({monthSelectedIn:0}),e.highlightDates!==this.props.highlightDates&&this.setState({highlightDates:Dr(this.props.highlightDates)}),t.focused||$t(e.selected,this.props.selected)||this.setState({inputValue:null}),t.open!==this.state.open&&(!1===t.open&&!0===this.state.open&&this.props.onCalendarOpen(),!0===t.open&&!1===this.state.open&&this.props.onCalendarClose())}},{key:"componentWillUnmount",value:function(){this.clearPreventFocusTimeout(),window.removeEventListener("scroll",this.onScroll,!0)}},{key:"render",value:function(){var e=this.renderCalendar();return this.props.inline&&!this.props.withPortal?e:this.props.withPortal?de.default.createElement("div",null,this.props.inline?null:de.default.createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),this.state.open||this.props.inline?de.default.createElement("div",{className:"react-datepicker__portal"},e):null):de.default.createElement(Vr,{className:this.props.popperClassName,wrapperClassName:this.props.wrapperClassName,hidePopper:!this.isCalendarOpen(),portalId:this.props.portalId,popperModifiers:this.props.popperModifiers,targetComponent:de.default.createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),popperContainer:this.props.popperContainer,popperComponent:e,popperPlacement:this.props.popperPlacement,popperProps:this.props.popperProps,popperOnKeyDown:this.onPopperKeyDown,enableTabLoop:this.props.enableTabLoop})}}],[{key:"defaultProps",get:function(){return{allowSameDay:!1,dateFormat:"MM/dd/yyyy",dateFormatCalendar:"LLLL yyyy",onChange:function(){},disabled:!1,disabledKeyboardNavigation:!1,dropdownMode:"scroll",onFocus:function(){},onBlur:function(){},onKeyDown:function(){},onInputClick:function(){},onSelect:function(){},onClickOutside:function(){},onMonthChange:function(){},onCalendarOpen:function(){},onCalendarClose:function(){},preventOpenOnFocus:!1,onYearChange:function(){},onInputError:function(){},monthsShown:1,readOnly:!1,withPortal:!1,shouldCloseOnSelect:!0,showTimeSelect:!1,showTimeInput:!1,showPreviousMonths:!1,showMonthYearPicker:!1,showFullMonthYearPicker:!1,showTwoColumnMonthYearPicker:!1,showFourColumnMonthYearPicker:!1,showYearPicker:!1,showQuarterYearPicker:!1,strictParsing:!1,timeIntervals:30,timeCaption:"Time",previousMonthButtonLabel:"Previous Month",nextMonthButtonLabel:"Next Month",previousYearButtonLabel:"Previous Year",nextYearButtonLabel:"Next Year",timeInputLabel:"Time",enableTabLoop:!0,yearItemNumber:Ot,renderDayContents:function(e){return e},focusSelectedMonth:!1,showPopperArrow:!0,excludeScrollbar:!0,customTimeInput:null}}}]),r}(de.default.Component),Jr="input",Xr="navigate";e.CalendarContainer=Wr,e.default=Gr,e.getDefaultLocale=Gt,e.registerLocale=function(e,t){var r="undefined"!=typeof window?window:global;r.__localeData__||(r.__localeData__={}),r.__localeData__[e]=t},e.setDefaultLocale=function(e){("undefined"!=typeof window?window:global).__localeId__=e},Object.defineProperty(e,"__esModule",{value:!0})}));
+/* WEBPACK VAR INJECTION */(function(global) {!function(e,t){ true?t(exports,__webpack_require__(16),__webpack_require__(28),__webpack_require__(869),__webpack_require__(1517),__webpack_require__(1484),__webpack_require__(1518),__webpack_require__(1531),__webpack_require__(1532),__webpack_require__(1288),__webpack_require__(1533),__webpack_require__(1289),__webpack_require__(1487),__webpack_require__(1735),__webpack_require__(1736),__webpack_require__(1737),__webpack_require__(1738),__webpack_require__(1739),__webpack_require__(1740),__webpack_require__(1534),__webpack_require__(1741),__webpack_require__(1535),__webpack_require__(1742),__webpack_require__(1743),__webpack_require__(1744),__webpack_require__(1747),__webpack_require__(1748),__webpack_require__(1536),__webpack_require__(1749),__webpack_require__(1537),__webpack_require__(1538),__webpack_require__(1539),__webpack_require__(1489),__webpack_require__(1751),__webpack_require__(1540),__webpack_require__(1752),__webpack_require__(1753),__webpack_require__(1754),__webpack_require__(1755),__webpack_require__(1756),__webpack_require__(1757),__webpack_require__(1291),__webpack_require__(1290),__webpack_require__(1541),__webpack_require__(1542),__webpack_require__(1543),__webpack_require__(1544),__webpack_require__(1545),__webpack_require__(1546),__webpack_require__(1547),__webpack_require__(1548),__webpack_require__(1549),__webpack_require__(1550),__webpack_require__(1758),__webpack_require__(1551),__webpack_require__(1552),__webpack_require__(1759),__webpack_require__(901),__webpack_require__(1553),__webpack_require__(1766),__webpack_require__(1768),__webpack_require__(1769),__webpack_require__(322)):"function"==typeof define&&define.amd?define(["exports","react","prop-types","classnames","date-fns/isDate","date-fns/isValid","date-fns/format","date-fns/addMinutes","date-fns/addHours","date-fns/addDays","date-fns/addWeeks","date-fns/addMonths","date-fns/addYears","date-fns/subMinutes","date-fns/subHours","date-fns/subDays","date-fns/subWeeks","date-fns/subMonths","date-fns/subYears","date-fns/getSeconds","date-fns/getMinutes","date-fns/getHours","date-fns/getDay","date-fns/getDate","date-fns/getISOWeek","date-fns/getMonth","date-fns/getQuarter","date-fns/getYear","date-fns/getTime","date-fns/setSeconds","date-fns/setMinutes","date-fns/setHours","date-fns/setMonth","date-fns/setQuarter","date-fns/setYear","date-fns/min","date-fns/max","date-fns/differenceInCalendarDays","date-fns/differenceInCalendarMonths","date-fns/differenceInCalendarWeeks","date-fns/differenceInCalendarYears","date-fns/startOfDay","date-fns/startOfWeek","date-fns/startOfMonth","date-fns/startOfQuarter","date-fns/startOfYear","date-fns/endOfDay","date-fns/endOfWeek","date-fns/endOfMonth","date-fns/isEqual","date-fns/isSameDay","date-fns/isSameMonth","date-fns/isSameYear","date-fns/isSameQuarter","date-fns/isAfter","date-fns/isBefore","date-fns/isWithinInterval","date-fns/toDate","date-fns/parse","date-fns/parseISO","react-onclickoutside","react-popper","react-dom"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).DatePicker={},e.React,e.PropTypes,e.classNames,e.isDate,e.isValidDate,e.format,e.addMinutes,e.addHours,e.addDays,e.addWeeks,e.addMonths,e.addYears,null,null,e.subDays,e.subWeeks,e.subMonths,e.subYears,e.getSeconds,e.getMinutes,e.getHours,e.getDay,e.getDate,e.getISOWeek,e.getMonth,e.getQuarter,e.getYear,e.getTime,e.setSeconds,e.setMinutes,e.setHours,e.setMonth,e.setQuarter,e.setYear,e.min,e.max,e.differenceInCalendarDays,e.differenceInCalendarMonths,null,e.differenceInCalendarYears,e.startOfDay,e.startOfWeek,e.startOfMonth,e.startOfQuarter,e.startOfYear,e.endOfDay,null,null,e.dfIsEqual,e.dfIsSameDay,e.dfIsSameMonth,e.dfIsSameYear,e.dfIsSameQuarter,e.isAfter,e.isBefore,e.isWithinInterval,e.toDate,e.parse,e.parseISO,e.onClickOutside,e.ReactPopper,e.ReactDOM)}(this,(function(e,t,r,a,n,o,s,i,p,l,d,c,u,f,h,m,y,v,D,w,k,g,b,C,S,_,M,P,E,N,O,Y,x,T,I,L,F,R,q,A,W,B,j,H,K,Q,V,U,$,z,G,J,X,Z,ee,te,re,ae,ne,oe,se,ie,pe){"use strict";function le(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var de=le(t),ce=le(a),ue=le(n),fe=le(o),he=le(s),me=le(i),ye=le(p),ve=le(l),De=le(d),we=le(c),ke=le(u),ge=le(m),be=le(y),Ce=le(v),Se=le(D),_e=le(w),Me=le(k),Pe=le(g),Ee=le(b),Ne=le(C),Oe=le(S),Ye=le(_),xe=le(M),Te=le(P),Ie=le(E),Le=le(N),Fe=le(O),Re=le(Y),qe=le(x),Ae=le(T),We=le(I),Be=le(L),je=le(F),He=le(R),Ke=le(q),Qe=le(W),Ve=le(B),Ue=le(j),$e=le(H),ze=le(K),Ge=le(Q),Je=le(V),Xe=le(z),Ze=le(G),et=le(J),tt=le(X),rt=le(Z),at=le(ee),nt=le(te),ot=le(re),st=le(ae),it=le(ne),pt=le(oe),lt=le(se),dt=le(pe);function ct(e){return(ct="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function ut(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function ft(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}function ht(e,t,r){return t&&ft(e.prototype,t),r&&ft(e,r),e}function mt(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function yt(){return(yt=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)Object.prototype.hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e}).apply(this,arguments)}function vt(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(e);t&&(a=a.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,a)}return r}function Dt(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?vt(Object(r),!0).forEach((function(t){mt(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):vt(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function wt(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&gt(e,t)}function kt(e){return(kt=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function gt(e,t){return(gt=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function bt(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function Ct(e,t){return!t||"object"!=typeof t&&"function"!=typeof t?bt(e):t}function St(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}();return function(){var r,a=kt(e);if(t){var n=kt(this).constructor;r=Reflect.construct(a,arguments,n)}else r=a.apply(this,arguments);return Ct(this,r)}}function _t(e){return function(e){if(Array.isArray(e))return Mt(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(!e)return;if("string"==typeof e)return Mt(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);"Object"===r&&e.constructor&&(r=e.constructor.name);if("Map"===r||"Set"===r)return Array.from(e);if("Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r))return Mt(e,t)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function Mt(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,a=new Array(t);r<t;r++)a[r]=e[r];return a}function Pt(e,t){switch(e){case"P":return t.date({width:"short"});case"PP":return t.date({width:"medium"});case"PPP":return t.date({width:"long"});case"PPPP":default:return t.date({width:"full"})}}function Et(e,t){switch(e){case"p":return t.time({width:"short"});case"pp":return t.time({width:"medium"});case"ppp":return t.time({width:"long"});case"pppp":default:return t.time({width:"full"})}}var Nt={p:Et,P:function(e,t){var r,a=e.match(/(P+)(p+)?/),n=a[1],o=a[2];if(!o)return Pt(e,t);switch(n){case"P":r=t.dateTime({width:"short"});break;case"PP":r=t.dateTime({width:"medium"});break;case"PPP":r=t.dateTime({width:"long"});break;case"PPPP":default:r=t.dateTime({width:"full"})}return r.replace("{{date}}",Pt(n,t)).replace("{{time}}",Et(o,t))}},Ot=12,Yt=/P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;function xt(e){var t=e?"string"==typeof e||e instanceof String?pt.default(e):st.default(e):new Date;return It(t)?t:null}function Tt(e,t,r,a){var n=null,o=Jt(r)||Jt(Gt()),s=!0;return Array.isArray(t)?(t.forEach((function(t){var r=it.default(e,t,new Date,{locale:o});a&&(s=It(r)&&e===he.default(r,t,{awareOfUnicodeTokens:!0})),It(r)&&s&&(n=r)})),n):(n=it.default(e,t,new Date,{locale:o}),a?s=It(n)&&e===he.default(n,t,{awareOfUnicodeTokens:!0}):It(n)||(t=t.match(Yt).map((function(e){var t=e[0];return"p"===t||"P"===t?o?(0,Nt[t])(e,o.formatLong):t:e})).join(""),e.length>0&&(n=it.default(e,t.slice(0,e.length),new Date)),It(n)||(n=new Date(e))),It(n)&&s?n:null)}function It(e){return fe.default(e)&&at.default(e,new Date("1/1/1000"))}function Lt(e,t,r){if("en"===r)return he.default(e,t,{awareOfUnicodeTokens:!0});var a=Jt(r);return r&&!a&&console.warn('A locale object was not found for the provided string ["'.concat(r,'"].')),!a&&Gt()&&Jt(Gt())&&(a=Jt(Gt())),he.default(e,t,{locale:a||null,awareOfUnicodeTokens:!0})}function Ft(e,t){var r=t.hour,a=void 0===r?0:r,n=t.minute,o=void 0===n?0:n,s=t.second,i=void 0===s?0:s;return Re.default(Fe.default(Le.default(e,i),o),a)}function Rt(e,t){var r=t&&Jt(t)||Gt()&&Jt(Gt());return Oe.default(e,r?{locale:r}:null)}function qt(e,t){return Lt(e,"ddd",t)}function At(e){return Ve.default(e)}function Wt(e,t){var r=Jt(t||Gt());return Ue.default(e,{locale:r})}function Bt(e){return $e.default(e)}function jt(e){return Ge.default(e)}function Ht(e){return ze.default(e)}function Kt(e,t){return e&&t?tt.default(e,t):!e&&!t}function Qt(e,t){return e&&t?et.default(e,t):!e&&!t}function Vt(e,t){return e&&t?rt.default(e,t):!e&&!t}function Ut(e,t){return e&&t?Ze.default(e,t):!e&&!t}function $t(e,t){return e&&t?Xe.default(e,t):!e&&!t}function zt(e,t,r){var a,n=Ve.default(t),o=Je.default(r);try{a=ot.default(e,{start:n,end:o})}catch(e){a=!1}return a}function Gt(){return("undefined"!=typeof window?window:global).__localeId__}function Jt(e){if("string"==typeof e){var t="undefined"!=typeof window?window:global;return t.__localeData__?t.__localeData__[e]:null}return e}function Xt(e,t){return Lt(qe.default(xt(),e),"LLLL",t)}function Zt(e,t){return Lt(qe.default(xt(),e),"LLL",t)}function er(e,t){return Lt(Ae.default(xt(),e),"QQQ",t)}function tr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Ut(e,t)}))||o&&!o.some((function(t){return Ut(e,t)}))||s&&!s(xt(e))||!1}function rr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.excludeDates;return r&&r.some((function(t){return Ut(e,t)}))||!1}function ar(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Qt(e,t)}))||o&&!o.some((function(t){return Qt(e,t)}))||s&&!s(xt(e))||!1}function nr(e,t,r,a){var n=Te.default(e),o=Ye.default(e),s=Te.default(t),i=Ye.default(t),p=Te.default(a);return n===s&&n===p?o<=r&&r<=i:n<s?p===n&&o<=r||p===s&&i>=r||p<s&&p>n:void 0}function or(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=t.excludeDates,o=t.includeDates,s=t.filterDate;return pr(e,{minDate:r,maxDate:a})||n&&n.some((function(t){return Vt(e,t)}))||o&&!o.some((function(t){return Vt(e,t)}))||s&&!s(xt(e))||!1}function sr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate,n=new Date(e,0,1);return pr(n,{minDate:r,maxDate:a})||!1}function ir(e,t,r,a){var n=Te.default(e),o=xe.default(e),s=Te.default(t),i=xe.default(t),p=Te.default(a);return n===s&&n===p?o<=r&&r<=i:n<s?p===n&&o<=r||p===s&&i>=r||p<s&&p>n:void 0}function pr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.maxDate;return r&&He.default(e,r)<0||a&&He.default(e,a)>0}function lr(e,t){return t.some((function(t){return Pe.default(t)===Pe.default(e)&&Me.default(t)===Me.default(e)}))}function dr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.excludeTimes,a=t.includeTimes,n=t.filterTime;return r&&lr(e,r)||a&&!lr(e,a)||n&&!n(e)||!1}function cr(e,t){var r=t.minTime,a=t.maxTime;if(!r||!a)throw new Error("Both minTime and maxTime props required");var n,o=xt(),s=Re.default(Fe.default(o,Me.default(e)),Pe.default(e)),i=Re.default(Fe.default(o,Me.default(r)),Pe.default(r)),p=Re.default(Fe.default(o,Me.default(a)),Pe.default(a));try{n=!ot.default(s,{start:i,end:p})}catch(e){n=!1}return n}function ur(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.includeDates,n=Ce.default(e,1);return r&&Ke.default(r,n)>0||a&&a.every((function(e){return Ke.default(e,n)>0}))||!1}function fr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.includeDates,n=we.default(e,1);return r&&Ke.default(n,r)>0||a&&a.every((function(e){return Ke.default(n,e)>0}))||!1}function hr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.includeDates,n=Se.default(e,1);return r&&Qe.default(r,n)>0||a&&a.every((function(e){return Qe.default(e,n)>0}))||!1}function mr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.includeDates,n=ke.default(e,1);return r&&Qe.default(n,r)>0||a&&a.every((function(e){return Qe.default(n,e)>0}))||!1}function yr(e){var t=e.minDate,r=e.includeDates;if(r&&t){var a=r.filter((function(e){return He.default(e,t)>=0}));return Be.default(a)}return r?Be.default(r):t}function vr(e){var t=e.maxDate,r=e.includeDates;if(r&&t){var a=r.filter((function(e){return He.default(e,t)<=0}));return je.default(a)}return r?je.default(r):t}function Dr(){for(var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[],t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"react-datepicker__day--highlighted",r=new Map,a=0,n=e.length;a<n;a++){var o=e[a];if(ue.default(o)){var s=Lt(o,"MM.dd.yyyy"),i=r.get(s)||[];i.includes(t)||(i.push(t),r.set(s,i))}else if("object"===ct(o)){var p=Object.keys(o),l=p[0],d=o[p[0]];if("string"==typeof l&&d.constructor===Array)for(var c=0,u=d.length;c<u;c++){var f=Lt(d[c],"MM.dd.yyyy"),h=r.get(f)||[];h.includes(l)||(h.push(l),r.set(f,h))}}}return r}function wr(e,t,r,a,n){for(var o=n.length,s=[],i=0;i<o;i++){var p=me.default(ye.default(e,Pe.default(n[i])),Me.default(n[i])),l=me.default(e,(r+1)*a);at.default(p,t)&&nt.default(p,l)&&s.push(n[i])}return s}function kr(e){return e<10?"0".concat(e):"".concat(e)}function gr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:Ot,r=Math.ceil(Te.default(e)/t)*t,a=r-(t-1);return{startPeriod:a,endPeriod:r}}function br(e,t,r,a){for(var n=[],o=0;o<2*t+1;o++){var s=e+t-o,i=!0;r&&(i=Te.default(r)<=s),a&&i&&(i=Te.default(a)>=s),i&&n.push(s)}return n}var Cr=function(e){wt(r,e);var t=St(r);function r(e){var a;ut(this,r),mt(bt(a=t.call(this,e)),"renderOptions",(function(){var e=a.props.year,t=a.state.yearsList.map((function(t){return de.default.createElement("div",{className:e===t?"react-datepicker__year-option react-datepicker__year-option--selected_year":"react-datepicker__year-option",key:t,onClick:a.onChange.bind(bt(a),t)},e===t?de.default.createElement("span",{className:"react-datepicker__year-option--selected"},"✓"):"",t)})),r=a.props.minDate?Te.default(a.props.minDate):null,n=a.props.maxDate?Te.default(a.props.maxDate):null;return n&&a.state.yearsList.find((function(e){return e===n}))||t.unshift(de.default.createElement("div",{className:"react-datepicker__year-option",key:"upcoming",onClick:a.incrementYears},de.default.createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-upcoming"}))),r&&a.state.yearsList.find((function(e){return e===r}))||t.push(de.default.createElement("div",{className:"react-datepicker__year-option",key:"previous",onClick:a.decrementYears},de.default.createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-previous"}))),t})),mt(bt(a),"onChange",(function(e){a.props.onChange(e)})),mt(bt(a),"handleClickOutside",(function(){a.props.onCancel()})),mt(bt(a),"shiftYears",(function(e){var t=a.state.yearsList.map((function(t){return t+e}));a.setState({yearsList:t})})),mt(bt(a),"incrementYears",(function(){return a.shiftYears(1)})),mt(bt(a),"decrementYears",(function(){return a.shiftYears(-1)}));var n=e.yearDropdownItemNumber,o=e.scrollableYearDropdown,s=n||(o?10:5);return a.state={yearsList:br(a.props.year,s,a.props.minDate,a.props.maxDate)},a}return ht(r,[{key:"render",value:function(){var e=ce.default({"react-datepicker__year-dropdown":!0,"react-datepicker__year-dropdown--scrollable":this.props.scrollableYearDropdown});return de.default.createElement("div",{className:e},this.renderOptions())}}]),r}(de.default.Component),Sr=lt.default(Cr),_r=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(){for(var t=e.props.minDate?Te.default(e.props.minDate):1900,r=e.props.maxDate?Te.default(e.props.maxDate):2100,a=[],n=t;n<=r;n++)a.push(de.default.createElement("option",{key:n,value:n},n));return a})),mt(bt(e),"onSelectChange",(function(t){e.onChange(t.target.value)})),mt(bt(e),"renderSelectMode",(function(){return de.default.createElement("select",{value:e.props.year,className:"react-datepicker__year-select",onChange:e.onSelectChange},e.renderSelectOptions())})),mt(bt(e),"renderReadView",(function(t){return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__year-read-view",onClick:function(t){return e.toggleDropdown(t)}},de.default.createElement("span",{className:"react-datepicker__year-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__year-read-view--selected-year"},e.props.year))})),mt(bt(e),"renderDropdown",(function(){return de.default.createElement(Sr,{key:"dropdown",year:e.props.year,onChange:e.onChange,onCancel:e.toggleDropdown,minDate:e.props.minDate,maxDate:e.props.maxDate,scrollableYearDropdown:e.props.scrollableYearDropdown,yearDropdownItemNumber:e.props.yearDropdownItemNumber})})),mt(bt(e),"renderScrollMode",(function(){var t=e.state.dropdownVisible,r=[e.renderReadView(!t)];return t&&r.unshift(e.renderDropdown()),r})),mt(bt(e),"onChange",(function(t){e.toggleDropdown(),t!==e.props.year&&e.props.onChange(t)})),mt(bt(e),"toggleDropdown",(function(t){e.setState({dropdownVisible:!e.state.dropdownVisible},(function(){e.props.adjustDateOnChange&&e.handleYearChange(e.props.date,t)}))})),mt(bt(e),"handleYearChange",(function(t,r){e.onSelect(t,r),e.setOpen()})),mt(bt(e),"onSelect",(function(t,r){e.props.onSelect&&e.props.onSelect(t,r)})),mt(bt(e),"setOpen",(function(){e.props.setOpen&&e.props.setOpen(!0)})),e}return ht(r,[{key:"render",value:function(){var e;switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode();break;case"select":e=this.renderSelectMode()}return de.default.createElement("div",{className:"react-datepicker__year-dropdown-container react-datepicker__year-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component),Mr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"renderOptions",(function(){return e.props.monthNames.map((function(t,r){return de.default.createElement("div",{className:e.props.month===r?"react-datepicker__month-option react-datepicker__month-option--selected_month":"react-datepicker__month-option",key:t,onClick:e.onChange.bind(bt(e),r)},e.props.month===r?de.default.createElement("span",{className:"react-datepicker__month-option--selected"},"✓"):"",t)}))})),mt(bt(e),"onChange",(function(t){return e.props.onChange(t)})),mt(bt(e),"handleClickOutside",(function(){return e.props.onCancel()})),e}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__month-dropdown"},this.renderOptions())}}]),r}(de.default.Component),Pr=lt.default(Mr),Er=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(e){return e.map((function(e,t){return de.default.createElement("option",{key:t,value:t},e)}))})),mt(bt(e),"renderSelectMode",(function(t){return de.default.createElement("select",{value:e.props.month,className:"react-datepicker__month-select",onChange:function(t){return e.onChange(t.target.value)}},e.renderSelectOptions(t))})),mt(bt(e),"renderReadView",(function(t,r){return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__month-read-view",onClick:e.toggleDropdown},de.default.createElement("span",{className:"react-datepicker__month-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__month-read-view--selected-month"},r[e.props.month]))})),mt(bt(e),"renderDropdown",(function(t){return de.default.createElement(Pr,{key:"dropdown",month:e.props.month,monthNames:t,onChange:e.onChange,onCancel:e.toggleDropdown})})),mt(bt(e),"renderScrollMode",(function(t){var r=e.state.dropdownVisible,a=[e.renderReadView(!r,t)];return r&&a.unshift(e.renderDropdown(t)),a})),mt(bt(e),"onChange",(function(t){e.toggleDropdown(),t!==e.props.month&&e.props.onChange(t)})),mt(bt(e),"toggleDropdown",(function(){return e.setState({dropdownVisible:!e.state.dropdownVisible})})),e}return ht(r,[{key:"render",value:function(){var e,t=this,r=[0,1,2,3,4,5,6,7,8,9,10,11].map(this.props.useShortMonthInDropdown?function(e){return Zt(e,t.props.locale)}:function(e){return Xt(e,t.props.locale)});switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode(r);break;case"select":e=this.renderSelectMode(r)}return de.default.createElement("div",{className:"react-datepicker__month-dropdown-container react-datepicker__month-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component);function Nr(e,t){for(var r=[],a=Bt(e),n=Bt(t);!at.default(a,n);)r.push(xt(a)),a=we.default(a,1);return r}var Or=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"renderOptions",(function(){return a.state.monthYearsList.map((function(e){var t=Ie.default(e),r=Kt(a.props.date,e)&&Qt(a.props.date,e);return de.default.createElement("div",{className:r?"react-datepicker__month-year-option --selected_month-year":"react-datepicker__month-year-option",key:t,onClick:a.onChange.bind(bt(a),t)},r?de.default.createElement("span",{className:"react-datepicker__month-year-option--selected"},"✓"):"",Lt(e,a.props.dateFormat,a.props.locale))}))})),mt(bt(a),"onChange",(function(e){return a.props.onChange(e)})),mt(bt(a),"handleClickOutside",(function(){a.props.onCancel()})),a.state={monthYearsList:Nr(a.props.minDate,a.props.maxDate)},a}return ht(r,[{key:"render",value:function(){var e=ce.default({"react-datepicker__month-year-dropdown":!0,"react-datepicker__month-year-dropdown--scrollable":this.props.scrollableMonthYearDropdown});return de.default.createElement("div",{className:e},this.renderOptions())}}]),r}(de.default.Component),Yr=lt.default(Or),xr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{dropdownVisible:!1}),mt(bt(e),"renderSelectOptions",(function(){for(var t=Bt(e.props.minDate),r=Bt(e.props.maxDate),a=[];!at.default(t,r);){var n=Ie.default(t);a.push(de.default.createElement("option",{key:n,value:n},Lt(t,e.props.dateFormat,e.props.locale))),t=we.default(t,1)}return a})),mt(bt(e),"onSelectChange",(function(t){e.onChange(t.target.value)})),mt(bt(e),"renderSelectMode",(function(){return de.default.createElement("select",{value:Ie.default(Bt(e.props.date)),className:"react-datepicker__month-year-select",onChange:e.onSelectChange},e.renderSelectOptions())})),mt(bt(e),"renderReadView",(function(t){var r=Lt(e.props.date,e.props.dateFormat,e.props.locale);return de.default.createElement("div",{key:"read",style:{visibility:t?"visible":"hidden"},className:"react-datepicker__month-year-read-view",onClick:function(t){return e.toggleDropdown(t)}},de.default.createElement("span",{className:"react-datepicker__month-year-read-view--down-arrow"}),de.default.createElement("span",{className:"react-datepicker__month-year-read-view--selected-month-year"},r))})),mt(bt(e),"renderDropdown",(function(){return de.default.createElement(Yr,{key:"dropdown",date:e.props.date,dateFormat:e.props.dateFormat,onChange:e.onChange,onCancel:e.toggleDropdown,minDate:e.props.minDate,maxDate:e.props.maxDate,scrollableMonthYearDropdown:e.props.scrollableMonthYearDropdown,locale:e.props.locale})})),mt(bt(e),"renderScrollMode",(function(){var t=e.state.dropdownVisible,r=[e.renderReadView(!t)];return t&&r.unshift(e.renderDropdown()),r})),mt(bt(e),"onChange",(function(t){e.toggleDropdown();var r=xt(parseInt(t));Kt(e.props.date,r)&&Qt(e.props.date,r)||e.props.onChange(r)})),mt(bt(e),"toggleDropdown",(function(){return e.setState({dropdownVisible:!e.state.dropdownVisible})})),e}return ht(r,[{key:"render",value:function(){var e;switch(this.props.dropdownMode){case"scroll":e=this.renderScrollMode();break;case"select":e=this.renderSelectMode()}return de.default.createElement("div",{className:"react-datepicker__month-year-dropdown-container react-datepicker__month-year-dropdown-container--".concat(this.props.dropdownMode)},e)}}]),r}(de.default.Component),Tr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"dayEl",de.default.createRef()),mt(bt(e),"handleClick",(function(t){!e.isDisabled()&&e.props.onClick&&e.props.onClick(t)})),mt(bt(e),"handleMouseEnter",(function(t){!e.isDisabled()&&e.props.onMouseEnter&&e.props.onMouseEnter(t)})),mt(bt(e),"handleOnKeyDown",(function(t){" "===t.key&&(t.preventDefault(),t.key="Enter"),e.props.handleOnKeyDown(t)})),mt(bt(e),"isSameDay",(function(t){return Ut(e.props.day,t)})),mt(bt(e),"isKeyboardSelected",(function(){return!e.props.disabledKeyboardNavigation&&!e.isSameDay(e.props.selected)&&e.isSameDay(e.props.preSelection)})),mt(bt(e),"isDisabled",(function(){return tr(e.props.day,e.props)})),mt(bt(e),"isExcluded",(function(){return rr(e.props.day,e.props)})),mt(bt(e),"getHighLightedClass",(function(t){var r=e.props,a=r.day,n=r.highlightDates;if(!n)return!1;var o=Lt(a,"MM.dd.yyyy");return n.get(o)})),mt(bt(e),"isInRange",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&zt(r,a,n)})),mt(bt(e),"isInSelectingRange",(function(){var t=e.props,r=t.day,a=t.selectsStart,n=t.selectsEnd,o=t.selectsRange,s=t.selectingDate,i=t.startDate,p=t.endDate;return!(!(a||n||o)||!s||e.isDisabled())&&(a&&p&&(nt.default(s,p)||$t(s,p))?zt(r,s,p):(n&&i&&(at.default(s,i)||$t(s,i))||!(!o||!i||p||!at.default(s,i)&&!$t(s,i)))&&zt(r,i,s))})),mt(bt(e),"isSelectingRangeStart",(function(){if(!e.isInSelectingRange())return!1;var t=e.props,r=t.day,a=t.selectingDate,n=t.startDate;return Ut(r,t.selectsStart?a:n)})),mt(bt(e),"isSelectingRangeEnd",(function(){if(!e.isInSelectingRange())return!1;var t=e.props,r=t.day,a=t.selectingDate,n=t.endDate;return Ut(r,t.selectsEnd?a:n)})),mt(bt(e),"isRangeStart",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&Ut(a,r)})),mt(bt(e),"isRangeEnd",(function(){var t=e.props,r=t.day,a=t.startDate,n=t.endDate;return!(!a||!n)&&Ut(n,r)})),mt(bt(e),"isWeekend",(function(){var t=Ee.default(e.props.day);return 0===t||6===t})),mt(bt(e),"isOutsideMonth",(function(){return void 0!==e.props.month&&e.props.month!==Ye.default(e.props.day)})),mt(bt(e),"getClassNames",(function(t){var r=e.props.dayClassName?e.props.dayClassName(t):void 0;return ce.default("react-datepicker__day",r,"react-datepicker__day--"+qt(e.props.day),{"react-datepicker__day--disabled":e.isDisabled(),"react-datepicker__day--excluded":e.isExcluded(),"react-datepicker__day--selected":e.isSameDay(e.props.selected),"react-datepicker__day--keyboard-selected":e.isKeyboardSelected(),"react-datepicker__day--range-start":e.isRangeStart(),"react-datepicker__day--range-end":e.isRangeEnd(),"react-datepicker__day--in-range":e.isInRange(),"react-datepicker__day--in-selecting-range":e.isInSelectingRange(),"react-datepicker__day--selecting-range-start":e.isSelectingRangeStart(),"react-datepicker__day--selecting-range-end":e.isSelectingRangeEnd(),"react-datepicker__day--today":e.isSameDay(xt()),"react-datepicker__day--weekend":e.isWeekend(),"react-datepicker__day--outside-month":e.isOutsideMonth()},e.getHighLightedClass("react-datepicker__day--highlighted"))})),mt(bt(e),"getAriaLabel",(function(){var t=e.props,r=t.day,a=t.ariaLabelPrefixWhenEnabled,n=void 0===a?"Choose":a,o=t.ariaLabelPrefixWhenDisabled,s=void 0===o?"Not available":o,i=e.isDisabled()||e.isExcluded()?s:n;return"".concat(i," ").concat(Lt(r,"PPPP"))})),mt(bt(e),"getTabIndex",(function(t,r){var a=t||e.props.selected,n=r||e.props.preSelection;return e.isKeyboardSelected()||e.isSameDay(a)&&Ut(n,a)?0:-1})),mt(bt(e),"handleFocusDay",(function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},r=!1;0===e.getTabIndex()&&!t.isInputFocused&&e.isSameDay(e.props.preSelection)&&(document.activeElement&&document.activeElement!==document.body||(r=!0),e.props.inline&&!e.props.shouldFocusDayInline&&(r=!1),e.props.containerRef&&e.props.containerRef.current&&e.props.containerRef.current.contains(document.activeElement)&&document.activeElement.classList.contains("react-datepicker__day")&&(r=!0)),r&&e.dayEl.current.focus({preventScroll:!0})})),mt(bt(e),"renderDayContents",(function(){if(e.isOutsideMonth()){if(e.props.monthShowsDuplicateDaysEnd&&Ne.default(e.props.day)<10)return null;if(e.props.monthShowsDuplicateDaysStart&&Ne.default(e.props.day)>20)return null}return e.props.renderDayContents?e.props.renderDayContents(Ne.default(e.props.day),e.props.day):Ne.default(e.props.day)})),mt(bt(e),"render",(function(){return de.default.createElement("div",{ref:e.dayEl,className:e.getClassNames(e.props.day),onKeyDown:e.handleOnKeyDown,onClick:e.handleClick,onMouseEnter:e.handleMouseEnter,tabIndex:e.getTabIndex(),"aria-label":e.getAriaLabel(),role:"button","aria-disabled":e.isDisabled()},e.renderDayContents())})),e}return ht(r,[{key:"componentDidMount",value:function(){this.handleFocusDay()}},{key:"componentDidUpdate",value:function(e){this.handleFocusDay(e)}}]),r}(de.default.Component),Ir=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"handleClick",(function(t){e.props.onClick&&e.props.onClick(t)})),e}return ht(r,[{key:"render",value:function(){var e=this.props,t=e.weekNumber,r=e.ariaLabelPrefix,a=void 0===r?"week ":r,n={"react-datepicker__week-number":!0,"react-datepicker__week-number--clickable":!!e.onClick};return de.default.createElement("div",{className:ce.default(n),"aria-label":"".concat(a," ").concat(this.props.weekNumber),onClick:this.handleClick},t)}}]),r}(de.default.Component),Lr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"handleDayClick",(function(t,r){e.props.onDayClick&&e.props.onDayClick(t,r)})),mt(bt(e),"handleDayMouseEnter",(function(t){e.props.onDayMouseEnter&&e.props.onDayMouseEnter(t)})),mt(bt(e),"handleWeekClick",(function(t,r,a){"function"==typeof e.props.onWeekSelect&&e.props.onWeekSelect(t,r,a),e.props.shouldCloseOnSelect&&e.props.setOpen(!1)})),mt(bt(e),"formatWeekNumber",(function(t){return e.props.formatWeekNumber?e.props.formatWeekNumber(t):Rt(t)})),mt(bt(e),"renderDays",(function(){var t=Wt(e.props.day,e.props.locale),r=[],a=e.formatWeekNumber(t);if(e.props.showWeekNumber){var n=e.props.onWeekSelect?e.handleWeekClick.bind(bt(e),t,a):void 0;r.push(de.default.createElement(Ir,{key:"W",weekNumber:a,onClick:n,ariaLabelPrefix:e.props.ariaLabelPrefix}))}return r.concat([0,1,2,3,4,5,6].map((function(r){var a=ve.default(t,r);return de.default.createElement(Tr,{ariaLabelPrefixWhenEnabled:e.props.chooseDayAriaLabelPrefix,ariaLabelPrefixWhenDisabled:e.props.disabledDayAriaLabelPrefix,key:a.valueOf(),day:a,month:e.props.month,onClick:e.handleDayClick.bind(bt(e),a),onMouseEnter:e.handleDayMouseEnter.bind(bt(e),a),minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,highlightDates:e.props.highlightDates,selectingDate:e.props.selectingDate,filterDate:e.props.filterDate,preSelection:e.props.preSelection,selected:e.props.selected,selectsStart:e.props.selectsStart,selectsEnd:e.props.selectsEnd,selectsRange:e.props.selectsRange,startDate:e.props.startDate,endDate:e.props.endDate,dayClassName:e.props.dayClassName,renderDayContents:e.props.renderDayContents,disabledKeyboardNavigation:e.props.disabledKeyboardNavigation,handleOnKeyDown:e.props.handleOnKeyDown,isInputFocused:e.props.isInputFocused,containerRef:e.props.containerRef,inline:e.props.inline,shouldFocusDayInline:e.props.shouldFocusDayInline,monthShowsDuplicateDaysEnd:e.props.monthShowsDuplicateDaysEnd,monthShowsDuplicateDaysStart:e.props.monthShowsDuplicateDaysStart})})))})),e}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__week"},this.renderDays())}}],[{key:"defaultProps",get:function(){return{shouldCloseOnSelect:!0}}}]),r}(de.default.Component),Fr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"MONTH_REFS",_t(Array(12)).map((function(){return de.default.createRef()}))),mt(bt(e),"isDisabled",(function(t){return tr(t,e.props)})),mt(bt(e),"isExcluded",(function(t){return rr(t,e.props)})),mt(bt(e),"handleDayClick",(function(t,r){e.props.onDayClick&&e.props.onDayClick(t,r,e.props.orderInDisplay)})),mt(bt(e),"handleDayMouseEnter",(function(t){e.props.onDayMouseEnter&&e.props.onDayMouseEnter(t)})),mt(bt(e),"handleMouseLeave",(function(){e.props.onMouseLeave&&e.props.onMouseLeave()})),mt(bt(e),"isRangeStartMonth",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Qt(qe.default(a,t),n)})),mt(bt(e),"isRangeStartQuarter",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Vt(Ae.default(a,t),n)})),mt(bt(e),"isRangeEndMonth",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Qt(qe.default(a,t),o)})),mt(bt(e),"isRangeEndQuarter",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate;return!(!n||!o)&&Vt(Ae.default(a,t),o)})),mt(bt(e),"isWeekInMonth",(function(t){var r=e.props.day,a=ve.default(t,6);return Qt(t,r)||Qt(a,r)})),mt(bt(e),"renderWeeks",(function(){for(var t=[],r=e.props.fixedHeight,a=Wt(Bt(e.props.day),e.props.locale),n=0,o=!1;t.push(de.default.createElement(Lr,{ariaLabelPrefix:e.props.weekAriaLabelPrefix,chooseDayAriaLabelPrefix:e.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:e.props.disabledDayAriaLabelPrefix,key:n,day:a,month:Ye.default(e.props.day),onDayClick:e.handleDayClick,onDayMouseEnter:e.handleDayMouseEnter,onWeekSelect:e.props.onWeekSelect,formatWeekNumber:e.props.formatWeekNumber,locale:e.props.locale,minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,inline:e.props.inline,shouldFocusDayInline:e.props.shouldFocusDayInline,highlightDates:e.props.highlightDates,selectingDate:e.props.selectingDate,filterDate:e.props.filterDate,preSelection:e.props.preSelection,selected:e.props.selected,selectsStart:e.props.selectsStart,selectsEnd:e.props.selectsEnd,selectsRange:e.props.selectsRange,showWeekNumber:e.props.showWeekNumbers,startDate:e.props.startDate,endDate:e.props.endDate,dayClassName:e.props.dayClassName,setOpen:e.props.setOpen,shouldCloseOnSelect:e.props.shouldCloseOnSelect,disabledKeyboardNavigation:e.props.disabledKeyboardNavigation,renderDayContents:e.props.renderDayContents,handleOnKeyDown:e.props.handleOnKeyDown,isInputFocused:e.props.isInputFocused,containerRef:e.props.containerRef,monthShowsDuplicateDaysEnd:e.props.monthShowsDuplicateDaysEnd,monthShowsDuplicateDaysStart:e.props.monthShowsDuplicateDaysStart})),!o;){n++,a=De.default(a,1);var s=r&&n>=6,i=!r&&!e.isWeekInMonth(a);if(s||i){if(!e.props.peekNextMonth)break;o=!0}}return t})),mt(bt(e),"onMonthClick",(function(t,r){e.handleDayClick(Bt(qe.default(e.props.day,r)),t)})),mt(bt(e),"handleMonthNavigation",(function(t,r){e.isDisabled(r)||e.isExcluded(r)||(e.props.setPreSelection(r),e.MONTH_REFS[t].current&&e.MONTH_REFS[t].current.focus())})),mt(bt(e),"onMonthKeyDown",(function(t,r){var a=t.key;if(!e.props.disabledKeyboardNavigation)switch(a){case"Enter":e.onMonthClick(t,r),e.props.setPreSelection(e.props.selected);break;case"ArrowRight":e.handleMonthNavigation(11===r?0:r+1,we.default(e.props.preSelection,1));break;case"ArrowLeft":e.handleMonthNavigation(0===r?11:r-1,Ce.default(e.props.preSelection,1))}})),mt(bt(e),"onQuarterClick",(function(t,r){e.handleDayClick(Ht(Ae.default(e.props.day,r)),t)})),mt(bt(e),"getMonthClassNames",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate,s=r.selected,i=r.minDate,p=r.maxDate,l=r.preSelection,d=r.monthClassName,c=d?d(a):void 0;return ce.default("react-datepicker__month-text","react-datepicker__month-".concat(t),c,{"react-datepicker__month--disabled":(i||p)&&ar(qe.default(a,t),e.props),"react-datepicker__month--selected":Ye.default(a)===t&&Te.default(a)===Te.default(s),"react-datepicker__month-text--keyboard-selected":Ye.default(l)===t,"react-datepicker__month--in-range":nr(n,o,t,a),"react-datepicker__month--range-start":e.isRangeStartMonth(t),"react-datepicker__month--range-end":e.isRangeEndMonth(t)})})),mt(bt(e),"getTabIndex",(function(t){var r=Ye.default(e.props.preSelection);return e.props.disabledKeyboardNavigation||t!==r?"-1":"0"})),mt(bt(e),"getAriaLabel",(function(t){var r=e.props,a=r.ariaLabelPrefix,n=void 0===a?"Choose":a,o=r.disabledDayAriaLabelPrefix,s=void 0===o?"Not available":o,i=r.day,p=qe.default(i,t),l=e.isDisabled(p)||e.isExcluded(p)?s:n;return"".concat(l," ").concat(Lt(p,"MMMM yyyy"))})),mt(bt(e),"getQuarterClassNames",(function(t){var r=e.props,a=r.day,n=r.startDate,o=r.endDate,s=r.selected,i=r.minDate,p=r.maxDate;return ce.default("react-datepicker__quarter-text","react-datepicker__quarter-".concat(t),{"react-datepicker__quarter--disabled":(i||p)&&or(Ae.default(a,t),e.props),"react-datepicker__quarter--selected":xe.default(a)===t&&Te.default(a)===Te.default(s),"react-datepicker__quarter--in-range":ir(n,o,t,a),"react-datepicker__quarter--range-start":e.isRangeStartQuarter(t),"react-datepicker__quarter--range-end":e.isRangeEndQuarter(t)})})),mt(bt(e),"renderMonths",(function(){var t=e.props,r=t.showFullMonthYearPicker,a=t.showTwoColumnMonthYearPicker,n=t.showFourColumnMonthYearPicker,o=t.locale;return(n?[[0,1,2,3],[4,5,6,7],[8,9,10,11]]:a?[[0,1],[2,3],[4,5],[6,7],[8,9],[10,11]]:[[0,1,2],[3,4,5],[6,7,8],[9,10,11]]).map((function(t,a){return de.default.createElement("div",{className:"react-datepicker__month-wrapper",key:a},t.map((function(t,a){return de.default.createElement("div",{ref:e.MONTH_REFS[t],key:a,onClick:function(r){e.onMonthClick(r,t)},onKeyDown:function(r){e.onMonthKeyDown(r,t)},tabIndex:e.getTabIndex(t),className:e.getMonthClassNames(t),role:"button","aria-label":e.getAriaLabel(t)},r?Xt(t,o):Zt(t,o))})))}))})),mt(bt(e),"renderQuarters",(function(){return de.default.createElement("div",{className:"react-datepicker__quarter-wrapper"},[1,2,3,4].map((function(t,r){return de.default.createElement("div",{key:r,onClick:function(r){e.onQuarterClick(r,t)},className:e.getQuarterClassNames(t)},er(t,e.props.locale))})))})),mt(bt(e),"getClassNames",(function(){var t=e.props;t.day;var r=t.selectingDate,a=t.selectsStart,n=t.selectsEnd,o=t.showMonthYearPicker,s=t.showQuarterYearPicker;return ce.default("react-datepicker__month",{"react-datepicker__month--selecting-range":r&&(a||n)},{"react-datepicker__monthPicker":o},{"react-datepicker__quarterPicker":s})})),e}return ht(r,[{key:"render",value:function(){var e=this.props,t=e.showMonthYearPicker,r=e.showQuarterYearPicker,a=e.day,n=e.ariaLabelPrefix,o=void 0===n?"month ":n;return de.default.createElement("div",{className:this.getClassNames(),onMouseLeave:this.handleMouseLeave,"aria-label":"".concat(o," ").concat(Lt(a,"yyyy-MM"))},t?this.renderMonths():r?this.renderQuarters():this.renderWeeks())}}]),r}(de.default.Component),Rr=function(e){wt(r,e);var t=St(r);function r(){var e;ut(this,r);for(var a=arguments.length,n=new Array(a),o=0;o<a;o++)n[o]=arguments[o];return mt(bt(e=t.call.apply(t,[this].concat(n))),"state",{height:null}),mt(bt(e),"handleClick",(function(t){(e.props.minTime||e.props.maxTime)&&cr(t,e.props)||(e.props.excludeTimes||e.props.includeTimes||e.props.filterTime)&&dr(t,e.props)||e.props.onChange(t)})),mt(bt(e),"liClasses",(function(t,r,a){var n=["react-datepicker__time-list-item",e.props.timeClassName?e.props.timeClassName(t,r,a):void 0];return e.props.selected&&r===Pe.default(t)&&a===Me.default(t)&&n.push("react-datepicker__time-list-item--selected"),((e.props.minTime||e.props.maxTime)&&cr(t,e.props)||(e.props.excludeTimes||e.props.includeTimes||e.props.filterTime)&&dr(t,e.props))&&n.push("react-datepicker__time-list-item--disabled"),e.props.injectTimes&&(60*Pe.default(t)+Me.default(t))%e.props.intervals!=0&&n.push("react-datepicker__time-list-item--injected"),n.join(" ")})),mt(bt(e),"renderTimes",(function(){for(var t=[],r=e.props.format?e.props.format:"p",a=e.props.intervals,n=At(xt(e.props.selected)),o=1440/a,s=e.props.injectTimes&&e.props.injectTimes.sort((function(e,t){return e-t})),i=e.props.selected||e.props.openToDate||xt(),p=Pe.default(i),l=Me.default(i),d=Re.default(Fe.default(n,l),p),c=0;c<o;c++){var u=me.default(n,c*a);if(t.push(u),s){var f=wr(n,u,c,a,s);t=t.concat(f)}}return t.map((function(t,a){return de.default.createElement("li",{key:a,onClick:e.handleClick.bind(bt(e),t),className:e.liClasses(t,p,l),ref:function(r){(nt.default(t,d)||$t(t,d))&&(e.centerLi=r)},tabIndex:"0"},Lt(t,r,e.props.locale))}))})),e}return ht(r,[{key:"componentDidMount",value:function(){this.list.scrollTop=r.calcCenterPosition(this.props.monthRef?this.props.monthRef.clientHeight-this.header.clientHeight:this.list.clientHeight,this.centerLi),this.props.monthRef&&this.header&&this.setState({height:this.props.monthRef.clientHeight-this.header.clientHeight})}},{key:"render",value:function(){var e=this,t=this.state.height;return de.default.createElement("div",{className:"react-datepicker__time-container ".concat(this.props.todayButton?"react-datepicker__time-container--with-today-button":"")},de.default.createElement("div",{className:"react-datepicker__header react-datepicker__header--time ".concat(this.props.showTimeSelectOnly?"react-datepicker__header--time--only":""),ref:function(t){e.header=t}},de.default.createElement("div",{className:"react-datepicker-time__header"},this.props.timeCaption)),de.default.createElement("div",{className:"react-datepicker__time"},de.default.createElement("div",{className:"react-datepicker__time-box"},de.default.createElement("ul",{className:"react-datepicker__time-list",ref:function(t){e.list=t},style:t?{height:t}:{},tabIndex:"0"},this.renderTimes()))))}}],[{key:"defaultProps",get:function(){return{intervals:30,onTimeChange:function(){},todayButton:null,timeCaption:"Time"}}}]),r}(de.default.Component);mt(Rr,"calcCenterPosition",(function(e,t){return t.offsetTop-(e/2-t.clientHeight/2)}));var qr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"handleYearClick",(function(e,t){a.props.onDayClick&&a.props.onDayClick(e,t)})),mt(bt(a),"isSameDay",(function(e,t){return Ut(e,t)})),mt(bt(a),"isKeyboardSelected",(function(e){var t=jt(We.default(a.props.date,e));return!a.props.disabledKeyboardNavigation&&!a.props.inline&&!Ut(t,jt(a.props.selected))&&Ut(t,jt(a.props.preSelection))})),mt(bt(a),"onYearClick",(function(e,t){var r=a.props.date;a.handleYearClick(jt(We.default(r,t)),e)})),mt(bt(a),"getYearClassNames",(function(e){var t=a.props,r=t.minDate,n=t.maxDate,o=t.selected;return ce.default("react-datepicker__year-text",{"react-datepicker__year-text--selected":e===Te.default(o),"react-datepicker__year-text--disabled":(r||n)&&sr(e,a.props),"react-datepicker__year-text--keyboard-selected":a.isKeyboardSelected(e),"react-datepicker__year-text--today":e===Te.default(xt())})})),a}return ht(r,[{key:"render",value:function(){for(var e=this,t=[],r=this.props,a=gr(r.date,r.yearItemNumber),n=a.startPeriod,o=a.endPeriod,s=function(r){t.push(de.default.createElement("div",{onClick:function(t){e.onYearClick(t,r)},className:e.getYearClassNames(r),key:r},r))},i=n;i<=o;i++)s(i);return de.default.createElement("div",{className:"react-datepicker__year"},de.default.createElement("div",{className:"react-datepicker__year-wrapper"},t))}}]),r}(de.default.Component),Ar=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"onTimeChange",(function(e){a.setState({time:e});var t=new Date;t.setHours(e.split(":")[0]),t.setMinutes(e.split(":")[1]),a.props.onChange(t)})),mt(bt(a),"renderTimeInput",(function(){var e=a.state.time,t=a.props,r=t.date,n=t.timeString,o=t.customTimeInput;return o?de.default.cloneElement(o,{date:r,value:e,onChange:a.onTimeChange}):de.default.createElement("input",{type:"time",className:"react-datepicker-time__input",placeholder:"Time",name:"time-input",required:!0,value:e,onChange:function(e){a.onTimeChange(e.target.value||n)}})})),a.state={time:a.props.timeString},a}return ht(r,[{key:"render",value:function(){return de.default.createElement("div",{className:"react-datepicker__input-time-container"},de.default.createElement("div",{className:"react-datepicker-time__caption"},this.props.timeInputLabel),de.default.createElement("div",{className:"react-datepicker-time__input-container"},de.default.createElement("div",{className:"react-datepicker-time__input"},this.renderTimeInput())))}}],[{key:"getDerivedStateFromProps",value:function(e,t){return e.timeString!==t.time?{time:e.timeString}:null}}]),r}(de.default.Component);function Wr(e){var t=e.className,r=e.children,a=e.showPopperArrow,n=e.arrowProps,o=void 0===n?{}:n;return de.default.createElement("div",{className:t},a&&de.default.createElement("div",yt({className:"react-datepicker__triangle"},o)),r)}var Br=["react-datepicker__year-select","react-datepicker__month-select","react-datepicker__month-year-select"],jr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"handleClickOutside",(function(e){a.props.onClickOutside(e)})),mt(bt(a),"setClickOutsideRef",(function(){return a.containerRef.current})),mt(bt(a),"handleDropdownFocus",(function(e){(function(){var e=((arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}).className||"").split(/\s+/);return Br.some((function(t){return e.indexOf(t)>=0}))})(e.target)&&a.props.onDropdownFocus()})),mt(bt(a),"getDateInView",(function(){var e=a.props,t=e.preSelection,r=e.selected,n=e.openToDate,o=yr(a.props),s=vr(a.props),i=xt(),p=n||r||t;return p||(o&&nt.default(i,o)?o:s&&at.default(i,s)?s:i)})),mt(bt(a),"increaseMonth",(function(){a.setState((function(e){var t=e.date;return{date:we.default(t,1)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"decreaseMonth",(function(){a.setState((function(e){var t=e.date;return{date:Ce.default(t,1)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"handleDayClick",(function(e,t,r){a.props.onSelect(e,t,r),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleDayMouseEnter",(function(e){a.setState({selectingDate:e}),a.props.onDayMouseEnter&&a.props.onDayMouseEnter(e)})),mt(bt(a),"handleMonthMouseLeave",(function(){a.setState({selectingDate:null}),a.props.onMonthMouseLeave&&a.props.onMonthMouseLeave()})),mt(bt(a),"handleYearChange",(function(e){a.props.onYearChange&&a.props.onYearChange(e),a.props.adjustDateOnChange&&(a.props.onSelect&&a.props.onSelect(e),a.props.setOpen&&a.props.setOpen(!0)),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleMonthChange",(function(e){a.props.onMonthChange&&a.props.onMonthChange(e),a.props.adjustDateOnChange&&(a.props.onSelect&&a.props.onSelect(e),a.props.setOpen&&a.props.setOpen(!0)),a.props.setPreSelection&&a.props.setPreSelection(e)})),mt(bt(a),"handleMonthYearChange",(function(e){a.handleYearChange(e),a.handleMonthChange(e)})),mt(bt(a),"changeYear",(function(e){a.setState((function(t){var r=t.date;return{date:We.default(r,e)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"changeMonth",(function(e){a.setState((function(t){var r=t.date;return{date:qe.default(r,e)}}),(function(){return a.handleMonthChange(a.state.date)}))})),mt(bt(a),"changeMonthYear",(function(e){a.setState((function(t){var r=t.date;return{date:We.default(qe.default(r,Ye.default(e)),Te.default(e))}}),(function(){return a.handleMonthYearChange(a.state.date)}))})),mt(bt(a),"header",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a.state.date,t=Wt(e,a.props.locale),r=[];return a.props.showWeekNumbers&&r.push(de.default.createElement("div",{key:"W",className:"react-datepicker__day-name"},a.props.weekLabel||"#")),r.concat([0,1,2,3,4,5,6].map((function(e){var r=ve.default(t,e),n=a.formatWeekday(r,a.props.locale),o=a.props.weekDayClassName?a.props.weekDayClassName(r):void 0;return de.default.createElement("div",{key:e,className:ce.default("react-datepicker__day-name",o)},n)})))})),mt(bt(a),"formatWeekday",(function(e,t){return a.props.formatWeekDay?function(e,t,r){return t(Lt(e,"EEEE",r))}(e,a.props.formatWeekDay,t):a.props.useWeekdaysShort?function(e,t){return Lt(e,"EEE",t)}(e,t):function(e,t){return Lt(e,"EEEEEE",t)}(e,t)})),mt(bt(a),"decreaseYear",(function(){a.setState((function(e){var t=e.date;return{date:Se.default(t,a.props.showYearPicker?a.props.yearItemNumber:1)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"renderPreviousButton",(function(){if(!a.props.renderCustomHeader){var e;switch(!0){case a.props.showMonthYearPicker:e=hr(a.state.date,a.props);break;case a.props.showYearPicker:e=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.minDate,a=t.yearItemNumber,n=void 0===a?Ot:a,o=gr(jt(Se.default(e,n)),n).endPeriod,s=r&&Te.default(r);return s&&s>o||!1}(a.state.date,a.props);break;default:e=ur(a.state.date,a.props)}if((a.props.forceShowMonthNavigation||a.props.showDisabledMonthNavigation||!e)&&!a.props.showTimeSelectOnly){var t=["react-datepicker__navigation","react-datepicker__navigation--previous"],r=a.decreaseMonth;(a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker)&&(r=a.decreaseYear),e&&a.props.showDisabledMonthNavigation&&(t.push("react-datepicker__navigation--previous--disabled"),r=null);var n=a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker,o=a.props,s=o.previousMonthAriaLabel,i=void 0===s?"Previous Month":s,p=o.previousYearAriaLabel,l=void 0===p?"Previous Year":p;return de.default.createElement("button",{type:"button",className:t.join(" "),onClick:r,"aria-label":n?l:i},n?a.props.previousYearButtonLabel:a.props.previousMonthButtonLabel)}}})),mt(bt(a),"increaseYear",(function(){a.setState((function(e){var t=e.date;return{date:ke.default(t,a.props.showYearPicker?a.props.yearItemNumber:1)}}),(function(){return a.handleYearChange(a.state.date)}))})),mt(bt(a),"renderNextButton",(function(){if(!a.props.renderCustomHeader){var e;switch(!0){case a.props.showMonthYearPicker:e=mr(a.state.date,a.props);break;case a.props.showYearPicker:e=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.maxDate,a=t.yearItemNumber,n=void 0===a?Ot:a,o=gr(ke.default(e,n),n).startPeriod,s=r&&Te.default(r);return s&&s<o||!1}(a.state.date,a.props);break;default:e=fr(a.state.date,a.props)}if((a.props.forceShowMonthNavigation||a.props.showDisabledMonthNavigation||!e)&&!a.props.showTimeSelectOnly){var t=["react-datepicker__navigation","react-datepicker__navigation--next"];a.props.showTimeSelect&&t.push("react-datepicker__navigation--next--with-time"),a.props.todayButton&&t.push("react-datepicker__navigation--next--with-today-button");var r=a.increaseMonth;(a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker)&&(r=a.increaseYear),e&&a.props.showDisabledMonthNavigation&&(t.push("react-datepicker__navigation--next--disabled"),r=null);var n=a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker,o=a.props,s=o.nextMonthAriaLabel,i=void 0===s?"Next Month":s,p=o.nextYearAriaLabel,l=void 0===p?"Next Year":p;return de.default.createElement("button",{type:"button",className:t.join(" "),onClick:r,"aria-label":n?l:i},n?a.props.nextYearButtonLabel:a.props.nextMonthButtonLabel)}}})),mt(bt(a),"renderCurrentMonth",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a.state.date,t=["react-datepicker__current-month"];return a.props.showYearDropdown&&t.push("react-datepicker__current-month--hasYearDropdown"),a.props.showMonthDropdown&&t.push("react-datepicker__current-month--hasMonthDropdown"),a.props.showMonthYearDropdown&&t.push("react-datepicker__current-month--hasMonthYearDropdown"),de.default.createElement("div",{className:t.join(" ")},Lt(e,a.props.dateFormat,a.props.locale))})),mt(bt(a),"renderYearDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showYearDropdown&&!e)return de.default.createElement(_r,{adjustDateOnChange:a.props.adjustDateOnChange,date:a.state.date,onSelect:a.props.onSelect,setOpen:a.props.setOpen,dropdownMode:a.props.dropdownMode,onChange:a.changeYear,minDate:a.props.minDate,maxDate:a.props.maxDate,year:Te.default(a.state.date),scrollableYearDropdown:a.props.scrollableYearDropdown,yearDropdownItemNumber:a.props.yearDropdownItemNumber})})),mt(bt(a),"renderMonthDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showMonthDropdown&&!e)return de.default.createElement(Er,{dropdownMode:a.props.dropdownMode,locale:a.props.locale,onChange:a.changeMonth,month:Ye.default(a.state.date),useShortMonthInDropdown:a.props.useShortMonthInDropdown})})),mt(bt(a),"renderMonthYearDropdown",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(a.props.showMonthYearDropdown&&!e)return de.default.createElement(xr,{dropdownMode:a.props.dropdownMode,locale:a.props.locale,dateFormat:a.props.dateFormat,onChange:a.changeMonthYear,minDate:a.props.minDate,maxDate:a.props.maxDate,date:a.state.date,scrollableMonthYearDropdown:a.props.scrollableMonthYearDropdown})})),mt(bt(a),"renderTodayButton",(function(){if(a.props.todayButton&&!a.props.showTimeSelectOnly)return de.default.createElement("div",{className:"react-datepicker__today-button",onClick:function(e){return a.props.onSelect(Ve.default(xt()),e)}},a.props.todayButton)})),mt(bt(a),"renderDefaultHeader",(function(e){var t=e.monthDate,r=e.i;return de.default.createElement("div",{className:"react-datepicker__header ".concat(a.props.showTimeSelect?"react-datepicker__header--has-time-select":"")},a.renderCurrentMonth(t),de.default.createElement("div",{className:"react-datepicker__header__dropdown react-datepicker__header__dropdown--".concat(a.props.dropdownMode),onFocus:a.handleDropdownFocus},a.renderMonthDropdown(0!==r),a.renderMonthYearDropdown(0!==r),a.renderYearDropdown(0!==r)),de.default.createElement("div",{className:"react-datepicker__day-names"},a.header(t)))})),mt(bt(a),"renderCustomHeader",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.monthDate,r=e.i;if(a.props.showTimeSelect&&!a.state.monthContainer||a.props.showTimeSelectOnly)return null;var n=ur(a.state.date,a.props),o=fr(a.state.date,a.props),s=hr(a.state.date,a.props),i=mr(a.state.date,a.props),p=!a.props.showMonthYearPicker&&!a.props.showQuarterYearPicker&&!a.props.showYearPicker;return de.default.createElement("div",{className:"react-datepicker__header react-datepicker__header--custom",onFocus:a.props.onDropdownFocus},a.props.renderCustomHeader(Dt(Dt({},a.state),{},{customHeaderCount:r,changeMonth:a.changeMonth,changeYear:a.changeYear,decreaseMonth:a.decreaseMonth,increaseMonth:a.increaseMonth,decreaseYear:a.decreaseYear,increaseYear:a.increaseYear,prevMonthButtonDisabled:n,nextMonthButtonDisabled:o,prevYearButtonDisabled:s,nextYearButtonDisabled:i})),p&&de.default.createElement("div",{className:"react-datepicker__day-names"},a.header(t)))})),mt(bt(a),"renderYearHeader",(function(){var e=a.state.date,t=a.props,r=t.showYearPicker,n=gr(e,t.yearItemNumber),o=n.startPeriod,s=n.endPeriod;return de.default.createElement("div",{className:"react-datepicker__header react-datepicker-year-header"},r?"".concat(o," - ").concat(s):Te.default(e))})),mt(bt(a),"renderHeader",(function(e){switch(!0){case void 0!==a.props.renderCustomHeader:return a.renderCustomHeader(e);case a.props.showMonthYearPicker||a.props.showQuarterYearPicker||a.props.showYearPicker:return a.renderYearHeader(e);default:return a.renderDefaultHeader(e)}})),mt(bt(a),"renderMonths",(function(){if(!a.props.showTimeSelectOnly&&!a.props.showYearPicker){for(var e=[],t=a.props.showPreviousMonths?a.props.monthsShown-1:0,r=Ce.default(a.state.date,t),n=0;n<a.props.monthsShown;++n){var o=n-a.props.monthSelectedIn,s=we.default(r,o),i="month-".concat(n),p=n<a.props.monthsShown-1,l=n>0;e.push(de.default.createElement("div",{key:i,ref:function(e){a.monthContainer=e},className:"react-datepicker__month-container"},a.renderHeader({monthDate:s,i:n}),de.default.createElement(Fr,{chooseDayAriaLabelPrefix:a.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:a.props.disabledDayAriaLabelPrefix,weekAriaLabelPrefix:a.props.weekAriaLabelPrefix,onChange:a.changeMonthYear,day:s,dayClassName:a.props.dayClassName,monthClassName:a.props.monthClassName,onDayClick:a.handleDayClick,handleOnKeyDown:a.props.handleOnKeyDown,onDayMouseEnter:a.handleDayMouseEnter,onMouseLeave:a.handleMonthMouseLeave,onWeekSelect:a.props.onWeekSelect,orderInDisplay:n,formatWeekNumber:a.props.formatWeekNumber,locale:a.props.locale,minDate:a.props.minDate,maxDate:a.props.maxDate,excludeDates:a.props.excludeDates,highlightDates:a.props.highlightDates,selectingDate:a.state.selectingDate,includeDates:a.props.includeDates,inline:a.props.inline,shouldFocusDayInline:a.props.shouldFocusDayInline,fixedHeight:a.props.fixedHeight,filterDate:a.props.filterDate,preSelection:a.props.preSelection,setPreSelection:a.props.setPreSelection,selected:a.props.selected,selectsStart:a.props.selectsStart,selectsEnd:a.props.selectsEnd,selectsRange:a.props.selectsRange,showWeekNumbers:a.props.showWeekNumbers,startDate:a.props.startDate,endDate:a.props.endDate,peekNextMonth:a.props.peekNextMonth,setOpen:a.props.setOpen,shouldCloseOnSelect:a.props.shouldCloseOnSelect,renderDayContents:a.props.renderDayContents,disabledKeyboardNavigation:a.props.disabledKeyboardNavigation,showMonthYearPicker:a.props.showMonthYearPicker,showFullMonthYearPicker:a.props.showFullMonthYearPicker,showTwoColumnMonthYearPicker:a.props.showTwoColumnMonthYearPicker,showFourColumnMonthYearPicker:a.props.showFourColumnMonthYearPicker,showYearPicker:a.props.showYearPicker,showQuarterYearPicker:a.props.showQuarterYearPicker,isInputFocused:a.props.isInputFocused,containerRef:a.containerRef,monthShowsDuplicateDaysEnd:p,monthShowsDuplicateDaysStart:l})))}return e}})),mt(bt(a),"renderYears",(function(){if(!a.props.showTimeSelectOnly)return a.props.showYearPicker?de.default.createElement("div",{className:"react-datepicker__year--container"},a.renderHeader(),de.default.createElement(qr,yt({onDayClick:a.handleDayClick,date:a.state.date},a.props))):void 0})),mt(bt(a),"renderTimeSection",(function(){if(a.props.showTimeSelect&&(a.state.monthContainer||a.props.showTimeSelectOnly))return de.default.createElement(Rr,{selected:a.props.selected,openToDate:a.props.openToDate,onChange:a.props.onTimeChange,timeClassName:a.props.timeClassName,format:a.props.timeFormat,includeTimes:a.props.includeTimes,intervals:a.props.timeIntervals,minTime:a.props.minTime,maxTime:a.props.maxTime,excludeTimes:a.props.excludeTimes,filterTime:a.props.filterTime,timeCaption:a.props.timeCaption,todayButton:a.props.todayButton,showMonthDropdown:a.props.showMonthDropdown,showMonthYearDropdown:a.props.showMonthYearDropdown,showYearDropdown:a.props.showYearDropdown,withPortal:a.props.withPortal,monthRef:a.state.monthContainer,injectTimes:a.props.injectTimes,locale:a.props.locale,showTimeSelectOnly:a.props.showTimeSelectOnly})})),mt(bt(a),"renderInputTimeSection",(function(){var e=new Date(a.props.selected),t=It(e)&&Boolean(a.props.selected)?"".concat(kr(e.getHours()),":").concat(kr(e.getMinutes())):"";if(a.props.showTimeInput)return de.default.createElement(Ar,{date:e,timeString:t,timeInputLabel:a.props.timeInputLabel,onChange:a.props.onTimeChange,customTimeInput:a.props.customTimeInput})})),a.containerRef=de.default.createRef(),a.state={date:a.getDateInView(),selectingDate:null,monthContainer:null},a}return ht(r,[{key:"componentDidMount",value:function(){var e=this;this.props.showTimeSelect&&(this.assignMonthContainer=void e.setState({monthContainer:e.monthContainer}))}},{key:"componentDidUpdate",value:function(e){this.props.preSelection&&!Ut(this.props.preSelection,e.preSelection)?this.setState({date:this.props.preSelection}):this.props.openToDate&&!Ut(this.props.openToDate,e.openToDate)&&this.setState({date:this.props.openToDate})}},{key:"render",value:function(){var e=this.props.container||Wr;return de.default.createElement("div",{ref:this.containerRef},de.default.createElement(e,{className:ce.default("react-datepicker",this.props.className,{"react-datepicker--time-only":this.props.showTimeSelectOnly}),showPopperArrow:this.props.showPopperArrow,arrowProps:this.props.arrowProps},this.renderPreviousButton(),this.renderNextButton(),this.renderMonths(),this.renderYears(),this.renderTodayButton(),this.renderTimeSection(),this.renderInputTimeSection(),this.props.children))}}],[{key:"defaultProps",get:function(){return{onDropdownFocus:function(){},monthsShown:1,monthSelectedIn:0,forceShowMonthNavigation:!1,timeCaption:"Time",previousYearButtonLabel:"Previous Year",nextYearButtonLabel:"Next Year",previousMonthButtonLabel:"Previous Month",nextMonthButtonLabel:"Next Month",customTimeInput:null,yearItemNumber:Ot}}}]),r}(de.default.Component),Hr=function(e){return!e.disabled&&-1!==e.tabIndex},Kr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"getTabChildren",(function(){return Array.prototype.slice.call(a.tabLoopRef.current.querySelectorAll("[tabindex], a, button, input, select, textarea"),1,-1).filter(Hr)})),mt(bt(a),"handleFocusStart",(function(e){var t=a.getTabChildren();t&&t.length>1&&t[t.length-1].focus()})),mt(bt(a),"handleFocusEnd",(function(e){var t=a.getTabChildren();t&&t.length>1&&t[0].focus()})),a.tabLoopRef=de.default.createRef(),a}return ht(r,[{key:"render",value:function(){return this.props.enableTabLoop?de.default.createElement("div",{className:"react-datepicker__tab-loop",ref:this.tabLoopRef},de.default.createElement("div",{className:"react-datepicker__tab-loop__start",tabIndex:"0",onFocus:this.handleFocusStart}),this.props.children,de.default.createElement("div",{className:"react-datepicker__tab-loop__end",tabIndex:"0",onFocus:this.handleFocusEnd})):this.props.children}}],[{key:"defaultProps",get:function(){return{enableTabLoop:!0}}}]),r}(de.default.Component),Qr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),(a=t.call(this,e)).el=document.createElement("div"),a}return ht(r,[{key:"componentDidMount",value:function(){this.portalRoot=document.getElementById(this.props.portalId),this.portalRoot||(this.portalRoot=document.createElement("div"),this.portalRoot.setAttribute("id",this.props.portalId),document.body.appendChild(this.portalRoot)),this.portalRoot.appendChild(this.el)}},{key:"componentWillUnmount",value:function(){this.portalRoot.removeChild(this.el)}},{key:"render",value:function(){return dt.default.createPortal(this.props.children,this.el)}}]),r}(de.default.Component),Vr=function(e){wt(r,e);var t=St(r);function r(){return ut(this,r),t.apply(this,arguments)}return ht(r,[{key:"render",value:function(){var e,t=this.props,r=t.className,a=t.wrapperClassName,n=t.hidePopper,o=t.popperComponent,s=t.popperModifiers,i=t.popperPlacement,p=t.popperProps,l=t.targetComponent,d=t.enableTabLoop,c=t.popperOnKeyDown,u=t.portalId;if(!n){var f=ce.default("react-datepicker-popper",r);e=de.default.createElement(ie.Popper,yt({modifiers:s,placement:i},p),(function(e){var t=e.ref,r=e.style,a=e.placement,n=e.arrowProps;return de.default.createElement(Kr,{enableTabLoop:d},de.default.createElement("div",{ref:t,style:r,className:f,"data-placement":a,onKeyDown:c},de.default.cloneElement(o,{arrowProps:n})))}))}this.props.popperContainer&&(e=de.default.createElement(this.props.popperContainer,{},e)),u&&!n&&(e=de.default.createElement(Qr,{portalId:u},e));var h=ce.default("react-datepicker-wrapper",a);return de.default.createElement(ie.Manager,{className:"react-datepicker-manager"},de.default.createElement(ie.Reference,null,(function(e){var t=e.ref;return de.default.createElement("div",{ref:t,className:h},l)})),e)}}],[{key:"defaultProps",get:function(){return{hidePopper:!0,popperModifiers:{preventOverflow:{enabled:!0,escapeWithReference:!0,boundariesElement:"viewport"}},popperProps:{},popperPlacement:"bottom-start"}}}]),r}(de.default.Component),Ur="react-datepicker-ignore-onclickoutside",$r=lt.default(jr);var zr="Date input not valid.",Gr=function(e){wt(r,e);var t=St(r);function r(e){var a;return ut(this,r),mt(bt(a=t.call(this,e)),"getPreSelection",(function(){return a.props.openToDate?a.props.openToDate:a.props.selectsEnd&&a.props.startDate?a.props.startDate:a.props.selectsStart&&a.props.endDate?a.props.endDate:xt()})),mt(bt(a),"calcInitialState",(function(){var e=a.getPreSelection(),t=yr(a.props),r=vr(a.props),n=t&&nt.default(e,Ve.default(t))?t:r&&at.default(e,Je.default(r))?r:e;return{open:a.props.startOpen||!1,preventFocus:!1,preSelection:a.props.selected?a.props.selected:n,highlightDates:Dr(a.props.highlightDates),focused:!1,shouldFocusDayInline:!1}})),mt(bt(a),"clearPreventFocusTimeout",(function(){a.preventFocusTimeout&&clearTimeout(a.preventFocusTimeout)})),mt(bt(a),"setFocus",(function(){a.input&&a.input.focus&&a.input.focus({preventScroll:!0})})),mt(bt(a),"setBlur",(function(){a.input&&a.input.blur&&a.input.blur(),a.cancelFocusInput()})),mt(bt(a),"setOpen",(function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];a.setState({open:e,preSelection:e&&a.state.open?a.state.preSelection:a.calcInitialState().preSelection,lastPreSelectChange:Xr},(function(){e||a.setState((function(e){return{focused:!!t&&e.focused}}),(function(){!t&&a.setBlur(),a.setState({inputValue:null})}))}))})),mt(bt(a),"inputOk",(function(){return ue.default(a.state.preSelection)})),mt(bt(a),"isCalendarOpen",(function(){return void 0===a.props.open?a.state.open&&!a.props.disabled&&!a.props.readOnly:a.props.open})),mt(bt(a),"handleFocus",(function(e){a.state.preventFocus||(a.props.onFocus(e),a.props.preventOpenOnFocus||a.props.readOnly||a.setOpen(!0)),a.setState({focused:!0})})),mt(bt(a),"cancelFocusInput",(function(){clearTimeout(a.inputFocusTimeout),a.inputFocusTimeout=null})),mt(bt(a),"deferFocusInput",(function(){a.cancelFocusInput(),a.inputFocusTimeout=setTimeout((function(){return a.setFocus()}),1)})),mt(bt(a),"handleDropdownFocus",(function(){a.cancelFocusInput()})),mt(bt(a),"handleBlur",(function(e){(!a.state.open||a.props.withPortal||a.props.showTimeInput)&&a.props.onBlur(e),a.setState({focused:!1})})),mt(bt(a),"handleCalendarClickOutside",(function(e){a.props.inline||a.setOpen(!1),a.props.onClickOutside(e),a.props.withPortal&&e.preventDefault()})),mt(bt(a),"handleChange",(function(){for(var e=arguments.length,t=new Array(e),r=0;r<e;r++)t[r]=arguments[r];var n=t[0];if(!a.props.onChangeRaw||(a.props.onChangeRaw.apply(bt(a),t),"function"==typeof n.isDefaultPrevented&&!n.isDefaultPrevented())){a.setState({inputValue:n.target.value,lastPreSelectChange:Jr});var o=Tt(n.target.value,a.props.dateFormat,a.props.locale,a.props.strictParsing);!o&&n.target.value||a.setSelected(o,n,!0)}})),mt(bt(a),"handleSelect",(function(e,t,r){a.setState({preventFocus:!0},(function(){return a.preventFocusTimeout=setTimeout((function(){return a.setState({preventFocus:!1})}),50),a.preventFocusTimeout})),a.props.onChangeRaw&&a.props.onChangeRaw(t),a.setSelected(e,t,!1,r),!a.props.shouldCloseOnSelect||a.props.showTimeSelect?a.setPreSelection(e):a.props.inline||a.setOpen(!1)})),mt(bt(a),"setSelected",(function(e,t,r,n){var o=e;if(null===o||!tr(o,a.props)){var s=a.props,i=s.onChange,p=s.selectsRange,l=s.startDate,d=s.endDate;if(!$t(a.props.selected,o)||a.props.allowSameDay||p)if(null!==o&&(!a.props.selected||r&&(a.props.showTimeSelect||a.props.showTimeSelectOnly||a.props.showTimeInput)||(o=Ft(o,{hour:Pe.default(a.props.selected),minute:Me.default(a.props.selected),second:_e.default(a.props.selected)})),a.props.inline||a.setState({preSelection:o}),a.props.focusSelectedMonth||a.setState({monthSelectedIn:n})),p){var c=l&&!d,u=l&&d;!l&&!d?i([o,null],t):c&&(nt.default(o,l)?i([o,null],t):i([l,o],t)),u&&i([o,null],t)}else i(o,t);r||(a.props.onSelect(o,t),a.setState({inputValue:null}))}})),mt(bt(a),"setPreSelection",(function(e){var t=void 0!==a.props.minDate,r=void 0!==a.props.maxDate,n=!0;if(e){var o=Ve.default(e);if(t&&r)n=zt(e,a.props.minDate,a.props.maxDate);else if(t){var s=Ve.default(a.props.minDate);n=at.default(e,s)||$t(o,s)}else if(r){var i=Je.default(a.props.maxDate);n=nt.default(e,i)||$t(o,i)}}n&&a.setState({preSelection:e})})),mt(bt(a),"handleTimeChange",(function(e){var t=Ft(a.props.selected?a.props.selected:a.getPreSelection(),{hour:Pe.default(e),minute:Me.default(e)});a.setState({preSelection:t}),a.props.onChange(t),a.props.shouldCloseOnSelect&&a.setOpen(!1),a.props.showTimeInput&&a.setOpen(!0),a.setState({inputValue:null})})),mt(bt(a),"onInputClick",(function(){a.props.disabled||a.props.readOnly||a.setOpen(!0),a.props.onInputClick()})),mt(bt(a),"onInputKeyDown",(function(e){a.props.onKeyDown(e);var t=e.key;if(a.state.open||a.props.inline||a.props.preventOpenOnFocus){if(a.state.open){if("ArrowDown"===t||"ArrowUp"===t){e.preventDefault();var r=a.calendar.componentNode&&a.calendar.componentNode.querySelector('.react-datepicker__day[tabindex="0"]');return void(r&&r.focus({preventScroll:!0}))}var n=xt(a.state.preSelection);"Enter"===t?(e.preventDefault(),a.inputOk()&&a.state.lastPreSelectChange===Xr?(a.handleSelect(n,e),!a.props.shouldCloseOnSelect&&a.setPreSelection(n)):a.setOpen(!1)):"Escape"===t&&(e.preventDefault(),a.setOpen(!1)),a.inputOk()||a.props.onInputError({code:1,msg:zr})}}else"ArrowDown"!==t&&"ArrowUp"!==t&&"Enter"!==t||a.onInputClick()})),mt(bt(a),"onDayKeyDown",(function(e){a.props.onKeyDown(e);var t=e.key,r=xt(a.state.preSelection);if("Enter"===t)e.preventDefault(),a.handleSelect(r,e),!a.props.shouldCloseOnSelect&&a.setPreSelection(r);else if("Escape"===t)e.preventDefault(),a.setOpen(!1),a.inputOk()||a.props.onInputError({code:1,msg:zr});else if(!a.props.disabledKeyboardNavigation){var n;switch(t){case"ArrowLeft":n=ge.default(r,1);break;case"ArrowRight":n=ve.default(r,1);break;case"ArrowUp":n=be.default(r,1);break;case"ArrowDown":n=De.default(r,1);break;case"PageUp":n=Ce.default(r,1);break;case"PageDown":n=we.default(r,1);break;case"Home":n=Se.default(r,1);break;case"End":n=ke.default(r,1)}if(!n)return void(a.props.onInputError&&a.props.onInputError({code:1,msg:zr}));if(e.preventDefault(),a.setState({lastPreSelectChange:Xr}),a.props.adjustDateOnChange&&a.setSelected(n),a.setPreSelection(n),a.props.inline){var o=Ye.default(r),s=Ye.default(n),i=Te.default(r),p=Te.default(n);o!==s||i!==p?a.setState({shouldFocusDayInline:!0}):a.setState({shouldFocusDayInline:!1})}}})),mt(bt(a),"onPopperKeyDown",(function(e){"Escape"===e.key&&(e.preventDefault(),a.setState({preventFocus:!0},(function(){a.setOpen(!1),setTimeout((function(){a.setFocus(),a.setState({preventFocus:!1})}))})))})),mt(bt(a),"onClearClick",(function(e){e&&e.preventDefault&&e.preventDefault(),a.props.onChange(null,e),a.setState({inputValue:null})})),mt(bt(a),"clear",(function(){a.onClearClick()})),mt(bt(a),"onScroll",(function(e){"boolean"==typeof a.props.closeOnScroll&&a.props.closeOnScroll?e.target!==document&&e.target!==document.documentElement&&e.target!==document.body||a.setOpen(!1):"function"==typeof a.props.closeOnScroll&&a.props.closeOnScroll(e)&&a.setOpen(!1)})),mt(bt(a),"renderCalendar",(function(){return a.props.inline||a.isCalendarOpen()?de.default.createElement($r,{ref:function(e){a.calendar=e},locale:a.props.locale,chooseDayAriaLabelPrefix:a.props.chooseDayAriaLabelPrefix,disabledDayAriaLabelPrefix:a.props.disabledDayAriaLabelPrefix,weekAriaLabelPrefix:a.props.weekAriaLabelPrefix,adjustDateOnChange:a.props.adjustDateOnChange,setOpen:a.setOpen,shouldCloseOnSelect:a.props.shouldCloseOnSelect,dateFormat:a.props.dateFormatCalendar,useWeekdaysShort:a.props.useWeekdaysShort,formatWeekDay:a.props.formatWeekDay,dropdownMode:a.props.dropdownMode,selected:a.props.selected,preSelection:a.state.preSelection,onSelect:a.handleSelect,onWeekSelect:a.props.onWeekSelect,openToDate:a.props.openToDate,minDate:a.props.minDate,maxDate:a.props.maxDate,selectsStart:a.props.selectsStart,selectsEnd:a.props.selectsEnd,selectsRange:a.props.selectsRange,startDate:a.props.startDate,endDate:a.props.endDate,excludeDates:a.props.excludeDates,filterDate:a.props.filterDate,onClickOutside:a.handleCalendarClickOutside,formatWeekNumber:a.props.formatWeekNumber,highlightDates:a.state.highlightDates,includeDates:a.props.includeDates,includeTimes:a.props.includeTimes,injectTimes:a.props.injectTimes,inline:a.props.inline,shouldFocusDayInline:a.state.shouldFocusDayInline,peekNextMonth:a.props.peekNextMonth,showMonthDropdown:a.props.showMonthDropdown,showPreviousMonths:a.props.showPreviousMonths,useShortMonthInDropdown:a.props.useShortMonthInDropdown,showMonthYearDropdown:a.props.showMonthYearDropdown,showWeekNumbers:a.props.showWeekNumbers,showYearDropdown:a.props.showYearDropdown,withPortal:a.props.withPortal,forceShowMonthNavigation:a.props.forceShowMonthNavigation,showDisabledMonthNavigation:a.props.showDisabledMonthNavigation,scrollableYearDropdown:a.props.scrollableYearDropdown,scrollableMonthYearDropdown:a.props.scrollableMonthYearDropdown,todayButton:a.props.todayButton,weekLabel:a.props.weekLabel,outsideClickIgnoreClass:Ur,fixedHeight:a.props.fixedHeight,monthsShown:a.props.monthsShown,monthSelectedIn:a.state.monthSelectedIn,onDropdownFocus:a.handleDropdownFocus,onMonthChange:a.props.onMonthChange,onYearChange:a.props.onYearChange,dayClassName:a.props.dayClassName,weekDayClassName:a.props.weekDayClassName,monthClassName:a.props.monthClassName,timeClassName:a.props.timeClassName,showTimeSelect:a.props.showTimeSelect,showTimeSelectOnly:a.props.showTimeSelectOnly,onTimeChange:a.handleTimeChange,timeFormat:a.props.timeFormat,timeIntervals:a.props.timeIntervals,minTime:a.props.minTime,maxTime:a.props.maxTime,excludeTimes:a.props.excludeTimes,filterTime:a.props.filterTime,timeCaption:a.props.timeCaption,className:a.props.calendarClassName,container:a.props.calendarContainer,yearItemNumber:a.props.yearItemNumber,yearDropdownItemNumber:a.props.yearDropdownItemNumber,previousMonthButtonLabel:a.props.previousMonthButtonLabel,nextMonthButtonLabel:a.props.nextMonthButtonLabel,previousYearButtonLabel:a.props.previousYearButtonLabel,nextYearButtonLabel:a.props.nextYearButtonLabel,timeInputLabel:a.props.timeInputLabel,disabledKeyboardNavigation:a.props.disabledKeyboardNavigation,renderCustomHeader:a.props.renderCustomHeader,popperProps:a.props.popperProps,renderDayContents:a.props.renderDayContents,onDayMouseEnter:a.props.onDayMouseEnter,onMonthMouseLeave:a.props.onMonthMouseLeave,showTimeInput:a.props.showTimeInput,showMonthYearPicker:a.props.showMonthYearPicker,showFullMonthYearPicker:a.props.showFullMonthYearPicker,showTwoColumnMonthYearPicker:a.props.showTwoColumnMonthYearPicker,showFourColumnMonthYearPicker:a.props.showFourColumnMonthYearPicker,showYearPicker:a.props.showYearPicker,showQuarterYearPicker:a.props.showQuarterYearPicker,showPopperArrow:a.props.showPopperArrow,excludeScrollbar:a.props.excludeScrollbar,handleOnKeyDown:a.onDayKeyDown,isInputFocused:a.state.focused,customTimeInput:a.props.customTimeInput,setPreSelection:a.setPreSelection},a.props.children):null})),mt(bt(a),"renderDateInput",(function(){var e,t,r,n,o,s=ce.default(a.props.className,mt({},Ur,a.state.open)),i=a.props.customInput||de.default.createElement("input",{type:"text"}),p=a.props.customInputRef||"ref",l="string"==typeof a.props.value?a.props.value:"string"==typeof a.state.inputValue?a.state.inputValue:(t=a.props.selected,r=a.props,n=r.dateFormat,o=r.locale,t&&Lt(t,Array.isArray(n)?n[0]:n,o)||"");return de.default.cloneElement(i,(mt(e={},p,(function(e){a.input=e})),mt(e,"value",l),mt(e,"onBlur",a.handleBlur),mt(e,"onChange",a.handleChange),mt(e,"onClick",a.onInputClick),mt(e,"onFocus",a.handleFocus),mt(e,"onKeyDown",a.onInputKeyDown),mt(e,"id",a.props.id),mt(e,"name",a.props.name),mt(e,"autoFocus",a.props.autoFocus),mt(e,"placeholder",a.props.placeholderText),mt(e,"disabled",a.props.disabled),mt(e,"autoComplete",a.props.autoComplete),mt(e,"className",ce.default(i.props.className,s)),mt(e,"title",a.props.title),mt(e,"readOnly",a.props.readOnly),mt(e,"required",a.props.required),mt(e,"tabIndex",a.props.tabIndex),mt(e,"aria-describedby",a.props.ariaDescribedBy),mt(e,"aria-invalid",a.props.ariaInvalid),mt(e,"aria-labelledby",a.props.ariaLabelledBy),mt(e,"aria-required",a.props.ariaRequired),e))})),mt(bt(a),"renderClearButton",(function(){var e=a.props,t=e.isClearable,r=e.selected,n=e.clearButtonTitle,o=e.clearButtonClassName,s=e.ariaLabelClose,i=void 0===s?"Close":s;return t&&null!=r?de.default.createElement("button",{type:"button",className:"react-datepicker__close-icon ".concat(o),"aria-label":i,onClick:a.onClearClick,title:n,tabIndex:-1}):null})),a.state=a.calcInitialState(),a}return ht(r,[{key:"componentDidMount",value:function(){window.addEventListener("scroll",this.onScroll,!0)}},{key:"componentDidUpdate",value:function(e,t){var r,a;e.inline&&(r=e.selected,a=this.props.selected,r&&a?Ye.default(r)!==Ye.default(a)||Te.default(r)!==Te.default(a):r!==a)&&this.setPreSelection(this.props.selected),void 0!==this.state.monthSelectedIn&&e.monthsShown!==this.props.monthsShown&&this.setState({monthSelectedIn:0}),e.highlightDates!==this.props.highlightDates&&this.setState({highlightDates:Dr(this.props.highlightDates)}),t.focused||$t(e.selected,this.props.selected)||this.setState({inputValue:null}),t.open!==this.state.open&&(!1===t.open&&!0===this.state.open&&this.props.onCalendarOpen(),!0===t.open&&!1===this.state.open&&this.props.onCalendarClose())}},{key:"componentWillUnmount",value:function(){this.clearPreventFocusTimeout(),window.removeEventListener("scroll",this.onScroll,!0)}},{key:"render",value:function(){var e=this.renderCalendar();return this.props.inline&&!this.props.withPortal?e:this.props.withPortal?de.default.createElement("div",null,this.props.inline?null:de.default.createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),this.state.open||this.props.inline?de.default.createElement("div",{className:"react-datepicker__portal"},e):null):de.default.createElement(Vr,{className:this.props.popperClassName,wrapperClassName:this.props.wrapperClassName,hidePopper:!this.isCalendarOpen(),portalId:this.props.portalId,popperModifiers:this.props.popperModifiers,targetComponent:de.default.createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),popperContainer:this.props.popperContainer,popperComponent:e,popperPlacement:this.props.popperPlacement,popperProps:this.props.popperProps,popperOnKeyDown:this.onPopperKeyDown,enableTabLoop:this.props.enableTabLoop})}}],[{key:"defaultProps",get:function(){return{allowSameDay:!1,dateFormat:"MM/dd/yyyy",dateFormatCalendar:"LLLL yyyy",onChange:function(){},disabled:!1,disabledKeyboardNavigation:!1,dropdownMode:"scroll",onFocus:function(){},onBlur:function(){},onKeyDown:function(){},onInputClick:function(){},onSelect:function(){},onClickOutside:function(){},onMonthChange:function(){},onCalendarOpen:function(){},onCalendarClose:function(){},preventOpenOnFocus:!1,onYearChange:function(){},onInputError:function(){},monthsShown:1,readOnly:!1,withPortal:!1,shouldCloseOnSelect:!0,showTimeSelect:!1,showTimeInput:!1,showPreviousMonths:!1,showMonthYearPicker:!1,showFullMonthYearPicker:!1,showTwoColumnMonthYearPicker:!1,showFourColumnMonthYearPicker:!1,showYearPicker:!1,showQuarterYearPicker:!1,strictParsing:!1,timeIntervals:30,timeCaption:"Time",previousMonthButtonLabel:"Previous Month",nextMonthButtonLabel:"Next Month",previousYearButtonLabel:"Previous Year",nextYearButtonLabel:"Next Year",timeInputLabel:"Time",enableTabLoop:!0,yearItemNumber:Ot,renderDayContents:function(e){return e},focusSelectedMonth:!1,showPopperArrow:!0,excludeScrollbar:!0,customTimeInput:null}}}]),r}(de.default.Component),Jr="input",Xr="navigate";e.CalendarContainer=Wr,e.default=Gr,e.getDefaultLocale=Gt,e.registerLocale=function(e,t){var r="undefined"!=typeof window?window:global;r.__localeData__||(r.__localeData__={}),r.__localeData__[e]=t},e.setDefaultLocale=function(e){("undefined"!=typeof window?window:global).__localeId__=e},Object.defineProperty(e,"__esModule",{value:!0})}));
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(153)))
 
@@ -54046,7 +54468,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -54066,9 +54488,9 @@ var _overviewModal2 = _interopRequireDefault(_overviewModal);
 
 var _accessories = __webpack_require__(1284);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55031,7 +55453,7 @@ exports.default = OverviewModal;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(16);
@@ -55046,318 +55468,336 @@ var _de = __webpack_require__(1564);
 
 var _de2 = _interopRequireDefault(_de);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDatepicker.registerLocale)('de', _de2.default);
+(0, _reactDatepicker.registerLocale)("de", _de2.default);
 
 var Shipping = function Shipping(_ref) {
-    var choiceShipping = _ref.choiceShipping,
-        chooseShippingMethod = _ref.chooseShippingMethod,
-        shippingMethod = _ref.shippingMethod,
-        shippingMethods = _ref.shippingMethods,
-        total = _ref.total,
-        handlerSendForm = _ref.handlerSendForm,
-        handlerShowHideBlocks = _ref.handlerShowHideBlocks,
-        placeDescription = _ref.placeDescription,
-        changeCheckbox = _ref.changeCheckbox,
-        inputCheckbox = _ref.inputCheckbox,
-        error = _ref.error,
-        errorNoProducts = _ref.errorNoProducts;
+  var choiceShipping = _ref.choiceShipping,
+      chooseShippingMethod = _ref.chooseShippingMethod,
+      shippingMethod = _ref.shippingMethod,
+      shippingMethods = _ref.shippingMethods,
+      total = _ref.total,
+      handlerSendForm = _ref.handlerSendForm,
+      handlerShowHideBlocks = _ref.handlerShowHideBlocks,
+      placeDescription = _ref.placeDescription,
+      changeCheckbox = _ref.changeCheckbox,
+      inputCheckbox = _ref.inputCheckbox,
+      error = _ref.error,
+      errorNoProducts = _ref.errorNoProducts,
+      t = _ref.t;
 
-    var order = function order(e) {
-        if (inputCheckbox.agree === true) {
-            e.preventDefault();
-            var button = $(".order");
-            if (!button.hasClass('animate')) {
-                button.addClass('animate');
-                handlerSendForm(e);
-            }
-        }
-    };
-    return _react2.default.createElement(
-        "div",
-        null,
+  var order = function order(e) {
+    if (inputCheckbox.agree === true) {
+      e.preventDefault();
+      var button = $(".order");
+      if (!button.hasClass("animate")) {
+        button.addClass("animate");
+        handlerSendForm(e);
+      }
+    }
+  };
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "div",
+      { className: "shippingMethod" },
+      _react2.default.createElement(
+        "h3",
+        {
+          className: "title",
+          onClick: function onClick(e) {
+            return handlerShowHideBlocks(e);
+          },
+          "data-step": "shippingMethod"
+        },
         _react2.default.createElement(
-            "div",
-            { className: "shippingMethod" },
-            _react2.default.createElement(
-                "h3",
-                { className: "title",
-                    onClick: function onClick(e) {
-                        return handlerShowHideBlocks(e);
-                    },
-                    "data-step": "shippingMethod" },
-                _react2.default.createElement(
-                    "span",
-                    { className: "num" },
-                    "3"
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "text" },
-                    "Versand"
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "arrow" },
-                    _react2.default.createElement("i", { className: "fa fa-angle-down", "aria-hidden": "true" })
-                )
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "wrapperItemBasket" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "" },
-                    _react2.default.createElement(
-                        "ul",
-                        null,
-                        shippingMethods.map(function (item, i) {
-                            return _react2.default.createElement(
-                                "li",
-                                { key: "shippingMethod-" + i, onClick: chooseShippingMethod, className: shippingMethod.selected && shippingMethod.value.name === item.name ? 'active' : '' },
-                                _react2.default.createElement("input", { type: "radio",
-                                    "data-id": item.id,
-                                    "data-value": item.name,
-                                    name: "shipping_method",
-                                    className: "radio-check",
-                                    id: "radio-shippingMethod-" + item.id,
-                                    value: item.name + " " + (item.shortcode === "PICKAS" ? placeDescription : "") + " (" + (0, _helpersFunction.formatPrice)(item.price) + " " + window.currencyValue + ")",
-                                    required: true,
-                                    readOnly: true,
-                                    checked: shippingMethod.selected && shippingMethod.value.name === item.name }),
-                                _react2.default.createElement(
-                                    "label",
-                                    { htmlFor: "radio-shippingMethod-" + item.id },
-                                    _react2.default.createElement(
-                                        "div",
-                                        { className: "radio-container" },
-                                        _react2.default.createElement(
-                                            "div",
-                                            { className: "cRadioBtn" },
-                                            _react2.default.createElement("div", { className: "overlay" }),
-                                            _react2.default.createElement("div", { className: "drops xsDrop" }),
-                                            _react2.default.createElement("div", { className: "drops mdDrop" }),
-                                            _react2.default.createElement("div", { className: "drops lgDrop" })
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        "span",
-                                        { className: "shipping-title" },
-                                        item.name,
-                                        " ",
-                                        item.shortcode === "PICKAS" ? placeDescription : "",
-                                        _react2.default.createElement(
-                                            "div",
-                                            { className: "shipping-note" },
-                                            "shipping-description"
-                                        ),
-                                        _react2.default.createElement(
-                                            "div",
-                                            { className: "shipping-price" },
-                                            (0, _helpersFunction.formatPrice)(item.price),
-                                            " ",
-                                            window.currencyValue
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        "span",
-                                        { className: "shipping-img" },
-                                        _react2.default.createElement("img", { loading: "lazy", src: "/images/icons/shipping-type/" + item.shortcode + ".png", alt: "" })
-                                    )
-                                )
-                            )
-                            // <li key={i} onClick={chooseShippingMethod} className={shippingMethod.selected && shippingMethod.value.name === item.name ? 'active' : '' }>
-                            //     <label data-id={item.productTypeId}
-                            //            data-value={item.name}>
-                            //         <input type="radio"
-                            //                name="shipping_method"
-                            //                value={`${item.name} ${item.shortcode==="PICKAS"?placeDescription:""} (${item.price} ${window.currencyValue})`}
-                            //                required
-                            //                readOnly={true}
-                            //                checked={shippingMethod.selected && shippingMethod.value.name === item.name}/>
-                            //         <span className="radio" />                                                
-                            //         <span className="wrapItemMethod">
-                            //             <span className="name">{item.name} {item.shortcode === "PICKAS"?placeDescription:""}</span>
-                            //             <br/>
-                            //             <span className="price">{item.price} {window.currencyValue}</span>
-                            //         </span>
-                            //         <span className="shipping-img">
-                            //             <img loading="lazy" src={`/images/icons/shipping-type/${item.shortcode}.png`} alt="" />
-                            //         </span>                                                
-                            //     </label>
-                            // </li>
-
-
-                            ;
-                        }),
-                        choiceShipping && _react2.default.createElement(
-                            "li",
-                            null,
-                            _react2.default.createElement(
-                                "span",
-                                { className: "choiceShipping" },
-                                "Es muss eine Versandmethode angegeben werden"
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "agree" },
-                    _react2.default.createElement(
-                        "label",
-                        null,
-                        _react2.default.createElement("input", { type: "checkbox",
-                            name: "agree",
-                            required: true,
-                            onChange: changeCheckbox
-                        }),
-                        _react2.default.createElement("span", { className: !inputCheckbox.agree && shippingMethod.selected ? "checkbox button-pulse" : "checkbox" }),
-                        _react2.default.createElement(
-                            "span",
-                            { className: "description" },
-                            "Ich habe die ",
-                            _react2.default.createElement(
-                                "a",
-                                { href: "/ueber-uns/agb", target: "_blank" },
-                                "AGB"
-                            ),
-                            " und die ",
-                            _react2.default.createElement(
-                                "a",
-                                {
-                                    href: "/ueber-uns/datenschutzerklaerung",
-                                    target: "_blank" },
-                                "Datenschutzerkl\xE4rung"
-                            ),
-                            " gelesen und akzeptiere diese"
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: 'basketMobileBottom' },
-                    errorNoProducts && _react2.default.createElement(
-                        "div",
-                        { className: "basketError" },
-                        _react2.default.createElement("img", { loading: "lazy", src: "/images/design/warning.svg", alt: "" }),
-                        _react2.default.createElement(
-                            "span",
-                            null,
-                            errorNoProducts
-                        )
-                    ),
-                    error && error.general !== '' && _react2.default.createElement(
-                        "div",
-                        { className: "basketError" },
-                        _react2.default.createElement("img", { loading: "lazy", src: "/images/design/warning.svg", alt: "" }),
-                        _react2.default.createElement(
-                            "span",
-                            null,
-                            error.general
-                        )
-                    ),
-                    !window.isMobile && _react2.default.createElement(
-                        "div",
-                        { className: inputCheckbox.agree ? "text-left button-row button-pulse" : "text-left button-row", style: { display: 'inline-block', borderRadius: '3px' } },
-                        _react2.default.createElement(
-                            "button",
-                            { className: "order", onClick: function onClick(e) {
-                                    return order(e);
-                                } },
-                            _react2.default.createElement(
-                                "span",
-                                { className: "default" },
-                                "Bestellung senden",
-                                _react2.default.createElement(
-                                    "div",
-                                    { className: "arrow-image" },
-                                    _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
-                                )
-                            ),
-                            _react2.default.createElement(
-                                "span",
-                                { className: "success" },
-                                "Bestellung aufgegeben",
-                                _react2.default.createElement(
-                                    "svg",
-                                    { viewBox: "0 0 12 10" },
-                                    _react2.default.createElement("polyline", { points: "1.5 6 4.5 9 10.5 1" })
-                                )
-                            ),
-                            _react2.default.createElement("div", { className: "box" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "truck" },
-                                _react2.default.createElement("div", { className: "back" }),
-                                _react2.default.createElement(
-                                    "div",
-                                    { className: "front" },
-                                    _react2.default.createElement("div", { className: "window" })
-                                ),
-                                _react2.default.createElement("div", { className: "light top" }),
-                                _react2.default.createElement("div", { className: "light bottom" })
-                            ),
-                            _react2.default.createElement("div", { className: "lines" })
-                        )
-                    ),
-                    window.isMobile && _react2.default.createElement(
-                        "div",
-                        { className: inputCheckbox.agree ? "toPaymentWrap button-pulse" : "toPaymentWrap" },
-                        _react2.default.createElement(
-                            "button",
-                            { className: "order", onClick: function onClick(e) {
-                                    return order(e);
-                                } },
-                            _react2.default.createElement(
-                                "span",
-                                { className: "default" },
-                                "Jetzt bestellen",
-                                _react2.default.createElement(
-                                    "div",
-                                    { className: "arrow-image" },
-                                    _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
-                                )
-                            ),
-                            _react2.default.createElement(
-                                "span",
-                                { className: "success" },
-                                "Bestellung aufgegeben",
-                                _react2.default.createElement(
-                                    "svg",
-                                    { viewBox: "0 0 12 10" },
-                                    _react2.default.createElement("polyline", { points: "1.5 6 4.5 9 10.5 1" })
-                                )
-                            ),
-                            _react2.default.createElement("div", { className: "box" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "truck" },
-                                _react2.default.createElement("div", { className: "back" }),
-                                _react2.default.createElement(
-                                    "div",
-                                    { className: "front" },
-                                    _react2.default.createElement("div", { className: "window" })
-                                ),
-                                _react2.default.createElement("div", { className: "light top" }),
-                                _react2.default.createElement("div", { className: "light bottom" })
-                            ),
-                            _react2.default.createElement("div", { className: "lines" })
-                        )
-                    )
-                )
-            )
+          "span",
+          { className: "num" },
+          "3"
+        ),
+        _react2.default.createElement(
+          "span",
+          { className: "text" },
+          t("basketPage.shipping")
+        ),
+        _react2.default.createElement(
+          "span",
+          { className: "arrow" },
+          _react2.default.createElement("i", { className: "fa fa-angle-down", "aria-hidden": "true" })
         )
-    );
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wrapperItemBasket" },
+        _react2.default.createElement(
+          "div",
+          { className: "" },
+          _react2.default.createElement(
+            "ul",
+            null,
+            shippingMethods.map(function (item, i) {
+              return _react2.default.createElement(
+                "li",
+                {
+                  key: "shippingMethod-" + i,
+                  onClick: chooseShippingMethod,
+                  className: shippingMethod.selected && shippingMethod.value.name === item.name ? "active" : ""
+                },
+                _react2.default.createElement("input", {
+                  type: "radio",
+                  "data-id": item.id,
+                  "data-value": item.name,
+                  name: "shipping_method",
+                  className: "radio-check",
+                  id: "radio-shippingMethod-" + item.id,
+                  value: item.name + " " + (item.shortcode === "PICKAS" ? placeDescription : "") + " (" + (0, _helpersFunction.formatPrice)(item.price) + " " + window.currencyValue + ")",
+                  required: true,
+                  readOnly: true,
+                  checked: shippingMethod.selected && shippingMethod.value.name === item.name
+                }),
+                _react2.default.createElement(
+                  "label",
+                  { htmlFor: "radio-shippingMethod-" + item.id },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "radio-container" },
+                    _react2.default.createElement(
+                      "div",
+                      { className: "cRadioBtn" },
+                      _react2.default.createElement("div", { className: "overlay" }),
+                      _react2.default.createElement("div", { className: "drops xsDrop" }),
+                      _react2.default.createElement("div", { className: "drops mdDrop" }),
+                      _react2.default.createElement("div", { className: "drops lgDrop" })
+                    )
+                  ),
+                  _react2.default.createElement(
+                    "span",
+                    { className: "shipping-title" },
+                    item.name,
+                    " ",
+                    item.shortcode === "PICKAS" ? placeDescription : "",
+                    _react2.default.createElement(
+                      "div",
+                      { className: "shipping-price" },
+                      (0, _helpersFunction.formatPrice)(item.price),
+                      " ",
+                      window.currencyValue
+                    )
+                  ),
+                  _react2.default.createElement(
+                    "span",
+                    { className: "shipping-img" },
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/icons/shipping-type/" + item.shortcode + ".png",
+                      alt: ""
+                    })
+                  )
+                )
+              )
+              // <li key={i} onClick={chooseShippingMethod} className={shippingMethod.selected && shippingMethod.value.name === item.name ? 'active' : '' }>
+              //     <label data-id={item.productTypeId}
+              //            data-value={item.name}>
+              //         <input type="radio"
+              //                name="shipping_method"
+              //                value={`${item.name} ${item.shortcode==="PICKAS"?placeDescription:""} (${item.price} ${window.currencyValue})`}
+              //                required
+              //                readOnly={true}
+              //                checked={shippingMethod.selected && shippingMethod.value.name === item.name}/>
+              //         <span className="radio" />
+              //         <span className="wrapItemMethod">
+              //             <span className="name">{item.name} {item.shortcode === "PICKAS"?placeDescription:""}</span>
+              //             <br/>
+              //             <span className="price">{item.price} {window.currencyValue}</span>
+              //         </span>
+              //         <span className="shipping-img">
+              //             <img loading="lazy" src={`/images/icons/shipping-type/${item.shortcode}.png`} alt="" />
+              //         </span>
+              //     </label>
+              // </li>
+              ;
+            }),
+            choiceShipping && _react2.default.createElement(
+              "li",
+              null,
+              _react2.default.createElement(
+                "span",
+                { className: "choiceShipping" },
+                "Es muss eine Versandmethode angegeben werden"
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "span",
+          { className: "agree" },
+          _react2.default.createElement(
+            "label",
+            null,
+            _react2.default.createElement("input", {
+              type: "checkbox",
+              name: "agree",
+              required: true,
+              onChange: changeCheckbox
+            }),
+            _react2.default.createElement("span", {
+              className: !inputCheckbox.agree && shippingMethod.selected ? "checkbox button-pulse" : "checkbox"
+            }),
+            _react2.default.createElement(
+              "span",
+              { className: "description" },
+              "Ich habe die",
+              " ",
+              _react2.default.createElement(
+                "a",
+                { href: "/ueber-uns/agb", target: "_blank" },
+                "AGB"
+              ),
+              " ",
+              "und die",
+              " ",
+              _react2.default.createElement(
+                "a",
+                { href: "/ueber-uns/datenschutzerklaerung", target: "_blank" },
+                "Datenschutzerkl\xE4rung"
+              ),
+              " ",
+              "gelesen und akzeptiere diese"
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "basketMobileBottom" },
+          errorNoProducts && _react2.default.createElement(
+            "div",
+            { className: "basketError" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/design/warning.svg", alt: "" }),
+            _react2.default.createElement(
+              "span",
+              null,
+              errorNoProducts
+            )
+          ),
+          error && error.general !== "" && _react2.default.createElement(
+            "div",
+            { className: "basketError" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/design/warning.svg", alt: "" }),
+            _react2.default.createElement(
+              "span",
+              null,
+              error.general
+            )
+          ),
+          !window.isMobile && _react2.default.createElement(
+            "div",
+            {
+              className: inputCheckbox.agree ? "text-left button-row button-pulse" : "text-left button-row",
+              style: { display: "inline-block", borderRadius: "3px" }
+            },
+            _react2.default.createElement(
+              "button",
+              { className: "order", onClick: function onClick(e) {
+                  return order(e);
+                } },
+              _react2.default.createElement(
+                "span",
+                { className: "default" },
+                "Bestellung senden",
+                _react2.default.createElement(
+                  "div",
+                  { className: "arrow-image" },
+                  _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "success" },
+                "Bestellung aufgegeben",
+                _react2.default.createElement(
+                  "svg",
+                  { viewBox: "0 0 12 10" },
+                  _react2.default.createElement("polyline", { points: "1.5 6 4.5 9 10.5 1" })
+                )
+              ),
+              _react2.default.createElement("div", { className: "box" }),
+              _react2.default.createElement(
+                "div",
+                { className: "truck" },
+                _react2.default.createElement("div", { className: "back" }),
+                _react2.default.createElement(
+                  "div",
+                  { className: "front" },
+                  _react2.default.createElement("div", { className: "window" })
+                ),
+                _react2.default.createElement("div", { className: "light top" }),
+                _react2.default.createElement("div", { className: "light bottom" })
+              ),
+              _react2.default.createElement("div", { className: "lines" })
+            )
+          ),
+          window.isMobile && _react2.default.createElement(
+            "div",
+            {
+              className: inputCheckbox.agree ? "toPaymentWrap button-pulse" : "toPaymentWrap"
+            },
+            _react2.default.createElement(
+              "button",
+              { className: "order", onClick: function onClick(e) {
+                  return order(e);
+                } },
+              _react2.default.createElement(
+                "span",
+                { className: "default" },
+                "Jetzt bestellen",
+                _react2.default.createElement(
+                  "div",
+                  { className: "arrow-image" },
+                  _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "success" },
+                "Bestellung aufgegeben",
+                _react2.default.createElement(
+                  "svg",
+                  { viewBox: "0 0 12 10" },
+                  _react2.default.createElement("polyline", { points: "1.5 6 4.5 9 10.5 1" })
+                )
+              ),
+              _react2.default.createElement("div", { className: "box" }),
+              _react2.default.createElement(
+                "div",
+                { className: "truck" },
+                _react2.default.createElement("div", { className: "back" }),
+                _react2.default.createElement(
+                  "div",
+                  { className: "front" },
+                  _react2.default.createElement("div", { className: "window" })
+                ),
+                _react2.default.createElement("div", { className: "light top" }),
+                _react2.default.createElement("div", { className: "light bottom" })
+              ),
+              _react2.default.createElement("div", { className: "lines" })
+            )
+          )
+        )
+      )
+    )
+  );
 };
 
 Shipping.propTypes = {};
 Shipping.defaultProps = {};
 
-exports.default = Shipping;
+exports.default = (0, _reactI18next.withTranslation)()(Shipping);
 
 /***/ }),
 /* 1724 */
@@ -60194,7 +60634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IGNORE_CLASS_NAME", function() { return IGNORE_CLASS_NAME; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
@@ -65076,7 +65516,7 @@ var match = {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _slicedToArray2 = __webpack_require__(334);
@@ -65107,843 +65547,1136 @@ __webpack_require__(1515);
 
 var _reactDatepicker = __webpack_require__(1516);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDatepicker.registerLocale)('de', _de2.default);
+(0, _reactDatepicker.registerLocale)("de", _de2.default);
 
 var useStyles = (0, _styles.makeStyles)(function (theme) {
-    return {
-        container: {
-            display: 'flex',
-            flexWrap: 'wrap'
-        },
-        textField: {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-            width: 200
-        }
-    };
+  return {
+    container: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200
+    }
+  };
 });
 
 var Payment = function Payment(_ref) {
-    var choosePayMethod = _ref.choosePayMethod,
-        shippingMethod = _ref.shippingMethod,
-        domain = _ref.domain,
-        checkedPayByCredits = _ref.checkedPayByCredits,
-        goToDelivery = _ref.goToDelivery,
-        totalPrice = _ref.totalPrice,
-        credits = _ref.credits,
-        userIsLogin = _ref.userIsLogin,
-        changeCreditsInput = _ref.changeCreditsInput,
-        handlerNextTab = _ref.handlerNextTab,
-        handlerShowHideBlocks = _ref.handlerShowHideBlocks,
-        onNoteToggle = _ref.onNoteToggle,
-        dobChange = _ref.dobChange,
-        dobChange1 = _ref.dobChange1,
-        payMethod = _ref.payMethod,
-        payMethodError = _ref.payMethodError,
-        noteShow = _ref.noteShow,
-        noteShow1 = _ref.noteShow1,
-        noteShow2 = _ref.noteShow2;
+  var choosePayMethod = _ref.choosePayMethod,
+      shippingMethod = _ref.shippingMethod,
+      domain = _ref.domain,
+      checkedPayByCredits = _ref.checkedPayByCredits,
+      goToDelivery = _ref.goToDelivery,
+      totalPrice = _ref.totalPrice,
+      credits = _ref.credits,
+      userIsLogin = _ref.userIsLogin,
+      changeCreditsInput = _ref.changeCreditsInput,
+      handlerNextTab = _ref.handlerNextTab,
+      handlerShowHideBlocks = _ref.handlerShowHideBlocks,
+      onNoteToggle = _ref.onNoteToggle,
+      dobChange = _ref.dobChange,
+      dobChange1 = _ref.dobChange1,
+      payMethod = _ref.payMethod,
+      payMethodError = _ref.payMethodError,
+      noteShow = _ref.noteShow,
+      noteShow1 = _ref.noteShow1,
+      noteShow2 = _ref.noteShow2,
+      t = _ref.t;
 
-    var ifRequired = Math.round(totalPrice * 100) / 100 !== 0,
-        creditsCurrentVal = '' + credits.currentValue,
-        creditsInputWidth = (creditsCurrentVal.split('').length + 1) * 8 + 20 + 'px';
+  var ifRequired = Math.round(totalPrice * 100) / 100 !== 0,
+      creditsCurrentVal = "" + credits.currentValue,
+      creditsInputWidth = (creditsCurrentVal.split("").length + 1) * 8 + 20 + "px";
 
-    var _useState = (0, _react.useState)(new Date(1999, 0, 1)),
-        _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-        startDate = _useState2[0],
-        setStartDate = _useState2[1];
+  var _useState = (0, _react.useState)(new Date(1999, 0, 1)),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      startDate = _useState2[0],
+      setStartDate = _useState2[1];
 
-    var _useState3 = (0, _react.useState)(new Date(1999, 0, 1)),
-        _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
-        startDate1 = _useState4[0],
-        setStartDate1 = _useState4[1];
+  var _useState3 = (0, _react.useState)(new Date(1999, 0, 1)),
+      _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
+      startDate1 = _useState4[0],
+      setStartDate1 = _useState4[1];
 
-    var dateClasses = useStyles();
-    var samsung = new URLSearchParams(window.location.search).get("samsung");
-    var apple = new URLSearchParams(window.location.search).get("apple");
+  var dateClasses = useStyles();
+  var samsung = new URLSearchParams(window.location.search).get("samsung");
+  var apple = new URLSearchParams(window.location.search).get("apple");
 
-    return _react2.default.createElement(
-        'div',
-        null,
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "div",
+      { className: "paymentMethod" },
+      _react2.default.createElement(
+        "h3",
+        {
+          className: (0, _helpersFunction.formatPrice)(totalPrice) === 0 ? "title answering" : "title",
+          onClick: function onClick(e) {
+            return handlerShowHideBlocks(e);
+          },
+          "data-step": "paymentMethod",
+          id: "paymentPanel"
+        },
         _react2.default.createElement(
-            'div',
-            { className: 'paymentMethod' },
+          "span",
+          { className: "num" },
+          "1"
+        ),
+        _react2.default.createElement(
+          "span",
+          { className: "text" },
+          t("basketPage.paymentMethod")
+        ),
+        _react2.default.createElement(
+          "span",
+          { className: "arrow" },
+          _react2.default.createElement("i", { className: "fa fa-angle-up", "aria-hidden": "true" })
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wrapperItemBasket" },
+        _react2.default.createElement(
+          "ul",
+          { onChange: choosePayMethod },
+          userIsLogin && credits.totalCredits > 0 && _react2.default.createElement(
+            "li",
+            null,
             _react2.default.createElement(
-                'h3',
-                { className: (0, _helpersFunction.formatPrice)(totalPrice) === 0 ? 'title answering' : 'title',
-                    onClick: function onClick(e) {
-                        return handlerShowHideBlocks(e);
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                name: "payment_method",
+                value: "payByCredits",
+                defaultChecked: checkedPayByCredits
+              }),
+              _react2.default.createElement("span", { className: "radio check" }),
+              _react2.default.createElement("img", {
+                loading: "lazy",
+                src: "/images/icons/payment-type/credits.png",
+                width: "24",
+                height: "24",
+                className: "payment-icon",
+                alt: "Credits"
+              }),
+              "Credits (Total: ",
+              credits.totalCredits,
+              ")",
+              _react2.default.createElement("input", {
+                id: "creditsInput",
+                style: { width: creditsInputWidth },
+                type: "number",
+                pattern: "[0-9]+",
+                onChange: !checkedPayByCredits && changeCreditsInput,
+                value: credits.currentValue
+              })
+            ),
+            credits.errorCredits && _react2.default.createElement(
+              "p",
+              { className: "errorText" },
+              " ",
+              credits.errorCredits
+            )
+          ),
+          shippingMethod.value.shortcode === "PICKAS" && _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                required: ifRequired,
+                value: "payInShop",
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement("span", { className: "radio" }),
+              "Zahlung bei Abholung"
+            )
+          ),
+          domain === 2 && _react2.default.createElement(
+            "div",
+            null,
+            false && _react2.default.createElement(
+              "li",
+              null,
+              _react2.default.createElement(
+                "label",
+                null,
+                _react2.default.createElement("input", {
+                  type: "radio",
+                  name: "payment_method",
+                  required: ifRequired,
+                  value: "Datatrans",
+                  "data-paymethoddatatrans": "INT",
+                  onChange: function onChange(e) {
+                    return onNoteToggle(e);
+                  }
+                }),
+                _react2.default.createElement("span", { className: "radio" }),
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/icons/payment-type/104.png",
+                  width: "24",
+                  height: "24",
+                  className: "payment-icon",
+                  alt: "Byjuno"
+                }),
+                "Zahlung per Rechnung (Byjuno)"
+              ),
+              _react2.default.createElement(
+                "div",
+                {
+                  id: "dob-field",
+                  className: noteShow ? "payment-note" : "payment-note disabled"
+                },
+                "Bezahlen Sie die Ware bequem erst nach Erhalt der Ware per Rechnung / Einzahlungsschein. Der Einzahlungsschein wird per E-Mail oder auf Wunsch per Post von Byjuno AG zugestellt.",
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("br", null),
+                "Bitte geben Sie Ihr Geburtsdatum ein:",
+                !window.isMobile && _react2.default.createElement(
+                  _pickers.MuiPickersUtilsProvider,
+                  {
+                    utils: _dateFns2.default,
+                    locale: _de2.default
+                  },
+                  _react2.default.createElement(_pickers.KeyboardDatePicker, {
+                    value: startDate,
+                    invalidDateMessage: "Falsches Datumsformat",
+                    cancelLabel: "abbrechen",
+                    onChange: function onChange(date) {
+                      setStartDate(date);
+                      dobChange(date);
                     },
-                    'data-step': 'paymentMethod', id: 'paymentPanel' },
-                _react2.default.createElement(
-                    'span',
-                    { className: 'num' },
-                    '1'
+                    format: "dd.MM.yyyy"
+                  })
                 ),
-                _react2.default.createElement(
-                    'span',
-                    { className: 'text' },
-                    'Zahlungsart'
-                ),
-                _react2.default.createElement(
-                    'span',
-                    { className: 'arrow' },
-                    _react2.default.createElement('i', { className: 'fa fa-angle-up', 'aria-hidden': 'true' })
+                window.isMobile && _react2.default.createElement(
+                  "form",
+                  { className: dateClasses.container, noValidate: true },
+                  _react2.default.createElement(_TextField2.default, {
+                    id: "birth_date",
+                    type: "date",
+                    defaultValue: "1999-01-01",
+                    className: dateClasses.textField,
+                    onChange: function onChange(date) {
+                      setStartDate(new Date(date.target.value + "T01:00:00"));
+                      dobChange(new Date(date.target.value + "T01:00:00"));
+                    },
+                    InputLabelProps: {
+                      shrink: true
+                    }
+                  })
                 )
+              )
+            ),
+            false && _react2.default.createElement(
+              "li",
+              null,
+              _react2.default.createElement(
+                "label",
+                null,
+                _react2.default.createElement("input", {
+                  type: "radio",
+                  name: "payment_method",
+                  required: ifRequired,
+                  value: "Datatrans",
+                  "data-paymethoddatatrans": "INT1",
+                  onChange: function onChange(e) {
+                    return onNoteToggle(e);
+                  }
+                }),
+                _react2.default.createElement("span", { className: "radio" }),
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/icons/payment-type/104.png",
+                  width: "24",
+                  height: "24",
+                  className: "payment-icon",
+                  alt: "Byjuno"
+                }),
+                "Zahlung per Ratenzahlung (Byjuno)"
+              ),
+              _react2.default.createElement(
+                "div",
+                {
+                  id: "dob-field1",
+                  className: noteShow1 ? "payment-note" : "payment-note disabled"
+                },
+                "Bezahlen Sie die Ware bequem erst nach Erhalt der Ware und zahlen Sie anschliessend bequem in Monatsraten. Der Rechnungsbetrag kann in bis zu drei Monatsraten aufgeteilt werden: Die erste Rate ist innerhalb von 20 Tagen nach dem Bestelldatum, die zweite im darauffolgenden Monat und die dritte 60 Tage nach dem Bestelldatum f\xE4llig.",
+                _react2.default.createElement("br", null),
+                "Mindestbetrag bei der ersten Teilzahlung: 10% vom Gesamtbetrag.",
+                _react2.default.createElement("br", null),
+                "Auf den Restbetr\xE4gen werden Zinskosten und Geb\xFChren gem\xE4ss den Allgemeinen Gesch\xE4ftsbedingungen erhoben.",
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("br", null),
+                "Bitte geben Sie Ihr Geburtsdatum ein:",
+                !window.isMobile && _react2.default.createElement(
+                  _pickers.MuiPickersUtilsProvider,
+                  {
+                    utils: _dateFns2.default,
+                    locale: _de2.default
+                  },
+                  _react2.default.createElement(_pickers.KeyboardDatePicker, {
+                    value: startDate1,
+                    invalidDateMessage: "Falsches Datumsformat",
+                    cancelLabel: "abbrechen",
+                    onChange: function onChange(date) {
+                      setStartDate1(date);
+                      dobChange1(date);
+                    },
+                    format: "dd.MM.yyyy"
+                  })
+                ),
+                window.isMobile && _react2.default.createElement(
+                  "form",
+                  { className: dateClasses.container, noValidate: true },
+                  _react2.default.createElement(_TextField2.default, {
+                    id: "birth_date1",
+                    type: "date",
+                    defaultValue: "1999-01-01",
+                    className: dateClasses.textField,
+                    onChange: function onChange(date) {
+                      setStartDate1(new Date(date.target.value + "T01:00:00"));
+                      dobChange1(new Date(date.target.value + "T01:00:00"));
+                    },
+                    InputLabelProps: {
+                      shrink: true
+                    }
+                  })
+                )
+              )
+            ),
+            false && _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Payrexx" && payMethod.paymethodpayrexx === "bob-invoice" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Payrexx-bob-invoice",
+                value: "Payrexx",
+                "data-paymethodpayrexx": "bob-invoice",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Payrexx-bob-invoice" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  "Zahlung per Rechnung oder Ratenzahlung (BobFinance)",
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    "0%-Zinsen - Bezahlen Sie die Ware bequem erst nach Erhalt der Ware per Rechnung / Einzahlungsschein in bis zu 3 Monatsraten. Der Einzahlungsschein wird nach Verifizierung des Anbieters direkt per E-Mail von BobFinance zugestellt."
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/109.png",
+                    className: "payment-icon",
+                    alt: "BobFinance"
+                  })
+                )
+              )
             ),
             _react2.default.createElement(
-                'div',
-                { className: 'wrapperItemBasket' },
+              "li",
+              {
+                className: payMethod.method === "IdealPaymentRechnung" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-IdealPaymentRechnung",
+                value: "IdealPaymentRechnung",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-IdealPaymentRechnung" },
                 _react2.default.createElement(
-                    'ul',
-                    { onChange: choosePayMethod },
-                    userIsLogin && credits.totalCredits > 0 && _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                name: 'payment_method',
-                                value: 'payByCredits',
-                                defaultChecked: checkedPayByCredits }),
-                            _react2.default.createElement('span', { className: 'radio check' }),
-                            _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/credits.png', width: '24', height: '24', className: 'payment-icon', alt: 'Credits' }),
-                            'Credits (Total: ',
-                            credits.totalCredits,
-                            ')',
-                            _react2.default.createElement('input', { id: 'creditsInput',
-                                style: { width: creditsInputWidth },
-                                type: 'number',
-                                pattern: '[0-9]+',
-                                onChange: !checkedPayByCredits && changeCreditsInput,
-                                value: credits.currentValue })
-                        ),
-                        credits.errorCredits && _react2.default.createElement(
-                            'p',
-                            { className: 'errorText' },
-                            ' ',
-                            credits.errorCredits
-                        )
-                    ),
-                    shippingMethod.value.shortcode === 'PICKAS' && _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', required: ifRequired, value: 'payInShop', onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement('span', { className: 'radio' }),
-                            'Zahlung bei Abholung'
-                        )
-                    ),
-                    domain === 2 && _react2.default.createElement(
-                        'div',
-                        null,
-                        false && _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                _react2.default.createElement('input', { type: 'radio', name: 'payment_method', required: ifRequired, value: 'Datatrans', 'data-paymethoddatatrans': 'INT', onChange: function onChange(e) {
-                                        return onNoteToggle(e);
-                                    } }),
-                                _react2.default.createElement('span', { className: 'radio' }),
-                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/104.png', width: '24', height: '24', className: 'payment-icon', alt: 'Byjuno' }),
-                                'Zahlung per Rechnung (Byjuno)'
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { id: 'dob-field', className: noteShow ? "payment-note" : "payment-note disabled" },
-                                'Bezahlen Sie die Ware bequem erst nach Erhalt der Ware per Rechnung / Einzahlungsschein. Der Einzahlungsschein wird per E-Mail oder auf Wunsch per Post von Byjuno AG zugestellt.',
-                                _react2.default.createElement('br', null),
-                                _react2.default.createElement('br', null),
-                                'Bitte geben Sie Ihr Geburtsdatum ein:',
-                                !window.isMobile && _react2.default.createElement(
-                                    _pickers.MuiPickersUtilsProvider,
-                                    { utils: _dateFns2.default, locale: _de2.default },
-                                    _react2.default.createElement(_pickers.KeyboardDatePicker, {
-                                        value: startDate,
-                                        invalidDateMessage: 'Falsches Datumsformat',
-                                        cancelLabel: 'abbrechen',
-                                        onChange: function onChange(date) {
-                                            setStartDate(date);dobChange(date);
-                                        },
-                                        format: 'dd.MM.yyyy'
-                                    })
-                                ),
-                                window.isMobile && _react2.default.createElement(
-                                    'form',
-                                    { className: dateClasses.container, noValidate: true },
-                                    _react2.default.createElement(_TextField2.default, {
-                                        id: 'birth_date',
-                                        type: 'date',
-                                        defaultValue: '1999-01-01',
-                                        className: dateClasses.textField,
-                                        onChange: function onChange(date) {
-                                            setStartDate(new Date(date.target.value + 'T01:00:00'));
-                                            dobChange(new Date(date.target.value + 'T01:00:00'));
-                                        },
-                                        InputLabelProps: {
-                                            shrink: true
-                                        }
-
-                                    })
-                                )
-                            )
-                        ),
-                        false && _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                _react2.default.createElement('input', { type: 'radio', name: 'payment_method', required: ifRequired, value: 'Datatrans', 'data-paymethoddatatrans': 'INT1', onChange: function onChange(e) {
-                                        return onNoteToggle(e);
-                                    } }),
-                                _react2.default.createElement('span', { className: 'radio' }),
-                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/104.png', width: '24', height: '24', className: 'payment-icon', alt: 'Byjuno' }),
-                                'Zahlung per Ratenzahlung (Byjuno)'
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { id: 'dob-field1', className: noteShow1 ? "payment-note" : "payment-note disabled" },
-                                'Bezahlen Sie die Ware bequem erst nach Erhalt der Ware und zahlen Sie anschliessend bequem in Monatsraten. Der Rechnungsbetrag kann in bis zu drei Monatsraten aufgeteilt werden: Die erste Rate ist innerhalb von 20 Tagen nach dem Bestelldatum, die zweite im darauffolgenden Monat und die dritte 60 Tage nach dem Bestelldatum f\xE4llig.',
-                                _react2.default.createElement('br', null),
-                                'Mindestbetrag bei der ersten Teilzahlung: 10% vom Gesamtbetrag.',
-                                _react2.default.createElement('br', null),
-                                'Auf den Restbetr\xE4gen werden Zinskosten und Geb\xFChren gem\xE4ss den Allgemeinen Gesch\xE4ftsbedingungen erhoben.',
-                                _react2.default.createElement('br', null),
-                                _react2.default.createElement('br', null),
-                                'Bitte geben Sie Ihr Geburtsdatum ein:',
-                                !window.isMobile && _react2.default.createElement(
-                                    _pickers.MuiPickersUtilsProvider,
-                                    { utils: _dateFns2.default, locale: _de2.default },
-                                    _react2.default.createElement(_pickers.KeyboardDatePicker, {
-                                        value: startDate1,
-                                        invalidDateMessage: 'Falsches Datumsformat',
-                                        cancelLabel: 'abbrechen',
-                                        onChange: function onChange(date) {
-                                            setStartDate1(date);dobChange1(date);
-                                        },
-                                        format: 'dd.MM.yyyy'
-                                    })
-                                ),
-                                window.isMobile && _react2.default.createElement(
-                                    'form',
-                                    { className: dateClasses.container, noValidate: true },
-                                    _react2.default.createElement(_TextField2.default, {
-                                        id: 'birth_date1',
-                                        type: 'date',
-                                        defaultValue: '1999-01-01',
-                                        className: dateClasses.textField,
-                                        onChange: function onChange(date) {
-                                            setStartDate1(new Date(date.target.value + 'T01:00:00'));
-                                            dobChange1(new Date(date.target.value + 'T01:00:00'));
-                                        },
-                                        InputLabelProps: {
-                                            shrink: true
-                                        }
-
-                                    })
-                                )
-                            )
-                        ),
-                        false && _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Payrexx' && payMethod.paymethodpayrexx === 'bob-invoice' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Payrexx-bob-invoice', value: 'Payrexx', 'data-paymethodpayrexx': 'bob-invoice', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Payrexx-bob-invoice' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Zahlung per Rechnung oder Ratenzahlung (BobFinance)',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Zinsen - Bezahlen Sie die Ware bequem erst nach Erhalt der Ware per Rechnung / Einzahlungsschein in bis zu 3 Monatsraten. Der Einzahlungsschein wird nach Verifizierung des Anbieters direkt per E-Mail von BobFinance zugestellt.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/109.png', className: 'payment-icon', alt: 'BobFinance' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'IdealPaymentRechnung' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-IdealPaymentRechnung', value: 'IdealPaymentRechnung', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-IdealPaymentRechnung' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Zahlung per Rechnung (Ideal Payment)',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        'Profitieren Sie von 0% Zinsen und zahlen Sie bequem per Rechnung, nachdem Sie Ihre Ware erhalten haben. Die Bezahlung erfolgt einfach durch Scannen des QR-Codes auf dem Einzahlungsschein, den Sie von Ideal Payment per E-Mail erhalten. Dies setzt eine erfolgreiche Verifizierung durch den Anbieter voraus. Der Betrag ist innerhalb von 14 Tagen f\xE4llig.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/ideal_payment_logo.png', className: 'payment-icon', alt: 'Ideal Payment(Rechnung)' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'IdealPaymentRatenzahlung' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-IdealPaymentRatenzahlung', value: 'IdealPaymentRatenzahlung', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-IdealPaymentRatenzahlung' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Ratenzahlung bis 3. Monate (Ideal Payment)',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        'Geniessen Sie 0% Zinsen und zahlen Sie nach Warenerhalt bequem in bis zu 3 Raten. Die F\xE4lligkeiten sind gestaffelt: 1. Rate nach 10 Tagen, 2. Rate nach 40 Tagen und die 3. Rate nach 70 Tagen. Nach erfolgreicher Anbieter-Verifizierung sendet Ideal Payment Ihnen den Einzahlungsschein umgehend per E-Mail.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/ideal_payment_logo.png', className: 'payment-icon', alt: 'Ideal Payment(Ratenzahlung)' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'HeidiPay' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-HeidiPay', value: 'HeidiPay', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-HeidiPay' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Ratenzahlung mit ',
-                                    _react2.default.createElement(
-                                        'strong',
-                                        null,
-                                        '0%-Zinsen'
-                                    ),
-                                    ' bis max. 12 Monate (Debit- und Kreditkarten) - HeidiPay',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        'HeidiPay Description'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/HeidiPay-logo-small.png', className: 'payment-icon', alt: 'HeidiPay' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'VIS' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-VIS', value: 'Datatrans', 'data-paymethoddatatrans': 'VIS', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-VIS' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Visa',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit der Visa Debit- oder Kreditkarte zahlen Sie schnell und sicher. Ihre Bestellung wird sofort nach Verifizierung des Kartenanbieters bei uns ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/4.png', className: 'payment-icon', alt: 'Visa' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'ECA' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-ECA', value: 'Datatrans', 'data-paymethoddatatrans': 'ECA', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-ECA' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Mastercard',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit der Mastercard Debit- oder Kreditkarte zahlen Sie schnell und sicher. Ihre Bestellung wird sofort nach Verifizierung des Kartenanbieters bei uns ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/5.png', className: 'payment-icon', alt: 'Mastercard' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'AMX' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-AMX', value: 'Datatrans', 'data-paymethoddatatrans': 'AMX', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-AMX' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'American Express',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit der American Express Kreditkarte zahlen Sie schnell und sicher. Ihre Bestellung wird sofort nach Verifizierung des Kartenanbieters bei uns ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/7.png', className: 'payment-icon', alt: 'American Express' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'PFC' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-PFC', value: 'Datatrans', 'data-paymethoddatatrans': 'PFC', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-PFC' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'PostFinance Card',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit der Postcard wird der Betrag direkt von Ihrem PostFinance-Konto abgebucht und die Bestellung wird sofort ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/3.png', className: 'payment-icon', alt: 'PostFinance Card' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'TWI' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-TWI', value: 'Datatrans', 'data-paymethoddatatrans': 'TWI', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-TWI' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'TWINT Wallet',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit Twint bezahlen Sie bequem direkt per Smartphone (iOS und Android) und die Bestellung wird sofort ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/17.png', className: 'payment-icon', alt: 'TWINT Wallet' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'DIB' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-DIB', value: 'Datatrans', 'data-paymethoddatatrans': 'DIB', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-DIB' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Sofort\xFCberweisung',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit Sofort\xFCberweisung wird der Betrag direkt von Ihrem Bankkonto abgebucht und die Bestellung wird sofort ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/21.png', className: 'payment-icon', alt: 'Sofort\xFCberweisung' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Payrexx' && payMethod.paymethodpayrexx === 'apple-pay' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Payrexx-apple-pay', value: 'Payrexx', 'data-paymethodpayrexx': 'apple-pay', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Payrexx-apple-pay' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Apple Pay',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit Apple Pay bezahlen Sie bequem direkt per Apple Device und die Bestellung wird sofort ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/107.png', className: 'payment-icon', alt: 'Apple Pay' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: payMethod.method === 'Datatrans' && payMethod.paymethoddatatrans === 'SAM' ? 'active' : '' },
-                            _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Datatrans-SAM', value: 'Datatrans', 'data-paymethoddatatrans': 'SAM', required: ifRequired, onChange: function onChange(e) {
-                                    return onNoteToggle(e);
-                                } }),
-                            _react2.default.createElement(
-                                'label',
-                                { htmlFor: 'radio-Datatrans-SAM' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'radio-container' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'cRadioBtn' },
-                                        _react2.default.createElement('div', { className: 'overlay' }),
-                                        _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                        _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-title' },
-                                    'Samsung Pay',
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: "payment-note" },
-                                        '0%-Geb\xFChren - Mit Samsung Pay bezahlen Sie bequem direkt per Samsung Smartphone / Tablet und die Bestellung wird sofort ausgel\xF6st.'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'payment-img' },
-                                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/110.png', className: 'payment-icon', alt: 'Samsung Pay' })
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        { className: payMethod.method === 'PayPal' ? 'active' : '' },
-                        _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-PayPal', value: 'PayPal', required: ifRequired, onChange: function onChange(e) {
-                                return onNoteToggle(e);
-                            } }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'radio-PayPal' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'radio-container' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'cRadioBtn' },
-                                    _react2.default.createElement('div', { className: 'overlay' }),
-                                    _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                    _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                    _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'payment-title' },
-                                'PayPal',
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: "payment-note" },
-                                    '0%-Geb\xFChren - Mit der PayPal wird der Betrag direkt von Ihrem PayPal-Konto bzw. Ihrer Kreditkarte abgebucht und die Bestellung wird sofort ausgel\xF6st.'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'payment-img' },
-                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/6.png', className: 'payment-icon', alt: 'PayPal' })
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        { className: payMethod.method === 'Vorauskasse/Überweisung' && payMethod.paymethoddatatrans === 'BNK' ? 'active' : '' },
-                        _react2.default.createElement('input', { type: 'radio', name: 'payment_method', className: 'radio-check', id: 'radio-Vorauskasse-BNK', value: 'Vorauskasse/\xDCberweisung', 'data-paymethoddatatrans': 'BNK', required: ifRequired, onChange: function onChange(e) {
-                                return onNoteToggle(e);
-                            } }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'radio-Vorauskasse-BNK' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'radio-container' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'cRadioBtn' },
-                                    _react2.default.createElement('div', { className: 'overlay' }),
-                                    _react2.default.createElement('div', { className: 'drops xsDrop' }),
-                                    _react2.default.createElement('div', { className: 'drops mdDrop' }),
-                                    _react2.default.createElement('div', { className: 'drops lgDrop' })
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'payment-title' },
-                                'Bank\xFCberweisung / Vorauskasse',
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: "payment-note" },
-                                    '0%-Geb\xFChren - Bei der Bezahlung via Bank\xFCberweisung senden wir Ihnen die Zahlungsinformationen per E-Mail zu. Ware wird erst nach Zahlungseingang versendet. Die Zahlung muss innerhalb von 3 Werktagen erfolgen, ansonsten wird die Bestellung wieder storniert.'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'payment-img' },
-                                _react2.default.createElement('img', { loading: 'lazy', src: '/images/icons/payment-type/10.png', className: 'payment-icon', alt: 'Bank\xFCberweisung' })
-                            )
-                        )
-                    )
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'basketMobileBottom' },
-                    payMethodError && payMethodError.status && _react2.default.createElement(
-                        'div',
-                        { className: 'basketError' },
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/warning.svg', alt: '', style: { marginRight: "10px" } }),
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            payMethodError.msg
-                        )
-                    ),
-                    !window.isMobile && _react2.default.createElement(
-                        'div',
-                        { className: 'text-right button-row' },
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'button', className: payMethod.method ? "basketSubmit btn button-pulse" : "basketSubmit btn", onClick: handlerNextTab },
-                            'Weiter',
-                            _react2.default.createElement(
-                                'span',
-                                null,
-                                _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                            )
-                        )
-                    ),
-                    window.isMobile && _react2.default.createElement(
-                        'button',
-                        { type: 'button', className: payMethod.method ? "btn toDelivery button-pulse" : "btn toDelivery",
-                            onClick: goToDelivery },
-                        'Weiter',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                        )
-                    )
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle1"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription1")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/ideal_payment_logo.png",
+                    className: "payment-icon",
+                    alt: "Ideal Payment(Rechnung)"
+                  })
                 )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "IdealPaymentRatenzahlung" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-IdealPaymentRatenzahlung",
+                value: "IdealPaymentRatenzahlung",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-IdealPaymentRatenzahlung" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle2"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription2")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/ideal_payment_logo.png",
+                    className: "payment-icon",
+                    alt: "Ideal Payment(Ratenzahlung)"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              { className: payMethod.method === "HeidiPay" ? "active" : "" },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-HeidiPay",
+                value: "HeidiPay",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-HeidiPay" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle3Part1"),
+                  " ",
+                  _react2.default.createElement(
+                    "strong",
+                    null,
+                    t("basketPage.paymentTitle3Part2")
+                  ),
+                  " ",
+                  t("basketPage.paymentTitle3Part3"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription3")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/HeidiPay-logo-small.png",
+                    className: "payment-icon",
+                    alt: "HeidiPay"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "VIS" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-VIS",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "VIS",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-VIS" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle4"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription4")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/4.png",
+                    className: "payment-icon",
+                    alt: "Visa"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "ECA" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-ECA",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "ECA",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-ECA" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle5"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription5")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/5.png",
+                    className: "payment-icon",
+                    alt: "Mastercard"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "AMX" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-AMX",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "AMX",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-AMX" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle6"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription6")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/7.png",
+                    className: "payment-icon",
+                    alt: "American Express"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "PFC" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-PFC",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "PFC",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-PFC" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle7"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription7")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/3.png",
+                    className: "payment-icon",
+                    alt: "PostFinance Card"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "TWI" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-TWI",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "TWI",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-TWI" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle8"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription8")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/17.png",
+                    className: "payment-icon",
+                    alt: "TWINT Wallet"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "DIB" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-DIB",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "DIB",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-DIB" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle9"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription9")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/21.png",
+                    className: "payment-icon",
+                    alt: "Sofort\xFCberweisung"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Payrexx" && payMethod.paymethodpayrexx === "apple-pay" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Payrexx-apple-pay",
+                value: "Payrexx",
+                "data-paymethodpayrexx": "apple-pay",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Payrexx-apple-pay" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle10"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription10")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/107.png",
+                    className: "payment-icon",
+                    alt: "Apple Pay"
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              {
+                className: payMethod.method === "Datatrans" && payMethod.paymethoddatatrans === "SAM" ? "active" : ""
+              },
+              _react2.default.createElement("input", {
+                type: "radio",
+                name: "payment_method",
+                className: "radio-check",
+                id: "radio-Datatrans-SAM",
+                value: "Datatrans",
+                "data-paymethoddatatrans": "SAM",
+                required: ifRequired,
+                onChange: function onChange(e) {
+                  return onNoteToggle(e);
+                }
+              }),
+              _react2.default.createElement(
+                "label",
+                { htmlFor: "radio-Datatrans-SAM" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "radio-container" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "cRadioBtn" },
+                    _react2.default.createElement("div", { className: "overlay" }),
+                    _react2.default.createElement("div", { className: "drops xsDrop" }),
+                    _react2.default.createElement("div", { className: "drops mdDrop" }),
+                    _react2.default.createElement("div", { className: "drops lgDrop" })
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-title" },
+                  t("basketPage.paymentTitle11"),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "payment-note" },
+                    t("basketPage.paymentDescription11")
+                  )
+                ),
+                _react2.default.createElement(
+                  "span",
+                  { className: "payment-img" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: "/images/icons/payment-type/110.png",
+                    className: "payment-icon",
+                    alt: "Samsung Pay"
+                  })
+                )
+              )
             )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: payMethod.method === "PayPal" ? "active" : "" },
+            _react2.default.createElement("input", {
+              type: "radio",
+              name: "payment_method",
+              className: "radio-check",
+              id: "radio-PayPal",
+              value: "PayPal",
+              required: ifRequired,
+              onChange: function onChange(e) {
+                return onNoteToggle(e);
+              }
+            }),
+            _react2.default.createElement(
+              "label",
+              { htmlFor: "radio-PayPal" },
+              _react2.default.createElement(
+                "div",
+                { className: "radio-container" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "cRadioBtn" },
+                  _react2.default.createElement("div", { className: "overlay" }),
+                  _react2.default.createElement("div", { className: "drops xsDrop" }),
+                  _react2.default.createElement("div", { className: "drops mdDrop" }),
+                  _react2.default.createElement("div", { className: "drops lgDrop" })
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "payment-title" },
+                t("basketPage.paymentTitle12"),
+                _react2.default.createElement(
+                  "div",
+                  { className: "payment-note" },
+                  t("basketPage.paymentDescription12")
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "payment-img" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/icons/payment-type/6.png",
+                  className: "payment-icon",
+                  alt: "PayPal"
+                })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            {
+              className: payMethod.method === "Vorauskasse/Überweisung" && payMethod.paymethoddatatrans === "BNK" ? "active" : ""
+            },
+            _react2.default.createElement("input", {
+              type: "radio",
+              name: "payment_method",
+              className: "radio-check",
+              id: "radio-Vorauskasse-BNK",
+              value: "Vorauskasse/\xDCberweisung",
+              "data-paymethoddatatrans": "BNK",
+              required: ifRequired,
+              onChange: function onChange(e) {
+                return onNoteToggle(e);
+              }
+            }),
+            _react2.default.createElement(
+              "label",
+              { htmlFor: "radio-Vorauskasse-BNK" },
+              _react2.default.createElement(
+                "div",
+                { className: "radio-container" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "cRadioBtn" },
+                  _react2.default.createElement("div", { className: "overlay" }),
+                  _react2.default.createElement("div", { className: "drops xsDrop" }),
+                  _react2.default.createElement("div", { className: "drops mdDrop" }),
+                  _react2.default.createElement("div", { className: "drops lgDrop" })
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "payment-title" },
+                t("basketPage.paymentTitle13"),
+                _react2.default.createElement(
+                  "div",
+                  { className: "payment-note" },
+                  t("basketPage.paymentDescription13")
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "payment-img" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/icons/payment-type/10.png",
+                  className: "payment-icon",
+                  alt: "Bank\xFCberweisung"
+                })
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "basketMobileBottom" },
+          payMethodError && payMethodError.status && _react2.default.createElement(
+            "div",
+            { className: "basketError" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              src: "/images/design/warning.svg",
+              alt: "",
+              style: { marginRight: "10px" }
+            }),
+            _react2.default.createElement(
+              "span",
+              null,
+              payMethodError.msg
+            )
+          ),
+          !window.isMobile && _react2.default.createElement(
+            "div",
+            { className: "text-right button-row" },
+            _react2.default.createElement(
+              "button",
+              {
+                type: "button",
+                className: payMethod.method ? "basketSubmit btn button-pulse" : "basketSubmit btn",
+                onClick: handlerNextTab
+              },
+              t("basketPage.continue"),
+              _react2.default.createElement(
+                "span",
+                null,
+                _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+              )
+            )
+          ),
+          window.isMobile && _react2.default.createElement(
+            "button",
+            {
+              type: "button",
+              className: payMethod.method ? "btn toDelivery button-pulse" : "btn toDelivery",
+              onClick: goToDelivery
+            },
+            t("basketPage.continue"),
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+            )
+          )
         )
-    );
+      )
+    )
+  );
 };
 
 Payment.propTypes = {};
 Payment.defaultProps = {};
 
-exports.default = Payment;
+exports.default = (0, _reactI18next.withTranslation)()(Payment);
 
 /***/ }),
 /* 1800 */
@@ -65952,7 +66685,7 @@ exports.default = Payment;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStaticState", function() { return useStaticState; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
@@ -66596,7 +67329,7 @@ function removeClass(element, className) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__TransitionGroup__ = __webpack_require__(1567);
 
@@ -67166,7 +67899,7 @@ SwitchTransition.defaultProps = {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return KeyboardDatePicker; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
@@ -67340,7 +68073,7 @@ KeyboardDatePicker.defaultProps = defaultProps;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeyboardTimePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return TimePicker; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);
@@ -67467,7 +68200,7 @@ KeyboardTimePicker.defaultProps = defaultProps;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DateTimePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return KeyboardDateTimePicker; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_defineProperty__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(28);

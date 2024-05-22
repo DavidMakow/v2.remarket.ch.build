@@ -2314,7 +2314,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var hoistNonReactStatic = __webpack_require__(1161);
 var React = __webpack_require__(16);
-var ReactDOM = __webpack_require__(321);
+var ReactDOM = __webpack_require__(322);
 
 module.exports = function enhanceWithClickOutside(WrappedComponent) {
   var componentName = WrappedComponent.displayName || WrappedComponent.name;
@@ -4731,7 +4731,7 @@ module.exports = exports.default;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _slicedToArray2 = __webpack_require__(334);
@@ -4742,6 +4742,8 @@ var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactI18next = __webpack_require__(315);
+
 var _reactSelect = __webpack_require__(902);
 
 var _reactSelect2 = _interopRequireDefault(_reactSelect);
@@ -4749,759 +4751,962 @@ var _reactSelect2 = _interopRequireDefault(_reactSelect);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PersonalData = function PersonalData(_ref) {
-    var changeCountry = _ref.changeCountry,
-        country = _ref.country,
-        inputCheckbox = _ref.inputCheckbox,
-        changeCheckbox = _ref.changeCheckbox,
-        ifErrorPayment = _ref.ifErrorPayment,
-        error = _ref.error,
-        user = _ref.user,
-        goToPayment = _ref.goToPayment,
-        cancelRedirect = _ref.cancelRedirect,
-        handlerSendSellBasket = _ref.handlerSendSellBasket,
-        handlerNextTab = _ref.handlerNextTab,
-        handlerShowHideBlocks = _ref.handlerShowHideBlocks,
-        validateError = _ref.validateError,
-        validateForm = _ref.validateForm,
-        validateCheck = _ref.validateCheck,
-        isValidate = _ref.isValidate,
-        payMethodError = _ref.payMethodError;
+  var changeCountry = _ref.changeCountry,
+      country = _ref.country,
+      inputCheckbox = _ref.inputCheckbox,
+      changeCheckbox = _ref.changeCheckbox,
+      ifErrorPayment = _ref.ifErrorPayment,
+      error = _ref.error,
+      user = _ref.user,
+      goToPayment = _ref.goToPayment,
+      cancelRedirect = _ref.cancelRedirect,
+      handlerSendSellBasket = _ref.handlerSendSellBasket,
+      handlerNextTab = _ref.handlerNextTab,
+      handlerShowHideBlocks = _ref.handlerShowHideBlocks,
+      validateError = _ref.validateError,
+      validateForm = _ref.validateForm,
+      validateCheck = _ref.validateCheck,
+      isValidate = _ref.isValidate,
+      payMethodError = _ref.payMethodError,
+      t = _ref.t;
 
-    var _useState = (0, _react.useState)(false),
-        _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-        clickBtn = _useState2[0],
-        setClickBtn = _useState2[1];
+  var _useState = (0, _react.useState)(false),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      clickBtn = _useState2[0],
+      setClickBtn = _useState2[1];
 
-    (0, _react.useEffect)(function () {
-        validateCheck();
-    }, []);
-    function changePassword(e) {
-        var value = e.target.value,
-            regular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
+  (0, _react.useEffect)(function () {
+    validateCheck();
+  }, []);
+  function changePassword(e) {
+    var value = e.target.value,
+        regular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
 
-        if (regular.test(value.trim())) {
-            $(e.target).parents('.inputFullWidth').find('.statusBarPassword').css({ background: '#00cb94' });
-        } else {
-            $(e.target).parents('.inputFullWidth').find('.statusBarPassword').css({ background: '#ff0000' });
-        }
+    if (regular.test(value.trim())) {
+      $(e.target).parents(".inputFullWidth").find(".statusBarPassword").css({ background: "#00cb94" });
+    } else {
+      $(e.target).parents(".inputFullWidth").find(".statusBarPassword").css({ background: "#ff0000" });
     }
-    function showLoginForm() {
-        cancelRedirect(true);
-        document.getElementById("op").checked = true;
-        $('.login-box-wrapper').css({ display: 'block' });
+  }
+  function showLoginForm() {
+    cancelRedirect(true);
+    document.getElementById("op").checked = true;
+    $(".login-box-wrapper").css({ display: "block" });
+  }
+
+  var onClickButton = function onClickButton() {
+    setClickBtn(true);
+    setTimeout(function () {
+      setClickBtn(false);
+    }, 5500);
+    if (!validateForm()) {
+      return;
     }
+    if (window.isMobile) {
+      goToPayment();
+    } else {
+      handlerNextTab();
+    }
+  };
 
-    var onClickButton = function onClickButton() {
-        setClickBtn(true);
-        setTimeout(function () {
-            setClickBtn(false);
-        }, 5500);
-        if (!validateForm()) {
-            return;
-        }
-        if (window.isMobile) {
-            goToPayment();
-        } else {
-            handlerNextTab();
-        }
-    };
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'personalData' },
+  return _react2.default.createElement(
+    "div",
+    { className: "personalData" },
+    _react2.default.createElement(
+      "h3",
+      {
+        className: "title",
+        onClick: function onClick(e) {
+          return handlerShowHideBlocks(e);
+        },
+        "data-step": "personalData"
+      },
+      _react2.default.createElement(
+        "span",
+        { className: "num" },
+        "2"
+      ),
+      _react2.default.createElement(
+        "span",
+        { className: "text" },
+        t("basketPage.personalData")
+      ),
+      _react2.default.createElement(
+        "span",
+        { className: "arrow" },
+        _react2.default.createElement("i", { className: "fa fa-angle-down", "aria-hidden": "true" })
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "wrapperItemBasket" },
+      _react2.default.createElement(
+        "div",
+        { className: "billingForm" },
         _react2.default.createElement(
-            'h3',
-            { className: 'title',
-                onClick: function onClick(e) {
-                    return handlerShowHideBlocks(e);
-                },
-                'data-step': 'personalData' },
+          "div",
+          { className: "topPersonalData" },
+          !user.isLogin && _react2.default.createElement(
+            "div",
+            { className: "login-buttons buy-form" },
             _react2.default.createElement(
-                'span',
-                { className: 'num' },
-                '2'
+              "div",
+              { className: "buttons-row" },
+              window.isMobile && _react2.default.createElement(
+                "label",
+                null,
+                _react2.default.createElement("input", {
+                  type: "checkbox",
+                  onChange: changeCheckbox,
+                  name: "asGuest",
+                  className: "checkbox-login-as-guest",
+                  defaultChecked: true
+                }),
+                _react2.default.createElement("span", { className: "check" }),
+                "Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt"
+              )
             ),
-            _react2.default.createElement(
-                'span',
-                { className: 'text' },
-                'Pers\xF6nliche Daten'
-            ),
-            _react2.default.createElement(
-                'span',
-                { className: 'arrow' },
-                _react2.default.createElement('i', { className: 'fa fa-angle-down', 'aria-hidden': 'true' })
+            !window.isMobile && _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                onChange: changeCheckbox,
+                name: "asGuest",
+                className: "checkbox-login-as-guest",
+                defaultChecked: true
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt"
             )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "form-subheading" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/basket-form1.svg", alt: "" }),
+            _react2.default.createElement(
+              "h3",
+              null,
+              "Lieferadresse"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wrapLabel" },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                "div",
+                {
+                  className: validateError.gender.error ? clickBtn === true ? "genderArea genderError purple" : "genderArea genderError" : "genderArea"
+                },
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "gender",
+                    value: "Herr",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: true
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Herr"
+                ),
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "gender",
+                    value: "Frau",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: true
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Frau"
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.gender.msg
+              )
+            ),
+            _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                name: "company",
+                checked: inputCheckbox.company === true ? "true" : null,
+                onChange: changeCheckbox
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Firma"
+            )
+          ),
+          !user.isLogin && _react2.default.createElement(
+            "span",
+            { className: "loginForSellForm", onClick: showLoginForm },
+            "Sie haben bereits ein Konto? Jetzt einloggen"
+          )
         ),
         _react2.default.createElement(
-            'div',
-            { className: 'wrapperItemBasket' },
+          "div",
+          {
+            className: inputCheckbox.company ? " rowInputs" : " rowInputs hide"
+          },
+          _react2.default.createElement(
+            "div",
+            { className: "input-wrapper" },
+            _react2.default.createElement("input", {
+              type: "text",
+              name: "companyName",
+              className: validateError.companyName.error ? clickBtn === true ? "error purple" : "error" : null,
+              placeholder: "Firma",
+              onChange: function onChange() {
+                return validateForm();
+              },
+              required: inputCheckbox.company
+            }),
             _react2.default.createElement(
-                'div',
-                { className: 'billingForm' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'topPersonalData' },
-                    !user.isLogin && _react2.default.createElement(
-                        'div',
-                        { className: 'login-buttons buy-form' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'buttons-row' },
-                            window.isMobile && _react2.default.createElement(
-                                'label',
-                                null,
-                                _react2.default.createElement('input', { type: 'checkbox',
-                                    onChange: changeCheckbox,
-                                    name: 'asGuest',
-                                    className: 'checkbox-login-as-guest', defaultChecked: true }),
-                                _react2.default.createElement('span', { className: 'check' }),
-                                'Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt'
-                            )
-                        ),
-                        !window.isMobile && _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                onChange: changeCheckbox,
-                                name: 'asGuest',
-                                className: 'checkbox-login-as-guest', defaultChecked: true }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Als Gast bestellen - hierbei wird kein Benutzeraccount erstellt'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'form-subheading' },
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/basket-form1.svg', alt: '' }),
-                        _react2.default.createElement(
-                            'h3',
-                            null,
-                            'Lieferadresse'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'wrapLabel' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'div',
-                                { className: validateError.gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Herr', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: true }),
-                                    _react2.default.createElement('span', null),
-                                    'Herr'
-                                ),
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'gender', value: 'Frau', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: true }),
-                                    _react2.default.createElement('span', null),
-                                    'Frau'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.gender.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                name: 'company',
-                                checked: inputCheckbox.company === true ? "true" : null,
-                                onChange: changeCheckbox }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Firma'
-                        )
-                    ),
-                    !user.isLogin && _react2.default.createElement(
-                        'span',
-                        { className: 'loginForSellForm',
-                            onClick: showLoginForm },
-                        'Sie haben bereits ein Konto? Jetzt einloggen'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: inputCheckbox.company ? " rowInputs" : " rowInputs hide" },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-wrapper' },
-                        _react2.default.createElement('input', { type: 'text', name: 'companyName', className: validateError.companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', onChange: function onChange() {
-                                return validateForm();
-                            }, required: inputCheckbox.company }),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'placeholder' },
-                            'Firma'
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'errorText' },
-                            validateError.companyName.msg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: ' rowInputs' /*onChange={changeNameField}*/ },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'firstname', className: validateError.firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Vorname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.firstname.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'lastname', className: validateError.lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nachname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.lastname.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'email', name: 'email', className: error.info || validateError.email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'E-Mail'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                error.info ? error.info : validateError.email.error ? validateError.email.msg : ''
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'tel', name: 'phone', className: validateError.phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', minLength: '10', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Telefon (mobil)'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.phone.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataAddress rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'street', className: validateError.street.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'route', placeholder: 'Strasse', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Strasse'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.street.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'number', className: validateError.number.error ? clickBtn === true ? 'error purple' : 'error' : null, id: 'street_number', placeholder: 'Nr.', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nr.'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.number.msg
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataCity rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'zip', className: validateError.zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'postal_code', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'PLZ'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.zip.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'city', className: validateError.city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'locality', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: true }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Stadt'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.city.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'select' },
-                    !country.countriesList.some(function (item) {
-                        return item.value === country.currentCountry.inputCountry.toLowerCase();
-                    }) && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
-                    _react2.default.createElement(_reactSelect2.default, {
-                        placeholder: 'Land',
-                        value: country.currentCountry.inputCountry.toLowerCase(),
-                        name: 'inputCountry',
-                        clearable: false,
-                        options: country.countriesList,
-                        searchable: false,
-                        required: true,
-                        onChange: function onChange(val) {
-                            return changeCountry(val, "inputCountry");
-                        } }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'placeholder' },
-                        'Ausw\xE4hlen'
-                    )
-                ),
-                !user.isLogin && !inputCheckbox.asGuest && _react2.default.createElement(
-                    'div',
-                    { className: 'inputFullWidth rowInputs' },
-                    _react2.default.createElement('input', { type: 'password',
-                        name: 'password',
-                        placeholder: 'Password (min. 8 Zeichen + min. 1 Nr. )',
-                        className: error.password ? 'error' : null,
-                        onChange: changePassword,
-                        required: !ifErrorPayment }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'errorText' },
-                        error.password
-                    ),
-                    _react2.default.createElement('div', { className: 'statusBarPassword' })
-                ),
-                _react2.default.createElement(
-                    'label',
-                    { className: "shippingAddressCheck" },
-                    _react2.default.createElement('input', { type: 'checkbox', name: 'shippingAddress', checked: inputCheckbox.shippingAddress === true ? true : false, onChange: changeCheckbox }),
-                    _react2.default.createElement('span', null),
-                    ' Diese Lieferadresse auch als Rechnungsadresse benutzen'
-                )
+              "span",
+              { className: "placeholder" },
+              "Firma"
             ),
             _react2.default.createElement(
-                'div',
-                { className: inputCheckbox.shippingAddress === true ? 'hide shippingForm' : 'shippingForm' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'form-subheading' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/basket-form2.svg', alt: '' }),
-                    _react2.default.createElement(
-                        'h3',
-                        null,
-                        'Rechnungsadresse'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'topPersonalData' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'wrapLabel' },
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'div',
-                                { className: validateError.customer_gender.error ? clickBtn === true ? 'genderArea genderError purple' : 'genderArea genderError' : 'genderArea' },
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Herr', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Herr'
-                                ),
-                                _react2.default.createElement(
-                                    'label',
-                                    null,
-                                    _react2.default.createElement('input', { type: 'radio', name: 'customer_gender', value: 'Frau', onClick: function onClick() {
-                                            return validateForm();
-                                        }, required: !inputCheckbox.shippingAddress }),
-                                    _react2.default.createElement('span', null),
-                                    'Frau'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_gender.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'checkbox',
-                                name: 'customerCompanyName',
-                                value: '1',
-                                checked: inputCheckbox.customerCompanyName === true ? "true" : null,
-                                onClick: changeCheckbox }),
-                            _react2.default.createElement('span', { className: 'check' }),
-                            'Firma'
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: inputCheckbox.customerCompanyName ? "rowInputs" : "rowInputs hide" },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-wrapper' },
-                        _react2.default.createElement('input', { type: 'text', name: 'customer_companyName', className: validateError.customer_companyName.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Firma', onChange: function onChange() {
-                                return validateForm();
-                            }, required: inputCheckbox.customerCompanyName }),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'placeholder' },
-                            'Firma'
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'errorText' },
-                            validateError.customer_companyName.msg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' /*onChange={changeNameField}*/ },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_firstname', className: validateError.customer_firstname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Vorname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Vorname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_firstname.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_lastname', className: validateError.customer_lastname.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nachname', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nachname'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_lastname.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper adjust-wrapper' },
-                            _react2.default.createElement('input', { type: 'email', name: 'customer_email', className: error.info || validateError.customer_email.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'E-Mail', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'E-Mail'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                error.info ? error.info : validateError.customer_email.msg !== "" ? validateError.customer_email.msg : ""
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper' },
-                            _react2.default.createElement('input', { type: 'tel', name: 'customer_phone', className: validateError.customer_phone.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Telefon (mobil)', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Telefon (mobil)'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_phone.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'rowInputs-wrapper' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataAddress rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_street', id: 'customer_route', className: validateError.customer_street.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Strasse', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Strasse'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_street.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_number', id: 'customer_street_number', className: validateError.customer_number.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Nr.', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Nr.'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_number.msg
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'personalDataCity rowInputs' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-sm' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_zip', className: validateError.customer_zip.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'PLZ', id: 'customer_postal_code', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'PLZ'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_zip.msg
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'input-wrapper input-wrapper-lg' },
-                            _react2.default.createElement('input', { type: 'text', name: 'customer_city', className: validateError.customer_city.error ? clickBtn === true ? 'error purple' : 'error' : null, placeholder: 'Stadt', id: 'customer_locality', onChange: function onChange() {
-                                    return validateForm();
-                                }, required: !inputCheckbox.shippingAddress }),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'placeholder' },
-                                'Stadt'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'errorText' },
-                                validateError.customer_city.msg
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'select' },
-                    !country.countriesList.some(function (item) {
-                        return item.value === country.currentCountry.customer_inputCountry.toLowerCase();
-                    }) && inputCheckbox.shippingAddress !== true && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
-                    _react2.default.createElement(_reactSelect2.default, {
-                        placeholder: 'Ausw\xE4hlen...',
-                        value: country.currentCountry.customer_inputCountry.toLowerCase(),
-                        name: 'customer_inputCountry',
-                        clearable: false,
-                        options: country.countriesList,
-                        searchable: false,
-                        onChange: function onChange(val) {
-                            return changeCountry(val, "customer_inputCountry");
-                        } }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'placeholder' },
-                        'Ausw\xE4hlen'
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'basketMobileBottom' },
-                payMethodError && payMethodError.status && _react2.default.createElement(
-                    'div',
-                    { className: 'basketError' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/warning.svg', alt: '', style: { marginRight: "10px" } }),
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        payMethodError.msg
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'text-right button-row' },
-                    !handlerSendSellBasket && _react2.default.createElement(
-                        'button',
-                        { type: 'button', className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn", onClick: function onClick() {
-                                return onClickButton();
-                            } },
-                        'Weiter',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                        )
-                    ),
-                    handlerSendSellBasket && _react2.default.createElement(
-                        'button',
-                        { type: 'submit',
-                            className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
-                            onSubmit: handlerSendSellBasket },
-                        'Absenden',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('i', { className: 'fa fa-long-arrow-right', 'aria-hidden': 'true' })
-                        )
-                    )
-                ),
-                window.isMobile && _react2.default.createElement(
-                    'div',
-                    { className: 'toPaymentWrap' },
-                    _react2.default.createElement(
-                        'button',
-                        { className: isValidate ? "btn toPayment button-pulse" : "btn toPayment",
-                            type: 'button',
-                            onClick: function onClick() {
-                                return onClickButton();
-                            } },
-                        'Weiter',
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            _react2.default.createElement('img', { loading: 'lazy', src: 'images/arrow.svg', alt: '' })
-                        )
-                    )
-                )
+              "span",
+              { className: "errorText" },
+              validateError.companyName.msg
             )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: " rowInputs" /*onChange={changeNameField}*/ },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "firstname",
+                className: validateError.firstname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Vorname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Vorname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.firstname.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "lastname",
+                className: validateError.lastname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nachname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nachname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.lastname.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "email",
+                name: "email",
+                className: error.info || validateError.email.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "E-Mail",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "E-Mail"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                error.info ? error.info : validateError.email.error ? validateError.email.msg : ""
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "tel",
+                name: "phone",
+                className: validateError.phone.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Telefon (mobil)",
+                minLength: "10",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Telefon (mobil)"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.phone.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataAddress rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "street",
+                className: validateError.street.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "route",
+                placeholder: "Strasse",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Strasse"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.street.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "number",
+                className: validateError.number.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "street_number",
+                placeholder: "Nr.",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nr."
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.number.msg
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataCity rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "zip",
+                className: validateError.zip.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "PLZ",
+                id: "postal_code",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "PLZ"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.zip.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "city",
+                className: validateError.city.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Stadt",
+                id: "locality",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: true
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Stadt"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.city.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "select" },
+          !country.countriesList.some(function (item) {
+            return item.value === country.currentCountry.inputCountry.toLowerCase();
+          }) && _react2.default.createElement("input", { className: "requiredSelect", type: "text", required: true }),
+          _react2.default.createElement(_reactSelect2.default, {
+            placeholder: "Land",
+            value: country.currentCountry.inputCountry.toLowerCase(),
+            name: "inputCountry",
+            clearable: false,
+            options: country.countriesList,
+            searchable: false,
+            required: true,
+            onChange: function onChange(val) {
+              return changeCountry(val, "inputCountry");
+            }
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "placeholder" },
+            "Ausw\xE4hlen"
+          )
+        ),
+        !user.isLogin && !inputCheckbox.asGuest && _react2.default.createElement(
+          "div",
+          { className: "inputFullWidth rowInputs" },
+          _react2.default.createElement("input", {
+            type: "password",
+            name: "password",
+            placeholder: "Password (min. 8 Zeichen + min. 1 Nr. )",
+            className: error.password ? "error" : null,
+            onChange: changePassword,
+            required: !ifErrorPayment
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "errorText" },
+            error.password
+          ),
+          _react2.default.createElement("div", { className: "statusBarPassword" })
+        ),
+        _react2.default.createElement(
+          "label",
+          { className: "shippingAddressCheck" },
+          _react2.default.createElement("input", {
+            type: "checkbox",
+            name: "shippingAddress",
+            checked: inputCheckbox.shippingAddress === true ? true : false,
+            onChange: changeCheckbox
+          }),
+          _react2.default.createElement("span", null),
+          " Diese Lieferadresse auch als Rechnungsadresse benutzen"
         )
-    );
+      ),
+      _react2.default.createElement(
+        "div",
+        {
+          className: inputCheckbox.shippingAddress === true ? "hide shippingForm" : "shippingForm"
+        },
+        _react2.default.createElement(
+          "div",
+          { className: "form-subheading" },
+          _react2.default.createElement("img", { loading: "lazy", src: "/images/basket-form2.svg", alt: "" }),
+          _react2.default.createElement(
+            "h3",
+            null,
+            "Rechnungsadresse"
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "topPersonalData" },
+          _react2.default.createElement(
+            "div",
+            { className: "wrapLabel" },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                "div",
+                {
+                  className: validateError.customer_gender.error ? clickBtn === true ? "genderArea genderError purple" : "genderArea genderError" : "genderArea"
+                },
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "customer_gender",
+                    value: "Herr",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: !inputCheckbox.shippingAddress
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Herr"
+                ),
+                _react2.default.createElement(
+                  "label",
+                  null,
+                  _react2.default.createElement("input", {
+                    type: "radio",
+                    name: "customer_gender",
+                    value: "Frau",
+                    onClick: function onClick() {
+                      return validateForm();
+                    },
+                    required: !inputCheckbox.shippingAddress
+                  }),
+                  _react2.default.createElement("span", null),
+                  "Frau"
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_gender.msg
+              )
+            ),
+            _react2.default.createElement(
+              "label",
+              null,
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                name: "customerCompanyName",
+                value: "1",
+                checked: inputCheckbox.customerCompanyName === true ? "true" : null,
+                onClick: changeCheckbox
+              }),
+              _react2.default.createElement("span", { className: "check" }),
+              "Firma"
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          {
+            className: inputCheckbox.customerCompanyName ? "rowInputs" : "rowInputs hide"
+          },
+          _react2.default.createElement(
+            "div",
+            { className: "input-wrapper" },
+            _react2.default.createElement("input", {
+              type: "text",
+              name: "customer_companyName",
+              className: validateError.customer_companyName.error ? clickBtn === true ? "error purple" : "error" : null,
+              placeholder: "Firma",
+              onChange: function onChange() {
+                return validateForm();
+              },
+              required: inputCheckbox.customerCompanyName
+            }),
+            _react2.default.createElement(
+              "span",
+              { className: "placeholder" },
+              "Firma"
+            ),
+            _react2.default.createElement(
+              "span",
+              { className: "errorText" },
+              validateError.customer_companyName.msg
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" /*onChange={changeNameField}*/ },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_firstname",
+                className: validateError.customer_firstname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Vorname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Vorname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_firstname.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_lastname",
+                className: validateError.customer_lastname.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nachname",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nachname"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_lastname.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper adjust-wrapper" },
+              _react2.default.createElement("input", {
+                type: "email",
+                name: "customer_email",
+                className: error.info || validateError.customer_email.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "E-Mail",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "E-Mail"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                error.info ? error.info : validateError.customer_email.msg !== "" ? validateError.customer_email.msg : ""
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper" },
+              _react2.default.createElement("input", {
+                type: "tel",
+                name: "customer_phone",
+                className: validateError.customer_phone.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Telefon (mobil)",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Telefon (mobil)"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_phone.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "rowInputs-wrapper" },
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataAddress rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_street",
+                id: "customer_route",
+                className: validateError.customer_street.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Strasse",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Strasse"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_street.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_number",
+                id: "customer_street_number",
+                className: validateError.customer_number.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Nr.",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Nr."
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_number.msg
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "personalDataCity rowInputs" },
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-sm" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_zip",
+                className: validateError.customer_zip.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "PLZ",
+                id: "customer_postal_code",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "PLZ"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_zip.msg
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "input-wrapper input-wrapper-lg" },
+              _react2.default.createElement("input", {
+                type: "text",
+                name: "customer_city",
+                className: validateError.customer_city.error ? clickBtn === true ? "error purple" : "error" : null,
+                placeholder: "Stadt",
+                id: "customer_locality",
+                onChange: function onChange() {
+                  return validateForm();
+                },
+                required: !inputCheckbox.shippingAddress
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "placeholder" },
+                "Stadt"
+              ),
+              _react2.default.createElement(
+                "span",
+                { className: "errorText" },
+                validateError.customer_city.msg
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "select" },
+          !country.countriesList.some(function (item) {
+            return item.value === country.currentCountry.customer_inputCountry.toLowerCase();
+          }) && inputCheckbox.shippingAddress !== true && _react2.default.createElement("input", { className: "requiredSelect", type: "text", required: true }),
+          _react2.default.createElement(_reactSelect2.default, {
+            placeholder: "Ausw\xE4hlen...",
+            value: country.currentCountry.customer_inputCountry.toLowerCase(),
+            name: "customer_inputCountry",
+            clearable: false,
+            options: country.countriesList,
+            searchable: false,
+            onChange: function onChange(val) {
+              return changeCountry(val, "customer_inputCountry");
+            }
+          }),
+          _react2.default.createElement(
+            "span",
+            { className: "placeholder" },
+            "Ausw\xE4hlen"
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "basketMobileBottom" },
+        payMethodError && payMethodError.status && _react2.default.createElement(
+          "div",
+          { className: "basketError" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/design/warning.svg",
+            alt: "",
+            style: { marginRight: "10px" }
+          }),
+          _react2.default.createElement(
+            "span",
+            null,
+            payMethodError.msg
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "text-right button-row" },
+          !handlerSendSellBasket && _react2.default.createElement(
+            "button",
+            {
+              type: "button",
+              className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
+              onClick: function onClick() {
+                return onClickButton();
+              }
+            },
+            t("basketPage.continue"),
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+            )
+          ),
+          handlerSendSellBasket && _react2.default.createElement(
+            "button",
+            {
+              type: "submit",
+              className: isValidate ? "basketSubmit btn button-pulse" : "basketSubmit btn",
+              onSubmit: handlerSendSellBasket
+            },
+            "Absenden",
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("i", { className: "fa fa-long-arrow-right", "aria-hidden": "true" })
+            )
+          )
+        ),
+        window.isMobile && _react2.default.createElement(
+          "div",
+          { className: "toPaymentWrap" },
+          _react2.default.createElement(
+            "button",
+            {
+              className: isValidate ? "btn toPayment button-pulse" : "btn toPayment",
+              type: "button",
+              onClick: function onClick() {
+                return onClickButton();
+              }
+            },
+            t("basketPage.continue"),
+            _react2.default.createElement(
+              "span",
+              null,
+              _react2.default.createElement("img", { loading: "lazy", src: "images/arrow.svg", alt: "" })
+            )
+          )
+        )
+      )
+    )
+  );
 };
 
 PersonalData.propTypes = {};
 PersonalData.defaultProps = {};
 
-exports.default = PersonalData;
+exports.default = (0, _reactI18next.withTranslation)()(PersonalData);
 
 /***/ }),
 
@@ -5524,7 +5729,7 @@ var _propTypes = __webpack_require__(28);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5816,7 +6021,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ShowResults = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -5866,7 +6071,7 @@ var _user = __webpack_require__(217);
 
 var userActions = _interopRequireWildcard(_user);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _sendLinkMobile = __webpack_require__(1712);
 
@@ -7511,7 +7716,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -7882,7 +8087,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -7924,7 +8129,7 @@ var _index = __webpack_require__(149);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8478,7 +8683,7 @@ var ShowResultsPersonalData = function (_Component) {
                                         return item.value === country.currentCountry.inputCountry.toLowerCase();
                                     }) && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
                                     _react2.default.createElement(_reactSelect2.default, {
-                                        placeholder: 'Ausw\xE4hlen...',
+                                        placeholder: 'Land ausw\xE4hlen...',
                                         value: country.currentCountry.inputCountry.toLowerCase(),
                                         name: 'inputCountry',
                                         clearable: false,
@@ -8509,7 +8714,7 @@ var ShowResultsPersonalData = function (_Component) {
                                     { className: 'inputFullWidth rowInputs password' },
                                     _react2.default.createElement('input', { type: 'password',
                                         name: 'password',
-                                        placeholder: 'Passwort (min. 8 Zeichen + min. 1 Nr. )',
+                                        placeholder: 'Passwort (mind. 8 Zeichen, inkl. mind. 1 Zahl)',
                                         className: error.password ? 'error' : null,
                                         onChange: this.changePassword,
                                         required: !ifErrorPayment }),
@@ -8722,7 +8927,7 @@ var ShowResultsPersonalData = function (_Component) {
                                 return item.value === country.currentCountry.customer_inputCountry.toLowerCase();
                             }) && inputCheckbox.shippingAddress !== true && _react2.default.createElement('input', { className: 'requiredSelect', type: 'text', required: true }),
                             _react2.default.createElement(_reactSelect2.default, {
-                                placeholder: 'Ausw\xE4hlen...',
+                                placeholder: 'Land ausw\xE4hlen...',
                                 value: country.currentCountry.customer_inputCountry.toLowerCase(),
                                 name: 'customer_inputCountry',
                                 clearable: false,
@@ -9421,7 +9626,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BasketVerkaufen = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -9463,7 +9668,7 @@ var _debounce2 = __webpack_require__(899);
 
 var _debounce3 = _interopRequireDefault(_debounce2);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _personalData = __webpack_require__(1483);
 
@@ -10193,7 +10398,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -10250,7 +10455,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -10418,7 +10623,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -10613,9 +10818,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -10744,9 +10949,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -10911,7 +11116,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -11056,7 +11261,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -11663,7 +11868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -18202,11 +18407,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -18365,6 +18570,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -18513,7 +18720,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18535,7 +18743,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18557,7 +18766,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18579,7 +18789,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18601,7 +18812,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18623,7 +18835,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -18679,7 +18892,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 
@@ -18698,7 +18911,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -18744,7 +18957,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -19352,11 +19565,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19493,6 +19708,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -19505,7 +19722,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -19661,7 +19878,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 
@@ -19698,11 +19915,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

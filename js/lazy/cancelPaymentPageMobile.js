@@ -7,11 +7,11 @@ webpackJsonp([27,57],{
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.ListSimilarItems = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -53,291 +53,341 @@ var _addToBasketEffect = __webpack_require__(950);
 
 var _addToBasketEffect2 = _interopRequireDefault(_addToBasketEffect);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ListSimilarItems = exports.ListSimilarItems = function (_Component) {
-    (0, _inherits3.default)(ListSimilarItems, _Component);
+  (0, _inherits3.default)(ListSimilarItems, _Component);
 
-    function ListSimilarItems(props) {
-        (0, _classCallCheck3.default)(this, ListSimilarItems);
+  function ListSimilarItems(props) {
+    (0, _classCallCheck3.default)(this, ListSimilarItems);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
 
-        _this.gtagEnhancedEcommerce = function (item, tag) {
-            var brands = item.criterias.find(function (item) {
-                return item.id === 'manufacturer';
-            }).values,
-                brand = brands.length ? brands[0].name : "",
-                items = [{
-                "id": item.shortcode,
-                "name": item.descriptionLong || item.model || '',
-                "list_name": "Kaufen",
-                "quantity": 1,
-                "brand": brand,
-                "price": item.discountPrice || item.price,
-                "category": item.categoryName
-            }];
+    _this.gtagEnhancedEcommerce = function (item, tag) {
+      var brands = item.criterias.find(function (item) {
+        return item.id === "manufacturer";
+      }).values,
+          brand = brands.length ? brands[0].name : "",
+          items = [{
+        id: item.shortcode,
+        name: item.descriptionLong || item.model || "",
+        list_name: "Kaufen",
+        quantity: 1,
+        brand: brand,
+        price: item.discountPrice || item.price,
+        category: item.categoryName
+      }];
 
-            if (tag == 'select_content') {
-                gtag('event', tag, {
-                    "content_type": "product",
-                    "items": items
-                });
+      if (tag == "select_content") {
+        gtag("event", tag, {
+          content_type: "product",
+          items: items
+        });
 
-                var gtagData = { "category": item.categoryName };
-                window.localStorage.setItem('gtag', JSON.stringify(gtagData));
-            } else {
-                gtag('event', tag, {
-                    "items": items
-                });
-            }
-        };
+        var gtagData = { category: item.categoryName };
+        window.localStorage.setItem("gtag", JSON.stringify(gtagData));
+      } else {
+        gtag("event", tag, {
+          items: items
+        });
+      }
+    };
 
-        _this.clickOnLink = function (e, item) {
-            if (e.target.tagName === "BUTTON") {
-                e.preventDefault();
-            } else {
-                if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, 'select_content');
-            }
-        };
+    _this.clickOnLink = function (e, item) {
+      if (e.target.tagName === "BUTTON") {
+        e.preventDefault();
+      } else {
+        if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, "select_content");
+      }
+    };
 
-        _this.state = {};
-        _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
-        _this.addModelToBasket = _this.addModelToBasket.bind(_this);
-        return _this;
+    _this.setShowHoverBasket = function (e) {
+      _this.setState({
+        showHoverBasket: e
+      });
+    };
+
+    _this.state = {
+      showHoverBasket: null
+    };
+    _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
+    _this.addModelToBasket = _this.addModelToBasket.bind(_this);
+    return _this;
+  }
+
+  (0, _createClass3.default)(ListSimilarItems, [{
+    key: "addModelToBasket",
+    value: function addModelToBasket(e, model) {
+      var _this2 = this;
+
+      var status = e.target.getAttribute("data-status"),
+          basketData = this.props.basketData,
+          newBasketData = null,
+          accessoriesDetailPage = this.props.accessoriesDetailPage,
+          productTypeId = accessoriesDetailPage ? 3 : 7;
+
+
+      if (basketData.every(function (item) {
+        return item.id != model.id;
+      })) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
+      } else {
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
+        });
+      }
+
+      this.props.basketActions.changeBasketData(newBasketData);
+
+      if (status === "out") {
+        if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, "add_to_cart");
+        if (!window.isMobile) {
+          this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+            startPosition: $(e.target).offset(),
+            image: model.colorImage,
+            basketType: "kaufen"
+          }));
+          setTimeout(function () {
+            _reactRouter.browserHistory.push("/warenkorb");
+            _this2.props.basketActions.basketAddEffect(null);
+          }, 2000);
+        } else _reactRouter.browserHistory.push("/warenkorb");
+      }
     }
+  }, {
+    key: "mapSimilarItems",
+    value: function mapSimilarItems(model, i) {
+      var _this3 = this;
 
-    (0, _createClass3.default)(ListSimilarItems, [{
-        key: 'addModelToBasket',
-        value: function addModelToBasket(e, model) {
-            var _this2 = this;
-
-            var status = e.target.getAttribute('data-status'),
-                basketData = this.props.basketData,
-                newBasketData = null,
-                accessoriesDetailPage = this.props.accessoriesDetailPage,
-                productTypeId = accessoriesDetailPage ? 3 : 7;
+      var url = "",
+          accessoriesDetailPage = this.props.accessoriesDetailPage;
 
 
-            if (basketData.every(function (item) {
-                return item.id != model.id;
-            })) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
-            } else {
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
-                });
-            }
+      if (accessoriesDetailPage) {
+        var modelName = model.model.split(" ").join("-").toLowerCase().replace(/\//g, "--"),
+            deviceName = model.deviceName.toLowerCase().replace(/ /g, "-");
 
-            this.props.basketActions.changeBasketData(newBasketData);
+        url = "/kaufen/detail/zubehoer/" + deviceName + "/" + modelName + "/" + model.shortcode;
+      } else {
+        var _modelName = model.model.split(" ").join("-").toLowerCase(),
+            color = model.color.toLowerCase() || "color",
+            capacity = model.capacity.toLowerCase() || "capacity",
+            _deviceName = model.deviceName.replace(/ /g, "-").toLowerCase();
+        url = "/kaufen/detail/" + _deviceName + "/" + _modelName + "/" + capacity + "/" + color + "/" + model.shortcode;
+      }
+      var showHoverBasketStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(10%) translateY(-120%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        fontFamily: "Raleway",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        textTransform: "initial",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
-            if (status === 'out') {
-                if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, 'add_to_cart');
-                if (!window.isMobile) {
-                    this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: $(e.target).offset(),
-                        image: model.colorImage,
-                        basketType: 'kaufen' }));
-                    setTimeout(function () {
-                        _reactRouter.browserHistory.push('/warenkorb');
-                        _this2.props.basketActions.basketAddEffect(null);
-                    }, 2000);
-                } else _reactRouter.browserHistory.push('/warenkorb');
-            }
-        }
-    }, {
-        key: 'mapSimilarItems',
-        value: function mapSimilarItems(model, i) {
-            var _this3 = this;
-
-            var url = '',
-                accessoriesDetailPage = this.props.accessoriesDetailPage;
-
-
-            if (accessoriesDetailPage) {
-                var modelName = model.model.split(" ").join('-').toLowerCase().replace(/\//g, '--'),
-                    deviceName = model.deviceName.toLowerCase().replace(/ /g, '-');
-
-                url = '/kaufen/detail/zubehoer/' + deviceName + '/' + modelName + '/' + model.shortcode;
-            } else {
-                var _modelName = model.model.split(" ").join('-').toLowerCase(),
-                    color = model.color.toLowerCase() || 'color',
-                    capacity = model.capacity.toLowerCase() || 'capacity',
-                    _deviceName = model.deviceName.replace(/ /g, '-').toLowerCase();
-                url = '/kaufen/detail/' + _deviceName + '/' + _modelName + '/' + capacity + '/' + color + '/' + model.shortcode;
-            }
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'col-md-3 col-sm-6', key: i },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'itemModelWrap' },
-                    _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: url,
-                            onClick: function onClick(e) {
-                                return _this3.clickOnLink(e, model);
-                            },
-                            key: i },
-                        _react2.default.createElement(
-                            'div',
-                            { style: { width: '100%' } },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'image' },
-                                _react2.default.createElement('img', { loading: 'lazy', src: model.colorImage || model.deviceImages.mainImg.src, alt: '' })
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'modelName' },
-                                model.model,
-                                model.extendedTitle && ' (' + model.extendedTitle + ')'
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'div',
-                                null,
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'modelValues' },
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.capacity,
-                                        model.capacityImage && _react2.default.createElement('img', { loading: 'lazy', src: model.capacityImage, alt: '' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.color,
-                                        '\xA0',
-                                        model.colorCode && _react2.default.createElement('span', { className: 'colorPic',
-                                            style: { backgroundColor: model.colorCode } })
-                                    )
-                                )
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'p',
-                                { className: 'condition' },
-                                'Zustand: ',
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    model.condition
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'bottomRow' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 price' },
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-head' },
-                                        'Preis'
-                                    ),
-                                    model.discountPrice && _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-value discount-price' },
-                                        (0, _helpersFunction.formatPrice)(model.discountPrice),
-                                        ' ',
-                                        window.currencyValue
-                                    ),
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: model.discountPrice ? 'price-value old-price' : 'price-value' },
-                                        (0, _helpersFunction.formatPrice)(model.price),
-                                        ' ',
-                                        window.currencyValue
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 text-right' },
-                                    _react2.default.createElement('button', { 'data-status': this.props.basketData.some(function (item) {
-                                            return item.id === model.id;
-                                        }) ? 'in' : 'out',
-                                        className: 'btn addToBasket',
-                                        onClick: function onClick(e) {
-                                            return _this3.addModelToBasket(e, model);
-                                        } })
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var similarItems = this.props.similarItems,
-                settings = {
-                dots: true,
-                arrows: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1
-            };
-
-            return _react2.default.createElement(
-                'div',
+      return _react2.default.createElement(
+        "div",
+        { className: "col-md-3 col-sm-6", key: i },
+        _react2.default.createElement(
+          "div",
+          { className: "itemModelWrap" },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: url, onClick: function onClick(e) {
+                return _this3.clickOnLink(e, model);
+              }, key: i },
+            _react2.default.createElement(
+              "div",
+              { style: { width: "100%" } },
+              _react2.default.createElement(
+                "div",
+                { className: "image" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: model.colorImage || model.deviceImages.mainImg.src,
+                  alt: ""
+                })
+              ),
+              _react2.default.createElement(
+                "p",
+                { className: "modelName" },
+                model.model,
+                model.extendedTitle && " (" + model.extendedTitle + ")"
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "div",
                 null,
-                similarItems.length > 0 && _react2.default.createElement(
-                    'div',
-                    { className: 'listSimilarItems' },
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'tag' },
-                        'Weitere Produkte'
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'head' },
-                        'Folgendes k\xF6nnte Sie auch interessieren'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row wrapItems' },
-                        !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
-                            _reactSlick2.default,
-                            settings,
-                            similarItems.map(this.mapSimilarItems)
-                        )
-                    )
+                _react2.default.createElement(
+                  "span",
+                  { className: "modelValues" },
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.capacity,
+                    model.capacityImage && _react2.default.createElement("img", { loading: "lazy", src: model.capacityImage, alt: "" })
+                  ),
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.color,
+                    "\xA0",
+                    model.colorCode && _react2.default.createElement("span", {
+                      className: "colorPic",
+                      style: { backgroundColor: model.colorCode }
+                    })
+                  )
                 )
-            );
-        }
-    }]);
-    return ListSimilarItems;
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "p",
+                { className: "condition" },
+                "Zustand: ",
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  model.condition
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "bottomRow" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 price" },
+                  _react2.default.createElement(
+                    "p",
+                    { className: "price-head" },
+                    "Preis"
+                  ),
+                  model.discountPrice && _react2.default.createElement(
+                    "p",
+                    { className: "price-value discount-price" },
+                    (0, _helpersFunction.formatPrice)(model.discountPrice),
+                    " ",
+                    window.currencyValue
+                  ),
+                  _react2.default.createElement(
+                    "p",
+                    {
+                      className: model.discountPrice ? "price-value old-price" : "price-value"
+                    },
+                    (0, _helpersFunction.formatPrice)(model.price),
+                    " ",
+                    window.currencyValue
+                  )
+                ),
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 text-right" },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      "data-status": this.props.basketData.some(function (item) {
+                        return item.id === model.id;
+                      }) ? "in" : "out",
+                      className: "btn addToBasket",
+                      onMouseEnter: function onMouseEnter() {
+                        return _this3.setShowHoverBasket(i);
+                      },
+                      onMouseLeave: function onMouseLeave() {
+                        return _this3.setShowHoverBasket(null);
+                      },
+                      onClick: function onClick(e) {
+                        return _this3.addModelToBasket(e, model);
+                      }
+                    },
+                    this.state.showHoverBasket === i && _react2.default.createElement("div", { style: showHoverBasketStyle, dangerouslySetInnerHTML: {
+                        __html: t('addToBasket')
+                      } })
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var similarItems = this.props.similarItems,
+          settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
+      return _react2.default.createElement(
+        "div",
+        null,
+        similarItems.length > 0 && _react2.default.createElement(
+          "div",
+          { className: "listSimilarItems" },
+          _react2.default.createElement(
+            "h2",
+            { className: "tag" },
+            "Weitere Produkte"
+          ),
+          _react2.default.createElement(
+            "h2",
+            { className: "head" },
+            "Folgendes k\xF6nnte Sie auch interessieren"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "row wrapItems" },
+            !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
+              _reactSlick2.default,
+              settings,
+              similarItems.map(this.mapSimilarItems)
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return ListSimilarItems;
 }(_react.Component);
 
 ListSimilarItems.propTypes = {};
 ListSimilarItems.defaultProps = {
-    accessoriesDetailPage: false
+  accessoriesDetailPage: false
 };
 
 function mapStateToProps(state) {
-    return {
-        basketData: state.basket.basketData
-    };
+  return {
+    basketData: state.basket.basketData
+  };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
-    };
+  return {
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
+  };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListSimilarItems);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(ListSimilarItems));
 
 /***/ }),
 
@@ -707,7 +757,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -764,7 +814,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -932,7 +982,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -1127,9 +1177,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -1258,9 +1308,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -1425,7 +1475,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -1570,7 +1620,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -2793,7 +2843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -9180,11 +9230,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -9343,6 +9393,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -9491,7 +9543,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9513,7 +9566,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9535,7 +9589,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9557,7 +9612,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9579,7 +9635,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9601,7 +9658,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -9657,7 +9715,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 
@@ -9676,7 +9734,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -9722,7 +9780,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -10330,11 +10388,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10471,6 +10531,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -10483,7 +10545,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -10639,7 +10701,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 
@@ -10676,11 +10738,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

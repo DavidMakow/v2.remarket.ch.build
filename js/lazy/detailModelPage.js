@@ -1693,11 +1693,11 @@ exports.default = function (obj, key, value) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.ListSimilarItems = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -1739,291 +1739,341 @@ var _addToBasketEffect = __webpack_require__(950);
 
 var _addToBasketEffect2 = _interopRequireDefault(_addToBasketEffect);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ListSimilarItems = exports.ListSimilarItems = function (_Component) {
-    (0, _inherits3.default)(ListSimilarItems, _Component);
+  (0, _inherits3.default)(ListSimilarItems, _Component);
 
-    function ListSimilarItems(props) {
-        (0, _classCallCheck3.default)(this, ListSimilarItems);
+  function ListSimilarItems(props) {
+    (0, _classCallCheck3.default)(this, ListSimilarItems);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ListSimilarItems.__proto__ || Object.getPrototypeOf(ListSimilarItems)).call(this, props));
 
-        _this.gtagEnhancedEcommerce = function (item, tag) {
-            var brands = item.criterias.find(function (item) {
-                return item.id === 'manufacturer';
-            }).values,
-                brand = brands.length ? brands[0].name : "",
-                items = [{
-                "id": item.shortcode,
-                "name": item.descriptionLong || item.model || '',
-                "list_name": "Kaufen",
-                "quantity": 1,
-                "brand": brand,
-                "price": item.discountPrice || item.price,
-                "category": item.categoryName
-            }];
+    _this.gtagEnhancedEcommerce = function (item, tag) {
+      var brands = item.criterias.find(function (item) {
+        return item.id === "manufacturer";
+      }).values,
+          brand = brands.length ? brands[0].name : "",
+          items = [{
+        id: item.shortcode,
+        name: item.descriptionLong || item.model || "",
+        list_name: "Kaufen",
+        quantity: 1,
+        brand: brand,
+        price: item.discountPrice || item.price,
+        category: item.categoryName
+      }];
 
-            if (tag == 'select_content') {
-                gtag('event', tag, {
-                    "content_type": "product",
-                    "items": items
-                });
+      if (tag == "select_content") {
+        gtag("event", tag, {
+          content_type: "product",
+          items: items
+        });
 
-                var gtagData = { "category": item.categoryName };
-                window.localStorage.setItem('gtag', JSON.stringify(gtagData));
-            } else {
-                gtag('event', tag, {
-                    "items": items
-                });
-            }
-        };
+        var gtagData = { category: item.categoryName };
+        window.localStorage.setItem("gtag", JSON.stringify(gtagData));
+      } else {
+        gtag("event", tag, {
+          items: items
+        });
+      }
+    };
 
-        _this.clickOnLink = function (e, item) {
-            if (e.target.tagName === "BUTTON") {
-                e.preventDefault();
-            } else {
-                if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, 'select_content');
-            }
-        };
+    _this.clickOnLink = function (e, item) {
+      if (e.target.tagName === "BUTTON") {
+        e.preventDefault();
+      } else {
+        if (window.isGoogleConnection) _this.gtagEnhancedEcommerce(item, "select_content");
+      }
+    };
 
-        _this.state = {};
-        _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
-        _this.addModelToBasket = _this.addModelToBasket.bind(_this);
-        return _this;
+    _this.setShowHoverBasket = function (e) {
+      _this.setState({
+        showHoverBasket: e
+      });
+    };
+
+    _this.state = {
+      showHoverBasket: null
+    };
+    _this.mapSimilarItems = _this.mapSimilarItems.bind(_this);
+    _this.addModelToBasket = _this.addModelToBasket.bind(_this);
+    return _this;
+  }
+
+  (0, _createClass3.default)(ListSimilarItems, [{
+    key: "addModelToBasket",
+    value: function addModelToBasket(e, model) {
+      var _this2 = this;
+
+      var status = e.target.getAttribute("data-status"),
+          basketData = this.props.basketData,
+          newBasketData = null,
+          accessoriesDetailPage = this.props.accessoriesDetailPage,
+          productTypeId = accessoriesDetailPage ? 3 : 7;
+
+
+      if (basketData.every(function (item) {
+        return item.id != model.id;
+      })) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
+      } else {
+        newBasketData = basketData.filter(function (item) {
+          return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
+        });
+      }
+
+      this.props.basketActions.changeBasketData(newBasketData);
+
+      if (status === "out") {
+        if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, "add_to_cart");
+        if (!window.isMobile) {
+          this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+            startPosition: $(e.target).offset(),
+            image: model.colorImage,
+            basketType: "kaufen"
+          }));
+          setTimeout(function () {
+            _reactRouter.browserHistory.push("/warenkorb");
+            _this2.props.basketActions.basketAddEffect(null);
+          }, 2000);
+        } else _reactRouter.browserHistory.push("/warenkorb");
+      }
     }
+  }, {
+    key: "mapSimilarItems",
+    value: function mapSimilarItems(model, i) {
+      var _this3 = this;
 
-    (0, _createClass3.default)(ListSimilarItems, [{
-        key: 'addModelToBasket',
-        value: function addModelToBasket(e, model) {
-            var _this2 = this;
-
-            var status = e.target.getAttribute('data-status'),
-                basketData = this.props.basketData,
-                newBasketData = null,
-                accessoriesDetailPage = this.props.accessoriesDetailPage,
-                productTypeId = accessoriesDetailPage ? 3 : 7;
+      var url = "",
+          accessoriesDetailPage = this.props.accessoriesDetailPage;
 
 
-            if (basketData.every(function (item) {
-                return item.id != model.id;
-            })) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [model]);
-            } else {
-                newBasketData = basketData.filter(function (item) {
-                    return item.shortcode != model.shortcode && item.productTypeId == productTypeId;
-                });
-            }
+      if (accessoriesDetailPage) {
+        var modelName = model.model.split(" ").join("-").toLowerCase().replace(/\//g, "--"),
+            deviceName = model.deviceName.toLowerCase().replace(/ /g, "-");
 
-            this.props.basketActions.changeBasketData(newBasketData);
+        url = "/kaufen/detail/zubehoer/" + deviceName + "/" + modelName + "/" + model.shortcode;
+      } else {
+        var _modelName = model.model.split(" ").join("-").toLowerCase(),
+            color = model.color.toLowerCase() || "color",
+            capacity = model.capacity.toLowerCase() || "capacity",
+            _deviceName = model.deviceName.replace(/ /g, "-").toLowerCase();
+        url = "/kaufen/detail/" + _deviceName + "/" + _modelName + "/" + capacity + "/" + color + "/" + model.shortcode;
+      }
+      var showHoverBasketStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(10%) translateY(-120%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        fontFamily: "Raleway",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        textTransform: "initial",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
-            if (status === 'out') {
-                if (window.isGoogleConnection) this.gtagEnhancedEcommerce(model, 'add_to_cart');
-                if (!window.isMobile) {
-                    this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: $(e.target).offset(),
-                        image: model.colorImage,
-                        basketType: 'kaufen' }));
-                    setTimeout(function () {
-                        _reactRouter.browserHistory.push('/warenkorb');
-                        _this2.props.basketActions.basketAddEffect(null);
-                    }, 2000);
-                } else _reactRouter.browserHistory.push('/warenkorb');
-            }
-        }
-    }, {
-        key: 'mapSimilarItems',
-        value: function mapSimilarItems(model, i) {
-            var _this3 = this;
-
-            var url = '',
-                accessoriesDetailPage = this.props.accessoriesDetailPage;
-
-
-            if (accessoriesDetailPage) {
-                var modelName = model.model.split(" ").join('-').toLowerCase().replace(/\//g, '--'),
-                    deviceName = model.deviceName.toLowerCase().replace(/ /g, '-');
-
-                url = '/kaufen/detail/zubehoer/' + deviceName + '/' + modelName + '/' + model.shortcode;
-            } else {
-                var _modelName = model.model.split(" ").join('-').toLowerCase(),
-                    color = model.color.toLowerCase() || 'color',
-                    capacity = model.capacity.toLowerCase() || 'capacity',
-                    _deviceName = model.deviceName.replace(/ /g, '-').toLowerCase();
-                url = '/kaufen/detail/' + _deviceName + '/' + _modelName + '/' + capacity + '/' + color + '/' + model.shortcode;
-            }
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'col-md-3 col-sm-6', key: i },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'itemModelWrap' },
-                    _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: url,
-                            onClick: function onClick(e) {
-                                return _this3.clickOnLink(e, model);
-                            },
-                            key: i },
-                        _react2.default.createElement(
-                            'div',
-                            { style: { width: '100%' } },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'image' },
-                                _react2.default.createElement('img', { loading: 'lazy', src: model.colorImage || model.deviceImages.mainImg.src, alt: '' })
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'modelName' },
-                                model.model,
-                                model.extendedTitle && ' (' + model.extendedTitle + ')'
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'div',
-                                null,
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'modelValues' },
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.capacity,
-                                        model.capacityImage && _react2.default.createElement('img', { loading: 'lazy', src: model.capacityImage, alt: '' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        model.color,
-                                        '\xA0',
-                                        model.colorCode && _react2.default.createElement('span', { className: 'colorPic',
-                                            style: { backgroundColor: model.colorCode } })
-                                    )
-                                )
-                            ),
-                            !accessoriesDetailPage && _react2.default.createElement(
-                                'p',
-                                { className: 'condition' },
-                                'Zustand: ',
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    model.condition
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'bottomRow' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 price' },
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-head' },
-                                        'Preis'
-                                    ),
-                                    model.discountPrice && _react2.default.createElement(
-                                        'p',
-                                        { className: 'price-value discount-price' },
-                                        (0, _helpersFunction.formatPrice)(model.discountPrice),
-                                        ' ',
-                                        window.currencyValue
-                                    ),
-                                    _react2.default.createElement(
-                                        'p',
-                                        { className: model.discountPrice ? 'price-value old-price' : 'price-value' },
-                                        (0, _helpersFunction.formatPrice)(model.price),
-                                        ' ',
-                                        window.currencyValue
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-6 text-right' },
-                                    _react2.default.createElement('button', { 'data-status': this.props.basketData.some(function (item) {
-                                            return item.id === model.id;
-                                        }) ? 'in' : 'out',
-                                        className: 'btn addToBasket',
-                                        onClick: function onClick(e) {
-                                            return _this3.addModelToBasket(e, model);
-                                        } })
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var similarItems = this.props.similarItems,
-                settings = {
-                dots: true,
-                arrows: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1
-            };
-
-            return _react2.default.createElement(
-                'div',
+      return _react2.default.createElement(
+        "div",
+        { className: "col-md-3 col-sm-6", key: i },
+        _react2.default.createElement(
+          "div",
+          { className: "itemModelWrap" },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: url, onClick: function onClick(e) {
+                return _this3.clickOnLink(e, model);
+              }, key: i },
+            _react2.default.createElement(
+              "div",
+              { style: { width: "100%" } },
+              _react2.default.createElement(
+                "div",
+                { className: "image" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: model.colorImage || model.deviceImages.mainImg.src,
+                  alt: ""
+                })
+              ),
+              _react2.default.createElement(
+                "p",
+                { className: "modelName" },
+                model.model,
+                model.extendedTitle && " (" + model.extendedTitle + ")"
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "div",
                 null,
-                similarItems.length > 0 && _react2.default.createElement(
-                    'div',
-                    { className: 'listSimilarItems' },
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'tag' },
-                        'Weitere Produkte'
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'head' },
-                        'Folgendes k\xF6nnte Sie auch interessieren'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row wrapItems' },
-                        !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
-                            _reactSlick2.default,
-                            settings,
-                            similarItems.map(this.mapSimilarItems)
-                        )
-                    )
+                _react2.default.createElement(
+                  "span",
+                  { className: "modelValues" },
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.capacity,
+                    model.capacityImage && _react2.default.createElement("img", { loading: "lazy", src: model.capacityImage, alt: "" })
+                  ),
+                  _react2.default.createElement(
+                    "span",
+                    null,
+                    model.color,
+                    "\xA0",
+                    model.colorCode && _react2.default.createElement("span", {
+                      className: "colorPic",
+                      style: { backgroundColor: model.colorCode }
+                    })
+                  )
                 )
-            );
-        }
-    }]);
-    return ListSimilarItems;
+              ),
+              !accessoriesDetailPage && _react2.default.createElement(
+                "p",
+                { className: "condition" },
+                "Zustand: ",
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  model.condition
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "bottomRow" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 price" },
+                  _react2.default.createElement(
+                    "p",
+                    { className: "price-head" },
+                    "Preis"
+                  ),
+                  model.discountPrice && _react2.default.createElement(
+                    "p",
+                    { className: "price-value discount-price" },
+                    (0, _helpersFunction.formatPrice)(model.discountPrice),
+                    " ",
+                    window.currencyValue
+                  ),
+                  _react2.default.createElement(
+                    "p",
+                    {
+                      className: model.discountPrice ? "price-value old-price" : "price-value"
+                    },
+                    (0, _helpersFunction.formatPrice)(model.price),
+                    " ",
+                    window.currencyValue
+                  )
+                ),
+                _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-6 text-right" },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      "data-status": this.props.basketData.some(function (item) {
+                        return item.id === model.id;
+                      }) ? "in" : "out",
+                      className: "btn addToBasket",
+                      onMouseEnter: function onMouseEnter() {
+                        return _this3.setShowHoverBasket(i);
+                      },
+                      onMouseLeave: function onMouseLeave() {
+                        return _this3.setShowHoverBasket(null);
+                      },
+                      onClick: function onClick(e) {
+                        return _this3.addModelToBasket(e, model);
+                      }
+                    },
+                    this.state.showHoverBasket === i && _react2.default.createElement("div", { style: showHoverBasketStyle, dangerouslySetInnerHTML: {
+                        __html: t('addToBasket')
+                      } })
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var similarItems = this.props.similarItems,
+          settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
+      return _react2.default.createElement(
+        "div",
+        null,
+        similarItems.length > 0 && _react2.default.createElement(
+          "div",
+          { className: "listSimilarItems" },
+          _react2.default.createElement(
+            "h2",
+            { className: "tag" },
+            "Weitere Produkte"
+          ),
+          _react2.default.createElement(
+            "h2",
+            { className: "head" },
+            "Folgendes k\xF6nnte Sie auch interessieren"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "row wrapItems" },
+            !window.isMobile ? similarItems.map(this.mapSimilarItems) : _react2.default.createElement(
+              _reactSlick2.default,
+              settings,
+              similarItems.map(this.mapSimilarItems)
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return ListSimilarItems;
 }(_react.Component);
 
 ListSimilarItems.propTypes = {};
 ListSimilarItems.defaultProps = {
-    accessoriesDetailPage: false
+  accessoriesDetailPage: false
 };
 
 function mapStateToProps(state) {
-    return {
-        basketData: state.basket.basketData
-    };
+  return {
+    basketData: state.basket.basketData
+  };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
-    };
+  return {
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
+  };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListSimilarItems);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(ListSimilarItems));
 
 /***/ }),
 
@@ -4051,7 +4101,7 @@ var _reactAnimatedCss = __webpack_require__(953);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4792,7 +4842,6 @@ var AdditionalInfoBlock = function AdditionalInfoBlock(_ref) {
                 _react2.default.createElement(
                     'div',
                     { className: 'pay-services' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/swissbilling.png' }),
                     _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/heidipay.svg' })
                 )
             )
@@ -4942,6 +4991,8 @@ __webpack_require__(1104);
 
 __webpack_require__(1106);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SampleNextArrow(props) {
@@ -4950,13 +5001,9 @@ function SampleNextArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -4966,13 +5013,9 @@ function SamplePrevArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -4987,59 +5030,73 @@ var ModelInfoBlockImage = function (_Component) {
     _this.state = {
       dimensions: {},
       nav1: null,
-      nav2: null
+      nav2: null,
+      showHoverWishlist: false
     };
     _this.onImgLoad = _this.onImgLoad.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(ModelInfoBlockImage, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      $('.zoomContainer').remove();
-      $('#zoom_01').elevateZoom({ zoomType: "inner" });
-      if (this.props.quickPreview) $('#app').addClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#zoom_01").elevateZoom({ zoomType: "inner" });
+      if (this.props.quickPreview) $("#app").addClass("quickPreview");
       this.setState({
         nav1: this.slider1,
         nav2: this.slider2
       });
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      $('.zoomContainer').remove();
-      $('#app').removeClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#app").removeClass("quickPreview");
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate(nextProps) {
       if (nextProps.blockImageState.currentMainImage !== this.props.blockImageState.currentMainImage) {
-        $('.zoomContainer').remove();
-        $('#zoom_01').elevateZoom({ zoomType: "inner" });
+        $(".zoomContainer").remove();
+        $("#zoom_01").elevateZoom({ zoomType: "inner" });
       }
     }
   }, {
-    key: 'mapRealImg',
+    key: "mapRealImg",
     value: function mapRealImg(item, i) {
       var altTitle = this.props.altTitle;
 
       var className = this.props.blockImageState.currentMainImage === item.src ? "col-xs-3 modelInfoBlock-img-small active" : "col-xs-3 modelInfoBlock-img-small";
       return _react2.default.createElement(
-        'div',
+        "div",
         { className: className, key: i },
-        _react2.default.createElement('img', { loading: 'lazy', src: item.src, onClick: this.props.clickSmallImg, alt: altTitle + ' - Teil ' + (i + 2) })
+        _react2.default.createElement("img", {
+          loading: "lazy",
+          src: item.src,
+          onClick: this.props.clickSmallImg,
+          alt: altTitle + " - Teil " + (i + 2)
+        })
       );
     }
   }, {
-    key: 'onImgLoad',
+    key: "onImgLoad",
     value: function onImgLoad(_ref) {
       var img = _ref.target;
 
-      this.setState({ dimensions: { imgHeight: img.naturalHeight,
-          imgWidth: img.naturalWidth } });
+      this.setState({
+        dimensions: { imgHeight: img.naturalHeight, imgWidth: img.naturalWidth }
+      });
     }
   }, {
-    key: 'render',
+    key: "setShowHoverWishlist",
+    value: function setShowHoverWishlist(e) {
+      this.setState({
+        showHoverWishlist: e
+      });
+    }
+  }, {
+    key: "render",
     value: function render() {
       var _this2 = this;
 
@@ -5092,69 +5149,104 @@ var ModelInfoBlockImage = function (_Component) {
           imgWidth = _state$dimensions.imgWidth;
 
       var className = blockImageState.currentMainImage === image.mainImg.src ? "col-xs-3 modelInfoBlock-img-small" : "col-xs-3 modelInfoBlock-img-small";
+      var showHoverWishlistStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(20%) translateY(-60%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'col-md-6 modelInfoBlock-img ' },
+        "div",
+        { className: "col-md-6 modelInfoBlock-img " },
         _react2.default.createElement(_reactHelmet.Helmet, {
-          meta: [{ "property": "og:image:width", "content": imgWidth }, { "property": "og:image:height", "content": imgHeight }]
+          meta: [{ property: "og:image:width", content: imgWidth }, { property: "og:image:height", content: imgHeight }]
         }),
         _react2.default.createElement(
-          'div',
-          { className: 'row imageDetailOnly' },
+          "div",
+          { className: "row imageDetailOnly" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
-            (0, _extends3.default)({ asNavFor: this.state.nav2,
+            (0, _extends3.default)({
+              asNavFor: this.state.nav2,
               ref: function ref(slider) {
                 return _this2.slider1 = slider;
               }
             }, settings),
             image.realImg.length > 0 && image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
-                { className: 'item', key: 'slider-item' + i },
+                "div",
+                { className: "item", key: "slider-item" + i },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'col-md-12 modelInfoBlock-img-big' },
-                  _react2.default.createElement('img', { loading: 'lazy', onLoad: _this2.onImgLoad,
+                  "div",
+                  { className: "col-md-12 modelInfoBlock-img-big" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    onLoad: _this2.onImgLoad,
                     onClick: openLightBox,
-                    src: el.src, alt: altTitle }),
+                    src: el.src,
+                    alt: altTitle
+                  }),
                   _react2.default.createElement(
-                    'i',
-                    { className: 'modelInfoBlock-img-big-searchBtn',
+                    "i",
+                    {
+                      className: "modelInfoBlock-img-big-searchBtn",
                       onClick: openLightBox,
-                      'aria-hidden': 'true' },
+                      "aria-hidden": "true"
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                        xmlns: 'http://www.w3.org/2000/svg' },
-                      _react2.default.createElement('path', {
-                        d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                        fill: '#BED3CB' }),
-                      _react2.default.createElement('path', {
-                        d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                        fill: '#BED3CB' })
+                      "svg",
+                      {
+                        width: "30",
+                        height: "30",
+                        viewBox: "0 0 30 30",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      },
+                      _react2.default.createElement("path", {
+                        d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                        fill: "#BED3CB"
+                      }),
+                      _react2.default.createElement("path", {
+                        d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                        fill: "#BED3CB"
+                      })
                     )
                   ),
                   _react2.default.createElement(
-                    'i',
-                    { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+                    "i",
+                    {
+                      className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
                       onClick: function onClick(e) {
                         return addModelToWishlist(e);
-                      } },
+                      }
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { viewBox: '0 0 24 24' },
-                      _react2.default.createElement('use', { href: '#heart' }),
-                      _react2.default.createElement('use', { href: '#heart' })
+                      "svg",
+                      { viewBox: "0 0 24 24" },
+                      _react2.default.createElement("use", { href: "#heart" }),
+                      _react2.default.createElement("use", { href: "#heart" })
                     ),
                     _react2.default.createElement(
-                      'svg',
-                      { className: 'hide', viewBox: '0 0 24 24' },
+                      "svg",
+                      { className: "hide", viewBox: "0 0 24 24" },
                       _react2.default.createElement(
-                        'defs',
+                        "defs",
                         null,
-                        _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                        _react2.default.createElement("path", {
+                          id: "heart",
+                          d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                        })
                       )
                     )
                   )
@@ -5162,55 +5254,83 @@ var ModelInfoBlockImage = function (_Component) {
               );
             })
           ) : _react2.default.createElement(
-            'div',
-            { className: 'col-md-12 modelInfoBlock-img-big' },
-            _react2.default.createElement('img', { loading: 'lazy', onLoad: this.onImgLoad,
+            "div",
+            { className: "col-md-12 modelInfoBlock-img-big" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              onLoad: this.onImgLoad,
               onClick: openLightBox,
-              src: image.mainImg.src, alt: altTitle }),
+              src: image.mainImg.src,
+              alt: altTitle
+            }),
+            this.state.showHoverWishlist && _react2.default.createElement("div", {
+              style: showHoverWishlistStyle,
+              dangerouslySetInnerHTML: { __html: t("addToWishlist") }
+            }),
             _react2.default.createElement(
-              'i',
-              { className: 'modelInfoBlock-img-big-searchBtn',
+              "i",
+              {
+                className: "modelInfoBlock-img-big-searchBtn",
                 onClick: openLightBox,
-                'aria-hidden': 'true' },
+                "aria-hidden": "true"
+              },
               _react2.default.createElement(
-                'svg',
-                { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                  xmlns: 'http://www.w3.org/2000/svg' },
-                _react2.default.createElement('path', {
-                  d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                  fill: '#BED3CB' }),
-                _react2.default.createElement('path', {
-                  d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                  fill: '#BED3CB' })
+                "svg",
+                {
+                  width: "30",
+                  height: "30",
+                  viewBox: "0 0 30 30",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                },
+                _react2.default.createElement("path", {
+                  d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                  fill: "#BED3CB"
+                }),
+                _react2.default.createElement("path", {
+                  d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                  fill: "#BED3CB"
+                })
               )
             ),
             _react2.default.createElement(
-              'i',
-              { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+              "i",
+              {
+                className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
+                onMouseEnter: function onMouseEnter() {
+                  return _this2.setShowHoverWishlist(true);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return _this2.setShowHoverWishlist(false);
+                },
                 onClick: function onClick(e) {
                   return addModelToWishlist(e);
-                } },
+                }
+              },
               _react2.default.createElement(
-                'svg',
-                { viewBox: '0 0 24 24' },
-                _react2.default.createElement('use', { href: '#heart' }),
-                _react2.default.createElement('use', { href: '#heart' })
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
               ),
               _react2.default.createElement(
-                'svg',
-                { className: 'hide', viewBox: '0 0 24 24' },
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
                 _react2.default.createElement(
-                  'defs',
+                  "defs",
                   null,
-                  _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                  _react2.default.createElement("path", {
+                    id: "heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
                 )
               )
             )
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row smallImageWrapper' },
+          "div",
+          { className: "row smallImageWrapper" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
             (0, _extends3.default)({
@@ -5221,35 +5341,41 @@ var ModelInfoBlockImage = function (_Component) {
             }, settingsSmallImg),
             image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                  'div',
+                  "div",
                   { className: className, key: i },
-                  _react2.default.createElement('img', { loading: 'lazy', src: el.src, alt: '', onClick: _this2.props.clickSmallImg })
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: el.src,
+                    alt: "",
+                    onClick: _this2.props.clickSmallImg
+                  })
                 )
               );
             })
-          ) : ''
+          ) : ""
         ),
-        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, { src: blockImageState.currentMainImage,
+        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, {
+          src: blockImageState.currentMainImage,
           showFirstImage: false,
           showRealImageText: true,
           close: closeLightBox,
-          array: [].concat(image.mainImg, image.realImg) })
+          array: [].concat(image.mainImg, image.realImg)
+        })
       );
     }
   }]);
   return ModelInfoBlockImage;
 }(_react.Component);
 
-exports.default = ModelInfoBlockImage;
-
-
 ModelInfoBlockImage.propTypes = {};
 ModelInfoBlockImage.defaultProps = {
   showDescription: false
 };
+
+exports.default = (0, _reactI18next.withTranslation)()(ModelInfoBlockImage);
 
 /***/ }),
 
@@ -5264,7 +5390,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ModelInfoBlock = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -5340,7 +5466,7 @@ var _usefullProductItem = __webpack_require__(1278);
 
 var _usefullProductItem2 = _interopRequireDefault(_usefullProductItem);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7235,7 +7361,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -14879,7 +15005,7 @@ var _reactToggle = __webpack_require__(1279);
 
 var _reactToggle2 = _interopRequireDefault(_reactToggle);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15361,7 +15487,7 @@ var _reactSlick = __webpack_require__(929);
 
 var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15710,14 +15836,14 @@ exports.default = SuccessAddToBasket;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _defineProperty2 = __webpack_require__(1037);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -15749,359 +15875,462 @@ var _lightboxImg = __webpack_require__(1062);
 
 var _lightboxImg2 = _interopRequireDefault(_lightboxImg);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SampleNextArrow = function SampleNextArrow(props) {
-    var className = props.className,
-        style = props.style,
-        onClick = props.onClick;
+  var className = props.className,
+      style = props.style,
+      onClick = props.onClick;
 
-    return _react2.default.createElement(
-        "div",
-        {
-            className: className,
-            style: (0, _extends3.default)({}, style),
-            onClick: onClick
-        },
-        _react2.default.createElement(
-            "svg",
-            { width: "10", height: "18", viewBox: "0 0 10 18", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
-            _react2.default.createElement("path", { d: "M2.19298 1.10152L8.9008 8.22652C9.10588 8.44331 9.20839 8.72152 9.20839 8.99995C9.20839 9.27825 9.10583 9.55636 8.9008 9.77339L2.19298 16.8984C1.76548 17.3484 1.05345 17.3671 0.602516 16.9406C0.148391 16.5128 0.132359 15.7978 0.55857 15.3496L6.57732 8.99808L0.55857 2.64652C0.132359 2.19839 0.148297 1.48823 0.602516 1.05745C1.05345 0.631359 1.76548 0.650109 2.19298 1.10152Z", fill: "#161616" })
-        )
-    );
+  return _react2.default.createElement(
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement(
+      "svg",
+      {
+        width: "10",
+        height: "18",
+        viewBox: "0 0 10 18",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg"
+      },
+      _react2.default.createElement("path", {
+        d: "M2.19298 1.10152L8.9008 8.22652C9.10588 8.44331 9.20839 8.72152 9.20839 8.99995C9.20839 9.27825 9.10583 9.55636 8.9008 9.77339L2.19298 16.8984C1.76548 17.3484 1.05345 17.3671 0.602516 16.9406C0.148391 16.5128 0.132359 15.7978 0.55857 15.3496L6.57732 8.99808L0.55857 2.64652C0.132359 2.19839 0.148297 1.48823 0.602516 1.05745C1.05345 0.631359 1.76548 0.650109 2.19298 1.10152Z",
+        fill: "#161616"
+      })
+    )
+  );
 };
 
 var SamplePrevArrow = function SamplePrevArrow(props) {
-    var className = props.className,
-        style = props.style,
-        onClick = props.onClick;
+  var className = props.className,
+      style = props.style,
+      onClick = props.onClick;
 
-    return _react2.default.createElement(
-        "div",
-        {
-            className: className,
-            style: (0, _extends3.default)({}, style),
-            onClick: onClick
-        },
-        _react2.default.createElement(
-            "svg",
-            { width: "10", height: "18", viewBox: "0 0 10 18", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
-            _react2.default.createElement("path", { d: "M2.19298 1.10152L8.9008 8.22652C9.10588 8.44331 9.20839 8.72152 9.20839 8.99995C9.20839 9.27825 9.10583 9.55636 8.9008 9.77339L2.19298 16.8984C1.76548 17.3484 1.05345 17.3671 0.602516 16.9406C0.148391 16.5128 0.132359 15.7978 0.55857 15.3496L6.57732 8.99808L0.55857 2.64652C0.132359 2.19839 0.148297 1.48823 0.602516 1.05745C1.05345 0.631359 1.76548 0.650109 2.19298 1.10152Z", fill: "#161616" })
-        )
-    );
+  return _react2.default.createElement(
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement(
+      "svg",
+      {
+        width: "10",
+        height: "18",
+        viewBox: "0 0 10 18",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg"
+      },
+      _react2.default.createElement("path", {
+        d: "M2.19298 1.10152L8.9008 8.22652C9.10588 8.44331 9.20839 8.72152 9.20839 8.99995C9.20839 9.27825 9.10583 9.55636 8.9008 9.77339L2.19298 16.8984C1.76548 17.3484 1.05345 17.3671 0.602516 16.9406C0.148391 16.5128 0.132359 15.7978 0.55857 15.3496L6.57732 8.99808L0.55857 2.64652C0.132359 2.19839 0.148297 1.48823 0.602516 1.05745C1.05345 0.631359 1.76548 0.650109 2.19298 1.10152Z",
+        fill: "#161616"
+      })
+    )
+  );
 };
 
 var OtherProducts = function OtherProducts(_ref) {
-    var _settings;
+  var _settings;
 
-    var similarItems = _ref.similarItems,
-        basketActions = _ref.basketActions,
-        basketData = _ref.basketData,
-        wishlistData = _ref.wishlistData;
+  var similarItems = _ref.similarItems,
+      basketActions = _ref.basketActions,
+      basketData = _ref.basketData,
+      wishlistData = _ref.wishlistData,
+      t = _ref.t;
 
-    var _useState = (0, _react.useState)({
-        currentMainImage: '',
-        isOpenLightBox: false,
-        currentImageLightBox: 0
-    }),
-        _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-        blockImage = _useState2[0],
-        setBlockImage = _useState2[1];
+  var _useState = (0, _react.useState)({
+    currentMainImage: "",
+    isOpenLightBox: false,
+    currentImageLightBox: 0
+  }),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      blockImage = _useState2[0],
+      setBlockImage = _useState2[1];
 
-    var closeLightBox = function closeLightBox() {
-        $('#zoom_01').elevateZoom({ zoomType: "inner" });
-        setBlockImage((0, _extends3.default)({}, blockImage, {
-            isOpenLightBox: false
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
+      showHoverWishlist = _useState4[0],
+      setShowHoverWishlist = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = (0, _slicedToArray3.default)(_useState5, 2),
+      showHoverBasket = _useState6[0],
+      setShowHoverBasket = _useState6[1];
+
+  var closeLightBox = function closeLightBox() {
+    $("#zoom_01").elevateZoom({ zoomType: "inner" });
+    setBlockImage((0, _extends3.default)({}, blockImage, {
+      isOpenLightBox: false
+    }));
+  };
+
+  var openLightBox = function openLightBox(item) {
+    $(".zoomContainer").remove();
+    var position = 0;
+    setBlockImage({
+      currentMainImage: item.colorImage,
+      isOpenLightBox: true,
+      currentImageLightBox: position
+    });
+  };
+
+  var addToBasket = function addToBasket(e, item) {
+    e.stopPropagation();
+    e.preventDefault();
+    var status = void 0;
+    var newBasketData = [];
+    if (basketData.every(function (itemBasket) {
+      return itemBasket.id != item.id;
+    })) {
+      newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
+      status = "out";
+    } else {
+      newBasketData = basketData.filter(function (itemBasket) {
+        return itemBasket.shortcode != item.shortcode;
+      });
+      status = "in";
+    }
+    basketActions.changeBasketData(newBasketData);
+    if (status === "out") {
+      if (!window.isMobile) {
+        var img = item.colorImage ? item.colorImage : "/images/design/Product.svg",
+            start = $(e.target).offset();
+        basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+          startPosition: start,
+          image: img,
+          basketType: "kaufen"
         }));
+        setTimeout(function () {
+          basketActions.basketAddEffect(null);
+        }, 2000);
+      }
+    }
+  };
+
+  var addModelToWishlist = function addModelToWishlist(e, item) {
+    e.stopPropagation();
+    e.preventDefault();
+    var newWishlistData = null;
+    var status = "";
+    if (wishlistData.every(function (itemWishlist) {
+      return itemWishlist.id != item.id;
+    })) {
+      newWishlistData = [].concat((0, _toConsumableArray3.default)(wishlistData), [item]);
+      status = "add";
+    } else {
+      newWishlistData = wishlistData.filter(function (itemWishlist) {
+        return itemWishlist.shortcode != item.shortcode;
+      });
+      status = "remove";
+    }
+    basketActions.changeWishlisteData(newWishlistData);
+    if (!window.isMobile && status === "add") {
+      var img = item.colorImage ? item.colorImage : "/images/design/Product.svg";
+      basketActions.wishlistAddEffect(_react2.default.createElement(_addToWishlistEffect2.default, { startPosition: $(e.target).offset(), image: img }));
+      setTimeout(function () {
+        basketActions.wishlistAddEffect(null);
+      }, 2000);
+    }
+  };
+
+  var handleOpenDetailPage = function handleOpenDetailPage(deviceName, modelName, capacity, color, shortcode) {
+    window.open("//" + window.location.host + "/kaufen/detail/" + deviceName + "/" + modelName + "/" + capacity + "/" + color + "/" + shortcode, "_self");
+  };
+
+  var mapSimilarItems = function mapSimilarItems(model, i) {
+    var itemWrap = { paddingLeft: "8px", paddingRight: "8px" };
+    var realPrice = model.discountPrice ? model.discountPrice : model.price;
+    var monthPrice = (realPrice / 12).toFixed(2);
+    var description = "";
+    if (description != "") description += ", ";
+    description += model.capacity !== "" ? model.capacity : "";
+    if (description != "") description += ", ";
+    description += model.color !== "" ? model.color : "";
+    if (description != "") description += ", ";
+    description += model.warranty !== "" ? "Garantie: " + model.warranty : "";
+    description = description.length > 35 ? description.substr(0, 35) + "..." : description;
+
+    var productIsAddedToWishlist = false;
+    wishlistData.map(function (el) {
+      if (el.shortcode === model.shortcode) {
+        productIsAddedToWishlist = true;
+      }
+    });
+
+    var modelName = model.model.split(" ").join("-").toLowerCase() || "modelName",
+        deviceName = model.deviceName.toLowerCase().replace(/ /g, "-") || "deviceName",
+        color = model.color ? model.color.toLowerCase() : "color",
+        capacity = model.capacity ? model.capacity.toLowerCase() : "capacity";
+
+    var showHoverWishlistStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: "500",
+      transform: "translateX(30%) translateY(-80%)",
+      backgroundColor: "#23234A",
+      padding: "5px 5px",
+      textAlign: "center",
+      borderRadius: "5px",
+      fontSize: "12px",
+      transition: "ease-in 0.3s",
+      zIndex: "3"
     };
 
-    var openLightBox = function openLightBox(item) {
-        $('.zoomContainer').remove();
-        var position = 0;
-        setBlockImage({
-            currentMainImage: item.colorImage,
-            isOpenLightBox: true,
-            currentImageLightBox: position
-        });
+    var showHoverBasketStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: "500",
+      transform: "translateX(30%) translateY(-120%)",
+      backgroundColor: "#23234A",
+      padding: "5px 5px",
+      fontFamily: "Raleway",
+      textAlign: "center",
+      borderRadius: "5px",
+      fontSize: "12px",
+      transition: "ease-in 0.3s",
+      textTransform: "initial",
+      zIndex: "3"
     };
 
-    var addToBasket = function addToBasket(e, item) {
-        e.stopPropagation();
-        e.preventDefault();
-        var status = void 0;
-        var newBasketData = [];
-        if (basketData.every(function (itemBasket) {
-            return itemBasket.id != item.id;
-        })) {
-            newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
-            status = 'out';
-        } else {
-            newBasketData = basketData.filter(function (itemBasket) {
-                return itemBasket.shortcode != item.shortcode;
-            });
-            status = 'in';
-        }
-        basketActions.changeBasketData(newBasketData);
-        if (status === 'out') {
-            if (!window.isMobile) {
-                var img = item.colorImage ? item.colorImage : '/images/design/Product.svg',
-                    start = $(e.target).offset();
-                basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: start,
-                    image: img,
-                    basketType: "kaufen" }));
-                setTimeout(function () {
-                    basketActions.basketAddEffect(null);
-                }, 2000);
-            }
-        }
-    };
-
-    var addModelToWishlist = function addModelToWishlist(e, item) {
-        e.stopPropagation();
-        e.preventDefault();
-        var newWishlistData = null;
-        var status = '';
-        if (wishlistData.every(function (itemWishlist) {
-            return itemWishlist.id != item.id;
-        })) {
-            newWishlistData = [].concat((0, _toConsumableArray3.default)(wishlistData), [item]);
-            status = 'add';
-        } else {
-            newWishlistData = wishlistData.filter(function (itemWishlist) {
-                return itemWishlist.shortcode != item.shortcode;
-            });
-            status = 'remove';
-        }
-        basketActions.changeWishlisteData(newWishlistData);
-        if (!window.isMobile && status === 'add') {
-            var img = item.colorImage ? item.colorImage : '/images/design/Product.svg';
-            basketActions.wishlistAddEffect(_react2.default.createElement(_addToWishlistEffect2.default, { startPosition: $(e.target).offset(), image: img }));
-            setTimeout(function () {
-                basketActions.wishlistAddEffect(null);
-            }, 2000);
-        }
-    };
-
-    var handleOpenDetailPage = function handleOpenDetailPage(deviceName, modelName, capacity, color, shortcode) {
-        window.open("//" + window.location.host + "/kaufen/detail/" + deviceName + "/" + modelName + "/" + capacity + "/" + color + "/" + shortcode, '_self');
-    };
-
-    var mapSimilarItems = function mapSimilarItems(model, i) {
-        var itemWrap = { paddingLeft: "8px", paddingRight: "8px" };
-        var realPrice = model.discountPrice ? model.discountPrice : model.price;
-        var monthPrice = (realPrice / 12).toFixed(2);
-        var description = '';
-        if (description != '') description += ', ';
-        description += model.capacity !== '' ? model.capacity : '';
-        if (description != '') description += ', ';
-        description += model.color !== '' ? model.color : '';
-        if (description != '') description += ', ';
-        description += model.warranty !== '' ? 'Garantie: ' + model.warranty : '';
-        description = description.length > 35 ? description.substr(0, 35) + '...' : description;
-
-        var productIsAddedToWishlist = false;
-        wishlistData.map(function (el) {
-            if (el.shortcode === model.shortcode) {
-                productIsAddedToWishlist = true;
-            }
-        });
-
-        var modelName = model.model.split(" ").join('-').toLowerCase() || 'modelName',
-            deviceName = model.deviceName.toLowerCase().replace(/ /g, '-') || 'deviceName',
-            color = model.color ? model.color.toLowerCase() : 'color',
-            capacity = model.capacity ? model.capacity.toLowerCase() : 'capacity';
-
-        return _react2.default.createElement(
-            "div",
-            { key: "map-similar-items" + i },
-            _react2.default.createElement(
-                "div",
-                { style: itemWrap },
-                _react2.default.createElement(
-                    "div",
-                    { className: "item", onClick: function onClick() {
-                            return handleOpenDetailPage(deviceName, modelName, capacity, color, model.shortcode);
-                        } },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "img" },
-                        _react2.default.createElement("img", { loading: "lazy", src: model.colorImage || model.deviceImages.mainImg.src, alt: "" }),
-                        _react2.default.createElement(
-                            "i",
-                            { className: "modelInfoBlock-img-small-searchBtn",
-                                onClick: function onClick() {
-                                    return openLightBox(model);
-                                },
-                                "aria-hidden": "true" },
-                            _react2.default.createElement(
-                                "svg",
-                                { width: "25", height: "25", viewBox: "0 0 25 25", fill: "none",
-                                    xmlns: "http://www.w3.org/2000/svg" },
-                                _react2.default.createElement("path", {
-                                    d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
-                                    fill: "#BED3CB" }),
-                                _react2.default.createElement("path", {
-                                    d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
-                                    fill: "#BED3CB" })
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "i",
-                            { className: productIsAddedToWishlist ? 'modelInfoBlock-img-small-wishBtn on' : 'modelInfoBlock-img-small-wishBtn',
-                                onClick: function onClick(e) {
-                                    return addModelToWishlist(e, model);
-                                } },
-                            _react2.default.createElement(
-                                "svg",
-                                { viewBox: "0 0 24 24" },
-                                _react2.default.createElement("use", { href: "#heart" }),
-                                _react2.default.createElement("use", { href: "#heart" })
-                            ),
-                            _react2.default.createElement(
-                                "svg",
-                                { className: "hide", viewBox: "0 0 24 24" },
-                                _react2.default.createElement(
-                                    "defs",
-                                    null,
-                                    _react2.default.createElement("path", { id: "#heart", d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" })
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "heading" },
-                        _react2.default.createElement(
-                            "h4",
-                            null,
-                            model.model
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "colors" },
-                            _react2.default.createElement("span", { className: "colorPic", style: { backgroundColor: model.colorCode } })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "span",
-                        { className: "small-description" },
-                        description
-                    ),
-                    _react2.default.createElement(
-                        "span",
-                        { className: "details" },
-                        _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdLocation.svg", alt: "" }),
-                        model.placeDescription
-                    ),
-                    _react2.default.createElement(
-                        "span",
-                        { className: "details" },
-                        _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdState.svg", alt: "" }),
-                        model.condition
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "cost-block" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "cost" },
-                            _react2.default.createElement(
-                                "div",
-                                { className: "price-wrap" },
-                                model.discountPrice && _react2.default.createElement(
-                                    "p",
-                                    { className: "price-value discount-price" },
-                                    (0, _helpersFunction.formatPrice)(model.discountPrice),
-                                    " ",
-                                    window.currencyValue
-                                ),
-                                _react2.default.createElement(
-                                    "p",
-                                    { className: model.discountPrice ? 'price-value old-price' : 'price-value' },
-                                    (0, _helpersFunction.formatPrice)(model.price),
-                                    " ",
-                                    window.currencyValue
-                                )
-                            ),
-                            _react2.default.createElement(
-                                "span",
-                                null,
-                                "ab ",
-                                monthPrice,
-                                " CHF/Monat"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "button",
-                            { className: "add-cart", onClick: function onClick(e) {
-                                    return addToBasket(e, model);
-                                } },
-                            _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdCart.svg", alt: "" })
-                        )
-                    )
-                )
-            )
-        );
-    };
-
-    var settings = (_settings = {
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        arrows: false,
-        swipeToSlide: true
-    }, (0, _defineProperty3.default)(_settings, "arrows", true), (0, _defineProperty3.default)(_settings, "nextArrow", _react2.default.createElement(SampleNextArrow, null)), (0, _defineProperty3.default)(_settings, "prevArrow", _react2.default.createElement(SamplePrevArrow, null)), (0, _defineProperty3.default)(_settings, "responsive", [{
-        breakpoint: 1440,
-        settings: {
-            slidesToShow: 4,
-            infinite: true
-        }
-    }, {
-        breakpoint: 1280,
-        settings: {
-            slidesToShow: 3,
-            infinite: true
-        }
-    }, {
-        breakpoint: 768,
-        settings: {
-            slidesToShow: 2,
-            infinite: true
-        }
-    }, {
-        breakpoint: 540,
-        settings: {
-            slidesToShow: 1,
-            infinite: true
-        }
-    }]), _settings);
     return _react2.default.createElement(
+      "div",
+      { key: "map-similar-items" + i },
+      _react2.default.createElement(
         "div",
-        { className: "col-xs-12 other-product" },
+        { style: itemWrap },
         _react2.default.createElement(
-            "h3",
-            null,
-            "Folgendes k\xF6nnte Sie auch interessieren"
-        ),
-        _react2.default.createElement(
-            _reactSlick2.default,
-            settings,
-            similarItems.map(mapSimilarItems)
-        ),
-        blockImage.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, {
-            src: blockImage.currentMainImage,
-            showFirstImage: false,
-            showRealImageText: true,
-            close: closeLightBox,
-            array: [blockImage.currentMainImage]
-        })
+          "div",
+          {
+            className: "item",
+            onClick: function onClick() {
+              return handleOpenDetailPage(deviceName, modelName, capacity, color, model.shortcode);
+            }
+          },
+          _react2.default.createElement(
+            "div",
+            { className: "img" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              src: model.colorImage || model.deviceImages.mainImg.src,
+              alt: ""
+            }),
+            _react2.default.createElement(
+              "i",
+              {
+                className: "modelInfoBlock-img-small-searchBtn",
+                onClick: function onClick() {
+                  return openLightBox(model);
+                },
+                "aria-hidden": "true"
+              },
+              _react2.default.createElement(
+                "svg",
+                {
+                  width: "25",
+                  height: "25",
+                  viewBox: "0 0 25 25",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                },
+                _react2.default.createElement("path", {
+                  d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                  fill: "#BED3CB"
+                }),
+                _react2.default.createElement("path", {
+                  d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                  fill: "#BED3CB"
+                })
+              )
+            ),
+            _react2.default.createElement(
+              "i",
+              {
+                className: productIsAddedToWishlist ? "modelInfoBlock-img-small-wishBtn on" : "modelInfoBlock-img-small-wishBtn",
+                onMouseEnter: function onMouseEnter() {
+                  return setShowHoverWishlist(i);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return setShowHoverWishlist(null);
+                },
+                onClick: function onClick(e) {
+                  return addModelToWishlist(e, model);
+                }
+              },
+              showHoverWishlist === i && _react2.default.createElement("div", { style: showHoverWishlistStyle, dangerouslySetInnerHTML: { __html: t('addToWishlist') } }),
+              _react2.default.createElement(
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
+              ),
+              _react2.default.createElement(
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
+                _react2.default.createElement(
+                  "defs",
+                  null,
+                  _react2.default.createElement("path", {
+                    id: "#heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "heading" },
+            _react2.default.createElement(
+              "h4",
+              null,
+              model.model
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "colors" },
+              _react2.default.createElement("span", {
+                className: "colorPic",
+                style: { backgroundColor: model.colorCode }
+              })
+            )
+          ),
+          _react2.default.createElement(
+            "span",
+            { className: "small-description" },
+            description
+          ),
+          _react2.default.createElement(
+            "span",
+            { className: "details" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdLocation.svg", alt: "" }),
+            model.placeDescription
+          ),
+          _react2.default.createElement(
+            "span",
+            { className: "details" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdState.svg", alt: "" }),
+            model.condition
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "cost-block" },
+            _react2.default.createElement(
+              "div",
+              { className: "cost" },
+              _react2.default.createElement(
+                "div",
+                { className: "price-wrap" },
+                model.discountPrice && _react2.default.createElement(
+                  "p",
+                  { className: "price-value discount-price" },
+                  (0, _helpersFunction.formatPrice)(model.discountPrice),
+                  " ",
+                  window.currencyValue
+                ),
+                _react2.default.createElement(
+                  "p",
+                  {
+                    className: model.discountPrice ? "price-value old-price" : "price-value"
+                  },
+                  (0, _helpersFunction.formatPrice)(model.price),
+                  " ",
+                  window.currencyValue
+                )
+              ),
+              _react2.default.createElement(
+                "span",
+                null,
+                "ab ",
+                monthPrice,
+                " CHF/Monat"
+              )
+            ),
+            _react2.default.createElement(
+              "button",
+              {
+                className: "add-cart",
+                onMouseEnter: function onMouseEnter() {
+                  return setShowHoverBasket(i);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return setShowHoverBasket(null);
+                },
+                onClick: function onClick(e) {
+                  return addToBasket(e, model);
+                }
+              },
+              showHoverBasket === i && _react2.default.createElement("div", { style: showHoverBasketStyle, dangerouslySetInnerHTML: { __html: t('addToBasket') } }),
+              _react2.default.createElement("img", { loading: "lazy", src: "/images/otherProdCart.svg", alt: "" })
+            )
+          )
+        )
+      )
     );
+  };
+
+  var settings = (_settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    swipeToSlide: true
+  }, (0, _defineProperty3.default)(_settings, "arrows", true), (0, _defineProperty3.default)(_settings, "nextArrow", _react2.default.createElement(SampleNextArrow, null)), (0, _defineProperty3.default)(_settings, "prevArrow", _react2.default.createElement(SamplePrevArrow, null)), (0, _defineProperty3.default)(_settings, "responsive", [{
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: 4,
+      infinite: true
+    }
+  }, {
+    breakpoint: 1280,
+    settings: {
+      slidesToShow: 3,
+      infinite: true
+    }
+  }, {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+      infinite: true
+    }
+  }, {
+    breakpoint: 540,
+    settings: {
+      slidesToShow: 1,
+      infinite: true
+    }
+  }]), _settings);
+  console.log("similiarItems", similarItems);
+  return _react2.default.createElement(
+    "div",
+    { className: "col-xs-12 other-product" },
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Folgendes k\xF6nnte Sie auch interessieren"
+    ),
+    _react2.default.createElement(
+      _reactSlick2.default,
+      settings,
+      similarItems.map(mapSimilarItems)
+    ),
+    blockImage.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, {
+      src: blockImage.currentMainImage,
+      showFirstImage: false,
+      showRealImageText: true,
+      close: closeLightBox,
+      array: [blockImage.currentMainImage]
+    })
+  );
 };
 
-exports.default = OtherProducts;
+exports.default = (0, _reactI18next.withTranslation)()(OtherProducts);
 
 /***/ }),
 
@@ -16120,7 +16349,7 @@ var _defineProperty2 = __webpack_require__(1037);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -16156,7 +16385,7 @@ var _lightboxImg2 = _interopRequireDefault(_lightboxImg);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16729,10 +16958,10 @@ var ReactContentLoaderBulletList = function (props) { return (Object(__WEBPACK_I
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -16780,7 +17009,7 @@ var _index = __webpack_require__(330);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _addToBasketEffect = __webpack_require__(950);
 
@@ -16811,575 +17040,617 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DetailModelPage = function (_Component) {
-    (0, _inherits3.default)(DetailModelPage, _Component);
+  (0, _inherits3.default)(DetailModelPage, _Component);
 
-    function DetailModelPage(props) {
-        (0, _classCallCheck3.default)(this, DetailModelPage);
+  function DetailModelPage(props) {
+    (0, _classCallCheck3.default)(this, DetailModelPage);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (DetailModelPage.__proto__ || Object.getPrototypeOf(DetailModelPage)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DetailModelPage.__proto__ || Object.getPrototypeOf(DetailModelPage)).call(this, props));
 
-        _this.state = {
-            model: [],
-            similarItems: [],
-            upsellingItems: [],
-            specifications: [],
-            additionalSpecifications: {},
-            capacityName: null,
-            deviceStatus: {
-                statusId: null,
-                dateOfBought: null,
-                boughtCurrentUser: false
-            },
-            activeNavItem: 'technical',
-            successAddToBasket: null,
-            recommendProducts: null
+    _this.state = {
+      model: [],
+      similarItems: [],
+      upsellingItems: [],
+      specifications: [],
+      additionalSpecifications: {},
+      capacityName: null,
+      deviceStatus: {
+        statusId: null,
+        dateOfBought: null,
+        boughtCurrentUser: false
+      },
+      activeNavItem: "technical",
+      successAddToBasket: null,
+      recommendProducts: null
+    };
+
+    _this.clickNavItem = _this.clickNavItem.bind(_this);
+    _this.mapAccessories = _this.mapAccessories.bind(_this);
+    _this._increaseCounter = _this._increaseCounter.bind(_this);
+    _this.openSuccessAddToBasket = _this.openSuccessAddToBasket.bind(_this);
+    _this._recommendProducts = _this._recommendProducts.bind(_this);
+    _this.closeSuccessAddToBasket = _this.closeSuccessAddToBasket.bind(_this);
+    _this.addModelToBasket = _this.addModelToBasket.bind(_this);
+    return _this;
+  }
+
+  (0, _createClass3.default)(DetailModelPage, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.params.currentModelId !== this.props.params.currentModelId) {
+        var _nextProps$params = nextProps.params,
+            currentModelId = _nextProps$params.currentModelId,
+            deviceName = _nextProps$params.device;
+
+        deviceName = deviceName.split("-").join(" ");
+        var objForRequest = {
+          deviceName: deviceName,
+          inventoryId: currentModelId
+        };
+        this._getModelData(objForRequest, currentModelId);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _props$params = this.props.params,
+          currentModelId = _props$params.currentModelId,
+          deviceName = _props$params.device;
+
+      deviceName = deviceName.split("-").join(" ");
+      var objForRequest = {
+        deviceName: deviceName,
+        inventoryId: currentModelId
+      };
+      this._getModelData(objForRequest, currentModelId);
+      this._increaseCounter(currentModelId);
+    }
+  }, {
+    key: "_increaseCounter",
+    value: function _increaseCounter(currentModelId) {
+      _axios2.default.post("/api/increaseCounter", { deviceId: currentModelId }).then(function (_ref) {
+        var data = _ref.data;
+      }).catch(function (error) {});
+    }
+  }, {
+    key: "_gtag_snippet",
+    value: function _gtag_snippet(model) {
+      gtag("event", "page_view", {
+        send_to: "AW-827036726",
+        ecomm_prodid: model.shortcode,
+        ecomm_pagetype: "product",
+        ecomm_totalvalue: +model.discountPrice || +model.price,
+        ecomm_category: "Electronics"
+      });
+    }
+  }, {
+    key: "_recommendProducts",
+    value: function _recommendProducts(modelId) {
+      var _this2 = this;
+
+      var successAddToBasket = this.state.successAddToBasket;
+
+      var promise = new Promise(function (resolve, reject) {
+        if (modelId) {
+          _axios2.default.get("/api/loadRecommendProducts?modelId=" + modelId).then(function (result) {
+            resolve(result.data.data.length ? result.data.data : null);
+          });
+        } else {
+          resolve(null);
+        }
+      });
+      promise.then(function (result) {
+        if (result && successAddToBasket == null && result.length > 0) {
+          _this2.setState({ recommendProducts: result });
+        }
+      });
+    }
+  }, {
+    key: "_getModelData",
+    value: function _getModelData(objForRequest, currentModelId) {
+      var _this3 = this;
+
+      document.getElementById("spinner-box-load").style.display = "block";
+      _index2.default.getModels("/api/models", objForRequest).then(function (_ref2) {
+        var data = _ref2.data;
+
+        var responseData = data;
+        if (window.isGoogleConnection) {
+          _this3._gtag_snippet(responseData.data[0]);
+        }
+        _this3.setState({
+          model: responseData.data,
+          capacityName: responseData.meta.capacityName
+        });
+        var model = responseData.data,
+            gtagData = JSON.parse(window.localStorage.getItem("gtag"));
+        0;
+        if (window.isGoogleConnection && gtagData) {
+          gtag("event", "view_item", {
+            items: [{
+              id: model[0].shortcode,
+              name: model[0].descriptionLong,
+              list_name: "Kaufen",
+              quantity: 1,
+              price: model[0].discountPrice || model[0].price,
+              brand: model[0].deviceName,
+              category: gtagData.category || ""
+            }]
+          });
+        }
+
+        (0, _helpersFunction.pushKlavioIdentify)();
+
+        var gtagDataCategory = gtagData ? [gtagData.category] : [""];
+        var klavioItem = {
+          ProductName: model[0].descriptionLong,
+          ProductID: model[0].shortcode,
+          Categories: gtagDataCategory,
+          ImageURL: model[0].deviceImages.mainImg.src,
+          URL: window.location.href,
+          Brand: model[0].deviceName,
+          Price: model[0].discountPrice || model[0].price,
+          CompareAtPrice: model[0].price
         };
 
-        _this.clickNavItem = _this.clickNavItem.bind(_this);
-        _this.mapAccessories = _this.mapAccessories.bind(_this);
-        _this._increaseCounter = _this._increaseCounter.bind(_this);
-        _this.openSuccessAddToBasket = _this.openSuccessAddToBasket.bind(_this);
-        _this._recommendProducts = _this._recommendProducts.bind(_this);
-        _this.closeSuccessAddToBasket = _this.closeSuccessAddToBasket.bind(_this);
-        _this.addModelToBasket = _this.addModelToBasket.bind(_this);
-        return _this;
+        _learnq.push(["track", "Viewed Product", klavioItem]);
+
+        _learnq.push(["trackViewedItem", {
+          Title: klavioItem.ProductName,
+          ItemId: klavioItem.ProductID,
+          Categories: klavioItem.Categories,
+          ImageUrl: klavioItem.ImageURL,
+          Url: klavioItem.URL,
+          Metadata: {
+            Brand: klavioItem.Brand,
+            Price: klavioItem.Price,
+            CompareAtPrice: klavioItem.CompareAtPrice
+          }
+        }]);
+
+        _this3._recommendProducts(model[0].modelId);
+      }).catch(function (error) {});
+      _axios2.default.get("/api/getSpecifications?deviceId=" + currentModelId).then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this3.setState({
+          specifications: data.specifications,
+          additionalSpecifications: data.additionalSpecifications
+        });
+      }).catch(function (error) {});
+      _axios2.default.post("/api/similarItems", { deviceId: currentModelId }).then(function (_ref4) {
+        var data = _ref4.data;
+
+        _this3.setState({ similarItems: data });
+      }).catch(function (error) {});
+      _axios2.default.get("/api/checkSoldDevice?deviceShortcode=" + currentModelId).then(function (_ref5) {
+        var data = _ref5.data;
+
+        _this3.setState({
+          deviceStatus: (0, _extends3.default)({}, _this3.state.deviceStatus, {
+            statusId: data.status,
+            dateOfBought: data.date,
+            boughtCurrentUser: data.boughtCurrentUser
+          })
+        });
+      }).catch(function (error) {});
+      _axios2.default.get("/api/getUpsellingProducts?deviceShortcode=" + currentModelId).then(function (_ref6) {
+        var data = _ref6.data;
+
+        _this3.setState({ upsellingItems: data.data });
+      }).catch(function (error) {});
     }
+  }, {
+    key: "clickNavItem",
+    value: function clickNavItem(e) {
+      var activeNavItem = e.currentTarget.getAttribute("data-type");
+      this.setState({ activeNavItem: activeNavItem });
+    }
+  }, {
+    key: "mapAccessories",
+    value: function mapAccessories(item, i) {
+      return _react2.default.createElement(
+        "li",
+        { key: i },
+        _react2.default.createElement("i", { className: "fa fa-check-circle-o", "aria-hidden": "true" }),
+        item
+      );
+    }
+  }, {
+    key: "getUrlForNavigation",
+    value: function getUrlForNavigation() {
+      var deviceName = this.state.model[0].deviceName,
+          currentDevices = null;
 
-    (0, _createClass3.default)(DetailModelPage, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            if (nextProps.params.currentModelId !== this.props.params.currentModelId) {
-                var _nextProps$params = nextProps.params,
-                    currentModelId = _nextProps$params.currentModelId,
-                    deviceName = _nextProps$params.device;
-
-                deviceName = deviceName.split("-").join(' ');
-                var objForRequest = {
-                    deviceName: deviceName,
-                    inventoryId: currentModelId
-                };
-                this._getModelData(objForRequest, currentModelId);
-            }
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _props$params = this.props.params,
-                currentModelId = _props$params.currentModelId,
-                deviceName = _props$params.device;
-
-            deviceName = deviceName.split("-").join(' ');
-            var objForRequest = {
-                deviceName: deviceName,
-                inventoryId: currentModelId
-            };
-            this._getModelData(objForRequest, currentModelId);
-            this._increaseCounter(currentModelId);
-        }
-    }, {
-        key: '_increaseCounter',
-        value: function _increaseCounter(currentModelId) {
-            _axios2.default.post('/api/increaseCounter', { deviceId: currentModelId }).then(function (_ref) {
-                var data = _ref.data;
-            }).catch(function (error) {});
-        }
-    }, {
-        key: '_gtag_snippet',
-        value: function _gtag_snippet(model) {
-            gtag('event', 'page_view', {
-                'send_to': 'AW-827036726',
-                'ecomm_prodid': model.shortcode,
-                'ecomm_pagetype': 'product',
-                'ecomm_totalvalue': +model.discountPrice || +model.price,
-                'ecomm_category': 'Electronics'
+      function findCurrentDevice(current, nextDevice) {
+        if (nextDevice.submodels) {
+          var equalDevice = nextDevice.submodels.filter(function (item) {
+            return item.name == deviceName;
+          });
+          if (equalDevice.length > 0) {
+            currentDevices = [].concat((0, _toConsumableArray3.default)(current), [equalDevice[0].name]);
+            return true;
+          } else {
+            nextDevice.submodels.forEach(function (item) {
+              if (item.submodels) {
+                findCurrentDevice([].concat((0, _toConsumableArray3.default)(current), [item.name]), item);
+              }
             });
+            return false;
+          }
         }
-    }, {
-        key: '_recommendProducts',
-        value: function _recommendProducts(modelId) {
-            var _this2 = this;
+      }
+      this.props.devices.forEach(function (item) {
+        return findCurrentDevice([item.name], item);
+      });
+      var strUrl = "";
+      if (currentDevices) strUrl = currentDevices.join("/").toLowerCase().replace(/ /g, "-") + "/filter";
+      return "/kaufen/" + strUrl;
+    }
+  }, {
+    key: "openSuccessAddToBasket",
+    value: function openSuccessAddToBasket(item, source) {
+      this.setState({
+        successAddToBasket: _react2.default.createElement(_successAddToBasket2.default, {
+          addModelToBasket: this.addModelToBasket,
+          basketData: this.props.basketData,
+          source: source,
+          model: item,
+          recommendProducts: this.state.recommendProducts,
+          closeSuccessAddToBasket: this.closeSuccessAddToBasket
+        })
+      });
+    }
+  }, {
+    key: "closeSuccessAddToBasket",
+    value: function closeSuccessAddToBasket() {
+      this.setState({ successAddToBasket: null });
+    }
+  }, {
+    key: "addModelToBasket",
+    value: function addModelToBasket(e, item) {
+      var _this4 = this;
 
-            var successAddToBasket = this.state.successAddToBasket;
+      e.stopPropagation();
+      e.preventDefault();
+      var status = e.target.getAttribute("data-status"),
+          basketData = this.props.basketData,
+          newBasketData = null;
 
-            var promise = new Promise(function (resolve, reject) {
-                if (modelId) {
-                    _axios2.default.get('/api/loadRecommendProducts?modelId=' + modelId).then(function (result) {
-                        resolve(result.data.data.length ? result.data.data : null);
-                    });
-                } else {
-                    resolve(null);
-                }
-            });
-            promise.then(function (result) {
-                if (result && successAddToBasket == null && result.length > 0) {
-                    _this2.setState({ recommendProducts: result });
-                }
-            });
+      if (item.categoryName) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
+      } else if (basketData.every(function (itemBasket) {
+        return itemBasket.id != item.id;
+      })) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
+      } else {
+        newBasketData = basketData.filter(function (itemBasket) {
+          return itemBasket.shortcode != item.shortcode;
+        });
+      }
+      this.props.basketActions.changeBasketData(newBasketData);
+
+      if (status === "out") {
+        var brands = item.criterias.find(function (item) {
+          return item.id === "manufacturer";
+        }).values,
+            brand = brands.length ? brands[0].name : "",
+            category = item.categoryName;
+        gtag("event", "add_to_cart", {
+          items: [{
+            id: item.shortcode,
+            list_name: "Kaufen",
+            quantity: 1,
+            price: item.discountPrice || item.price,
+            name: item.descriptionLong || item.model || "",
+            brand: brand,
+            category: category
+          }]
+        });
+        if (!window.isMobile) {
+          var img = item.deviceImages ? item.deviceImages.mainImg.src : "/images/design/Product.svg",
+              start = $(e.target).offset();
+          this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+            startPosition: start,
+            image: img,
+            basketType: "kaufen"
+          }));
+          setTimeout(function () {
+            _this4.props.basketActions.basketAddEffect(null);
+          }, 2000);
+        } else {
+          _reactRouter.browserHistory.push("/warenkorb");
         }
-    }, {
-        key: '_getModelData',
-        value: function _getModelData(objForRequest, currentModelId) {
-            var _this3 = this;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _state = this.state,
+          model = _state.model,
+          similarItems = _state.similarItems,
+          specifications = _state.specifications,
+          additionalSpecifications = _state.additionalSpecifications,
+          capacityName = _state.capacityName,
+          deviceStatus = _state.deviceStatus,
+          activeNavItem = _state.activeNavItem,
+          successAddToBasket = _state.successAddToBasket,
+          upsellingItems = _state.upsellingItems,
+          recommendProducts = _state.recommendProducts,
+          deviceName = this.props.params.device,
+          locationQuery = this.props.location.query,
+          urlNavigation = model[0] && this.getUrlForNavigation() || "",
+          loader = document.getElementById("spinner-box-load"),
+          title = model[0] ? model[0].descriptionLong + ",  " + model[0].capacity + ", " + model[0].condition : "",
+          descriptionPrice = model[0] && model[0].discountPrice ? model[0].discountPrice : model[0] ? model[0].price : "",
+          description = model[0] ? model[0].descriptionLong + ",  " + model[0].capacity + " g\xFCnstig kaufen in " + model[0].placeDescription + " f\xFCr " + descriptionPrice + " im Zustand " + model[0].condition + " inkl. " + model[0].warranty + " Garantie." : "";
 
-            document.getElementById('spinner-box-load').style.display = 'block';
-            _index2.default.getModels('/api/models', objForRequest).then(function (_ref2) {
-                var data = _ref2.data;
+      var webshopDiscountData = JSON.parse(window.localStorage.getItem("webshopDiscountData"));
+      if (loader && model[0]) loader.style.display = "none";
 
-                var responseData = data;
-                if (window.isGoogleConnection) {
-                    _this3._gtag_snippet(responseData.data[0]);
-                }
-                _this3.setState({ model: responseData.data, capacityName: responseData.meta.capacityName });
-                var model = responseData.data,
-                    gtagData = JSON.parse(window.localStorage.getItem("gtag"));
-                0;
-                if (window.isGoogleConnection && gtagData) {
-                    gtag('event', 'view_item', {
-                        "items": [{
-                            "id": model[0].shortcode,
-                            "name": model[0].descriptionLong,
-                            "list_name": "Kaufen",
-                            "quantity": 1,
-                            "price": model[0].discountPrice || model[0].price,
-                            "brand": model[0].deviceName,
-                            "category": gtagData.category || ''
-                        }]
-                    });
-                }
+      var schemaData = {};
+      if (model[0]) {
+        // add schema
+        var device = model[0];
 
-                (0, _helpersFunction.pushKlavioIdentify)();
+        var titleSchema = "";
 
-                var gtagDataCategory = gtagData ? [gtagData.category] : [''];
-                var klavioItem = {
-                    "ProductName": model[0].descriptionLong,
-                    "ProductID": model[0].shortcode,
-                    "Categories": gtagDataCategory,
-                    "ImageURL": model[0].deviceImages.mainImg.src,
-                    "URL": window.location.href,
-                    "Brand": model[0].deviceName,
-                    "Price": model[0].discountPrice || model[0].price,
-                    "CompareAtPrice": model[0].price
-                };
+        var condition = device.conditionId === 1 || device.conditionId === 2 ? "" : "gebraucht, ";
+        titleSchema = device.model + ", " + condition + device.capacity + ", " + device.color;
 
-                _learnq.push(["track", "Viewed Product", klavioItem]);
-
-                _learnq.push(["trackViewedItem", {
-                    "Title": klavioItem.ProductName,
-                    "ItemId": klavioItem.ProductID,
-                    "Categories": klavioItem.Categories,
-                    "ImageUrl": klavioItem.ImageURL,
-                    "Url": klavioItem.URL,
-                    "Metadata": {
-                        "Brand": klavioItem.Brand,
-                        "Price": klavioItem.Price,
-                        "CompareAtPrice": klavioItem.CompareAtPrice
-                    }
-                }]);
-
-                _this3._recommendProducts(model[0].modelId);
-            }).catch(function (error) {});
-            _axios2.default.get('/api/getSpecifications?deviceId=' + currentModelId).then(function (_ref3) {
-                var data = _ref3.data;
-
-                _this3.setState({ specifications: data.specifications, additionalSpecifications: data.additionalSpecifications });
-            }).catch(function (error) {});
-            _axios2.default.post('/api/similarItems', { deviceId: currentModelId }).then(function (_ref4) {
-                var data = _ref4.data;
-
-                _this3.setState({ similarItems: data });
-            }).catch(function (error) {});
-            _axios2.default.get('/api/checkSoldDevice?deviceShortcode=' + currentModelId).then(function (_ref5) {
-                var data = _ref5.data;
-
-                _this3.setState({ deviceStatus: (0, _extends3.default)({}, _this3.state.deviceStatus, { statusId: data.status, dateOfBought: data.date,
-                        boughtCurrentUser: data.boughtCurrentUser }) });
-            }).catch(function (error) {});
-            _axios2.default.get('/api/getUpsellingProducts?deviceShortcode=' + currentModelId).then(function (_ref6) {
-                var data = _ref6.data;
-
-                _this3.setState({ upsellingItems: data.data });
-            }).catch(function (error) {});
+        var stockDevice = {};
+        if (device.statusId === 1) {
+          stockDevice = {
+            availability: "https://schema.org/InStock"
+          };
+        } else {
+          stockDevice = {
+            availability: "https://schema.org/OutOfStock"
+          };
         }
-    }, {
-        key: 'clickNavItem',
-        value: function clickNavItem(e) {
-            var activeNavItem = e.currentTarget.getAttribute('data-type');
-            this.setState({ activeNavItem: activeNavItem });
+
+        var conditionDevice = {};
+        if (device.conditionId === 1 || device.conditionId === 2) {
+          conditionDevice = {
+            itemCondition: "https://schema.org/NewCondition"
+          };
+        } else if (device.conditionId === 3 || device.conditionId === 4 || device.conditionId === 5) {
+          conditionDevice = {
+            itemCondition: "https://schema.org/UsedCondition"
+          };
         }
-    }, {
-        key: 'mapAccessories',
-        value: function mapAccessories(item, i) {
-            return _react2.default.createElement(
-                'li',
-                { key: i },
-                _react2.default.createElement('i', { className: 'fa fa-check-circle-o', 'aria-hidden': 'true' }),
-                item
-            );
+
+        var offers = {};
+        if (device.discountPrice === false) {
+          offers = {
+            "@type": "Offer",
+            url: window.location.href,
+            priceCurrency: "CHF",
+            price: device.price
+          };
+        } else {
+          offers = {
+            "@type": "AggregateOffer",
+            url: window.location.href,
+            priceCurrency: "CHF",
+            lowPrice: device.discountPrice,
+            highPrice: device.price
+          };
         }
-    }, {
-        key: 'getUrlForNavigation',
-        value: function getUrlForNavigation() {
-            var deviceName = this.state.model[0].deviceName,
-                currentDevices = null;
 
-            function findCurrentDevice(current, nextDevice) {
-                if (nextDevice.submodels) {
-                    var equalDevice = nextDevice.submodels.filter(function (item) {
-                        return item.name == deviceName;
-                    });
-                    if (equalDevice.length > 0) {
-                        currentDevices = [].concat((0, _toConsumableArray3.default)(current), [equalDevice[0].name]);
-                        return true;
-                    } else {
-                        nextDevice.submodels.forEach(function (item) {
-                            if (item.submodels) {
-                                findCurrentDevice([].concat((0, _toConsumableArray3.default)(current), [item.name]), item);
-                            }
-                        });
-                        return false;
-                    }
-                }
-            }
-            this.props.devices.forEach(function (item) {
-                return findCurrentDevice([item.name], item);
-            });
-            var strUrl = '';
-            if (currentDevices) strUrl = currentDevices.join('/').toLowerCase().replace(/ /g, '-') + '/filter';
-            return '/kaufen/' + strUrl;
-        }
-    }, {
-        key: 'openSuccessAddToBasket',
-        value: function openSuccessAddToBasket(item, source) {
-            this.setState({ successAddToBasket: _react2.default.createElement(_successAddToBasket2.default, {
-                    addModelToBasket: this.addModelToBasket,
-                    basketData: this.props.basketData,
-                    source: source,
-                    model: item,
-                    recommendProducts: this.state.recommendProducts,
-                    closeSuccessAddToBasket: this.closeSuccessAddToBasket }) });
-        }
-    }, {
-        key: 'closeSuccessAddToBasket',
-        value: function closeSuccessAddToBasket() {
-            this.setState({ successAddToBasket: null });
-        }
-    }, {
-        key: 'addModelToBasket',
-        value: function addModelToBasket(e, item) {
-            var _this4 = this;
+        schemaData = {
+          "@context": "http://schema.org/",
+          "@type": "Product",
+          name: titleSchema,
+          image: device.deviceImages.mainImg.src,
+          description: device.descriptionSeo,
+          brand: device.deviceName,
+          sku: device.shortcode,
+          offers: offers
+        };
 
-            e.stopPropagation();
-            e.preventDefault();
-            var status = e.target.getAttribute('data-status'),
-                basketData = this.props.basketData,
-                newBasketData = null;
+        schemaData = (0, _extends3.default)({}, schemaData, stockDevice, conditionDevice);
+      }
+      var structuredSchemaDataJSON = JSON.stringify(schemaData);
 
-            if (item.categoryName) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
-            } else if (basketData.every(function (itemBasket) {
-                return itemBasket.id != item.id;
-            })) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
-            } else {
-                newBasketData = basketData.filter(function (itemBasket) {
-                    return itemBasket.shortcode != item.shortcode;
-                });
-            }
-            this.props.basketActions.changeBasketData(newBasketData);
-
-            if (status === 'out') {
-                var brands = item.criterias.find(function (item) {
-                    return item.id === 'manufacturer';
-                }).values,
-                    brand = brands.length ? brands[0].name : "",
-                    category = item.categoryName;
-                gtag('event', 'add_to_cart', {
-                    "items": [{
-                        "id": item.shortcode,
-                        "list_name": "Kaufen",
-                        "quantity": 1,
-                        "price": item.discountPrice || item.price,
-                        "name": item.descriptionLong || item.model || '',
-                        "brand": brand,
-                        "category": category
-                    }]
-                });
-                if (!window.isMobile) {
-                    var img = item.deviceImages ? item.deviceImages.mainImg.src : '/images/design/Product.svg',
-                        start = $(e.target).offset();
-                    this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: start,
-                        image: img,
-                        basketType: 'kaufen' }));
-                    setTimeout(function () {
-                        _this4.props.basketActions.basketAddEffect(null);
-                    }, 2000);
-                } else {
-                    _reactRouter.browserHistory.push('/warenkorb');
-                }
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _state = this.state,
-                model = _state.model,
-                similarItems = _state.similarItems,
-                specifications = _state.specifications,
-                additionalSpecifications = _state.additionalSpecifications,
-                capacityName = _state.capacityName,
-                deviceStatus = _state.deviceStatus,
-                activeNavItem = _state.activeNavItem,
-                successAddToBasket = _state.successAddToBasket,
-                upsellingItems = _state.upsellingItems,
-                recommendProducts = _state.recommendProducts,
-                deviceName = this.props.params.device,
-                locationQuery = this.props.location.query,
-                urlNavigation = model[0] && this.getUrlForNavigation() || '',
-                loader = document.getElementById('spinner-box-load'),
-                title = model[0] ? model[0].descriptionLong + ',  ' + model[0].capacity + ', ' + model[0].condition : '',
-                descriptionPrice = model[0] && model[0].discountPrice ? model[0].discountPrice : model[0] ? model[0].price : '',
-                description = model[0] ? model[0].descriptionLong + ',  ' + model[0].capacity + ' g\xFCnstig kaufen in ' + model[0].placeDescription + ' f\xFCr ' + descriptionPrice + ' im Zustand ' + model[0].condition + ' inkl. ' + model[0].warranty + ' Garantie.' : '';
-
-            var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
-            if (loader && model[0]) loader.style.display = 'none';
-
-            var schemaData = {};
-            if (model[0]) {
-                // add schema
-                var device = model[0];
-
-                var titleSchema = '';
-
-                var condition = device.conditionId === 1 || device.conditionId === 2 ? '' : 'gebraucht, ';
-                titleSchema = device.model + ', ' + condition + device.capacity + ', ' + device.color;
-
-                var stockDevice = {};
-                if (device.statusId === 1) {
-                    stockDevice = {
-                        "availability": "https://schema.org/InStock"
-                    };
-                } else {
-                    stockDevice = {
-                        "availability": "https://schema.org/OutOfStock"
-                    };
-                }
-
-                var conditionDevice = {};
-                if (device.conditionId === 1 || device.conditionId === 2) {
-                    conditionDevice = {
-                        "itemCondition": "https://schema.org/NewCondition"
-                    };
-                } else if (device.conditionId === 3 || device.conditionId === 4 || device.conditionId === 5) {
-                    conditionDevice = {
-                        "itemCondition": "https://schema.org/UsedCondition"
-                    };
-                }
-
-                var offers = {};
-                if (device.discountPrice === false) {
-                    offers = {
-                        "@type": "Offer",
-                        "url": window.location.href,
-                        "priceCurrency": "CHF",
-                        "price": device.price
-                    };
-                } else {
-                    offers = {
-                        "@type": "AggregateOffer",
-                        "url": window.location.href,
-                        "priceCurrency": "CHF",
-                        "lowPrice": device.discountPrice,
-                        "highPrice": device.price
-                    };
-                }
-
-                schemaData = {
-                    "@context": "http://schema.org/",
-                    "@type": "Product",
-                    "name": titleSchema,
-                    "image": device.deviceImages.mainImg.src,
-                    "description": device.descriptionSeo,
-                    "brand": device.deviceName,
-                    "sku": device.shortcode,
-                    "offers": offers
-                };
-
-                schemaData = (0, _extends3.default)({}, schemaData, stockDevice, conditionDevice);
-            }
-            var structuredSchemaDataJSON = JSON.stringify(schemaData);
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'detail-page' },
-                model[0] && _react2.default.createElement(_reactHelmet.Helmet, {
-                    title: title,
-                    meta: [{ "name": "description", "content": description }, { "property": "og:title", "content": title }, { "property": "og:image", "content": model[0].deviceImages.mainImg.src }]
-                }),
-                _react2.default.createElement(
-                    _reactHelmet.Helmet,
-                    null,
+      return _react2.default.createElement(
+        "div",
+        { className: "detail-page" },
+        model[0] && _react2.default.createElement(_reactHelmet.Helmet, {
+          title: title,
+          meta: [{ name: "description", content: description }, { property: "og:title", content: title }, {
+            property: "og:image",
+            content: model[0].deviceImages.mainImg.src
+          }]
+        }),
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            "script",
+            { type: "application/ld+json" },
+            structuredSchemaDataJSON
+          )
+        ),
+        model[0] && _react2.default.createElement(
+          "div",
+          { className: "detailPage" },
+          _react2.default.createElement(
+            "div",
+            { className: "infoBlock" },
+            _react2.default.createElement(
+              "div",
+              { className: "container-fluid" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                !window.isMobile && _react2.default.createElement(
+                  "div",
+                  { className: "col-xs-12" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "navigation-row" },
                     _react2.default.createElement(
-                        'script',
-                        { type: 'application/ld+json' },
-                        structuredSchemaDataJSON
+                      _reactRouter.Link,
+                      { to: "/" },
+                      _react2.default.createElement("img", {
+                        loading: "lazy",
+                        src: "/images/design/house-icon.svg",
+                        alt: ""
+                      })
+                    ),
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: urlNavigation },
+                      "Liste"
+                    ),
+                    _react2.default.createElement(
+                      "span",
+                      null,
+                      model[0] && model[0].model
                     )
+                  )
                 ),
-                model[0] && _react2.default.createElement(
-                    'div',
-                    { className: 'detailPage' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'infoBlock' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                !window.isMobile && _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-xs-12' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'navigation-row' },
-                                        _react2.default.createElement(
-                                            _reactRouter.Link,
-                                            { to: '/' },
-                                            _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/house-icon.svg', alt: '' })
-                                        ),
-                                        _react2.default.createElement(
-                                            _reactRouter.Link,
-                                            { to: urlNavigation },
-                                            'Liste'
-                                        ),
-                                        _react2.default.createElement(
-                                            'span',
-                                            null,
-                                            model[0] && model[0].model
-                                        )
-                                    )
-                                ),
-                                !window.isMobile && webshopDiscountData.desktop_detail_active == 1 && _react2.default.createElement(
-                                    'div',
-                                    { className: 'notification-device-detail' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'subtract' },
-                                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/subtract.svg' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'content' },
-                                        _react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: (0, _helpersFunction.discountCode)(webshopDiscountData.desktop_detail_text, 'discount-code') } })
-                                    )
-                                ),
-                                window.isMobile && webshopDiscountData.mobile_detail_active == 1 && _react2.default.createElement(
-                                    'div',
-                                    { className: 'notification-device-detail' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'subtract' },
-                                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/subtract.svg' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'content' },
-                                        _react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: (0, _helpersFunction.discountCode)(webshopDiscountData.mobile_detail_text, 'discount-code') } })
-                                    )
-                                ),
-                                _react2.default.createElement(_modelInfoBlock2.default, { currentModel: model,
-                                    openSuccessAddToBasket: this.openSuccessAddToBasket,
-                                    deviceStatus: deviceStatus,
-                                    capacityName: capacityName,
-                                    isRemarketingCampaign: locationQuery ? locationQuery.coupon : 0,
-                                    specifications: specifications,
-                                    additionalSpecifications: additionalSpecifications,
-                                    upsellingItems: upsellingItems
-                                })
-                            ),
-                            _react2.default.createElement('div', { className: 'cb' })
-                        )
-                    ),
-                    similarItems.length > 0 && _react2.default.createElement(
-                        'div',
-                        { className: 'others-product-block' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(_otherProducts2.default, {
-                                    similarItems: similarItems,
-                                    basketActions: this.props.basketActions,
-                                    basketData: this.props.basketData,
-                                    wishlistData: this.props.wishlistData
-                                })
-                            )
-                        )
-                    ),
-                    !recommendProducts && _react2.default.createElement(
-                        'div',
-                        { className: 'others-product-block' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(_purchaseProducts.EmptyPurchaseProducts, null)
-                            )
-                        )
-                    ),
-                    recommendProducts && recommendProducts.length > 0 && _react2.default.createElement(
-                        'div',
-                        { className: 'others-product-block' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(_purchaseProducts2.default, {
-                                    recommendProducts: recommendProducts,
-                                    basketActions: this.props.basketActions,
-                                    basketData: this.props.basketData,
-                                    wishlistData: this.props.wishlistData })
-                            )
-                        )
-                    ),
-                    false && _react2.default.createElement(
-                        'div',
-                        { className: 'similar' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container' },
-                            _react2.default.createElement(_listSimilarItems2.default, { similarItems: similarItems, deviceName: deviceName }),
-                            _react2.default.createElement('div', { className: 'cb' })
-                        )
-                    ),
-                    successAddToBasket
-                )
-            );
-        }
-    }]);
-    return DetailModelPage;
+                !window.isMobile && webshopDiscountData.desktop_detail_active == 1 && _react2.default.createElement(
+                  "div",
+                  { className: "notification-device-detail" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "subtract" },
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/subtract.svg"
+                    })
+                  ),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "content" },
+                    _react2.default.createElement("p", {
+                      dangerouslySetInnerHTML: {
+                        __html: (0, _helpersFunction.discountCode)(webshopDiscountData.desktop_detail_text, "discount-code")
+                      }
+                    })
+                  )
+                ),
+                window.isMobile && webshopDiscountData.mobile_detail_active == 1 && _react2.default.createElement(
+                  "div",
+                  { className: "notification-device-detail" },
+                  _react2.default.createElement(
+                    "div",
+                    { className: "subtract" },
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/subtract.svg"
+                    })
+                  ),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "content" },
+                    _react2.default.createElement("p", {
+                      dangerouslySetInnerHTML: {
+                        __html: (0, _helpersFunction.discountCode)(webshopDiscountData.mobile_detail_text, "discount-code")
+                      }
+                    })
+                  )
+                ),
+                _react2.default.createElement(_modelInfoBlock2.default, {
+                  currentModel: model,
+                  openSuccessAddToBasket: this.openSuccessAddToBasket,
+                  deviceStatus: deviceStatus,
+                  capacityName: capacityName,
+                  isRemarketingCampaign: locationQuery ? locationQuery.coupon : 0,
+                  specifications: specifications,
+                  additionalSpecifications: additionalSpecifications,
+                  upsellingItems: upsellingItems
+                })
+              ),
+              _react2.default.createElement("div", { className: "cb" })
+            )
+          ),
+          similarItems.length > 0 && _react2.default.createElement(
+            "div",
+            { className: "others-product-block" },
+            _react2.default.createElement(
+              "div",
+              { className: "container-fluid" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(_otherProducts2.default, {
+                  similarItems: similarItems,
+                  basketActions: this.props.basketActions,
+                  basketData: this.props.basketData,
+                  wishlistData: this.props.wishlistData
+                })
+              )
+            )
+          ),
+          !recommendProducts && _react2.default.createElement(
+            "div",
+            { className: "others-product-block" },
+            _react2.default.createElement(
+              "div",
+              { className: "container-fluid" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(_purchaseProducts.EmptyPurchaseProducts, null)
+              )
+            )
+          ),
+          recommendProducts && recommendProducts.length > 0 && _react2.default.createElement(
+            "div",
+            { className: "others-product-block" },
+            _react2.default.createElement(
+              "div",
+              { className: "container-fluid" },
+              _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(_purchaseProducts2.default, {
+                  recommendProducts: recommendProducts,
+                  basketActions: this.props.basketActions,
+                  basketData: this.props.basketData,
+                  wishlistData: this.props.wishlistData
+                })
+              )
+            )
+          ),
+          false && _react2.default.createElement(
+            "div",
+            { className: "similar" },
+            _react2.default.createElement(
+              "div",
+              { className: "container" },
+              _react2.default.createElement(_listSimilarItems2.default, {
+                similarItems: similarItems,
+                deviceName: deviceName
+              }),
+              _react2.default.createElement("div", { className: "cb" })
+            )
+          ),
+          successAddToBasket
+        )
+      );
+    }
+  }]);
+  return DetailModelPage;
 }(_react.Component);
 
 DetailModelPage.propTypes = {};
 DetailModelPage.defaultProps = {};
 
 function mapStateToProps(state) {
-    return {
-        devices: state.shop.devices,
-        basketData: state.basket.basketData,
-        wishlistData: state.basket.wishlistData
-    };
+  return {
+    devices: state.shop.devices,
+    basketData: state.basket.basketData,
+    wishlistData: state.basket.wishlistData
+  };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
-    };
+  return {
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
+  };
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DetailModelPage);
 
@@ -17511,7 +17782,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -17568,7 +17839,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -17742,9 +18013,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -17873,9 +18144,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -18040,7 +18311,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -18185,7 +18456,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 

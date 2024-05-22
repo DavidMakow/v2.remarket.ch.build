@@ -3677,7 +3677,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var hoistNonReactStatic = __webpack_require__(1161);
 var React = __webpack_require__(16);
-var ReactDOM = __webpack_require__(321);
+var ReactDOM = __webpack_require__(322);
 
 module.exports = function enhanceWithClickOutside(WrappedComponent) {
   var componentName = WrappedComponent.displayName || WrappedComponent.name;
@@ -3839,7 +3839,7 @@ var _reactAnimatedCss = __webpack_require__(953);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4580,7 +4580,6 @@ var AdditionalInfoBlock = function AdditionalInfoBlock(_ref) {
                 _react2.default.createElement(
                     'div',
                     { className: 'pay-services' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/swissbilling.png' }),
                     _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/heidipay.svg' })
                 )
             )
@@ -4730,6 +4729,8 @@ __webpack_require__(1104);
 
 __webpack_require__(1106);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SampleNextArrow(props) {
@@ -4738,13 +4739,9 @@ function SampleNextArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -4754,13 +4751,9 @@ function SamplePrevArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -4775,59 +4768,73 @@ var ModelInfoBlockImage = function (_Component) {
     _this.state = {
       dimensions: {},
       nav1: null,
-      nav2: null
+      nav2: null,
+      showHoverWishlist: false
     };
     _this.onImgLoad = _this.onImgLoad.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(ModelInfoBlockImage, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      $('.zoomContainer').remove();
-      $('#zoom_01').elevateZoom({ zoomType: "inner" });
-      if (this.props.quickPreview) $('#app').addClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#zoom_01").elevateZoom({ zoomType: "inner" });
+      if (this.props.quickPreview) $("#app").addClass("quickPreview");
       this.setState({
         nav1: this.slider1,
         nav2: this.slider2
       });
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      $('.zoomContainer').remove();
-      $('#app').removeClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#app").removeClass("quickPreview");
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate(nextProps) {
       if (nextProps.blockImageState.currentMainImage !== this.props.blockImageState.currentMainImage) {
-        $('.zoomContainer').remove();
-        $('#zoom_01').elevateZoom({ zoomType: "inner" });
+        $(".zoomContainer").remove();
+        $("#zoom_01").elevateZoom({ zoomType: "inner" });
       }
     }
   }, {
-    key: 'mapRealImg',
+    key: "mapRealImg",
     value: function mapRealImg(item, i) {
       var altTitle = this.props.altTitle;
 
       var className = this.props.blockImageState.currentMainImage === item.src ? "col-xs-3 modelInfoBlock-img-small active" : "col-xs-3 modelInfoBlock-img-small";
       return _react2.default.createElement(
-        'div',
+        "div",
         { className: className, key: i },
-        _react2.default.createElement('img', { loading: 'lazy', src: item.src, onClick: this.props.clickSmallImg, alt: altTitle + ' - Teil ' + (i + 2) })
+        _react2.default.createElement("img", {
+          loading: "lazy",
+          src: item.src,
+          onClick: this.props.clickSmallImg,
+          alt: altTitle + " - Teil " + (i + 2)
+        })
       );
     }
   }, {
-    key: 'onImgLoad',
+    key: "onImgLoad",
     value: function onImgLoad(_ref) {
       var img = _ref.target;
 
-      this.setState({ dimensions: { imgHeight: img.naturalHeight,
-          imgWidth: img.naturalWidth } });
+      this.setState({
+        dimensions: { imgHeight: img.naturalHeight, imgWidth: img.naturalWidth }
+      });
     }
   }, {
-    key: 'render',
+    key: "setShowHoverWishlist",
+    value: function setShowHoverWishlist(e) {
+      this.setState({
+        showHoverWishlist: e
+      });
+    }
+  }, {
+    key: "render",
     value: function render() {
       var _this2 = this;
 
@@ -4880,69 +4887,104 @@ var ModelInfoBlockImage = function (_Component) {
           imgWidth = _state$dimensions.imgWidth;
 
       var className = blockImageState.currentMainImage === image.mainImg.src ? "col-xs-3 modelInfoBlock-img-small" : "col-xs-3 modelInfoBlock-img-small";
+      var showHoverWishlistStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(20%) translateY(-60%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'col-md-6 modelInfoBlock-img ' },
+        "div",
+        { className: "col-md-6 modelInfoBlock-img " },
         _react2.default.createElement(_reactHelmet.Helmet, {
-          meta: [{ "property": "og:image:width", "content": imgWidth }, { "property": "og:image:height", "content": imgHeight }]
+          meta: [{ property: "og:image:width", content: imgWidth }, { property: "og:image:height", content: imgHeight }]
         }),
         _react2.default.createElement(
-          'div',
-          { className: 'row imageDetailOnly' },
+          "div",
+          { className: "row imageDetailOnly" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
-            (0, _extends3.default)({ asNavFor: this.state.nav2,
+            (0, _extends3.default)({
+              asNavFor: this.state.nav2,
               ref: function ref(slider) {
                 return _this2.slider1 = slider;
               }
             }, settings),
             image.realImg.length > 0 && image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
-                { className: 'item', key: 'slider-item' + i },
+                "div",
+                { className: "item", key: "slider-item" + i },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'col-md-12 modelInfoBlock-img-big' },
-                  _react2.default.createElement('img', { loading: 'lazy', onLoad: _this2.onImgLoad,
+                  "div",
+                  { className: "col-md-12 modelInfoBlock-img-big" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    onLoad: _this2.onImgLoad,
                     onClick: openLightBox,
-                    src: el.src, alt: altTitle }),
+                    src: el.src,
+                    alt: altTitle
+                  }),
                   _react2.default.createElement(
-                    'i',
-                    { className: 'modelInfoBlock-img-big-searchBtn',
+                    "i",
+                    {
+                      className: "modelInfoBlock-img-big-searchBtn",
                       onClick: openLightBox,
-                      'aria-hidden': 'true' },
+                      "aria-hidden": "true"
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                        xmlns: 'http://www.w3.org/2000/svg' },
-                      _react2.default.createElement('path', {
-                        d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                        fill: '#BED3CB' }),
-                      _react2.default.createElement('path', {
-                        d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                        fill: '#BED3CB' })
+                      "svg",
+                      {
+                        width: "30",
+                        height: "30",
+                        viewBox: "0 0 30 30",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      },
+                      _react2.default.createElement("path", {
+                        d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                        fill: "#BED3CB"
+                      }),
+                      _react2.default.createElement("path", {
+                        d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                        fill: "#BED3CB"
+                      })
                     )
                   ),
                   _react2.default.createElement(
-                    'i',
-                    { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+                    "i",
+                    {
+                      className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
                       onClick: function onClick(e) {
                         return addModelToWishlist(e);
-                      } },
+                      }
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { viewBox: '0 0 24 24' },
-                      _react2.default.createElement('use', { href: '#heart' }),
-                      _react2.default.createElement('use', { href: '#heart' })
+                      "svg",
+                      { viewBox: "0 0 24 24" },
+                      _react2.default.createElement("use", { href: "#heart" }),
+                      _react2.default.createElement("use", { href: "#heart" })
                     ),
                     _react2.default.createElement(
-                      'svg',
-                      { className: 'hide', viewBox: '0 0 24 24' },
+                      "svg",
+                      { className: "hide", viewBox: "0 0 24 24" },
                       _react2.default.createElement(
-                        'defs',
+                        "defs",
                         null,
-                        _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                        _react2.default.createElement("path", {
+                          id: "heart",
+                          d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                        })
                       )
                     )
                   )
@@ -4950,55 +4992,83 @@ var ModelInfoBlockImage = function (_Component) {
               );
             })
           ) : _react2.default.createElement(
-            'div',
-            { className: 'col-md-12 modelInfoBlock-img-big' },
-            _react2.default.createElement('img', { loading: 'lazy', onLoad: this.onImgLoad,
+            "div",
+            { className: "col-md-12 modelInfoBlock-img-big" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              onLoad: this.onImgLoad,
               onClick: openLightBox,
-              src: image.mainImg.src, alt: altTitle }),
+              src: image.mainImg.src,
+              alt: altTitle
+            }),
+            this.state.showHoverWishlist && _react2.default.createElement("div", {
+              style: showHoverWishlistStyle,
+              dangerouslySetInnerHTML: { __html: t("addToWishlist") }
+            }),
             _react2.default.createElement(
-              'i',
-              { className: 'modelInfoBlock-img-big-searchBtn',
+              "i",
+              {
+                className: "modelInfoBlock-img-big-searchBtn",
                 onClick: openLightBox,
-                'aria-hidden': 'true' },
+                "aria-hidden": "true"
+              },
               _react2.default.createElement(
-                'svg',
-                { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                  xmlns: 'http://www.w3.org/2000/svg' },
-                _react2.default.createElement('path', {
-                  d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                  fill: '#BED3CB' }),
-                _react2.default.createElement('path', {
-                  d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                  fill: '#BED3CB' })
+                "svg",
+                {
+                  width: "30",
+                  height: "30",
+                  viewBox: "0 0 30 30",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                },
+                _react2.default.createElement("path", {
+                  d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                  fill: "#BED3CB"
+                }),
+                _react2.default.createElement("path", {
+                  d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                  fill: "#BED3CB"
+                })
               )
             ),
             _react2.default.createElement(
-              'i',
-              { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+              "i",
+              {
+                className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
+                onMouseEnter: function onMouseEnter() {
+                  return _this2.setShowHoverWishlist(true);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return _this2.setShowHoverWishlist(false);
+                },
                 onClick: function onClick(e) {
                   return addModelToWishlist(e);
-                } },
+                }
+              },
               _react2.default.createElement(
-                'svg',
-                { viewBox: '0 0 24 24' },
-                _react2.default.createElement('use', { href: '#heart' }),
-                _react2.default.createElement('use', { href: '#heart' })
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
               ),
               _react2.default.createElement(
-                'svg',
-                { className: 'hide', viewBox: '0 0 24 24' },
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
                 _react2.default.createElement(
-                  'defs',
+                  "defs",
                   null,
-                  _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                  _react2.default.createElement("path", {
+                    id: "heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
                 )
               )
             )
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row smallImageWrapper' },
+          "div",
+          { className: "row smallImageWrapper" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
             (0, _extends3.default)({
@@ -5009,35 +5079,41 @@ var ModelInfoBlockImage = function (_Component) {
             }, settingsSmallImg),
             image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                  'div',
+                  "div",
                   { className: className, key: i },
-                  _react2.default.createElement('img', { loading: 'lazy', src: el.src, alt: '', onClick: _this2.props.clickSmallImg })
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: el.src,
+                    alt: "",
+                    onClick: _this2.props.clickSmallImg
+                  })
                 )
               );
             })
-          ) : ''
+          ) : ""
         ),
-        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, { src: blockImageState.currentMainImage,
+        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, {
+          src: blockImageState.currentMainImage,
           showFirstImage: false,
           showRealImageText: true,
           close: closeLightBox,
-          array: [].concat(image.mainImg, image.realImg) })
+          array: [].concat(image.mainImg, image.realImg)
+        })
       );
     }
   }]);
   return ModelInfoBlockImage;
 }(_react.Component);
 
-exports.default = ModelInfoBlockImage;
-
-
 ModelInfoBlockImage.propTypes = {};
 ModelInfoBlockImage.defaultProps = {
   showDescription: false
 };
+
+exports.default = (0, _reactI18next.withTranslation)()(ModelInfoBlockImage);
 
 /***/ }),
 
@@ -5504,7 +5580,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ModelInfoBlock = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -5580,7 +5656,7 @@ var _usefullProductItem = __webpack_require__(1278);
 
 var _usefullProductItem2 = _interopRequireDefault(_usefullProductItem);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7475,7 +7551,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -15119,7 +15195,7 @@ var _reactToggle = __webpack_require__(1279);
 
 var _reactToggle2 = _interopRequireDefault(_reactToggle);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15597,7 +15673,7 @@ var _modelInfoBlock = __webpack_require__(1253);
 
 var _modelInfoBlock2 = _interopRequireDefault(_modelInfoBlock);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16184,7 +16260,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(16), __webpack_require__(321), __webpack_require__(1687), __webpack_require__(972), __webpack_require__(1160), __webpack_require__(1857), __webpack_require__(1691), __webpack_require__(1860), __webpack_require__(1864), __webpack_require__(1865), __webpack_require__(1867), __webpack_require__(1868), __webpack_require__(1869), __webpack_require__(1870), __webpack_require__(1872), __webpack_require__(1873), __webpack_require__(1874), __webpack_require__(1692), __webpack_require__(1875), __webpack_require__(1876), __webpack_require__(1877), __webpack_require__(1878), __webpack_require__(1879), __webpack_require__(1880), __webpack_require__(1881), __webpack_require__(1882), __webpack_require__(1883), __webpack_require__(1884), __webpack_require__(1886), __webpack_require__(1888)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(16), __webpack_require__(322), __webpack_require__(1687), __webpack_require__(972), __webpack_require__(1160), __webpack_require__(1857), __webpack_require__(1691), __webpack_require__(1860), __webpack_require__(1864), __webpack_require__(1865), __webpack_require__(1867), __webpack_require__(1868), __webpack_require__(1869), __webpack_require__(1870), __webpack_require__(1872), __webpack_require__(1873), __webpack_require__(1874), __webpack_require__(1692), __webpack_require__(1875), __webpack_require__(1876), __webpack_require__(1877), __webpack_require__(1878), __webpack_require__(1879), __webpack_require__(1880), __webpack_require__(1881), __webpack_require__(1882), __webpack_require__(1883), __webpack_require__(1884), __webpack_require__(1886), __webpack_require__(1888)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -30524,7 +30600,7 @@ module.exports = __webpack_require__(16);
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = __webpack_require__(321);
+module.exports = __webpack_require__(322);
 
 /***/ }),
 /* 36 */
@@ -32104,7 +32180,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32243,7 +32319,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SearchResultsKaufen = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -32858,7 +32934,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -32915,7 +32991,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -33083,7 +33159,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -33278,9 +33354,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -33409,9 +33485,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -33576,7 +33652,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -33721,7 +33797,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -35289,7 +35365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -41848,11 +41924,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -42011,6 +42087,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -42159,7 +42237,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42181,7 +42260,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42203,7 +42283,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42225,7 +42306,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42247,7 +42329,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42269,7 +42352,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -42325,7 +42409,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 
@@ -42344,7 +42428,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -42390,7 +42474,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -42998,11 +43082,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43139,6 +43225,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -43151,7 +43239,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -43307,7 +43395,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 
@@ -43344,11 +43432,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

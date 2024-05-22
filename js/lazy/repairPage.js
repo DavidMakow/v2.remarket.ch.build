@@ -927,7 +927,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3677,6 +3677,10 @@ var _axios = __webpack_require__(149);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactI18next = __webpack_require__(315);
+
+var _i18next = __webpack_require__(209);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Banner = function (_Component) {
@@ -3688,8 +3692,8 @@ var Banner = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Banner.__proto__ || Object.getPrototypeOf(Banner)).call(this, props));
 
     _this.state = {
-      inputField: '',
-      errorInputData: '',
+      inputField: "",
+      errorInputData: "",
       showInput: true,
       showOkMessage: false
     };
@@ -3703,10 +3707,10 @@ var Banner = function (_Component) {
   }
 
   (0, _createClass3.default)(Banner, [{
-    key: '_validateInput',
+    key: "_validateInput",
     value: function _validateInput(value) {
       var error = "",
-          domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1],
+          domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1],
           phonenoCh = /^\(?([0-9]{4})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno2Ch = /^\+([0-9]{2})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno3Ch = /^\(?([0-9]{3})\)?[ ]?([0-9]{3})\)?[ ]?([0-9]{2})[ ]?([0-9]{2})$/,
@@ -3715,16 +3719,16 @@ var Banner = function (_Component) {
 
       if (value === "") {
         error = "Sie haben keine Telefonnummer bzw. E-Mail eingegeben.";
-      } else if (isNaN(+value.replace(/ /g, ''))) {
+      } else if (isNaN(+value.replace(/ /g, ""))) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
           return true;
         } else {
           error = "Telefonnummer bzw. E-Mail enthält unzulässige Zeichen";
           document.forms.coupon.email.value = "";
         }
-      } else if (domain === 'ch' && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === 'de' && !phonenoDe.test(value) && !phoneno2De.test(value)) {
+      } else if (domain === "ch" && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === "de" && !phonenoDe.test(value) && !phoneno2De.test(value)) {
         document.forms.coupon.email.value = "";
-        error = domain === 'ch' ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
+        error = domain === "ch" ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
       }
       if (error) {
         this.setState({ errorInputData: error });
@@ -3732,176 +3736,188 @@ var Banner = function (_Component) {
       } else return true;
     }
   }, {
-    key: 'handleNoEmail',
+    key: "handleNoEmail",
     value: function handleNoEmail(e) {
       e.preventDefault();
       this.setState({ showOkMessage: false, showInput: true });
     }
   }, {
-    key: 'changeInput',
+    key: "changeInput",
     value: function changeInput() {
-      this.setState({ errorInputData: '' });
+      this.setState({ errorInputData: "" });
     }
   }, {
-    key: '_gtag_report_conversion',
+    key: "_gtag_report_conversion",
     value: function _gtag_report_conversion(url) {
       var callback = function callback() {
-        if (typeof url != 'undefined') {
+        if (typeof url != "undefined") {
           window.location = url;
         }
       };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-827036726/3tyqCJ_ayXsQtqiuigM',
-        'event_callback': callback
+      gtag("event", "conversion", {
+        send_to: "AW-827036726/3tyqCJ_ayXsQtqiuigM",
+        event_callback: callback
       });
       return false;
     }
   }, {
-    key: 'send',
+    key: "send",
     value: function send(e) {
       var _this2 = this;
 
       e.preventDefault();
-      var domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
+      var domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1];
 
       var inputValue = document.forms.coupon.email.value,
           inputAntiSpam = document.forms.coupon.email2.value;
-      document.forms.coupon.email.value = '';
+      document.forms.coupon.email.value = "";
       if (this._validateInput(inputValue) && !inputAntiSpam) {
-        document.getElementById('spinner-box-load').style.display = 'block';
-        _axios2.default.get('/api/generateCoupons?phoneOrEmail=' + inputValue.replace(/\+/g, '%2B')).then(function (result) {
-          document.getElementById('spinner-box-load').style.display = 'none';
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.get("/api/generateCoupons?phoneOrEmail=" + inputValue.replace(/\+/g, "%2B")).then(function (result) {
+          document.getElementById("spinner-box-load").style.display = "none";
           if (window.isGoogleConnection) {
             _this2._gtag_report_conversion();
           }
           _this2.setState({ showInput: false, showOkMessage: true });
           if (window.isFBConnection) {
-            if (domain === 'ch') {
-              fbq('track', 'Lead', { value: 1 }); // facebook pixel
+            if (domain === "ch") {
+              fbq("track", "Lead", { value: 1 }); // facebook pixel
             }
           }
         });
-      } else document.forms.coupon.email.value = '';
+      } else document.forms.coupon.email.value = "";
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split('-').reverse().join('.');
+      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split("-").reverse().join(".");
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
         _react2.default.createElement(
-          'div',
-          { className: 'row banner' },
+          "div",
+          { className: "row banner" },
           _react2.default.createElement(
-            'div',
-            { className: 'guy' },
-            _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/Guy.svg', alt: '' })
+            "div",
+            { className: "guy" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/design/Guy.svg", alt: "" })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'price' },
+            "div",
+            { className: "price" },
             _react2.default.createElement(
-              'span',
-              { className: 'price-amount' },
-              '20 CHF'
+              "span",
+              { className: "price-amount" },
+              t("newsLetterBox.circleBannerTop")
             ),
             _react2.default.createElement(
-              'span',
-              { className: 'price-title' },
-              'Gutschein'
+              "span",
+              { className: "price-title" },
+              t("newsLetterBox.circleBannerBottom")
             )
           ),
-          _react2.default.createElement('div', { className: 'visible-md visible-lg visible-xl col-sm-2 col-md-2' }),
+          _react2.default.createElement("div", { className: "visible-md visible-lg visible-xl col-sm-2 col-md-2" }),
           _react2.default.createElement(
-            'div',
-            { className: 'col-sm-6 col-md-5 text-left' },
+            "div",
+            { className: "col-sm-6 col-md-5 text-left" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
+              _react2.default.createElement("h3", {
+                dangerouslySetInnerHTML: {
+                  __html: t("newsLetterBox.mainTitle")
+                }
+              }),
               _react2.default.createElement(
-                'h3',
+                "p",
                 null,
-                'Wir feiern unser 10 j\xE4hriges ',
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  'Jubil\xE4um'
-                ),
-                ' - Feiern Sie mit!'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'G\xFCltig auf alle Ank\xE4ufe ab 50.- ',
+                t("newsLetterBox.descriptionPart1"),
                 window.currencyValue,
-                ' bzw. Ger\xE4te ab 99.- ',
+                " ",
+                t("newsLetterBox.descriptionPart2"),
                 window.currencyValue,
-                ' mit diesem Gutschein, g\xFCltig bis ',
+                " ",
+                t("newsLetterBox.descriptionPart3"),
+                " ",
                 couponDate,
-                '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+                t("newsLetterBox.descriptionPart4")
               )
             )
           ),
           this.state.showInput && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-3 col-md-4 text-right' },
+            "div",
+            { className: "col-sm-3 col-md-4 text-right" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
               _react2.default.createElement(
-                'span',
-                { className: 'error' },
+                "span",
+                { className: "error" },
                 this.state.errorInputData
               ),
               _react2.default.createElement(
-                'form',
-                { className: 'form', name: 'coupon', onSubmit: this.send },
+                "form",
+                { className: "form", name: "coupon", onSubmit: this.send },
                 _react2.default.createElement(
-                  'label',
-                  { style: { display: 'inline', float: 'none', lineHeight: 'inherit' } },
-                  _react2.default.createElement('input', { type: 'text',
-                    name: 'email',
-                    id: 'couponEmail',
+                  "label",
+                  {
+                    style: {
+                      display: "inline",
+                      float: "none",
+                      lineHeight: "inherit"
+                    }
+                  },
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email",
+                    id: "couponEmail",
                     onChange: this.changeInput,
-                    placeholder: 'E-Mail oder Mobilnummer' }),
-                  _react2.default.createElement('button', { 'aria-label': 'Submit', type: 'submit' }),
-                  _react2.default.createElement('input', { type: 'text', name: 'email2', style: { display: 'none' } }),
+                    placeholder: t("newsLetterBox.input")
+                  }),
+                  _react2.default.createElement("button", { "aria-label": "Submit", type: "submit" }),
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email2",
+                    style: { display: "none" }
+                  }),
                   _react2.default.createElement(
-                    'p',
-                    { className: 'info-text' },
-                    'Wir geben Ihre Daten niemals an Dritte weiter.'
+                    "p",
+                    { className: "info-text" },
+                    t("newsLetterBox.subtitle")
                   )
                 )
               )
             )
           ),
           this.state.showOkMessage && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-4 col-md-5 text-right', style: { margin: '0 20px' } },
+            "div",
+            {
+              className: "col-sm-4 col-md-5 text-right",
+              style: { margin: "0 20px" }
+            },
             _react2.default.createElement(
-              'p',
+              "p",
               null,
-              'Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0',
+              "Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0",
               _react2.default.createElement(
-                'a',
-                { href: '#',
-                  className: 'noEmail',
-                  onClick: this.handleNoEmail },
-                'Gutschein nicht erhalten'
+                "a",
+                { href: "#", className: "noEmail", onClick: this.handleNoEmail },
+                "Gutschein nicht erhalten"
               ),
-              '?'
+              "?"
             )
           )
         ),
         _react2.default.createElement(
-          'p',
-          { className: 'couponDescr-mobile' },
-          'Auf alle Ank\xE4ufe ab 99.- ',
+          "p",
+          { className: "couponDescr-mobile" },
+          "Auf alle Ank\xE4ufe ab 99.- ",
           window.currencyValue,
-          ' mit diesem Gutschein, g\xFCltig bis ',
+          " mit diesem Gutschein, g\xFCltig bis ",
           couponDate,
-          '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+          ". Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar."
         )
       );
     }
@@ -3912,7 +3928,7 @@ var Banner = function (_Component) {
 Banner.propTypes = {};
 Banner.defaultProps = {};
 
-exports.default = Banner;
+exports.default = (0, _reactI18next.withTranslation)()(Banner);
 
 /***/ }),
 
@@ -3969,7 +3985,7 @@ var _apiCookie = __webpack_require__(941);
 
 var _reactRedux = __webpack_require__(313);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4355,7 +4371,7 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 !function (t, e) {
-	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(321)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(321)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(322)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(322)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : (0, _typeof3.default)(exports)) ? exports.Slider = e(require("react"), require("react-dom")) : t.Slider = e(t.React, t.ReactDOM);
@@ -5219,7 +5235,7 @@ var _reactCountTo = __webpack_require__(1502);
 
 var _reactCountTo2 = _interopRequireDefault(_reactCountTo);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6279,7 +6295,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -6336,7 +6352,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -6510,9 +6526,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -6641,9 +6657,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -6808,7 +6824,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -6953,7 +6969,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 

@@ -304,6 +304,8 @@ var placesActions = _interopRequireWildcard(_places);
 
 var _seoText = __webpack_require__(1079);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -312,115 +314,126 @@ var FOOTER_SEO_CH = _react2.default.createElement(
   _react2.default.Fragment,
   null,
   _react2.default.createElement(
-    'div',
+    "div",
     null,
     _react2.default.createElement(
-      'h1',
+      "h1",
       null,
-      'iPhone, Samsung Galaxy, iPad, MacBook gebraucht kaufen und verkaufen per Knopfdruck.'
+      "iPhone, Samsung Galaxy, iPad, MacBook gebraucht kaufen und verkaufen per Knopfdruck."
     ),
     _react2.default.createElement(
-      'p',
+      "p",
       null,
-      'Viele elektronische Ger\xE4te wie ',
+      "Viele elektronische Ger\xE4te wie",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Handys, Smartphones, Tablets oder Computer'
+        "Handys, Smartphones, Tablets oder Computer"
       ),
-      ' werden bereits nach kurzer Zeit der Nutzung durch neue Ger\xE4te ersetzt. Nicht selten landen die alten Ger\xE4te beim lokalen Entsorgungsbetrieb oder einfach in der Schublade oder im Schrank, sofern es sich um kleine Ger\xE4te wie beispielsweise ',
+      " werden bereits nach kurzer Zeit der Nutzung durch neue Ger\xE4te ersetzt. Nicht selten landen die alten Ger\xE4te beim lokalen Entsorgungsbetrieb oder einfach in der Schublade oder im Schrank, sofern es sich um kleine Ger\xE4te wie beispielsweise ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Smartphones'
+        "Smartphones"
       ),
-      ' handelt. Dabei ist auch gebrauchte Elektronik noch sehr gefragt. Ger\xE4te wie das ',
+      " handelt. Dabei ist auch gebrauchte Elektronik noch sehr gefragt. Ger\xE4te wie das",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'iPhone, iPad, ein Samsung Galaxy sowie tragbare Computer und Desktopcomputer'
+        "iPhone, iPad, ein Samsung Galaxy sowie tragbare Computer und Desktopcomputer"
       ),
-      ' k\xF6nnen durchaus noch einiges an Geld bringen, wenn sie \xFCber Shops wie unserem angeboten und verkauft werden. Viele Menschen k\xF6nnen sich neue Ger\xE4te namhafter Hersteller nicht leisten und greifen deshalb auf ',
+      " ",
+      "k\xF6nnen durchaus noch einiges an Geld bringen, wenn sie \xFCber Shops wie unserem angeboten und verkauft werden. Viele Menschen k\xF6nnen sich neue Ger\xE4te namhafter Hersteller nicht leisten und greifen deshalb auf",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'gebrauchte Ger\xE4te'
+        "gebrauchte Ger\xE4te"
       ),
-      ' zur\xFCck. Anstatt nun eventuell defekte Ger\xE4te von Privatleuten ohne Garantie oder Sicherheit zu kaufen, sollten Sie gebrauchte und gepr\xFCfte ',
+      " zur\xFCck. Anstatt nun eventuell defekte Ger\xE4te von Privatleuten ohne Garantie oder Sicherheit zu kaufen, sollten Sie gebrauchte und gepr\xFCfte",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Computer, Smartphones oder Tablets gebraucht und gepr\xFCft kaufen'
+        "Computer, Smartphones oder Tablets gebraucht und gepr\xFCft kaufen"
       ),
-      ', die in zahlreichen Ausf\xFChrungen auf unserer Homepage erh\xE4ltlich sind. Die Ger\xE4te werden zu deutlich g\xFCnstigeren Preisen als den ehemaligen Neupreisen angeboten, so dass sich noch jede Menge Geld sparen l\xE4sst.'
+      ", die in zahlreichen Ausf\xFChrungen auf unserer Homepage erh\xE4ltlich sind. Die Ger\xE4te werden zu deutlich g\xFCnstigeren Preisen als den ehemaligen Neupreisen angeboten, so dass sich noch jede Menge Geld sparen l\xE4sst."
     ),
     _react2.default.createElement(
-      'h2',
+      "h2",
       null,
-      'Verkaufen Sie Ihre Elektronik, wenn Sie neue Ger\xE4te gekauft haben'
+      "Verkaufen Sie Ihre Elektronik, wenn Sie neue Ger\xE4te gekauft haben"
     ),
     _react2.default.createElement(
-      'p',
+      "p",
       null,
-      'Anstatt Ihr nicht mehr ben\xF6tigtes Smartphone, Tablet oder ein Notebook im Schrank einstauben zu lassen, bieten Sie es doch einfach \xFCber unseren ',
+      "Anstatt Ihr nicht mehr ben\xF6tigtes Smartphone, Tablet oder ein Notebook im Schrank einstauben zu lassen, bieten Sie es doch einfach \xFCber unseren",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Onlineshop'
+        "Onlineshop"
       ),
-      ' zum Verkauf an. Es funktioniert ganz einfach. Sie w\xE4hlen einfach den entsprechenden Ger\xE4tetyp wie beispielsweise Ihr ',
+      " zum Verkauf an. Es funktioniert ganz einfach. Sie w\xE4hlen einfach den entsprechenden Ger\xE4tetyp wie beispielsweise Ihr",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'iPhone, MacBook oder den Apple Mac mini'
+        "iPhone, MacBook oder den Apple Mac mini"
       ),
-      ' aus und machen weitere Angaben zu den Ausstattungsmerkmalen und den Zustand des Ger\xE4tes. Innerhalb weniger Minuten und mit nur ',
+      " aus und machen weitere Angaben zu den Ausstattungsmerkmalen und den Zustand des Ger\xE4tes. Innerhalb weniger Minuten und mit nur",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'wenigen Klicks'
+        "wenigen Klicks"
       ),
-      ' ist der aktuelle Preis f\xFCr das von Ihnen angebotene Ger\xE4t ermittelt. Sie wissen also sofort, was Sie bekommen. Einfacher geht es nicht. Der Versand ist auch unkompliziert, da Sie die Kosten daf\xFCr ersetzt bekommen. Wurde das Ger\xE4t durch uns \xFCberpr\xFCft, erhalten Sie Ihr ',
+      " ist der aktuelle Preis f\xFCr das von Ihnen angebotene Ger\xE4t ermittelt. Sie wissen also sofort, was Sie bekommen. Einfacher geht es nicht. Der Versand ist auch unkompliziert, da Sie die Kosten daf\xFCr ersetzt bekommen. Wurde das Ger\xE4t durch uns \xFCberpr\xFCft, erhalten Sie Ihr ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Geld innerhalb k\xFCrzester Zeit'
+        "Geld innerhalb k\xFCrzester Zeit"
       ),
-      ' ohne weitere Abz\xFCge.'
+      " ohne weitere Abz\xFCge."
     ),
     _react2.default.createElement(
-      'h2',
+      "h2",
       null,
-      'M\xF6chten Sie ein gebrauchtes Smartphone oder Notebook kaufen?'
+      "M\xF6chten Sie ein gebrauchtes Smartphone oder Notebook kaufen?"
     ),
     _react2.default.createElement(
-      'p',
+      "p",
       null,
-      'Wenn Sie auf der Suche nach einem preisg\xFCnstigen ',
+      "Wenn Sie auf der Suche nach einem preisg\xFCnstigen",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'iPhone, iPad, Samsung Galaxy'
+        "iPhone, iPad, Samsung Galaxy"
       ),
-      ' oder einem anderen Mac-Computer sind, sollten Sie sich in unserem Onlineangebot umschauen. Sie bekommen zahlreiche Ger\xE4te namhafter Hersteller ',
+      " oder einem anderen Mac-Computer sind, sollten Sie sich in unserem Onlineangebot umschauen. Sie bekommen zahlreiche Ger\xE4te namhafter Hersteller",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'g\xFCnstig gebraucht und gepr\xFCft'
+        "g\xFCnstig gebraucht und gepr\xFCft"
       ),
-      '. Falls doch etwas nicht in Ordnung sein sollte, nutzen Sie einfach die einj\xE4hrige ',
+      ". Falls doch etwas nicht in Ordnung sein sollte, nutzen Sie einfach die einj\xE4hrige",
+      " ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'Garantie'
+        "Garantie"
       ),
-      ', die wir auf die Ger\xE4te aus unserem Angebot geben. Die Ger\xE4te werden ',
+      ", die wir auf die Ger\xE4te aus unserem Angebot geben. Die Ger\xE4te werden ",
       _react2.default.createElement(
-        'strong',
+        "strong",
         null,
-        'versandkostenfrei'
+        "versandkostenfrei"
       ),
-      ' an Sie geliefert.'
+      " an Sie geliefert."
     )
   )
 );
@@ -434,8 +447,8 @@ var Footer = exports.Footer = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 
     _this.globalClick = function (e) {
-      if (e.target.tagName.toLowerCase() === 'a') {
-        _this.props.shopActions.definedCounerForSearchInput(' ');
+      if (e.target.tagName.toLowerCase() === "a") {
+        _this.props.shopActions.definedCounerForSearchInput(" ");
       }
     };
 
@@ -443,10 +456,12 @@ var Footer = exports.Footer = function (_Component) {
   }
 
   (0, _createClass3.default)(Footer, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var data = JSON.parse(window.localStorage.getItem("locationData"));
       var active = {};
+      var t = this.props.t;
+
       if (data) {
         active.place = data.data.find(function (item) {
           return item.active === true;
@@ -456,197 +471,217 @@ var Footer = exports.Footer = function (_Component) {
         }
       }
       var currentPlace = this.props.places;
-      var domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
+      var domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1];
       return _react2.default.createElement(
-        'footer',
-        { id: 'footer', onClick: this.globalClick },
+        "footer",
+        { id: "footer", onClick: this.globalClick },
         _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
+          "div",
+          { className: "container-fluid" },
           _react2.default.createElement(
-            'div',
-            { className: 'row' },
+            "div",
+            { className: "row" },
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-12 col-sm-5 col-lg-3' },
+              "div",
+              { className: "col-xs-12 col-sm-5 col-lg-3" },
               _react2.default.createElement(
-                'div',
-                { className: 'address' },
-                _react2.default.createElement('img', { loading: 'lazy', src: domain === 'ch' ? "/images/design/logo_all_pages.svg" : "/images/design/logo_all_pages.svg", alt: '', width: '160' })
+                "div",
+                { className: "address" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: domain === "ch" ? "/images/design/logo_all_pages.svg" : "/images/design/logo_all_pages.svg",
+                  alt: "",
+                  width: "160"
+                })
               )
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-6 col-sm-4 col-lg-2' },
+              "div",
+              { className: "col-xs-6 col-sm-4 col-lg-2" },
               _react2.default.createElement(
-                'ul',
+                "ul",
                 null,
                 _react2.default.createElement(
-                  'li',
-                  { className: 'head' },
-                  'Schnell\xFCbersicht'
+                  "li",
+                  { className: "head" },
+                  t("footerSection.mainTitle1")
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/verkaufen' },
-                    'Verkaufen'
+                    { to: "/verkaufen" },
+                    t("footerSection.linkTitle1.1")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/kaufen' },
-                    'Kaufen'
+                    { to: "/kaufen" },
+                    t("footerSection.linkTitle1.2")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/firmenkunden' },
-                    'Firmenkunden'
+                    { to: "/firmenkunden" },
+                    t("footerSection.linkTitle1.3")
                   )
                 )
               )
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-6 col-sm-3 col-lg-2 text-left' },
+              "div",
+              { className: "col-xs-6 col-sm-3 col-lg-2 text-left" },
               _react2.default.createElement(
-                'ul',
+                "ul",
                 null,
                 _react2.default.createElement(
-                  'li',
-                  { className: 'head' },
-                  'Weiteres'
+                  "li",
+                  { className: "head" },
+                  t("footerSection.mainTitle3")
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/kontakt' },
-                    'Kontakt'
+                    { to: "/kontakt" },
+                    t("footerSection.linkTitle3.1")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/ueber-uns/agb/' },
-                    'AGB'
+                    { to: "/ueber-uns/agb/" },
+                    t("footerSection.linkTitle3.2")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/ueber-uns/widerrufsbelehrung/' },
-                    'Widerrufsbelehrung'
+                    { to: "/ueber-uns/widerrufsbelehrung/" },
+                    t("footerSection.linkTitle3.3")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/ueber-uns/datenschutzerklaerung/' },
-                    'Datenschutzerkl\xE4rung'
+                    { to: "/ueber-uns/datenschutzerklaerung/" },
+                    t("footerSection.linkTitle3.4")
                   )
                 ),
                 _react2.default.createElement(
-                  'li',
+                  "li",
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/ueber-uns/impressum/' },
-                    'Impressum'
+                    { to: "/ueber-uns/impressum/" },
+                    t("footerSection.linkTitle3.5")
                   )
                 )
               )
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-6 col-sm-4 col-lg-3' },
+              "div",
+              { className: "col-xs-6 col-sm-4 col-lg-3" },
               _react2.default.createElement(
-                'div',
-                { className: 'numPhone' },
-                _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/guy-banner.svg', alt: '' }),
+                "div",
+                { className: "numPhone" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/design/guy-banner.svg",
+                  alt: ""
+                }),
                 _react2.default.createElement(
-                  'span',
+                  "span",
                   null,
                   _react2.default.createElement(
-                    'a',
-                    { href: 'tel:+41615112244' },
-                    '061 511 22 44'
+                    "a",
+                    { href: "tel:+41615112244" },
+                    "061 511 22 44"
                   )
                 )
               ),
               currentPlace ? _react2.default.createElement(
-                'p',
-                { className: 'location' },
-                _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/location.svg' }),
+                "p",
+                { className: "location" },
+                _react2.default.createElement("img", { loading: "lazy", src: "/images/design/location.svg" }),
                 currentPlace.descriptionBranch,
-                _react2.default.createElement('br', null),
+                _react2.default.createElement("br", null),
                 currentPlace.address,
-                _react2.default.createElement('br', null),
-                currentPlace.zip + ' ' + currentPlace.city
+                _react2.default.createElement("br", null),
+                currentPlace.zip + " " + currentPlace.city
               ) : active.place ? _react2.default.createElement(
-                'p',
-                { className: 'location' },
-                _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/location.svg' }),
+                "p",
+                { className: "location" },
+                _react2.default.createElement("img", { loading: "lazy", src: "/images/design/location.svg" }),
                 active.place.descriptionBranch,
-                _react2.default.createElement('br', null),
+                _react2.default.createElement("br", null),
                 active.place.address,
-                _react2.default.createElement('br', null),
-                active.place.zip + ' ' + active.place.city
-              ) : ''
+                _react2.default.createElement("br", null),
+                active.place.zip + " " + active.place.city
+              ) : ""
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-6 col-sm-4 col-lg-2 proven-text' },
+              "div",
+              { className: "col-xs-6 col-sm-4 col-lg-2 proven-text" },
               _react2.default.createElement(
-                'div',
-                { className: 'right-part' },
-                domain === 'ch' && _react2.default.createElement(
-                  'div',
-                  { className: 'provenexpert' },
+                "div",
+                { className: "right-part" },
+                domain === "ch" && _react2.default.createElement(
+                  "div",
+                  { className: "provenexpert" },
                   _react2.default.createElement(
-                    'a',
-                    { href: 'https://www.provenexpert.com/de-de/ireparatur-ch-remarket-ch/?utm_source=Widget&utm_medium=Widget&utm_campaign=Widget',
-                      title: 'Erfahrungen & Bewertungen zu remarket.ch anzeigen', rel: 'noopener', target: '_blank',
-                      style: { textDecoration: 'none' } },
-                    _react2.default.createElement(_reactSimpleImg.SimpleImg, { src: 'https://images.provenexpert.com/cb/31/0208e362264a28e99cc49dcc8520/widget_portrait_200_de_1.png',
-                      srcSet: ''
+                    "a",
+                    {
+                      href: "https://www.provenexpert.com/de-de/ireparatur-ch-remarket-ch/?utm_source=Widget&utm_medium=Widget&utm_campaign=Widget",
+                      title: "Erfahrungen & Bewertungen zu remarket.ch anzeigen",
+                      rel: "noopener",
+                      target: "_blank",
+                      style: { textDecoration: "none" }
+                    },
+                    _react2.default.createElement(_reactSimpleImg.SimpleImg, {
+                      src: "https://images.provenexpert.com/cb/31/0208e362264a28e99cc49dcc8520/widget_portrait_200_de_1.png",
+                      srcSet: ""
                       // wrapperClassName="clearSimpleImgWrapper"
-                      , alt: 'Erfahrungen & Bewertungen zu remarket.ch',
-                      width: '200',
-                      height: '240' })
+                      , alt: "Erfahrungen & Bewertungen zu remarket.ch",
+                      width: "200",
+                      height: "240"
+                    })
                   )
                 ),
-                domain === 'de' && _react2.default.createElement(
-                  'div',
-                  { className: 'provenexpert' },
+                domain === "de" && _react2.default.createElement(
+                  "div",
+                  { className: "provenexpert" },
                   _react2.default.createElement(
-                    'a',
-                    { href: 'https://www.provenexpert.com/remarket-de-recommerce-gmbh/?utm_source=Widget&utm_medium=Widget&utm_campaign=Widget',
-                      title: 'Erfahrungen & Bewertungen zu remarket.de anzeigen',
-                      rel: 'noopener',
-                      target: '_blank', style: { textDecoration: 'none' } },
-                    _react2.default.createElement(_reactSimpleImg.SimpleImg, { src: 'https://images.provenexpert.com/e1/69/ef4bafa499aa5b40ff5dbff9b780/widget_portrait_200_de_1.png',
-                      srcSet: '',
-                      alt: 'Erfahrungen & Bewertungen zu remarket.de Recommerce GmbH',
-                      width: '200',
-                      height: '240',
-                      style: { border: 0 } })
+                    "a",
+                    {
+                      href: "https://www.provenexpert.com/remarket-de-recommerce-gmbh/?utm_source=Widget&utm_medium=Widget&utm_campaign=Widget",
+                      title: "Erfahrungen & Bewertungen zu remarket.de anzeigen",
+                      rel: "noopener",
+                      target: "_blank",
+                      style: { textDecoration: "none" }
+                    },
+                    _react2.default.createElement(_reactSimpleImg.SimpleImg, {
+                      src: "https://images.provenexpert.com/e1/69/ef4bafa499aa5b40ff5dbff9b780/widget_portrait_200_de_1.png",
+                      srcSet: "",
+                      alt: "Erfahrungen & Bewertungen zu remarket.de Recommerce GmbH",
+                      width: "200",
+                      height: "240",
+                      style: { border: 0 }
+                    })
                   )
                 )
               )
@@ -654,149 +689,211 @@ var Footer = exports.Footer = function (_Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'footerBottom' },
+          "div",
+          { className: "footerBottom" },
           _react2.default.createElement(
-            'div',
-            { className: 'container-fluid' },
+            "div",
+            { className: "container-fluid" },
             !window.isMobile && _react2.default.createElement(
-              'div',
-              { className: 'row' },
+              "div",
+              { className: "row" },
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-6 col-sm-push-6 text-right' },
+                "div",
+                { className: "col-sm-6 col-sm-push-6 text-right" },
                 _react2.default.createElement(
-                  'ul',
+                  "ul",
                   null,
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/visa.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/visa.svg",
+                      alt: ""
+                    })
                   ),
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/mastercard.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/mastercard.svg",
+                      alt: ""
+                    })
                   ),
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/paypal.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/paypal.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'de' && _react2.default.createElement(
-                    'li',
+                  domain !== "de" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/postfinance.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/postfinance.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'de' && _react2.default.createElement(
-                    'li',
+                  domain !== "de" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/twint.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/twint.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'ch' && _react2.default.createElement(
-                    'li',
+                  domain !== "ch" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/stripe.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/stripe.svg",
+                      alt: ""
+                    })
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-6 col-sm-pull-6 text-left' },
+                "div",
+                { className: "col-sm-6 col-sm-pull-6 text-left" },
                 _react2.default.createElement(
-                  'p',
-                  { className: 'initial-text' },
-                  'Alle Rechte vorbehalten. Copyright by ',
+                  "p",
+                  { className: "initial-text" },
+                  "Alle Rechte vorbehalten. Copyright by",
+                  " ",
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/' },
-                    domain === 'ch' ? "remarket.ch" : "remarket.de"
+                    { to: "/" },
+                    domain === "ch" ? "remarket.ch" : "remarket.de"
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-12' },
+                "div",
+                { className: "col-sm-12" },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'seo-wrap' },
+                  "div",
+                  { className: "seo-wrap" },
                   _react2.default.createElement(
-                    'div',
-                    { className: 'seo' },
+                    "div",
+                    { className: "seo" },
                     FOOTER_SEO_CH
                   ),
-                  _react2.default.createElement('button', { className: 'read-more-button', onClick: _seoText.seoReadMoreClick })
+                  _react2.default.createElement("button", {
+                    className: "read-more-button",
+                    onClick: _seoText.seoReadMoreClick
+                  })
                 )
               )
             ),
             window.isMobile && _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement('hr', { color: '#D5DDE0' }),
+              "div",
+              { className: "row" },
+              _react2.default.createElement("hr", { color: "#D5DDE0" }),
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-6 col-sm-pull-6 d-flex justify-content-center', style: { justifyContent: 'center', display: 'flex' } },
+                "div",
+                {
+                  className: "col-sm-6 col-sm-pull-6 d-flex justify-content-center",
+                  style: { justifyContent: "center", display: "flex" }
+                },
                 _react2.default.createElement(
-                  'p',
-                  { className: 'initial-text' },
-                  'Alle Rechte vorbehalten. Copyright by ',
+                  "p",
+                  { className: "initial-text" },
+                  "Alle Rechte vorbehalten. Copyright by",
+                  " ",
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/' },
-                    domain === 'ch' ? "remarket.ch" : "remarket.de"
+                    { to: "/" },
+                    domain === "ch" ? "remarket.ch" : "remarket.de"
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-6 col-sm-push-6', style: { justifyContent: 'center', display: 'flex' } },
+                "div",
+                {
+                  className: "col-sm-6 col-sm-push-6",
+                  style: { justifyContent: "center", display: "flex" }
+                },
                 _react2.default.createElement(
-                  'ul',
+                  "ul",
                   null,
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/visa.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/visa.svg",
+                      alt: ""
+                    })
                   ),
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/mastercard.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/mastercard.svg",
+                      alt: ""
+                    })
                   ),
                   _react2.default.createElement(
-                    'li',
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/paypal.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/paypal.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'de' && _react2.default.createElement(
-                    'li',
+                  domain !== "de" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/postfinance.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/postfinance.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'de' && _react2.default.createElement(
-                    'li',
+                  domain !== "de" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/twint.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/twint.svg",
+                      alt: ""
+                    })
                   ),
-                  domain !== 'ch' && _react2.default.createElement(
-                    'li',
+                  domain !== "ch" && _react2.default.createElement(
+                    "li",
                     null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/stripe.svg', alt: '' })
+                    _react2.default.createElement("img", {
+                      loading: "lazy",
+                      src: "/images/design/stripe.svg",
+                      alt: ""
+                    })
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-sm-12' },
+                "div",
+                { className: "col-sm-12" },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'seo-wrap' },
+                  "div",
+                  { className: "seo-wrap" },
                   _react2.default.createElement(
-                    'div',
-                    { className: 'seo' },
+                    "div",
+                    { className: "seo" },
                     FOOTER_SEO_CH
                   ),
-                  _react2.default.createElement('button', { className: 'read-more-button', onClick: _seoText.seoReadMoreClick })
+                  _react2.default.createElement("button", {
+                    className: "read-more-button",
+                    onClick: _seoText.seoReadMoreClick
+                  })
                 )
               )
             )
@@ -821,7 +918,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Footer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(Footer));
 
 /***/ }),
 
@@ -1541,7 +1638,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -4291,6 +4388,10 @@ var _axios = __webpack_require__(149);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactI18next = __webpack_require__(315);
+
+var _i18next = __webpack_require__(209);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Banner = function (_Component) {
@@ -4302,8 +4403,8 @@ var Banner = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Banner.__proto__ || Object.getPrototypeOf(Banner)).call(this, props));
 
     _this.state = {
-      inputField: '',
-      errorInputData: '',
+      inputField: "",
+      errorInputData: "",
       showInput: true,
       showOkMessage: false
     };
@@ -4317,10 +4418,10 @@ var Banner = function (_Component) {
   }
 
   (0, _createClass3.default)(Banner, [{
-    key: '_validateInput',
+    key: "_validateInput",
     value: function _validateInput(value) {
       var error = "",
-          domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1],
+          domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1],
           phonenoCh = /^\(?([0-9]{4})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno2Ch = /^\+([0-9]{2})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno3Ch = /^\(?([0-9]{3})\)?[ ]?([0-9]{3})\)?[ ]?([0-9]{2})[ ]?([0-9]{2})$/,
@@ -4329,16 +4430,16 @@ var Banner = function (_Component) {
 
       if (value === "") {
         error = "Sie haben keine Telefonnummer bzw. E-Mail eingegeben.";
-      } else if (isNaN(+value.replace(/ /g, ''))) {
+      } else if (isNaN(+value.replace(/ /g, ""))) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
           return true;
         } else {
           error = "Telefonnummer bzw. E-Mail enthält unzulässige Zeichen";
           document.forms.coupon.email.value = "";
         }
-      } else if (domain === 'ch' && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === 'de' && !phonenoDe.test(value) && !phoneno2De.test(value)) {
+      } else if (domain === "ch" && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === "de" && !phonenoDe.test(value) && !phoneno2De.test(value)) {
         document.forms.coupon.email.value = "";
-        error = domain === 'ch' ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
+        error = domain === "ch" ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
       }
       if (error) {
         this.setState({ errorInputData: error });
@@ -4346,176 +4447,188 @@ var Banner = function (_Component) {
       } else return true;
     }
   }, {
-    key: 'handleNoEmail',
+    key: "handleNoEmail",
     value: function handleNoEmail(e) {
       e.preventDefault();
       this.setState({ showOkMessage: false, showInput: true });
     }
   }, {
-    key: 'changeInput',
+    key: "changeInput",
     value: function changeInput() {
-      this.setState({ errorInputData: '' });
+      this.setState({ errorInputData: "" });
     }
   }, {
-    key: '_gtag_report_conversion',
+    key: "_gtag_report_conversion",
     value: function _gtag_report_conversion(url) {
       var callback = function callback() {
-        if (typeof url != 'undefined') {
+        if (typeof url != "undefined") {
           window.location = url;
         }
       };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-827036726/3tyqCJ_ayXsQtqiuigM',
-        'event_callback': callback
+      gtag("event", "conversion", {
+        send_to: "AW-827036726/3tyqCJ_ayXsQtqiuigM",
+        event_callback: callback
       });
       return false;
     }
   }, {
-    key: 'send',
+    key: "send",
     value: function send(e) {
       var _this2 = this;
 
       e.preventDefault();
-      var domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
+      var domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1];
 
       var inputValue = document.forms.coupon.email.value,
           inputAntiSpam = document.forms.coupon.email2.value;
-      document.forms.coupon.email.value = '';
+      document.forms.coupon.email.value = "";
       if (this._validateInput(inputValue) && !inputAntiSpam) {
-        document.getElementById('spinner-box-load').style.display = 'block';
-        _axios2.default.get('/api/generateCoupons?phoneOrEmail=' + inputValue.replace(/\+/g, '%2B')).then(function (result) {
-          document.getElementById('spinner-box-load').style.display = 'none';
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.get("/api/generateCoupons?phoneOrEmail=" + inputValue.replace(/\+/g, "%2B")).then(function (result) {
+          document.getElementById("spinner-box-load").style.display = "none";
           if (window.isGoogleConnection) {
             _this2._gtag_report_conversion();
           }
           _this2.setState({ showInput: false, showOkMessage: true });
           if (window.isFBConnection) {
-            if (domain === 'ch') {
-              fbq('track', 'Lead', { value: 1 }); // facebook pixel
+            if (domain === "ch") {
+              fbq("track", "Lead", { value: 1 }); // facebook pixel
             }
           }
         });
-      } else document.forms.coupon.email.value = '';
+      } else document.forms.coupon.email.value = "";
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split('-').reverse().join('.');
+      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split("-").reverse().join(".");
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
         _react2.default.createElement(
-          'div',
-          { className: 'row banner' },
+          "div",
+          { className: "row banner" },
           _react2.default.createElement(
-            'div',
-            { className: 'guy' },
-            _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/Guy.svg', alt: '' })
+            "div",
+            { className: "guy" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/design/Guy.svg", alt: "" })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'price' },
+            "div",
+            { className: "price" },
             _react2.default.createElement(
-              'span',
-              { className: 'price-amount' },
-              '20 CHF'
+              "span",
+              { className: "price-amount" },
+              t("newsLetterBox.circleBannerTop")
             ),
             _react2.default.createElement(
-              'span',
-              { className: 'price-title' },
-              'Gutschein'
+              "span",
+              { className: "price-title" },
+              t("newsLetterBox.circleBannerBottom")
             )
           ),
-          _react2.default.createElement('div', { className: 'visible-md visible-lg visible-xl col-sm-2 col-md-2' }),
+          _react2.default.createElement("div", { className: "visible-md visible-lg visible-xl col-sm-2 col-md-2" }),
           _react2.default.createElement(
-            'div',
-            { className: 'col-sm-6 col-md-5 text-left' },
+            "div",
+            { className: "col-sm-6 col-md-5 text-left" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
+              _react2.default.createElement("h3", {
+                dangerouslySetInnerHTML: {
+                  __html: t("newsLetterBox.mainTitle")
+                }
+              }),
               _react2.default.createElement(
-                'h3',
+                "p",
                 null,
-                'Wir feiern unser 10 j\xE4hriges ',
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  'Jubil\xE4um'
-                ),
-                ' - Feiern Sie mit!'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'G\xFCltig auf alle Ank\xE4ufe ab 50.- ',
+                t("newsLetterBox.descriptionPart1"),
                 window.currencyValue,
-                ' bzw. Ger\xE4te ab 99.- ',
+                " ",
+                t("newsLetterBox.descriptionPart2"),
                 window.currencyValue,
-                ' mit diesem Gutschein, g\xFCltig bis ',
+                " ",
+                t("newsLetterBox.descriptionPart3"),
+                " ",
                 couponDate,
-                '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+                t("newsLetterBox.descriptionPart4")
               )
             )
           ),
           this.state.showInput && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-3 col-md-4 text-right' },
+            "div",
+            { className: "col-sm-3 col-md-4 text-right" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
               _react2.default.createElement(
-                'span',
-                { className: 'error' },
+                "span",
+                { className: "error" },
                 this.state.errorInputData
               ),
               _react2.default.createElement(
-                'form',
-                { className: 'form', name: 'coupon', onSubmit: this.send },
+                "form",
+                { className: "form", name: "coupon", onSubmit: this.send },
                 _react2.default.createElement(
-                  'label',
-                  { style: { display: 'inline', float: 'none', lineHeight: 'inherit' } },
-                  _react2.default.createElement('input', { type: 'text',
-                    name: 'email',
-                    id: 'couponEmail',
+                  "label",
+                  {
+                    style: {
+                      display: "inline",
+                      float: "none",
+                      lineHeight: "inherit"
+                    }
+                  },
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email",
+                    id: "couponEmail",
                     onChange: this.changeInput,
-                    placeholder: 'E-Mail oder Mobilnummer' }),
-                  _react2.default.createElement('button', { 'aria-label': 'Submit', type: 'submit' }),
-                  _react2.default.createElement('input', { type: 'text', name: 'email2', style: { display: 'none' } }),
+                    placeholder: t("newsLetterBox.input")
+                  }),
+                  _react2.default.createElement("button", { "aria-label": "Submit", type: "submit" }),
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email2",
+                    style: { display: "none" }
+                  }),
                   _react2.default.createElement(
-                    'p',
-                    { className: 'info-text' },
-                    'Wir geben Ihre Daten niemals an Dritte weiter.'
+                    "p",
+                    { className: "info-text" },
+                    t("newsLetterBox.subtitle")
                   )
                 )
               )
             )
           ),
           this.state.showOkMessage && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-4 col-md-5 text-right', style: { margin: '0 20px' } },
+            "div",
+            {
+              className: "col-sm-4 col-md-5 text-right",
+              style: { margin: "0 20px" }
+            },
             _react2.default.createElement(
-              'p',
+              "p",
               null,
-              'Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0',
+              "Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0",
               _react2.default.createElement(
-                'a',
-                { href: '#',
-                  className: 'noEmail',
-                  onClick: this.handleNoEmail },
-                'Gutschein nicht erhalten'
+                "a",
+                { href: "#", className: "noEmail", onClick: this.handleNoEmail },
+                "Gutschein nicht erhalten"
               ),
-              '?'
+              "?"
             )
           )
         ),
         _react2.default.createElement(
-          'p',
-          { className: 'couponDescr-mobile' },
-          'Auf alle Ank\xE4ufe ab 99.- ',
+          "p",
+          { className: "couponDescr-mobile" },
+          "Auf alle Ank\xE4ufe ab 99.- ",
           window.currencyValue,
-          ' mit diesem Gutschein, g\xFCltig bis ',
+          " mit diesem Gutschein, g\xFCltig bis ",
           couponDate,
-          '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+          ". Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar."
         )
       );
     }
@@ -4526,7 +4639,7 @@ var Banner = function (_Component) {
 Banner.propTypes = {};
 Banner.defaultProps = {};
 
-exports.default = Banner;
+exports.default = (0, _reactI18next.withTranslation)()(Banner);
 
 /***/ }),
 
@@ -4583,7 +4696,7 @@ var _apiCookie = __webpack_require__(941);
 
 var _reactRedux = __webpack_require__(313);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4969,7 +5082,7 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 !function (t, e) {
-	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(321)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(321)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(322)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(322)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : (0, _typeof3.default)(exports)) ? exports.Slider = e(require("react"), require("react-dom")) : t.Slider = e(t.React, t.ReactDOM);
@@ -5833,7 +5946,7 @@ var _reactCountTo = __webpack_require__(1502);
 
 var _reactCountTo2 = _interopRequireDefault(_reactCountTo);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6974,7 +7087,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -7031,7 +7144,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -7199,7 +7312,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -7394,9 +7507,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -7525,9 +7638,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -7692,7 +7805,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -7837,7 +7950,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -9060,7 +9173,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -15447,11 +15560,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -15610,6 +15723,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -15758,7 +15873,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15780,7 +15896,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15802,7 +15919,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15824,7 +15942,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15846,7 +15965,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15868,7 +15988,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -15924,7 +16045,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 
@@ -15943,7 +16064,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -15989,7 +16110,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -16597,11 +16718,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16738,6 +16861,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -16750,7 +16875,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -16906,7 +17031,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 
@@ -16943,11 +17068,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

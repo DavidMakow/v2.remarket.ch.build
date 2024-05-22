@@ -4659,7 +4659,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -7397,7 +7397,7 @@ var _reactAnimatedCss = __webpack_require__(953);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8138,7 +8138,6 @@ var AdditionalInfoBlock = function AdditionalInfoBlock(_ref) {
                 _react2.default.createElement(
                     'div',
                     { className: 'pay-services' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/swissbilling.png' }),
                     _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/heidipay.svg' })
                 )
             )
@@ -8288,6 +8287,8 @@ __webpack_require__(1104);
 
 __webpack_require__(1106);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SampleNextArrow(props) {
@@ -8296,13 +8297,9 @@ function SampleNextArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -8312,13 +8309,9 @@ function SamplePrevArrow(props) {
       onClick = props.onClick;
 
   return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: (0, _extends3.default)({}, style),
-      onClick: onClick
-    },
-    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/slick-arrow.svg', alt: '' })
+    "div",
+    { className: className, style: (0, _extends3.default)({}, style), onClick: onClick },
+    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/slick-arrow.svg", alt: "" })
   );
 }
 
@@ -8333,59 +8326,73 @@ var ModelInfoBlockImage = function (_Component) {
     _this.state = {
       dimensions: {},
       nav1: null,
-      nav2: null
+      nav2: null,
+      showHoverWishlist: false
     };
     _this.onImgLoad = _this.onImgLoad.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(ModelInfoBlockImage, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      $('.zoomContainer').remove();
-      $('#zoom_01').elevateZoom({ zoomType: "inner" });
-      if (this.props.quickPreview) $('#app').addClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#zoom_01").elevateZoom({ zoomType: "inner" });
+      if (this.props.quickPreview) $("#app").addClass("quickPreview");
       this.setState({
         nav1: this.slider1,
         nav2: this.slider2
       });
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      $('.zoomContainer').remove();
-      $('#app').removeClass('quickPreview');
+      $(".zoomContainer").remove();
+      $("#app").removeClass("quickPreview");
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate(nextProps) {
       if (nextProps.blockImageState.currentMainImage !== this.props.blockImageState.currentMainImage) {
-        $('.zoomContainer').remove();
-        $('#zoom_01').elevateZoom({ zoomType: "inner" });
+        $(".zoomContainer").remove();
+        $("#zoom_01").elevateZoom({ zoomType: "inner" });
       }
     }
   }, {
-    key: 'mapRealImg',
+    key: "mapRealImg",
     value: function mapRealImg(item, i) {
       var altTitle = this.props.altTitle;
 
       var className = this.props.blockImageState.currentMainImage === item.src ? "col-xs-3 modelInfoBlock-img-small active" : "col-xs-3 modelInfoBlock-img-small";
       return _react2.default.createElement(
-        'div',
+        "div",
         { className: className, key: i },
-        _react2.default.createElement('img', { loading: 'lazy', src: item.src, onClick: this.props.clickSmallImg, alt: altTitle + ' - Teil ' + (i + 2) })
+        _react2.default.createElement("img", {
+          loading: "lazy",
+          src: item.src,
+          onClick: this.props.clickSmallImg,
+          alt: altTitle + " - Teil " + (i + 2)
+        })
       );
     }
   }, {
-    key: 'onImgLoad',
+    key: "onImgLoad",
     value: function onImgLoad(_ref) {
       var img = _ref.target;
 
-      this.setState({ dimensions: { imgHeight: img.naturalHeight,
-          imgWidth: img.naturalWidth } });
+      this.setState({
+        dimensions: { imgHeight: img.naturalHeight, imgWidth: img.naturalWidth }
+      });
     }
   }, {
-    key: 'render',
+    key: "setShowHoverWishlist",
+    value: function setShowHoverWishlist(e) {
+      this.setState({
+        showHoverWishlist: e
+      });
+    }
+  }, {
+    key: "render",
     value: function render() {
       var _this2 = this;
 
@@ -8438,69 +8445,104 @@ var ModelInfoBlockImage = function (_Component) {
           imgWidth = _state$dimensions.imgWidth;
 
       var className = blockImageState.currentMainImage === image.mainImg.src ? "col-xs-3 modelInfoBlock-img-small" : "col-xs-3 modelInfoBlock-img-small";
+      var showHoverWishlistStyle = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        color: "#fff",
+        fontWeight: "500",
+        transform: "translateX(20%) translateY(-60%)",
+        backgroundColor: "#23234A",
+        padding: "5px 5px",
+        textAlign: "center",
+        borderRadius: "5px",
+        fontSize: "12px",
+        transition: "ease-in 0.3s",
+        zIndex: "2"
+      };
+      var t = this.props.t;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'col-md-6 modelInfoBlock-img ' },
+        "div",
+        { className: "col-md-6 modelInfoBlock-img " },
         _react2.default.createElement(_reactHelmet.Helmet, {
-          meta: [{ "property": "og:image:width", "content": imgWidth }, { "property": "og:image:height", "content": imgHeight }]
+          meta: [{ property: "og:image:width", content: imgWidth }, { property: "og:image:height", content: imgHeight }]
         }),
         _react2.default.createElement(
-          'div',
-          { className: 'row imageDetailOnly' },
+          "div",
+          { className: "row imageDetailOnly" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
-            (0, _extends3.default)({ asNavFor: this.state.nav2,
+            (0, _extends3.default)({
+              asNavFor: this.state.nav2,
               ref: function ref(slider) {
                 return _this2.slider1 = slider;
               }
             }, settings),
             image.realImg.length > 0 && image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
-                { className: 'item', key: 'slider-item' + i },
+                "div",
+                { className: "item", key: "slider-item" + i },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'col-md-12 modelInfoBlock-img-big' },
-                  _react2.default.createElement('img', { loading: 'lazy', onLoad: _this2.onImgLoad,
+                  "div",
+                  { className: "col-md-12 modelInfoBlock-img-big" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    onLoad: _this2.onImgLoad,
                     onClick: openLightBox,
-                    src: el.src, alt: altTitle }),
+                    src: el.src,
+                    alt: altTitle
+                  }),
                   _react2.default.createElement(
-                    'i',
-                    { className: 'modelInfoBlock-img-big-searchBtn',
+                    "i",
+                    {
+                      className: "modelInfoBlock-img-big-searchBtn",
                       onClick: openLightBox,
-                      'aria-hidden': 'true' },
+                      "aria-hidden": "true"
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                        xmlns: 'http://www.w3.org/2000/svg' },
-                      _react2.default.createElement('path', {
-                        d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                        fill: '#BED3CB' }),
-                      _react2.default.createElement('path', {
-                        d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                        fill: '#BED3CB' })
+                      "svg",
+                      {
+                        width: "30",
+                        height: "30",
+                        viewBox: "0 0 30 30",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      },
+                      _react2.default.createElement("path", {
+                        d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                        fill: "#BED3CB"
+                      }),
+                      _react2.default.createElement("path", {
+                        d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                        fill: "#BED3CB"
+                      })
                     )
                   ),
                   _react2.default.createElement(
-                    'i',
-                    { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+                    "i",
+                    {
+                      className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
                       onClick: function onClick(e) {
                         return addModelToWishlist(e);
-                      } },
+                      }
+                    },
                     _react2.default.createElement(
-                      'svg',
-                      { viewBox: '0 0 24 24' },
-                      _react2.default.createElement('use', { href: '#heart' }),
-                      _react2.default.createElement('use', { href: '#heart' })
+                      "svg",
+                      { viewBox: "0 0 24 24" },
+                      _react2.default.createElement("use", { href: "#heart" }),
+                      _react2.default.createElement("use", { href: "#heart" })
                     ),
                     _react2.default.createElement(
-                      'svg',
-                      { className: 'hide', viewBox: '0 0 24 24' },
+                      "svg",
+                      { className: "hide", viewBox: "0 0 24 24" },
                       _react2.default.createElement(
-                        'defs',
+                        "defs",
                         null,
-                        _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                        _react2.default.createElement("path", {
+                          id: "heart",
+                          d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                        })
                       )
                     )
                   )
@@ -8508,55 +8550,83 @@ var ModelInfoBlockImage = function (_Component) {
               );
             })
           ) : _react2.default.createElement(
-            'div',
-            { className: 'col-md-12 modelInfoBlock-img-big' },
-            _react2.default.createElement('img', { loading: 'lazy', onLoad: this.onImgLoad,
+            "div",
+            { className: "col-md-12 modelInfoBlock-img-big" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              onLoad: this.onImgLoad,
               onClick: openLightBox,
-              src: image.mainImg.src, alt: altTitle }),
+              src: image.mainImg.src,
+              alt: altTitle
+            }),
+            this.state.showHoverWishlist && _react2.default.createElement("div", {
+              style: showHoverWishlistStyle,
+              dangerouslySetInnerHTML: { __html: t("addToWishlist") }
+            }),
             _react2.default.createElement(
-              'i',
-              { className: 'modelInfoBlock-img-big-searchBtn',
+              "i",
+              {
+                className: "modelInfoBlock-img-big-searchBtn",
                 onClick: openLightBox,
-                'aria-hidden': 'true' },
+                "aria-hidden": "true"
+              },
               _react2.default.createElement(
-                'svg',
-                { width: '30', height: '30', viewBox: '0 0 30 30', fill: 'none',
-                  xmlns: 'http://www.w3.org/2000/svg' },
-                _react2.default.createElement('path', {
-                  d: 'M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z',
-                  fill: '#BED3CB' }),
-                _react2.default.createElement('path', {
-                  d: 'M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z',
-                  fill: '#BED3CB' })
+                "svg",
+                {
+                  width: "30",
+                  height: "30",
+                  viewBox: "0 0 30 30",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg"
+                },
+                _react2.default.createElement("path", {
+                  d: "M27.8527 26.5212L20.1089 18.7493C21.8011 16.7076 22.6417 14.0926 22.4562 11.4473C22.2707 8.80207 21.0733 6.32994 19.1128 4.54439C17.1523 2.75885 14.5793 1.79714 11.9283 1.85901C9.27729 1.92089 6.75198 3.0016 4.87691 4.87667C3.00184 6.75173 1.92113 9.27704 1.85926 11.9281C1.79738 14.5791 2.75909 17.1521 4.54464 19.1126C6.33018 21.0731 8.80232 22.2704 11.4476 22.4559C14.0928 22.6414 16.7079 21.8008 18.7496 20.1087L26.4933 27.8524C26.6698 28.029 26.9093 28.1281 27.1589 28.1281C27.4086 28.1281 27.648 28.029 27.8246 27.8524C28.0011 27.6759 28.1003 27.4365 28.1003 27.1868C28.1003 26.9372 28.0011 26.6977 27.8246 26.5212H27.8527ZM3.74955 12.1868C3.74955 10.518 4.2444 8.88672 5.17153 7.49919C6.09865 6.11165 7.41641 5.03019 8.95816 4.39158C10.4999 3.75296 12.1964 3.58587 13.8331 3.91143C15.4698 4.237 16.9733 5.04059 18.1533 6.2206C19.3333 7.4006 20.1369 8.90402 20.4624 10.5407C20.788 12.1774 20.6209 13.8739 19.9823 15.4157C19.3437 16.9575 18.2622 18.2752 16.8747 19.2023C15.4871 20.1295 13.8558 20.6243 12.1871 20.6243C9.94929 20.6243 7.80318 19.7354 6.22084 18.153C4.6385 16.5707 3.74955 14.4246 3.74955 12.1868Z",
+                  fill: "#BED3CB"
+                }),
+                _react2.default.createElement("path", {
+                  d: "M15.9375 11.25H13.125V8.4375C13.125 8.18886 13.0262 7.9504 12.8504 7.77459C12.6746 7.59877 12.4361 7.5 12.1875 7.5C11.9389 7.5 11.7004 7.59877 11.5246 7.77459C11.3488 7.9504 11.25 8.18886 11.25 8.4375V11.25H8.4375C8.18886 11.25 7.9504 11.3488 7.77459 11.5246C7.59877 11.7004 7.5 11.9389 7.5 12.1875C7.5 12.4361 7.59877 12.6746 7.77459 12.8504C7.9504 13.0262 8.18886 13.125 8.4375 13.125H11.25V15.9375C11.25 16.1861 11.3488 16.4246 11.5246 16.6004C11.7004 16.7762 11.9389 16.875 12.1875 16.875C12.4361 16.875 12.6746 16.7762 12.8504 16.6004C13.0262 16.4246 13.125 16.1861 13.125 15.9375V13.125H15.9375C16.1861 13.125 16.4246 13.0262 16.6004 12.8504C16.7762 12.6746 16.875 12.4361 16.875 12.1875C16.875 11.9389 16.7762 11.7004 16.6004 11.5246C16.4246 11.3488 16.1861 11.25 15.9375 11.25Z",
+                  fill: "#BED3CB"
+                })
               )
             ),
             _react2.default.createElement(
-              'i',
-              { className: productIsAddedToWishlist ? 'modelInfoBlock-img-big-wishBtn on' : 'modelInfoBlock-img-big-wishBtn',
+              "i",
+              {
+                className: productIsAddedToWishlist ? "modelInfoBlock-img-big-wishBtn on" : "modelInfoBlock-img-big-wishBtn",
+                onMouseEnter: function onMouseEnter() {
+                  return _this2.setShowHoverWishlist(true);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return _this2.setShowHoverWishlist(false);
+                },
                 onClick: function onClick(e) {
                   return addModelToWishlist(e);
-                } },
+                }
+              },
               _react2.default.createElement(
-                'svg',
-                { viewBox: '0 0 24 24' },
-                _react2.default.createElement('use', { href: '#heart' }),
-                _react2.default.createElement('use', { href: '#heart' })
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
               ),
               _react2.default.createElement(
-                'svg',
-                { className: 'hide', viewBox: '0 0 24 24' },
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
                 _react2.default.createElement(
-                  'defs',
+                  "defs",
                   null,
-                  _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
+                  _react2.default.createElement("path", {
+                    id: "heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
                 )
               )
             )
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row smallImageWrapper' },
+          "div",
+          { className: "row smallImageWrapper" },
           image.realImg.length ? _react2.default.createElement(
             _reactSlick2.default,
             (0, _extends3.default)({
@@ -8567,35 +8637,41 @@ var ModelInfoBlockImage = function (_Component) {
             }, settingsSmallImg),
             image.realImg.map(function (el, i) {
               return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                  'div',
+                  "div",
                   { className: className, key: i },
-                  _react2.default.createElement('img', { loading: 'lazy', src: el.src, alt: '', onClick: _this2.props.clickSmallImg })
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    src: el.src,
+                    alt: "",
+                    onClick: _this2.props.clickSmallImg
+                  })
                 )
               );
             })
-          ) : ''
+          ) : ""
         ),
-        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, { src: blockImageState.currentMainImage,
+        blockImageState.isOpenLightBox && _react2.default.createElement(_lightboxImg2.default, {
+          src: blockImageState.currentMainImage,
           showFirstImage: false,
           showRealImageText: true,
           close: closeLightBox,
-          array: [].concat(image.mainImg, image.realImg) })
+          array: [].concat(image.mainImg, image.realImg)
+        })
       );
     }
   }]);
   return ModelInfoBlockImage;
 }(_react.Component);
 
-exports.default = ModelInfoBlockImage;
-
-
 ModelInfoBlockImage.propTypes = {};
 ModelInfoBlockImage.defaultProps = {
   showDescription: false
 };
+
+exports.default = (0, _reactI18next.withTranslation)()(ModelInfoBlockImage);
 
 /***/ }),
 
@@ -8648,7 +8724,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -9373,6 +9449,10 @@ var _axios = __webpack_require__(149);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactI18next = __webpack_require__(315);
+
+var _i18next = __webpack_require__(209);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Banner = function (_Component) {
@@ -9384,8 +9464,8 @@ var Banner = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Banner.__proto__ || Object.getPrototypeOf(Banner)).call(this, props));
 
     _this.state = {
-      inputField: '',
-      errorInputData: '',
+      inputField: "",
+      errorInputData: "",
       showInput: true,
       showOkMessage: false
     };
@@ -9399,10 +9479,10 @@ var Banner = function (_Component) {
   }
 
   (0, _createClass3.default)(Banner, [{
-    key: '_validateInput',
+    key: "_validateInput",
     value: function _validateInput(value) {
       var error = "",
-          domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1],
+          domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1],
           phonenoCh = /^\(?([0-9]{4})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno2Ch = /^\+([0-9]{2})\)?[ ]?([0-9]{2})\)?[ ]?([0-9]{3})[ ]?([0-9]{2})\)?[ ]?([0-9]{2})$/,
           phoneno3Ch = /^\(?([0-9]{3})\)?[ ]?([0-9]{3})\)?[ ]?([0-9]{2})[ ]?([0-9]{2})$/,
@@ -9411,16 +9491,16 @@ var Banner = function (_Component) {
 
       if (value === "") {
         error = "Sie haben keine Telefonnummer bzw. E-Mail eingegeben.";
-      } else if (isNaN(+value.replace(/ /g, ''))) {
+      } else if (isNaN(+value.replace(/ /g, ""))) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
           return true;
         } else {
           error = "Telefonnummer bzw. E-Mail enthält unzulässige Zeichen";
           document.forms.coupon.email.value = "";
         }
-      } else if (domain === 'ch' && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === 'de' && !phonenoDe.test(value) && !phoneno2De.test(value)) {
+      } else if (domain === "ch" && !phonenoCh.test(value) && !phoneno2Ch.test(value) && !phoneno3Ch.test(value) || domain === "de" && !phonenoDe.test(value) && !phoneno2De.test(value)) {
         document.forms.coupon.email.value = "";
-        error = domain === 'ch' ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
+        error = domain === "ch" ? "Die Telefonnummer muss aus mindestens 10 Zeichen bestehen, z.B. 079 123 45 67" : "Die Telefonnummer muss aus mindestens 11 Zeichen bestehen, z.B. 0150 123 45 67";
       }
       if (error) {
         this.setState({ errorInputData: error });
@@ -9428,176 +9508,188 @@ var Banner = function (_Component) {
       } else return true;
     }
   }, {
-    key: 'handleNoEmail',
+    key: "handleNoEmail",
     value: function handleNoEmail(e) {
       e.preventDefault();
       this.setState({ showOkMessage: false, showInput: true });
     }
   }, {
-    key: 'changeInput',
+    key: "changeInput",
     value: function changeInput() {
-      this.setState({ errorInputData: '' });
+      this.setState({ errorInputData: "" });
     }
   }, {
-    key: '_gtag_report_conversion',
+    key: "_gtag_report_conversion",
     value: function _gtag_report_conversion(url) {
       var callback = function callback() {
-        if (typeof url != 'undefined') {
+        if (typeof url != "undefined") {
           window.location = url;
         }
       };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-827036726/3tyqCJ_ayXsQtqiuigM',
-        'event_callback': callback
+      gtag("event", "conversion", {
+        send_to: "AW-827036726/3tyqCJ_ayXsQtqiuigM",
+        event_callback: callback
       });
       return false;
     }
   }, {
-    key: 'send',
+    key: "send",
     value: function send(e) {
       var _this2 = this;
 
       e.preventDefault();
-      var domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1];
+      var domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1];
 
       var inputValue = document.forms.coupon.email.value,
           inputAntiSpam = document.forms.coupon.email2.value;
-      document.forms.coupon.email.value = '';
+      document.forms.coupon.email.value = "";
       if (this._validateInput(inputValue) && !inputAntiSpam) {
-        document.getElementById('spinner-box-load').style.display = 'block';
-        _axios2.default.get('/api/generateCoupons?phoneOrEmail=' + inputValue.replace(/\+/g, '%2B')).then(function (result) {
-          document.getElementById('spinner-box-load').style.display = 'none';
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.get("/api/generateCoupons?phoneOrEmail=" + inputValue.replace(/\+/g, "%2B")).then(function (result) {
+          document.getElementById("spinner-box-load").style.display = "none";
           if (window.isGoogleConnection) {
             _this2._gtag_report_conversion();
           }
           _this2.setState({ showInput: false, showOkMessage: true });
           if (window.isFBConnection) {
-            if (domain === 'ch') {
-              fbq('track', 'Lead', { value: 1 }); // facebook pixel
+            if (domain === "ch") {
+              fbq("track", "Lead", { value: 1 }); // facebook pixel
             }
           }
         });
-      } else document.forms.coupon.email.value = '';
+      } else document.forms.coupon.email.value = "";
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split('-').reverse().join('.');
+      var couponDate = new Date(new Date().getTime() + 1209600000).toJSON().slice(0, 10).split("-").reverse().join(".");
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
         _react2.default.createElement(
-          'div',
-          { className: 'row banner' },
+          "div",
+          { className: "row banner" },
           _react2.default.createElement(
-            'div',
-            { className: 'guy' },
-            _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/Guy.svg', alt: '' })
+            "div",
+            { className: "guy" },
+            _react2.default.createElement("img", { loading: "lazy", src: "/images/design/Guy.svg", alt: "" })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'price' },
+            "div",
+            { className: "price" },
             _react2.default.createElement(
-              'span',
-              { className: 'price-amount' },
-              '20 CHF'
+              "span",
+              { className: "price-amount" },
+              t("newsLetterBox.circleBannerTop")
             ),
             _react2.default.createElement(
-              'span',
-              { className: 'price-title' },
-              'Gutschein'
+              "span",
+              { className: "price-title" },
+              t("newsLetterBox.circleBannerBottom")
             )
           ),
-          _react2.default.createElement('div', { className: 'visible-md visible-lg visible-xl col-sm-2 col-md-2' }),
+          _react2.default.createElement("div", { className: "visible-md visible-lg visible-xl col-sm-2 col-md-2" }),
           _react2.default.createElement(
-            'div',
-            { className: 'col-sm-6 col-md-5 text-left' },
+            "div",
+            { className: "col-sm-6 col-md-5 text-left" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
+              _react2.default.createElement("h3", {
+                dangerouslySetInnerHTML: {
+                  __html: t("newsLetterBox.mainTitle")
+                }
+              }),
               _react2.default.createElement(
-                'h3',
+                "p",
                 null,
-                'Wir feiern unser 10 j\xE4hriges ',
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  'Jubil\xE4um'
-                ),
-                ' - Feiern Sie mit!'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'G\xFCltig auf alle Ank\xE4ufe ab 50.- ',
+                t("newsLetterBox.descriptionPart1"),
                 window.currencyValue,
-                ' bzw. Ger\xE4te ab 99.- ',
+                " ",
+                t("newsLetterBox.descriptionPart2"),
                 window.currencyValue,
-                ' mit diesem Gutschein, g\xFCltig bis ',
+                " ",
+                t("newsLetterBox.descriptionPart3"),
+                " ",
                 couponDate,
-                '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+                t("newsLetterBox.descriptionPart4")
               )
             )
           ),
           this.state.showInput && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-3 col-md-4 text-right' },
+            "div",
+            { className: "col-sm-3 col-md-4 text-right" },
             _react2.default.createElement(
-              'div',
-              { className: 'flex-column' },
+              "div",
+              { className: "flex-column" },
               _react2.default.createElement(
-                'span',
-                { className: 'error' },
+                "span",
+                { className: "error" },
                 this.state.errorInputData
               ),
               _react2.default.createElement(
-                'form',
-                { className: 'form', name: 'coupon', onSubmit: this.send },
+                "form",
+                { className: "form", name: "coupon", onSubmit: this.send },
                 _react2.default.createElement(
-                  'label',
-                  { style: { display: 'inline', float: 'none', lineHeight: 'inherit' } },
-                  _react2.default.createElement('input', { type: 'text',
-                    name: 'email',
-                    id: 'couponEmail',
+                  "label",
+                  {
+                    style: {
+                      display: "inline",
+                      float: "none",
+                      lineHeight: "inherit"
+                    }
+                  },
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email",
+                    id: "couponEmail",
                     onChange: this.changeInput,
-                    placeholder: 'E-Mail oder Mobilnummer' }),
-                  _react2.default.createElement('button', { 'aria-label': 'Submit', type: 'submit' }),
-                  _react2.default.createElement('input', { type: 'text', name: 'email2', style: { display: 'none' } }),
+                    placeholder: t("newsLetterBox.input")
+                  }),
+                  _react2.default.createElement("button", { "aria-label": "Submit", type: "submit" }),
+                  _react2.default.createElement("input", {
+                    type: "text",
+                    name: "email2",
+                    style: { display: "none" }
+                  }),
                   _react2.default.createElement(
-                    'p',
-                    { className: 'info-text' },
-                    'Wir geben Ihre Daten niemals an Dritte weiter.'
+                    "p",
+                    { className: "info-text" },
+                    t("newsLetterBox.subtitle")
                   )
                 )
               )
             )
           ),
           this.state.showOkMessage && _react2.default.createElement(
-            'div',
-            { className: 'col-sm-4 col-md-5 text-right', style: { margin: '0 20px' } },
+            "div",
+            {
+              className: "col-sm-4 col-md-5 text-right",
+              style: { margin: "0 20px" }
+            },
             _react2.default.createElement(
-              'p',
+              "p",
               null,
-              'Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0',
+              "Vielen Dank! Sie erhalten den Gutschein innerhalb von 15 Minuten per E-Mail bzw. SMS zugesendet.\xA0",
               _react2.default.createElement(
-                'a',
-                { href: '#',
-                  className: 'noEmail',
-                  onClick: this.handleNoEmail },
-                'Gutschein nicht erhalten'
+                "a",
+                { href: "#", className: "noEmail", onClick: this.handleNoEmail },
+                "Gutschein nicht erhalten"
               ),
-              '?'
+              "?"
             )
           )
         ),
         _react2.default.createElement(
-          'p',
-          { className: 'couponDescr-mobile' },
-          'Auf alle Ank\xE4ufe ab 99.- ',
+          "p",
+          { className: "couponDescr-mobile" },
+          "Auf alle Ank\xE4ufe ab 99.- ",
           window.currencyValue,
-          ' mit diesem Gutschein, g\xFCltig bis ',
+          " mit diesem Gutschein, g\xFCltig bis ",
           couponDate,
-          '. Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar.'
+          ". Dieser Gutschein ist nicht mit anderen Aktionen / Rabatten kumulierbar."
         )
       );
     }
@@ -9608,7 +9700,7 @@ var Banner = function (_Component) {
 Banner.propTypes = {};
 Banner.defaultProps = {};
 
-exports.default = Banner;
+exports.default = (0, _reactI18next.withTranslation)()(Banner);
 
 /***/ }),
 
@@ -9665,7 +9757,7 @@ var _apiCookie = __webpack_require__(941);
 
 var _reactRedux = __webpack_require__(313);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10051,7 +10143,7 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 !function (t, e) {
-	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(321)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(321)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+	"object" == ( false ? "undefined" : (0, _typeof3.default)(exports)) && "object" == ( false ? "undefined" : (0, _typeof3.default)(module)) ? module.exports = e(__webpack_require__(16), __webpack_require__(322)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(16), __webpack_require__(322)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : (0, _typeof3.default)(exports)) ? exports.Slider = e(require("react"), require("react-dom")) : t.Slider = e(t.React, t.ReactDOM);
@@ -10888,7 +10980,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ModelInfoBlock = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -10964,7 +11056,7 @@ var _usefullProductItem = __webpack_require__(1278);
 
 var _usefullProductItem2 = _interopRequireDefault(_usefullProductItem);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -12859,7 +12951,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -20503,7 +20595,7 @@ var _reactToggle = __webpack_require__(1279);
 
 var _reactToggle2 = _interopRequireDefault(_reactToggle);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20985,7 +21077,7 @@ var _reactSlick = __webpack_require__(929);
 
 var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21367,7 +21459,7 @@ var _modelInfoBlock = __webpack_require__(1253);
 
 var _modelInfoBlock2 = _interopRequireDefault(_modelInfoBlock);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21562,8 +21654,25 @@ exports.default = QuickViewPage;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports.AsideFilter = undefined;
+
+var _classCallCheck2 = __webpack_require__(856);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(857);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(858);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(859);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = __webpack_require__(16);
 
@@ -21581,133 +21690,175 @@ var _itemFilterBlock = __webpack_require__(1901);
 
 var _itemFilterBlock2 = _interopRequireDefault(_itemFilterBlock);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AsideFilter = function AsideFilter(_ref) {
-    var selectedFilterOptions = _ref.selectedFilterOptions,
-        availableFilterOptions = _ref.availableFilterOptions,
-        filterOptions = _ref.filterOptions,
-        inputPriceMin = _ref.inputPriceMin,
-        inputPriceMax = _ref.inputPriceMax,
-        inputPriceErr = _ref.inputPriceErr,
-        changePrice = _ref.changePrice,
-        changeInputPrice = _ref.changeInputPrice,
-        applyInputPrice = _ref.applyInputPrice,
-        totalItems = _ref.totalItems,
-        mainModelGroupId = _ref.mainModelGroupId,
-        mobileChoseItemFilter = _ref.mobileChoseItemFilter,
-        mobileApply = _ref.mobileApply,
-        changeSortBy = _ref.changeSortBy,
-        currentValue = _ref.currentValue,
-        viewMode = _ref.viewMode,
-        routeParams = _ref.routeParams,
-        options = _ref.options,
-        isAsideFilterVisible = _ref.isAsideFilterVisible;
-    var price = selectedFilterOptions.price;
+var AsideFilter = exports.AsideFilter = function (_Component) {
+  (0, _inherits3.default)(AsideFilter, _Component);
+
+  function AsideFilter(props) {
+    (0, _classCallCheck3.default)(this, AsideFilter);
+    return (0, _possibleConstructorReturn3.default)(this, (AsideFilter.__proto__ || Object.getPrototypeOf(AsideFilter)).call(this, props));
+  }
+
+  (0, _createClass3.default)(AsideFilter, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          selectedFilterOptions = _props.selectedFilterOptions,
+          availableFilterOptions = _props.availableFilterOptions,
+          filterOptions = _props.filterOptions,
+          inputPriceMin = _props.inputPriceMin,
+          inputPriceMax = _props.inputPriceMax,
+          inputPriceErr = _props.inputPriceErr,
+          changePrice = _props.changePrice,
+          changeInputPrice = _props.changeInputPrice,
+          applyInputPrice = _props.applyInputPrice,
+          totalItems = _props.totalItems,
+          mainModelGroupId = _props.mainModelGroupId,
+          mobileChoseItemFilter = _props.mobileChoseItemFilter,
+          mobileApply = _props.mobileApply,
+          changeSortBy = _props.changeSortBy,
+          currentValue = _props.currentValue,
+          viewMode = _props.viewMode,
+          routeParams = _props.routeParams,
+          options = _props.options,
+          isAsideFilterVisible = _props.isAsideFilterVisible,
+          t = _props.t;
+      var price = selectedFilterOptions.price;
 
 
-    function returnItemFilterBlock(key) {
-        return _react2.default.createElement(_itemFilterBlock2.default, { key: key,
-            mainModelGroupId: mainModelGroupId,
-            totalItems: totalItems,
-            title: filterOptions[key].name,
-            name: key,
-            data: filterOptions[key],
-            availableOption: availableFilterOptions[key],
-            availableFilterOptions: availableFilterOptions,
-            selectedOption: selectedFilterOptions[key],
-            allSelected: selectedFilterOptions,
-            mobileChoseItemFilter: mobileChoseItemFilter,
-            routeParams: routeParams });
-    }
-    var arrayFilterOptions = [];
+      function returnItemFilterBlock(key) {
+        return _react2.default.createElement(_itemFilterBlock2.default, {
+          key: key,
+          mainModelGroupId: mainModelGroupId,
+          totalItems: totalItems,
+          title: filterOptions[key].name,
+          name: key,
+          data: filterOptions[key],
+          availableOption: availableFilterOptions[key],
+          availableFilterOptions: availableFilterOptions,
+          selectedOption: selectedFilterOptions[key],
+          allSelected: selectedFilterOptions,
+          mobileChoseItemFilter: mobileChoseItemFilter,
+          routeParams: routeParams
+        });
+      }
+      var arrayFilterOptions = [];
 
-    if (filterOptions.lagerort) arrayFilterOptions.push(returnItemFilterBlock('lagerort'));
-    if (filterOptions.modell) arrayFilterOptions.push(returnItemFilterBlock('modell'));
-    if (filterOptions.zustand) arrayFilterOptions.push(returnItemFilterBlock('zustand'));
+      if (filterOptions.lagerort) arrayFilterOptions.push(returnItemFilterBlock("lagerort"));
+      if (filterOptions.modell) arrayFilterOptions.push(returnItemFilterBlock("modell"));
+      if (filterOptions.zustand) arrayFilterOptions.push(returnItemFilterBlock("zustand"));
 
-    for (var key in filterOptions) {
-        if (key != 'modell' && key != 'zustand' && key != 'lagerort') {
-            var option = returnItemFilterBlock(key);
-            arrayFilterOptions.push(option);
+      for (var key in filterOptions) {
+        if (key != "modell" && key != "zustand" && key != "lagerort") {
+          var option = returnItemFilterBlock(key);
+          arrayFilterOptions.push(option);
         }
-    }
-    return _react2.default.createElement(
-        'div',
-        { className: 'col-md-3 asideFilter' },
+      }
+      return _react2.default.createElement(
+        "div",
+        { className: "col-md-3 asideFilter" },
         _react2.default.createElement(
-            'div',
-            { className: 'priceFilter itemFilterBlock' },
+          "div",
+          { className: "priceFilter itemFilterBlock" },
+          _react2.default.createElement(
+            "div",
+            { className: "head" },
             _react2.default.createElement(
-                'div',
-                { className: 'head' },
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/aside_filter_category_icons/price.svg', alt: '' }),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'headFilterTitle' },
-                        'Preis'
-                    )
-                ),
-                _react2.default.createElement(_reactInputRange2.default, {
-                    maxValue: +price.max,
-                    minValue: +price.min - 0.00001,
-                    value: { min: +price.minSearch - 0.00001, max: +price.maxSearch },
-                    onChange: changePrice }),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'priceRange' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'price-min' },
-                        _react2.default.createElement('input', { id: 'price_min', max: +price.max, min: +price.min, className: inputPriceErr.min ? "price-error" : null, value: inputPriceMin != 0 ? +inputPriceMin : +price.minSearch, type: 'number', onChange: function onChange(e) {
-                                return changeInputPrice(e, 'min');
-                            }, onBlur: function onBlur(e) {
-                                return applyInputPrice(e, 'min');
-                            } }),
-                        ' ',
-                        window.currencyValue
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'price-devider' },
-                        '-'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'price-max' },
-                        _react2.default.createElement('input', { id: 'price_max', max: +price.max, min: +price.min, className: inputPriceErr.max ? "price-error" : null, value: inputPriceMax != 0 ? +inputPriceMax : +price.maxSearch, type: 'number', onChange: function onChange(e) {
-                                return changeInputPrice(e, 'max');
-                            }, onBlur: function onBlur(e) {
-                                return applyInputPrice(e, 'max');
-                            } }),
-                        ' ',
-                        window.currencyValue
-                    )
-                )
+              "div",
+              null,
+              _react2.default.createElement("img", {
+                loading: "lazy",
+                src: "/images/design/aside_filter_category_icons/price.svg",
+                alt: ""
+              }),
+              _react2.default.createElement(
+                "span",
+                { className: "headFilterTitle" },
+                t("filterSidebar.price")
+              )
+            ),
+            _react2.default.createElement(_reactInputRange2.default, {
+              maxValue: +price.max,
+              minValue: +price.min - 0.00001,
+              value: { min: +price.minSearch - 0.00001, max: +price.maxSearch },
+              onChange: changePrice
+            }),
+            _react2.default.createElement(
+              "div",
+              { className: "priceRange" },
+              _react2.default.createElement(
+                "div",
+                { className: "price-min" },
+                _react2.default.createElement("input", {
+                  id: "price_min",
+                  max: +price.max,
+                  min: +price.min,
+                  className: inputPriceErr.min ? "price-error" : null,
+                  value: inputPriceMin != 0 ? +inputPriceMin : +price.minSearch,
+                  type: "number",
+                  onChange: function onChange(e) {
+                    return changeInputPrice(e, "min");
+                  },
+                  onBlur: function onBlur(e) {
+                    return applyInputPrice(e, "min");
+                  }
+                }),
+                " ",
+                window.currencyValue
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "price-devider" },
+                "-"
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "price-max" },
+                _react2.default.createElement("input", {
+                  id: "price_max",
+                  max: +price.max,
+                  min: +price.min,
+                  className: inputPriceErr.max ? "price-error" : null,
+                  value: inputPriceMax != 0 ? +inputPriceMax : +price.maxSearch,
+                  type: "number",
+                  onChange: function onChange(e) {
+                    return changeInputPrice(e, "max");
+                  },
+                  onBlur: function onBlur(e) {
+                    return applyInputPrice(e, "max");
+                  }
+                }),
+                " ",
+                window.currencyValue
+              )
             )
+          )
         ),
         arrayFilterOptions.map(function (item, i) {
-            return item;
+          return item;
         }),
         _react2.default.createElement(
-            'div',
-            { className: 'btnApply-mobile mobileFixedBtn' },
-            _react2.default.createElement(
-                'button',
-                { className: 'btn', onClick: mobileApply },
-                '\xDCbernehmen'
-            )
+          "div",
+          { className: "btnApply-mobile mobileFixedBtn" },
+          _react2.default.createElement(
+            "button",
+            { className: "btn", onClick: mobileApply },
+            "\xDCbernehmen"
+          )
         )
-    );
-};
+      );
+    }
+  }]);
+  return AsideFilter;
+}(_react.Component);
 
 AsideFilter.propTypes = {};
 AsideFilter.defaultProps = {};
 
-exports.default = AsideFilter;
+exports.default = (0, _reactI18next.withTranslation)()(AsideFilter);
 
 /***/ }),
 
@@ -21718,332 +21869,486 @@ exports.default = AsideFilter;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports.ItemFilterBlock = undefined;
 
 var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _classCallCheck2 = __webpack_require__(856);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(857);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(858);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(859);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactI18next = __webpack_require__(315);
 
 var _reactRouter = __webpack_require__(206);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ItemFilterBlock = function ItemFilterBlock(_ref) {
-    var routeParams = _ref.routeParams,
-        data = _ref.data,
-        name = _ref.name,
-        title = _ref.title,
-        availableOption = _ref.availableOption,
-        allSelected = _ref.allSelected,
-        selectedOption = _ref.selectedOption,
-        totalItems = _ref.totalItems,
-        mobileChoseItemFilter = _ref.mobileChoseItemFilter,
-        availableFilterOptions = _ref.availableFilterOptions,
-        mainModelGroupId = _ref.mainModelGroupId;
+var ItemFilterBlock = exports.ItemFilterBlock = function (_Component) {
+  (0, _inherits3.default)(ItemFilterBlock, _Component);
 
-    function getStr(arr, name, currentValue) {
-        var s = '';
+  function ItemFilterBlock(props) {
+    (0, _classCallCheck3.default)(this, ItemFilterBlock);
+    return (0, _possibleConstructorReturn3.default)(this, (ItemFilterBlock.__proto__ || Object.getPrototypeOf(ItemFilterBlock)).call(this, props));
+  }
+
+  (0, _createClass3.default)(ItemFilterBlock, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          routeParams = _props.routeParams,
+          data = _props.data,
+          name = _props.name,
+          title = _props.title,
+          availableOption = _props.availableOption,
+          allSelected = _props.allSelected,
+          selectedOption = _props.selectedOption,
+          totalItems = _props.totalItems,
+          mobileChoseItemFilter = _props.mobileChoseItemFilter,
+          availableFilterOptions = _props.availableFilterOptions,
+          mainModelGroupId = _props.mainModelGroupId,
+          t = _props.t;
+
+
+      function getStr(arr, name, currentValue) {
+        var s = "";
         var selectedFilterOptions = (0, _extends3.default)({}, arr);
         for (var key in selectedFilterOptions) {
-            if (key !== 'price' && key !== 'sort' && key !== 'page') {
-                selectedFilterOptions[key] = (0, _extends3.default)({}, arr[key]);
-                selectedFilterOptions[key].values = arr[key].values.map(function (item) {
-                    return (0, _extends3.default)({}, item);
-                });
-            } else if (key === 'page') {
-                selectedFilterOptions[key] = 1;
-            }
+          if (key !== "price" && key !== "sort" && key !== "page") {
+            selectedFilterOptions[key] = (0, _extends3.default)({}, arr[key]);
+            selectedFilterOptions[key].values = arr[key].values.map(function (item) {
+              return (0, _extends3.default)({}, item);
+            });
+          } else if (key === "page") {
+            selectedFilterOptions[key] = 1;
+          }
         }
-
-        if (currentValue === 'allValues') {
-            /*if(selectedFilterOptions[name].length === data.length) selectedFilterOptions.Models = []
-            else selectedFilterOptions[name] = data*/
-            selectedFilterOptions[name] ? selectedFilterOptions[name].values = data.values : null;
+        if (currentValue === "allValues") {
+          /*if(selectedFilterOptions[name].length === data.length) selectedFilterOptions.Models = []
+                      else selectedFilterOptions[name] = data*/
+          selectedFilterOptions[name] ? selectedFilterOptions[name].values = data.values : null;
         } else {
-            if (selectedFilterOptions[name] && selectedFilterOptions[name].values.length === data.values.length) {
-                selectedFilterOptions[name].values = [];
-                selectedFilterOptions[name].values.push(currentValue);
-            } else {
-                if (selectedFilterOptions[name] && selectedFilterOptions[name].values.some(function (option) {
-                    return option.id === currentValue.id;
-                })) {
-                    if (selectedFilterOptions[name].values.length === 1) selectedFilterOptions[name].values = [];else selectedFilterOptions[name].values = selectedFilterOptions[name].values.filter(function (item) {
-                        return item.id !== currentValue.id;
-                    });
-                } else if (selectedFilterOptions[name]) {
-                    selectedFilterOptions[name].values.push(currentValue);
-                }
+          if (selectedFilterOptions[name] && selectedFilterOptions[name].values.length === data.values.length) {
+            selectedFilterOptions[name].values = [];
+            selectedFilterOptions[name].values.push(currentValue);
+          } else {
+            if (selectedFilterOptions[name] && selectedFilterOptions[name].values.some(function (option) {
+              return option.id === currentValue.id;
+            })) {
+              if (selectedFilterOptions[name].values.length === 1) selectedFilterOptions[name].values = [];else selectedFilterOptions[name].values = selectedFilterOptions[name].values.filter(function (item) {
+                return item.id !== currentValue.id;
+              });
+            } else if (selectedFilterOptions[name]) {
+              selectedFilterOptions[name].values.push(currentValue);
             }
+          }
         }
 
         var _loop = function _loop(_key) {
-            if (_key === 'price') {
-                if (selectedFilterOptions[_key].minSearch > 0 || selectedFilterOptions[_key].maxSearch < selectedFilterOptions[_key].max) {
-                    s += 'preis=' + selectedFilterOptions[_key].minSearch + '-' + selectedFilterOptions[_key].maxSearch + '/';
-                }
-            } else if (_key === 'sort' || _key === 'page') s += _key + '=' + selectedFilterOptions[_key] + '/';else {
-                var categoryName = _key;
-
-                if (selectedFilterOptions[_key].values.length === availableFilterOptions[_key].values.length) {
-                    s += categoryName + '=alle/';
-                } else if (selectedFilterOptions[_key].values.length > 0) {
-                    selectedFilterOptions[_key].values.forEach(function (item, i) {
-                        if (i === 0) {
-                            if (selectedFilterOptions[_key].values.length === 1) {
-                                s += categoryName + '=' + item.id + '/';
-                            } else s += categoryName + '=' + item.id;
-                        } else if (i === selectedFilterOptions[_key].values.length - 1) {
-                            s += ',' + item.id + '/';
-                        } else s += ',' + item.id;
-                    });
-                }
+          if (_key === "price") {
+            if (selectedFilterOptions[_key].minSearch > 0 || selectedFilterOptions[_key].maxSearch < selectedFilterOptions[_key].max) {
+              s += "preis=" + selectedFilterOptions[_key].minSearch + "-" + selectedFilterOptions[_key].maxSearch + "/";
             }
+          } else if (_key === "sort" || _key === "page") s += _key + "=" + selectedFilterOptions[_key] + "/";else {
+            var categoryName = _key;
+
+            if (selectedFilterOptions[_key].values.length === availableFilterOptions[_key].values.length) {
+              s += categoryName + "=alle/";
+            } else if (selectedFilterOptions[_key].values.length > 0) {
+              selectedFilterOptions[_key].values.forEach(function (item, i) {
+                if (i === 0) {
+                  if (selectedFilterOptions[_key].values.length === 1) {
+                    s += categoryName + "=" + item.id + "/";
+                  } else s += categoryName + "=" + item.id;
+                } else if (i === selectedFilterOptions[_key].values.length - 1) {
+                  s += "," + item.id + "/";
+                } else s += "," + item.id;
+              });
+            }
+          }
         };
 
         for (var _key in selectedFilterOptions) {
-            _loop(_key);
+          _loop(_key);
         }
         return s;
-    }
+      }
 
-    var filteredValues = data.values.sort(function (a, b) {
-        if (title === 'Speichergrösse') return false;else return a.name > b.name ? 1 : -1;
-    });
+      var filteredValues = data.values.sort(function (a, b) {
+        if (title === "Speichergrösse") return false;else return a.name > b.name ? 1 : -1;
+      });
 
-    var titleName = '';
-    switch (title) {
-        case 'zustand':
-            titleName = 'Allgemeiner Zustand';
-            break;
+      var titleName = "";
+      switch (title) {
+        case "zustand":
+          titleName = "Allgemeiner Zustand";
+          break;
         default:
-            titleName = title;
-            break;
-    }
+          titleName = title;
+          break;
+      }
 
-    function getCategoriesParamRoute() {
-        var str = '/';
+      function getCategoriesParamRoute() {
+        var str = "/";
         for (var key in routeParams) {
-            if (key.includes('deviceCategory') && routeParams[key]) str += routeParams[key] + '/';
+          if (key.includes("deviceCategory") && routeParams[key]) str += routeParams[key] + "/";
         }
         return str;
-    }
+      }
 
-    function mapValues(item, i) {
-
+      function mapValues(item, i) {
         var isChecked = selectedOption && selectedOption.values.some(function (model) {
-            return model.id === item.id;
+          return model.id === item.id;
         }) && selectedOption.values.length !== data.values.length;
-        var color = item.colorCode ? item.colorCode : '';
-        var enable = item.hasOwnProperty('enable') ? item.enable : 1;
+        var color = item.colorCode ? item.colorCode : "";
+        var enable = item.hasOwnProperty("enable") ? item.enable : 1;
         return _react2.default.createElement(
-            'li',
-            { key: i, className: !enable ? 'disable' : isChecked ? 'active' : '' },
+          "li",
+          { key: i, className: !enable ? "disable" : isChecked ? "active" : "" },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            {
+              key: item.id,
+              to: enable ? url + "/" + getStr(allSelected, name, item) : null,
+              onClick: function onClick(e) {
+                return enable ? window.isMobile && mobileChoseItemFilter(e, name, item) : null;
+              }
+            },
+            _react2.default.createElement("input", {
+              type: "checkbox",
+              readOnly: true,
+              checked: isChecked,
+              disabled: availableOption && availableOption.values.every(function (items) {
+                return item.id !== items.id;
+              })
+            }),
+            titleName === "farbe" ? color && _react2.default.createElement("span", {
+              className: "checkbox-farbe",
+              key: i,
+              style: { background: color }
+            }) : _react2.default.createElement("span", { className: "checkbox" }),
             _react2.default.createElement(
-                _reactRouter.Link,
-                { key: item.id, to: enable ? url + '/' + getStr(allSelected, name, item) : null,
-                    onClick: function onClick(e) {
-                        return enable ? window.isMobile && mobileChoseItemFilter(e, name, item) : null;
-                    } },
-                _react2.default.createElement('input', { type: 'checkbox',
-                    readOnly: true,
-                    checked: isChecked,
-                    disabled: availableOption && availableOption.values.every(function (items) {
-                        return item.id !== items.id;
-                    }) }),
-                titleName === 'farbe' ? color && _react2.default.createElement('span', { className: 'checkbox-farbe', key: i, style: { background: color } }) : _react2.default.createElement('span', { className: 'checkbox' }),
-                _react2.default.createElement(
-                    'span',
-                    null,
-                    name === 'lagerort' && _react2.default.createElement('img', { loading: 'lazy', className: 'filter-img', src: '/images/design/aside_filter_category_icons/lagerort/filter-lagerort-' + item.id + '.svg', alt: '' }),
-                    item.name
-                )
-            ),
-            _react2.default.createElement(
-                'span',
-                null,
-                (name === 'modell' || name === 'lagerort') && '(' + item.count + ')'
+              "span",
+              null,
+              name === "lagerort" && _react2.default.createElement("img", {
+                loading: "lazy",
+                className: "filter-img",
+                src: "/images/design/aside_filter_category_icons/lagerort/filter-lagerort-" + item.id + ".svg",
+                alt: ""
+              }),
+              item.name == "Ja" && t('filterSidebar.yes'),
+              item.name == "Nein" && t('filterSidebar.no'),
+              item.name != "Ja" && item.name != "Nein" && item.name
             )
+          ),
+          _react2.default.createElement(
+            "span",
+            null,
+            (name === "modell" || name === "lagerort") && "(" + item.count + ")"
+          )
         );
-    }
-    function groupBy(list, keyGetter) {
+      }
+      function groupBy(list, keyGetter) {
         var map = new Map();
         list.forEach(function (item) {
-            var key = keyGetter(item);
-            var collection = map.get(key);
-            if (!collection) {
-                map.set(key, item.deviceModelGroupOrderBy);
-                map.set(key, [item]);
-            } else {
-                collection.push(item);
-            }
+          var key = keyGetter(item);
+          var collection = map.get(key);
+          if (!collection) {
+            map.set(key, item.deviceModelGroupOrderBy);
+            map.set(key, [item]);
+          } else {
+            collection.push(item);
+          }
         });
         return map;
-    }
-    function toggleIcon(e) {
-        var is_onened = e.currentTarget.getAttribute('aria-expanded');
-        if (is_onened === 'true') {
-            e.currentTarget.lastChild.classList.remove('glyphicon-plus');
-            e.currentTarget.lastChild.className += " glyphicon-minus";
+      }
+      function toggleIcon(e) {
+        var is_onened = e.currentTarget.getAttribute("aria-expanded");
+        if (is_onened === "true") {
+          e.currentTarget.lastChild.classList.remove("glyphicon-plus");
+          e.currentTarget.lastChild.className += " glyphicon-minus";
         } else {
-            e.currentTarget.lastChild.classList.remove('glyphicon-minus');
-            e.currentTarget.lastChild.className += " glyphicon-plus";
+          e.currentTarget.lastChild.classList.remove("glyphicon-minus");
+          e.currentTarget.lastChild.className += " glyphicon-plus";
         }
-    }
+      }
 
-    var url = '/kaufen' + getCategoriesParamRoute() + 'filter';
-    if (titleName === 'Arbeitsspeicher (RAM)') {
-        titleName = titleName.replace('Arbeitsspeicher (RAM)', 'Arbeitsspeicher RAM');
-    }
+      var url = "/kaufen" + getCategoriesParamRoute() + "filter";
+      if (titleName === "Arbeitsspeicher (RAM)") {
+        titleName = titleName.replace("Arbeitsspeicher (RAM)", "Arbeitsspeicher RAM");
+      }
 
-    var customHref = titleName.split(' ');
-
-    return _react2.default.createElement(
-        'div',
-        { className: titleName + ' itemFilterBlock' },
+      var customHref = titleName.split(" ");
+      var titleNameTranslate = "";
+      switch (titleName) {
+        case "lagerort":
+          titleNameTranslate = t("filterSidebar.storageLocation");
+          break;
+        case "modell":
+          titleNameTranslate = t("filterSidebar.model");
+          break;
+        case "Allgemeiner Zustand":
+          titleNameTranslate = t("filterSidebar.generalCondition");
+          break;
+        case "Speichergrösse":
+          titleNameTranslate = t("filterSidebar.storageSize");
+          break;
+        case "Farbe":
+          titleNameTranslate = t("filterSidebar.color");
+          break;
+        case "Zustand Display":
+          titleNameTranslate = t("filterSidebar.conditionOfDisplay");
+          break;
+        case "Zustand Deckel":
+          titleNameTranslate = t("filterSidebar.lidCondition");
+          break;
+        case "Zustand Unibody Gehäuse":
+          titleNameTranslate = t("filterSidebar.unibodyCaseCondition");
+          break;
+        case "Zustand Unterseite":
+          titleNameTranslate = t("filterSidebar.bottomCondition");
+          break;
+        case "Zubehör":
+          titleNameTranslate = t("filterSidebar.accessories");
+          break;
+        case "Tastaturlayout":
+          titleNameTranslate = t("filterSidebar.keyboardLayout");
+          break;
+        case "Zustand Rahmen":
+          titleNameTranslate = t("filterSidebar.conditionOfFrame");
+          break;
+        case "Zustand Rückseite":
+          titleNameTranslate = t("filterSidebar.conditionOfBack");
+          break;
+        case "Arbeitsspeicher":
+          titleNameTranslate = t("filterSidebar.ram");
+          break;
+        case "Prozessor":
+          titleNameTranslate = t("filterSidebar.processor");
+          break;
+        case "Grafikkarte":
+          titleNameTranslate = t("filterSidebar.graphicsCard");
+          break;
+        case "Displaygrösse":
+          titleNameTranslate = t("filterSidebar.displaySize");
+          break;
+        case "Arbeitsspeicher RAM":
+          titleNameTranslate = t("filterSidebar.ram");
+          break;
+        case "garantie":
+          titleNameTranslate = t("filterSidebar.warranty");
+          break;
+        case "Retina":
+          titleNameTranslate = t("filterSidebar.retina");
+          break;
+        case "Verbindungsart":
+          titleNameTranslate = t("filterSidebar.typeOfConnection");
+          break;
+        default:
+          titleNameTranslate = titleName;
+          break;
+      }
+      return _react2.default.createElement(
+        "div",
+        { className: titleName + " itemFilterBlock" },
         _react2.default.createElement(
-            'h5',
-            { className: 'head',
-                'data-toggle': 'collapse',
-                href: '#multiCollapseExample-' + customHref[customHref.length - 1],
-                'aria-expanded': 'false',
-                'aria-controls': 'collapseExample',
-                onClick: function onClick(e) {
-                    return toggleIcon(e);
-                } },
+          "h5",
+          {
+            className: "head",
+            "data-toggle": "collapse",
+            href: "#multiCollapseExample-" + customHref[customHref.length - 1],
+            "aria-expanded": "false",
+            "aria-controls": "collapseExample",
+            onClick: function onClick(e) {
+              return toggleIcon(e);
+            }
+          },
+          _react2.default.createElement(
+            "span",
+            null,
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              src: "/images/design/aside_filter_category_icons/" + mainModelGroupId + "/" + mainModelGroupId + "-" + name + ".svg",
+              onError: function onError(e) {
+                e.target.src = "/images/design/aside_filter_category_icons/default-icon.svg";
+              },
+              alt: ""
+            }),
             _react2.default.createElement(
-                'span',
-                null,
-                _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/aside_filter_category_icons/' + mainModelGroupId + '/' + mainModelGroupId + '-' + name + '.svg',
-                    onError: function onError(e) {
-                        e.target.src = '/images/design/aside_filter_category_icons/default-icon.svg';
-                    },
-                    alt: '' }),
-                _react2.default.createElement(
-                    'span',
-                    { className: 'head-titleName' },
-                    titleName
-                )
-            ),
-            _react2.default.createElement('span', { style: { color: '#b8d4cb' }, className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' })
+              "span",
+              { className: "head-titleName" },
+              titleNameTranslate
+            )
+          ),
+          _react2.default.createElement("span", {
+            style: { color: "#b8d4cb" },
+            className: "glyphicon glyphicon-plus",
+            "aria-hidden": "true"
+          })
         ),
         _react2.default.createElement(
-            'ul',
-            { id: 'multiCollapseExample-' + customHref[customHref.length - 1],
-                className: 'collapse multi-collapse' },
+          "ul",
+          {
+            id: "multiCollapseExample-" + customHref[customHref.length - 1],
+            className: "collapse multi-collapse"
+          },
+          _react2.default.createElement(
+            "li",
+            {
+              className: selectedOption && selectedOption.values.length === data.values.length ? "active" : ""
+            },
             _react2.default.createElement(
-                'li',
-                { className: selectedOption && selectedOption.values.length === data.values.length ? 'active' : '' },
-                _react2.default.createElement(
-                    _reactRouter.Link,
-                    { key: 'allValues-' + name, to: url + '/' + getStr(allSelected, name, 'allValues'),
-                        onClick: function onClick(e) {
-                            return window.isMobile && mobileChoseItemFilter(e, name, 'allValues');
-                        } },
-                    _react2.default.createElement('input', { type: 'checkbox',
-                        className: titleName + '-all',
-                        value: 'Show all models',
-                        readOnly: true,
-                        checked: selectedOption && selectedOption.values.length === data.values.length }),
-                    _react2.default.createElement('span', { className: 'checkbox' }),
-                    name !== 'lagerort' && _react2.default.createElement(
-                        'span',
-                        null,
-                        'Zeige alle ',
-                        routeParams.deviceCategory1 === "zubehör" ? 'Produkte' : 'Modelle'
-                    ),
-                    name === 'lagerort' && _react2.default.createElement(
-                        'span',
-                        null,
-                        'Alle Filialen anzeigen'
-                    )
-                ),
-                _react2.default.createElement(
-                    'span',
-                    null,
-                    name === 'modell' || name === 'lagerort' && '(' + totalItems + ')'
-                )
+              _reactRouter.Link,
+              {
+                key: "allValues-" + name,
+                to: url + "/" + getStr(allSelected, name, "allValues"),
+                onClick: function onClick(e) {
+                  return window.isMobile && mobileChoseItemFilter(e, name, "allValues");
+                }
+              },
+              _react2.default.createElement("input", {
+                type: "checkbox",
+                className: titleName + "-all",
+                value: "Show all models",
+                readOnly: true,
+                checked: selectedOption && selectedOption.values.length === data.values.length
+              }),
+              _react2.default.createElement("span", { className: "checkbox" }),
+              name !== "lagerort" && _react2.default.createElement(
+                "span",
+                null,
+                routeParams.deviceCategory1 === "zubehör" ? t('filterSidebar.showAllProduks') : t('filterSidebar.showAllModels')
+              ),
+              name === "lagerort" && _react2.default.createElement(
+                "span",
+                null,
+                t('filterSidebar.showAllBranches')
+              )
             ),
-            name === 'kategorie-compatibility' ? Array.from(groupBy(data.values, function (item) {
-                return item.deviceModelGroupOrderBy + '-' + item.deviceModelGroupName;
-            })).sort(function (a, b) {
-                return parseInt(a[0].split('-')[0]) > parseInt(b[0].split('-')[0]) ? 1 : -1;
-            }).map(function (item, index) {
-                return _react2.default.createElement(
+            _react2.default.createElement(
+              "span",
+              null,
+              name === "modell" || name === "lagerort" && "(" + totalItems + ")"
+            )
+          ),
+          name === "kategorie-compatibility" ? Array.from(groupBy(data.values, function (item) {
+            return item.deviceModelGroupOrderBy + "-" + item.deviceModelGroupName;
+          })).sort(function (a, b) {
+            return parseInt(a[0].split("-")[0]) > parseInt(b[0].split("-")[0]) ? 1 : -1;
+          }).map(function (item, index) {
+            return _react2.default.createElement(
+              _react2.default.Fragment,
+              { key: "label-0-" + index },
+              _react2.default.createElement(
+                "a",
+                {
+                  className: "brand",
+                  "data-toggle": "collapse",
+                  href: "#collapseExample-" + item[1][0]["deviceModelGroupId"] + "-" + item[1][0]["deviceModelGroupOrderBy"],
+                  "aria-expanded": "false",
+                  "aria-controls": "collapseExample",
+                  onClick: function onClick(e) {
+                    return toggleIcon(e);
+                  }
+                },
+                _react2.default.createElement(
+                  "span",
+                  { className: "name" },
+                  item[0].split("-")[1]
+                ),
+                _react2.default.createElement("span", {
+                  className: "glyphicon glyphicon-plus",
+                  "aria-hidden": "true"
+                })
+              ),
+              _react2.default.createElement(
+                "span",
+                {
+                  className: "collapse",
+                  id: "collapseExample-" + item[1][0]["deviceModelGroupId"] + "-" + item[1][0]["deviceModelGroupOrderBy"]
+                },
+                item[1][0].deviceModelSubGroupId ? Array.from(groupBy(item[1], function (subItem) {
+                  return subItem.deviceModelSubGroupOrderBy + "-" + subItem.deviceModelSubGroupName;
+                })).sort(function (a, b) {
+                  return parseInt(a[0].split("-")[0]) > parseInt(b[0].split("-")[0]) ? 1 : -1;
+                }).map(function (subItem, index) {
+                  return _react2.default.createElement(
                     _react2.default.Fragment,
-                    { key: 'label-0-' + index },
+                    { key: "label-1-" + index },
                     _react2.default.createElement(
-                        'a',
-                        { className: 'brand',
-                            'data-toggle': 'collapse',
-                            href: '#collapseExample-' + item[1][0]['deviceModelGroupId'] + '-' + item[1][0]['deviceModelGroupOrderBy'],
-                            'aria-expanded': 'false',
-                            'aria-controls': 'collapseExample',
-                            onClick: function onClick(e) {
-                                return toggleIcon(e);
-                            } },
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'name' },
-                            item[0].split('-')[1]
-                        ),
-                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' })
+                      "a",
+                      {
+                        className: "brand",
+                        "data-toggle": "collapse",
+                        href: "#collapseExample-" + subItem[1][0]["deviceModelSubGroupId"] + "-" + subItem[1][0]["deviceModelSubGroupOrderBy"],
+                        "aria-expanded": "false",
+                        "aria-controls": "collapseExample",
+                        onClick: function onClick(e) {
+                          return toggleIcon(e);
+                        }
+                      },
+                      _react2.default.createElement(
+                        "span",
+                        { className: "name" },
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/design/submodel/" + subItem[1][0]["deviceModelSubGroupId"] + ".svg",
+                          alt: ""
+                        }),
+                        subItem[0].split("-")[1]
+                      ),
+                      _react2.default.createElement("span", {
+                        className: "glyphicon glyphicon-plus",
+                        "aria-hidden": "true"
+                      })
                     ),
                     _react2.default.createElement(
-                        'span',
-                        { className: 'collapse', id: 'collapseExample-' + item[1][0]['deviceModelGroupId'] + '-' + item[1][0]['deviceModelGroupOrderBy'] },
-                        item[1][0].deviceModelSubGroupId ? Array.from(groupBy(item[1], function (subItem) {
-                            return subItem.deviceModelSubGroupOrderBy + '-' + subItem.deviceModelSubGroupName;
-                        })).sort(function (a, b) {
-                            return parseInt(a[0].split('-')[0]) > parseInt(b[0].split('-')[0]) ? 1 : -1;
-                        }).map(function (subItem, index) {
-                            return _react2.default.createElement(
-                                _react2.default.Fragment,
-                                { key: 'label-1-' + index },
-                                _react2.default.createElement(
-                                    'a',
-                                    { className: 'brand',
-                                        'data-toggle': 'collapse',
-                                        href: '#collapseExample-' + subItem[1][0]['deviceModelSubGroupId'] + '-' + subItem[1][0]['deviceModelSubGroupOrderBy'],
-                                        'aria-expanded': 'false',
-                                        'aria-controls': 'collapseExample',
-                                        onClick: function onClick(e) {
-                                            return toggleIcon(e);
-                                        } },
-                                    _react2.default.createElement(
-                                        'span',
-                                        { className: 'name' },
-                                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/submodel/' + subItem[1][0]['deviceModelSubGroupId'] + '.svg', alt: '' }),
-                                        subItem[0].split('-')[1]
-                                    ),
-                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' })
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'collapse', id: 'collapseExample-' + subItem[1][0]['deviceModelSubGroupId'] + '-' + subItem[1][0]['deviceModelSubGroupOrderBy'] },
-                                    subItem[1].sort(function (a, b) {
-                                        return a.orderBy - b.orderBy;
-                                    }).map(mapValues)
-                                )
-                            );
-                        }) : item[1].sort(function (a, b) {
-                            return a.orderBy - b.orderBy;
-                        }).map(mapValues)
+                      "span",
+                      {
+                        className: "collapse",
+                        id: "collapseExample-" + subItem[1][0]["deviceModelSubGroupId"] + "-" + subItem[1][0]["deviceModelSubGroupOrderBy"]
+                      },
+                      subItem[1].sort(function (a, b) {
+                        return a.orderBy - b.orderBy;
+                      }).map(mapValues)
                     )
-                );
-            }) : filteredValues.map(mapValues)
+                  );
+                }) : item[1].sort(function (a, b) {
+                  return a.orderBy - b.orderBy;
+                }).map(mapValues)
+              )
+            );
+          }) : filteredValues.map(mapValues)
         )
-    );
-};
+      );
+    }
+  }]);
+  return ItemFilterBlock;
+}(_react.Component);
 
 ItemFilterBlock.propTypes = {};
 ItemFilterBlock.defaultProps = {};
 
-exports.default = ItemFilterBlock;
+exports.default = (0, _reactI18next.withTranslation)()(ItemFilterBlock);
 
 /***/ }),
 
@@ -22054,8 +22359,12 @@ exports.default = ItemFilterBlock;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+
+var _slicedToArray2 = __webpack_require__(334);
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
 var _react = __webpack_require__(16);
 
@@ -22067,201 +22376,292 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouter = __webpack_require__(206);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ModelsGrid = function ModelsGrid(_ref) {
-    var models = _ref.models,
-        basketData = _ref.basketData,
-        wishlistData = _ref.wishlistData,
-        addModelToBasket = _ref.addModelToBasket,
-        addModelToWishlist = _ref.addModelToWishlist;
+  var models = _ref.models,
+      basketData = _ref.basketData,
+      wishlistData = _ref.wishlistData,
+      addModelToBasket = _ref.addModelToBasket,
+      addModelToWishlist = _ref.addModelToWishlist,
+      t = _ref.t;
 
-    var interval = null;
+  var interval = null;
 
-    function mouseEnter(e) {
-        var current = $(e.currentTarget);
-        function changeImage() {
-            if ($(current).find('img.active').next().length > 0) {
-                $(current).find('img.active').removeClass('active').next().addClass('active');
-            } else {
-                $(current).find('img').removeClass('active').first().addClass('active');
-            }
-        }
-        changeImage();
-        interval = setInterval(function () {
-            return changeImage();
-        }, 2000);
+  var _useState = (0, _react.useState)(null),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      showHoverWishlistGrid = _useState2[0],
+      setShowHoverWishlistGrid = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
+      showHoverBasketGrid = _useState4[0],
+      setShowHoverBasketGrid = _useState4[1];
+
+  function mouseEnter(e) {
+    var current = $(e.currentTarget);
+    function changeImage() {
+      if ($(current).find("img.active").next().length > 0) {
+        $(current).find("img.active").removeClass("active").next().addClass("active");
+      } else {
+        $(current).find("img").removeClass("active").first().addClass("active");
+      }
     }
-    function mouseOut(e) {
-        clearInterval(interval);
-        $(e.currentTarget).find('img').removeClass('active').first().addClass('active');
-    }
+    changeImage();
+    interval = setInterval(function () {
+      return changeImage();
+    }, 2000);
+  }
+  function mouseOut(e) {
+    clearInterval(interval);
+    $(e.currentTarget).find("img").removeClass("active").first().addClass("active");
+  }
 
-    function handleAddModelToWishlist(e, model) {
-        addModelToWishlist(e, model);
-    }
+  function handleAddModelToWishlist(e, model) {
+    addModelToWishlist(e, model);
+  }
 
-    function mapModels(item) {
-        var images = [].concat(item.deviceImages.mainImg, item.deviceImages.realImg),
-            modelName = item.model.split(" ").join('-').toLowerCase().replace(/\//g, '--'),
-            deviceName = item.deviceName.toLowerCase().replace(/ /g, '-');
-        var mainImages = [].concat(item.deviceImages.mainImg);
-        var realImages = [].concat(item.deviceImages.realImg);
+  function mapModels(item, index) {
+    var images = [].concat(item.deviceImages.mainImg, item.deviceImages.realImg),
+        modelName = item.model.split(" ").join("-").toLowerCase().replace(/\//g, "--"),
+        deviceName = item.deviceName.toLowerCase().replace(/ /g, "-");
+    var mainImages = [].concat(item.deviceImages.mainImg);
+    var realImages = [].concat(item.deviceImages.realImg);
 
-        var isWish = false;
+    var isWish = false;
 
-        wishlistData.map(function (el) {
-            if (el.shortcode === item.shortcode) {
-                isWish = true;
-            }
-        });
+    wishlistData.map(function (el) {
+      if (el.shortcode === item.shortcode) {
+        isWish = true;
+      }
+    });
 
-        return _react2.default.createElement(
-            'div',
-            { className: 'custom-col-3 col-md-4 col-sm-12 col-xs-12', key: item.id },
-            _react2.default.createElement(
-                _reactRouter.Link,
-                { to: '/kaufen/detail/zubehoer/' + deviceName + '/' + modelName + '/' + item.shortcode,
-                    className: item.discountPrice ? 'discount' : '', onClick: function onClick(e) {
-                        return gtagEnhancedEcommerce(item);
-                    } },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'item-accessory' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'icon-row' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: isWish ? "itemHeartView on" : "itemHeartView", onClick: function onClick(e) {
-                                    return handleAddModelToWishlist(e, item);
-                                } },
-                            _react2.default.createElement(
-                                'svg',
-                                { viewBox: '0 0 24 24' },
-                                _react2.default.createElement('use', { href: '#heart' }),
-                                _react2.default.createElement('use', { href: '#heart' })
-                            ),
-                            _react2.default.createElement(
-                                'svg',
-                                { className: 'hide', viewBox: '0 0 24 24' },
-                                _react2.default.createElement(
-                                    'defs',
-                                    null,
-                                    _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'images-wrap',
-                                onMouseEnter: mouseEnter,
-                                onMouseLeave: mouseOut },
-                            mainImages.map(function (item, i) {
-                                var className = 'active'; //images.length === i+1 ? 'active' : ''
-                                return _react2.default.createElement('img', { loading: 'lazy', src: item.src,
-                                    key: i,
-                                    className: className });
-                            }),
-                            realImages.map(function (item, i) {
-                                var className = ''; //images.length === i+1 ? 'active' : ''
-                                return _react2.default.createElement('img', { loading: 'lazy', src: item.src,
-                                    key: i,
-                                    className: className });
-                            })
-                        ),
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'modelName' },
-                            item.model
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'bottom-row' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'price' },
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'price-head' },
-                                'Preis'
-                            ),
-                            item.discountPrice && _react2.default.createElement(
-                                'p',
-                                { className: 'price-value discount-price' },
-                                (0, _helpersFunction.formatPrice)(item.discountPrice),
-                                ' ',
-                                window.currencyValue
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: item.discountPrice ? 'price-value old-price' : 'price-value' },
-                                (0, _helpersFunction.formatPrice)(item.price),
-                                ' ',
-                                window.currencyValue
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'text-right' },
-                            item.quantity > 0 ? _react2.default.createElement('button', { className: 'btn addToBasket',
-                                'data-status': 'out',
-                                'data-source': 'gridPage',
-                                onClick: function onClick(e) {
-                                    return addModelToBasket(e, item);
-                                } }) : _react2.default.createElement(
-                                'span',
-                                { className: 'outStock' },
-                                'Nicht auf Lager'
-                            )
-                        )
-                    )
-                )
-            )
-        );
-    }
-    function gtagEnhancedEcommerce(item) {
-        var brands = item.criterias.find(function (item) {
-            return item.id === 'manufacturer';
-        }).values;
-        gtag('event', 'select_content', {
-            "content_type": "product",
-            "items": [{
-                "id": item.shortcode,
-                "name": item.model,
-                "list_name": "Kaufen",
-                "quantity": 1,
-                "price": item.discountPrice || item.price,
-                "brand": brands.length ? brands[0].name : "",
-                "category": item.categoryName
-            }]
-        });
-    }
+    var showHoverWishlistStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: "500",
+      transform: "translateX(30%) translateY(-120%)",
+      backgroundColor: "#23234A",
+      padding: "5px 5px",
+      textAlign: "center",
+      borderRadius: "5px",
+      fontSize: "12px",
+      transition: "ease-in 0.3s",
+      zIndex: "2"
+    };
+
+    var showHoverBasketStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: "500",
+      transform: "translateX(3%) translateY(-120%)",
+      backgroundColor: "#23234A",
+      padding: "5px 5px",
+      fontFamily: "Raleway",
+      textAlign: "center",
+      borderRadius: "5px",
+      fontSize: "12px",
+      transition: "ease-in 0.3s",
+      textTransform: "initial",
+      zIndex: "2"
+    };
+
     return _react2.default.createElement(
-        'div',
-        { className: 'accessories' },
+      "div",
+      { className: "custom-col-3 col-md-4 col-sm-12 col-xs-12", key: item.id },
+      _react2.default.createElement(
+        _reactRouter.Link,
+        {
+          to: "/kaufen/detail/zubehoer/" + deviceName + "/" + modelName + "/" + item.shortcode,
+          className: item.discountPrice ? "discount" : "",
+          onClick: function onClick(e) {
+            return gtagEnhancedEcommerce(item);
+          }
+        },
         _react2.default.createElement(
-            'div',
-            { className: 'row accessory-row' },
-            models.map(mapModels)
+          "div",
+          { className: "item-accessory" },
+          _react2.default.createElement(
+            "div",
+            { className: "icon-row" },
+            _react2.default.createElement(
+              "div",
+              {
+                className: isWish ? "itemHeartView on" : "itemHeartView",
+                onMouseEnter: function onMouseEnter() {
+                  return setShowHoverWishlistGrid(index);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return setShowHoverWishlistGrid(null);
+                },
+                onClick: function onClick(e) {
+                  return handleAddModelToWishlist(e, item);
+                }
+              },
+              showHoverWishlistGrid === index && _react2.default.createElement("div", {
+                style: showHoverWishlistStyle,
+                dangerouslySetInnerHTML: { __html: t("addToWishlist") }
+              }),
+              _react2.default.createElement(
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
+              ),
+              _react2.default.createElement(
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
+                _react2.default.createElement(
+                  "defs",
+                  null,
+                  _react2.default.createElement("path", {
+                    id: "heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+              "div",
+              {
+                className: "images-wrap",
+                onMouseEnter: mouseEnter,
+                onMouseLeave: mouseOut
+              },
+              mainImages.map(function (item, i) {
+                var className = "active"; //images.length === i+1 ? 'active' : ''
+                return _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: item.src,
+                  key: i,
+                  className: className
+                });
+              }),
+              realImages.map(function (item, i) {
+                var className = ""; //images.length === i+1 ? 'active' : ''
+                return _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: item.src,
+                  key: i,
+                  className: className
+                });
+              })
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "modelName" },
+              item.model
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "bottom-row" },
+            _react2.default.createElement(
+              "div",
+              { className: "price" },
+              _react2.default.createElement(
+                "p",
+                { className: "price-head" },
+                "Preis"
+              ),
+              item.discountPrice && _react2.default.createElement(
+                "p",
+                { className: "price-value discount-price" },
+                (0, _helpersFunction.formatPrice)(item.discountPrice),
+                " ",
+                window.currencyValue
+              ),
+              _react2.default.createElement(
+                "p",
+                {
+                  className: item.discountPrice ? "price-value old-price" : "price-value"
+                },
+                (0, _helpersFunction.formatPrice)(item.price),
+                " ",
+                window.currencyValue
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "text-right" },
+              item.quantity > 0 ? _react2.default.createElement(
+                "button",
+                {
+                  className: "btn addToBasket",
+                  "data-status": "out",
+                  "data-source": "gridPage",
+                  onMouseEnter: function onMouseEnter() {
+                    return setShowHoverBasketGrid(index);
+                  },
+                  onMouseLeave: function onMouseLeave() {
+                    return setShowHoverBasketGrid(null);
+                  },
+                  onClick: function onClick(e) {
+                    return addModelToBasket(e, item);
+                  }
+                },
+                showHoverBasketGrid === index && _react2.default.createElement("div", {
+                  style: showHoverBasketStyle,
+                  dangerouslySetInnerHTML: { __html: t("addToBasket") }
+                })
+              ) : _react2.default.createElement(
+                "span",
+                { className: "outStock" },
+                "Nicht auf Lager"
+              )
+            )
+          )
         )
+      )
     );
+  }
+  function gtagEnhancedEcommerce(item) {
+    var brands = item.criterias.find(function (item) {
+      return item.id === "manufacturer";
+    }).values;
+    gtag("event", "select_content", {
+      content_type: "product",
+      items: [{
+        id: item.shortcode,
+        name: item.model,
+        list_name: "Kaufen",
+        quantity: 1,
+        price: item.discountPrice || item.price,
+        brand: brands.length ? brands[0].name : "",
+        category: item.categoryName
+      }]
+    });
+  }
+  return _react2.default.createElement(
+    "div",
+    { className: "accessories" },
+    _react2.default.createElement(
+      "div",
+      { className: "row accessory-row" },
+      models.map(mapModels)
+    )
+  );
 };
 
 ModelsGrid.propTypes = {};
 ModelsGrid.defaultProps = {};
 
-exports.default = ModelsGrid;
+exports.default = (0, _reactI18next.withTranslation)()(ModelsGrid);
 
 
-var img = ['https://uploads.remarket.ch/gK5_yljXv3AuMqba1nor.jpg', 'https://uploads.remarket.ch/6blor4sgPnUSLp7BDtN0.jpg', 'https://uploads.remarket.ch/BUiWVwG9AQKvSL3f0aH7.jpg'];
+var img = ["https://uploads.remarket.ch/gK5_yljXv3AuMqba1nor.jpg", "https://uploads.remarket.ch/6blor4sgPnUSLp7BDtN0.jpg", "https://uploads.remarket.ch/BUiWVwG9AQKvSL3f0aH7.jpg"];
 
 /***/ }),
 
@@ -22272,7 +22672,7 @@ var img = ['https://uploads.remarket.ch/gK5_yljXv3AuMqba1nor.jpg', 'https://uplo
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _slicedToArray2 = __webpack_require__(334);
@@ -22283,368 +22683,476 @@ var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactI18next = __webpack_require__(315);
+
 var _reactRouter = __webpack_require__(206);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
-    var models = _ref.models,
-        openQuickView = _ref.openQuickView,
-        capacityName = _ref.capacityName,
-        basketData = _ref.basketData,
-        wishlistData = _ref.wishlistData,
-        addModelToBasket = _ref.addModelToBasket,
-        addModelToWishlist = _ref.addModelToWishlist,
-        deviceName = _ref.deviceName;
+  var models = _ref.models,
+      openQuickView = _ref.openQuickView,
+      capacityName = _ref.capacityName,
+      basketData = _ref.basketData,
+      wishlistData = _ref.wishlistData,
+      addModelToBasket = _ref.addModelToBasket,
+      addModelToWishlist = _ref.addModelToWishlist,
+      deviceName = _ref.deviceName,
+      t = _ref.t;
 
-    var _useState = (0, _react.useState)(-1),
-        _useState2 = (0, _slicedToArray3.default)(_useState, 2),
-        moreIndex = _useState2[0],
-        setMoreIndex = _useState2[1];
+  var _useState = (0, _react.useState)(-1),
+      _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+      moreIndex = _useState2[0],
+      setMoreIndex = _useState2[1];
 
-    var _useState3 = (0, _react.useState)(),
-        _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
-        wish = _useState4[0],
-        setWish = _useState4[1];
+  var _useState3 = (0, _react.useState)(),
+      _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
+      wish = _useState4[0],
+      setWish = _useState4[1];
 
-    var interval = null;
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = (0, _slicedToArray3.default)(_useState5, 2),
+      showHoverWishlist = _useState6[0],
+      setShowHoverWishlist = _useState6[1];
 
-    function mouseEnter(e) {
-        var current = $(e.currentTarget);
-        function changeImage() {
-            if ($(current).find('img.active').next().length > 0) {
-                $(current).find('img.active').removeClass('active').next().addClass('active');
-            } else {
-                $(current).find('img').removeClass('active').first().addClass('active');
-            }
-        }
-        changeImage();
-        interval = setInterval(function () {
-            return changeImage();
-        }, 2000);
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = (0, _slicedToArray3.default)(_useState7, 2),
+      showHoverBasket = _useState8[0],
+      setShowHoverBasket = _useState8[1];
+
+  var interval = null;
+
+  function mouseEnter(e) {
+    var current = $(e.currentTarget);
+    function changeImage() {
+      if ($(current).find("img.active").next().length > 0) {
+        $(current).find("img.active").removeClass("active").next().addClass("active");
+      } else {
+        $(current).find("img").removeClass("active").first().addClass("active");
+      }
     }
-    function mouseOut(e) {
-        clearInterval(interval);
-        $(e.currentTarget).find('img').removeClass('active').first().addClass('active');
+    changeImage();
+    interval = setInterval(function () {
+      return changeImage();
+    }, 2000);
+  }
+  function mouseOut(e) {
+    clearInterval(interval);
+    $(e.currentTarget).find("img").removeClass("active").first().addClass("active");
+  }
+
+  function gtagEnhancedEcommerce(model) {
+    gtag("event", "select_content", {
+      content_type: "product",
+      items: [{
+        id: model.shortcode,
+        name: model.descriptionLong,
+        list_name: "Kaufen",
+        quantity: 1,
+        price: model.discountPrice || model.price,
+        brand: model.deviceName,
+        category: deviceName
+      }]
+    });
+    var gtagData = { category: deviceName };
+    window.localStorage.setItem("gtag", JSON.stringify(gtagData));
+  }
+
+  function handleOpenDetailPage(model, deviceName, modelName, capacity, color, shortcode) {
+    if (window.isGoogleConnection) gtagEnhancedEcommerce(model);
+    window.open("//" + window.location.host + "/kaufen/detail/" + deviceName + "/" + modelName + "/" + capacity + "/" + color + "/" + shortcode, "_self");
+  }
+
+  function showQuickView(e, model) {
+    e.stopPropagation();
+    openQuickView(model);
+    if (window.isGoogleConnection) gtagEnhancedEcommerce(model);
+  }
+
+  function showMoreInfos(e, index) {
+    e.stopPropagation();
+    if (index === moreIndex) {
+      setMoreIndex(-1);
+    } else {
+      setMoreIndex(index);
     }
+  }
 
-    function gtagEnhancedEcommerce(model) {
-        gtag('event', 'select_content', {
-            "content_type": "product",
-            "items": [{
-                "id": model.shortcode,
-                "name": model.descriptionLong,
-                "list_name": "Kaufen",
-                "quantity": 1,
-                "price": model.discountPrice || model.price,
-                "brand": model.deviceName,
-                "category": deviceName
-            }]
-        });
-        var gtagData = { "category": deviceName };
-        window.localStorage.setItem('gtag', JSON.stringify(gtagData));
-    }
+  function handleAddModelToBasket(e, model) {
+    addModelToBasket(e, model);
+  }
 
-    function handleOpenDetailPage(model, deviceName, modelName, capacity, color, shortcode) {
-        if (window.isGoogleConnection) gtagEnhancedEcommerce(model);
-        window.open('//' + window.location.host + '/kaufen/detail/' + deviceName + '/' + modelName + '/' + capacity + '/' + color + '/' + shortcode, '_self');
-    }
+  function handleAddModelToWishlist(e, model) {
+    addModelToWishlist(e, model);
+  }
 
-    function showQuickView(e, model) {
-        e.stopPropagation();
-        openQuickView(model);
-        if (window.isGoogleConnection) gtagEnhancedEcommerce(model);
-    }
+  function mapCriterias(criterias) {
+    var dataArr = [];
+    criterias.forEach(function (item) {
+      if (item.id === 2 || item.id === 4 || item.id === 5) {
+        dataArr.push(_react2.default.createElement(
+          "div",
+          { key: item.id, className: "device-criteria criteria-" + item.id },
+          _react2.default.createElement(
+            "span",
+            null,
+            item.name,
+            ":"
+          ),
+          _react2.default.createElement(
+            "span",
+            null,
+            item.values.map(function (item, i) {
+              return _react2.default.createElement(
+                "b",
+                { key: i },
+                item.name,
+                i < item.length - 1 ? "," : ""
+              );
+            })
+          )
+        ));
+      }
+    });
+    return dataArr;
+  }
 
-    function showMoreInfos(e, index) {
-        e.stopPropagation();
-        if (index === moreIndex) {
-            setMoreIndex(-1);
-        } else {
-            setMoreIndex(index);
-        }
-    }
+  function mapModels(model, index) {
+    var modelName = model.model.split(" ").join("-").toLowerCase() || "modelName",
+        deviceName = model.deviceName.toLowerCase().replace(/ /g, "-") || "deviceName",
+        color = model.color ? model.color.toLowerCase() : "color",
+        capacity = model.capacity ? model.capacity.toLowerCase() : "capacity";
 
-    function handleAddModelToBasket(e, model) {
-        addModelToBasket(e, model);
-    }
+    var mainImages = [].concat(model.deviceImages.mainImg);
+    var realImages = [].concat(model.deviceImages.realImg);
+    var description = "";
+    if (description != "") description += ", ";
+    description += model.capacity !== "" ? model.capacity : "";
+    if (description != "") description += ", ";
+    description += model.color !== "" ? model.color : "";
+    if (description != "") description += ", ";
+    description += model.warranty !== "" ? "Garantie: " + model.warranty : "";
+    description = description.length > 28 ? description.substr(0, 28) + "..." : description;
+    var condition = model.condition.length > 24 ? model.condition.substr(0, 24) + "..." : model.condition;
+    var placeDescription = model.placeDescription.length > 24 ? model.placeDescription.substr(0, 24) + "..." : model.placeDescription;
 
-    function handleAddModelToWishlist(e, model) {
-        addModelToWishlist(e, model);
-    }
+    var isWish = false;
 
-    function mapCriterias(criterias) {
-        var dataArr = [];
-        criterias.forEach(function (item) {
-            if (item.id === 2 || item.id === 4 || item.id === 5) {
-                dataArr.push(_react2.default.createElement(
-                    'div',
-                    { key: item.id, className: 'device-criteria criteria-' + item.id },
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        item.name,
-                        ':'
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        item.values.map(function (item, i) {
-                            return _react2.default.createElement(
-                                'b',
-                                { key: i },
-                                item.name,
-                                i < item.length - 1 ? ',' : ''
-                            );
-                        })
-                    )
-                ));
-            }
-        });
-        return dataArr;
-    }
+    wishlistData.map(function (el) {
+      if (el.shortcode === model.shortcode) {
+        isWish = true;
+      }
+    });
 
-    function mapModels(model, index) {
-        var modelName = model.model.split(" ").join('-').toLowerCase() || 'modelName',
-            deviceName = model.deviceName.toLowerCase().replace(/ /g, '-') || 'deviceName',
-            color = model.color ? model.color.toLowerCase() : 'color',
-            capacity = model.capacity ? model.capacity.toLowerCase() : 'capacity';
+    var showHoverWishlistStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: '500',
+      transform: 'translateX(30%) translateY(-80%)',
+      backgroundColor: '#23234A',
+      padding: '5px 5px',
+      textAlign: 'center',
+      borderRadius: '5px',
+      fontSize: '12px',
+      transition: 'ease-in 0.3s',
+      zIndex: '2'
+    };
 
-        var mainImages = [].concat(model.deviceImages.mainImg);
-        var realImages = [].concat(model.deviceImages.realImg);
-        var description = '';
-        if (description != '') description += ', ';
-        description += model.capacity !== '' ? model.capacity : '';
-        if (description != '') description += ', ';
-        description += model.color !== '' ? model.color : '';
-        if (description != '') description += ', ';
-        description += model.warranty !== '' ? 'Garantie: ' + model.warranty : '';
-        description = description.length > 28 ? description.substr(0, 28) + '...' : description;
-        var condition = model.condition.length > 24 ? model.condition.substr(0, 24) + '...' : model.condition;
-        var placeDescription = model.placeDescription.length > 24 ? model.placeDescription.substr(0, 24) + '...' : model.placeDescription;
+    var showHoverBasketStyle = {
+      position: "absolute",
+      top: "0",
+      right: "0",
+      color: "#fff",
+      fontWeight: '500',
+      transform: 'translateX(30%) translateY(-120%)',
+      backgroundColor: '#23234A',
+      padding: '5px 5px',
+      fontFamily: 'Raleway',
+      textAlign: 'center',
+      borderRadius: '5px',
+      fontSize: '12px',
+      transition: 'ease-in 0.3s',
+      textTransform: 'initial',
+      zIndex: '2'
+    };
 
-        var isWish = false;
-
-        wishlistData.map(function (el) {
-            if (el.shortcode === model.shortcode) {
-                isWish = true;
-            }
-        });
-
-        return _react2.default.createElement(
-            'div',
-            { className: 'custom-col-3 col-md-4 col-sm-12 col-xs-12', key: model.id, onClick: function onClick(e) {
-                    return handleOpenDetailPage(model, deviceName, modelName, capacity, color, model.shortcode);
-                } },
-            _react2.default.createElement(
-                _reactRouter.Link,
-                { className: model.discountPrice ? 'discount' : '' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'item-device' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'icon-row' },
-                        window.isMobile && _react2.default.createElement(
-                            'div',
-                            { className: 'itemQuickView', onClick: function onClick(e) {
-                                    return showMoreInfos(e, index);
-                                } },
-                            _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/aside_filter_category_icons/zoom-in-1.svg', alt: '' })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: isWish ? "itemHeartView on" : "itemHeartView", onClick: function onClick(e) {
-                                    return handleAddModelToWishlist(e, model);
-                                } },
-                            _react2.default.createElement(
-                                'svg',
-                                { viewBox: '0 0 24 24' },
-                                _react2.default.createElement('use', { href: '#heart' }),
-                                _react2.default.createElement('use', { href: '#heart' })
-                            ),
-                            _react2.default.createElement(
-                                'svg',
-                                { className: 'hide', viewBox: '0 0 24 24' },
-                                _react2.default.createElement(
-                                    'defs',
-                                    null,
-                                    _react2.default.createElement('path', { id: 'heart', d: 'M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z' })
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'images-wrap',
-                                onMouseEnter: mouseEnter,
-                                onMouseLeave: mouseOut },
-                            mainImages.map(function (item, i) {
-                                var className = 'active';
-                                return _react2.default.createElement('img', { loading: 'lazy', src: item.src,
-                                    key: i,
-                                    className: className });
-                            }),
-                            realImages.map(function (item, i) {
-                                var className = '';
-                                return _react2.default.createElement('img', { loading: 'lazy', src: item.src,
-                                    key: i,
-                                    className: className });
-                            })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'modelTitle' },
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'modelName' },
-                                model.model
-                            ),
-                            model.colorCode && _react2.default.createElement('span', { className: 'colorPic',
-                                style: { backgroundColor: model.colorCode } })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'description-row' },
-                        description
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'place-row' },
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/aside_filter_category_icons/location.svg', alt: '' }),
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            placeDescription
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'condition-row' },
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/aside_filter_category_icons/mobile-button-light.svg', alt: '' }),
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            condition
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'bottom-row' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'price' },
-                            model.discountPrice && _react2.default.createElement(
-                                'p',
-                                { className: 'price-value discount-price' },
-                                model.discountPrice,
-                                ' ',
-                                window.currencyValue
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: model.discountPrice ? 'price-value old-price' : 'price-value' },
-                                model.price,
-                                ' ',
-                                window.currencyValue
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'monthlyPrice' },
-                                'ab ',
-                                model.discountPrice ? (model.discountPrice / 12).toFixed(2) : (model.price / 12).toFixed(2),
-                                ' ',
-                                window.currencyValue,
-                                '/Monat'
-                            )
-                        ),
-                        _react2.default.createElement('button', { 'data-id': model.id,
-                            'data-status': basketData.some(function (item) {
-                                return item.id === model.id;
-                            }) ? 'in' : 'out',
-                            'data-source': 'listingPage',
-                            className: basketData.some(function (item) {
-                                return item.id === model.id;
-                            }) ? 'btn addToBasket in' : 'btn addToBasket out',
-                            onClick: function onClick(e) {
-                                return handleAddModelToBasket(e, model);
-                            } })
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: moreIndex !== index ? "hover-block" : "hover-block moreInfo" },
-                        mapCriterias(model.criterias),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'device-criteria criteria' },
-                            _react2.default.createElement(
-                                'span',
-                                null,
-                                'Garantie:'
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                null,
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    model.warranty
-                                )
-                            )
-                        ),
-                        model.batteryCapacity || model.batteryLoadcycle ? _react2.default.createElement(
-                            'div',
-                            { className: 'device-criteria criteria' },
-                            _react2.default.createElement(
-                                'span',
-                                null,
-                                'Batterie:'
-                            ),
-                            model.batteryCapacity ? _react2.default.createElement(
-                                'span',
-                                null,
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    'Kapazitat: ',
-                                    model.batteryCapacity == -1 ? "n.v." : model.batteryCapacity + '%'
-                                )
-                            ) : '',
-                            model.batteryLoadcycle ? _react2.default.createElement(
-                                'span',
-                                null,
-                                _react2.default.createElement(
-                                    'b',
-                                    null,
-                                    'Ladezyklen: ',
-                                    model.batteryLoadcycle == -1 ? "n.v." : model.batteryLoadcycle
-                                )
-                            ) : ''
-                        ) : ''
-                    )
-                )
-            )
-        );
-    }
     return _react2.default.createElement(
-        'div',
-        { className: 'devicelists' },
+      "div",
+      {
+        className: "custom-col-3 col-md-4 col-sm-12 col-xs-12",
+        key: model.id,
+        onClick: function onClick(e) {
+          return handleOpenDetailPage(model, deviceName, modelName, capacity, color, model.shortcode);
+        }
+      },
+      _react2.default.createElement(
+        _reactRouter.Link,
+        { className: model.discountPrice ? "discount" : "" },
         _react2.default.createElement(
-            'div',
-            { className: 'row deviceitem-row' },
-            models.map(mapModels)
+          "div",
+          { className: "item-device" },
+          _react2.default.createElement(
+            "div",
+            { className: "icon-row" },
+            window.isMobile && _react2.default.createElement(
+              "div",
+              {
+                className: "itemQuickView",
+                onClick: function onClick(e) {
+                  return showMoreInfos(e, index);
+                }
+              },
+              _react2.default.createElement("img", {
+                loading: "lazy",
+                src: "/images/design/aside_filter_category_icons/zoom-in-1.svg",
+                alt: ""
+              })
+            ),
+            _react2.default.createElement(
+              "div",
+              {
+                className: isWish ? "itemHeartView on" : "itemHeartView",
+                onMouseEnter: function onMouseEnter() {
+                  return setShowHoverWishlist(index);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return setShowHoverWishlist(null);
+                },
+                onClick: function onClick(e) {
+                  return handleAddModelToWishlist(e, model);
+                }
+              },
+              showHoverWishlist === index && _react2.default.createElement("div", { style: showHoverWishlistStyle, dangerouslySetInnerHTML: { __html: t('addToWishlist') } }),
+              _react2.default.createElement(
+                "svg",
+                { viewBox: "0 0 24 24" },
+                _react2.default.createElement("use", { href: "#heart" }),
+                _react2.default.createElement("use", { href: "#heart" })
+              ),
+              _react2.default.createElement(
+                "svg",
+                { className: "hide", viewBox: "0 0 24 24" },
+                _react2.default.createElement(
+                  "defs",
+                  null,
+                  _react2.default.createElement("path", {
+                    id: "heart",
+                    d: "M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+                  })
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+              "div",
+              {
+                className: "images-wrap",
+                onMouseEnter: mouseEnter,
+                onMouseLeave: mouseOut
+              },
+              mainImages.map(function (item, i) {
+                var className = "active";
+                return _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: item.src,
+                  key: i,
+                  className: className
+                });
+              }),
+              realImages.map(function (item, i) {
+                var className = "";
+                return _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: item.src,
+                  key: i,
+                  className: className
+                });
+              })
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "modelTitle" },
+              _react2.default.createElement(
+                "p",
+                { className: "modelName" },
+                model.model
+              ),
+              model.colorCode && _react2.default.createElement("span", {
+                className: "colorPic",
+                style: { backgroundColor: model.colorCode }
+              })
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "description-row" },
+            description
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "place-row" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              src: "/images/design/aside_filter_category_icons/location.svg",
+              alt: ""
+            }),
+            _react2.default.createElement(
+              "span",
+              null,
+              placeDescription
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "condition-row" },
+            _react2.default.createElement("img", {
+              loading: "lazy",
+              src: "/images/design/aside_filter_category_icons/mobile-button-light.svg",
+              alt: ""
+            }),
+            _react2.default.createElement(
+              "span",
+              null,
+              condition
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "bottom-row" },
+            _react2.default.createElement(
+              "div",
+              { className: "price" },
+              model.discountPrice && _react2.default.createElement(
+                "p",
+                { className: "price-value discount-price" },
+                model.discountPrice,
+                " ",
+                window.currencyValue
+              ),
+              _react2.default.createElement(
+                "p",
+                {
+                  className: model.discountPrice ? "price-value old-price" : "price-value"
+                },
+                model.price,
+                " ",
+                window.currencyValue
+              ),
+              _react2.default.createElement(
+                "p",
+                { className: "monthlyPrice" },
+                "ab",
+                " ",
+                model.discountPrice ? (model.discountPrice / 12).toFixed(2) : (model.price / 12).toFixed(2),
+                " ",
+                window.currencyValue,
+                "/Monat"
+              )
+            ),
+            _react2.default.createElement(
+              "button",
+              {
+                "data-id": model.id,
+                "data-status": basketData.some(function (item) {
+                  return item.id === model.id;
+                }) ? "in" : "out",
+                "data-source": "listingPage",
+                className: basketData.some(function (item) {
+                  return item.id === model.id;
+                }) ? "btn addToBasket in" : "btn addToBasket out",
+                onMouseEnter: function onMouseEnter() {
+                  return setShowHoverBasket(index);
+                },
+                onMouseLeave: function onMouseLeave() {
+                  return setShowHoverBasket(null);
+                },
+                onClick: function onClick(e) {
+                  return handleAddModelToBasket(e, model);
+                }
+              },
+              showHoverBasket === index && _react2.default.createElement("div", { style: showHoverBasketStyle, dangerouslySetInnerHTML: { __html: t('addToBasket') } })
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            {
+              className: moreIndex !== index ? "hover-block" : "hover-block moreInfo"
+            },
+            mapCriterias(model.criterias),
+            _react2.default.createElement(
+              "div",
+              { className: "device-criteria criteria" },
+              _react2.default.createElement(
+                "span",
+                null,
+                "Garantie:"
+              ),
+              _react2.default.createElement(
+                "span",
+                null,
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  model.warranty
+                )
+              )
+            ),
+            model.batteryCapacity || model.batteryLoadcycle ? _react2.default.createElement(
+              "div",
+              { className: "device-criteria criteria" },
+              _react2.default.createElement(
+                "span",
+                null,
+                "Batterie:"
+              ),
+              model.batteryCapacity ? _react2.default.createElement(
+                "span",
+                null,
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  "Kapazitat:",
+                  " ",
+                  model.batteryCapacity == -1 ? "n.v." : model.batteryCapacity + "%"
+                )
+              ) : "",
+              model.batteryLoadcycle ? _react2.default.createElement(
+                "span",
+                null,
+                _react2.default.createElement(
+                  "b",
+                  null,
+                  "Ladezyklen:",
+                  " ",
+                  model.batteryLoadcycle == -1 ? "n.v." : model.batteryLoadcycle
+                )
+              ) : ""
+            ) : ""
+          )
         )
+      )
     );
+  }
+  return _react2.default.createElement(
+    "div",
+    { className: "devicelists" },
+    _react2.default.createElement(
+      "div",
+      { className: "row deviceitem-row" },
+      models.map(mapModels)
+    )
+  );
 };
 
 DeviceModelsGrid.propTypes = {};
 DeviceModelsGrid.defaultProps = {};
 
-exports.default = DeviceModelsGrid;
+exports.default = (0, _reactI18next.withTranslation)()(DeviceModelsGrid);
 
 /***/ }),
 
@@ -22733,7 +23241,7 @@ var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24935,11 +25443,11 @@ exports.default = TopFilter;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.ModelsInnerPage = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -25066,1566 +25574,1621 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ModelsInnerPage = exports.ModelsInnerPage = function (_Component) {
-    (0, _inherits3.default)(ModelsInnerPage, _Component);
+  (0, _inherits3.default)(ModelsInnerPage, _Component);
 
-    function ModelsInnerPage(props) {
-        (0, _classCallCheck3.default)(this, ModelsInnerPage);
+  function ModelsInnerPage(props) {
+    (0, _classCallCheck3.default)(this, ModelsInnerPage);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (ModelsInnerPage.__proto__ || Object.getPrototypeOf(ModelsInnerPage)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ModelsInnerPage.__proto__ || Object.getPrototypeOf(ModelsInnerPage)).call(this, props));
 
-        _this.mapDuplicateFilter = function () {
-            var path = _this.props.location.pathname;
+    _this.mapDuplicateFilter = function () {
+      var path = _this.props.location.pathname;
 
-            var searchParamsArr = path.split('/').filter(function (x) {
-                return x;
-            });
-            var _this$state = _this.state,
-                selectedFilterOptions = _this$state.selectedFilterOptions,
-                mainModelGroupId = _this$state.mainModelGroupId;
-            var params = _this.props.params;
+      var searchParamsArr = path.split("/").filter(function (x) {
+        return x;
+      });
+      var _this$state = _this.state,
+          selectedFilterOptions = _this$state.selectedFilterOptions,
+          mainModelGroupId = _this$state.mainModelGroupId;
+      var params = _this.props.params;
 
-            var filtered = void 0;
+      var filtered = void 0;
 
-            searchParamsArr.forEach(function (el, index) {
-                if (el === 'filter') {
-                    searchParamsArr.length = index + 1;
-                    searchParamsArr = searchParamsArr.join('/');
-                }
-            });
+      searchParamsArr.forEach(function (el, index) {
+        if (el === "filter") {
+          searchParamsArr.length = index + 1;
+          searchParamsArr = searchParamsArr.join("/");
+        }
+      });
 
-            Object.keys(params).forEach(function (key) {
-                if (typeof params[key] === 'undefined') {
-                    delete params[key];
-                }
-            });
+      Object.keys(params).forEach(function (key) {
+        if (typeof params[key] === "undefined") {
+          delete params[key];
+        }
+      });
 
-            var filteredParams = Object.values(params);
-            for (var elem in filteredParams) {
-                if (filteredParams[elem].split('=').length === 1 || filteredParams[elem].split('=')[1] === 'alle') {
-                    delete filteredParams[elem];
-                    filtered = filteredParams.filter(function (e) {
-                        return e;
-                    });
-                }
-            }
+      var filteredParams = Object.values(params);
+      for (var elem in filteredParams) {
+        if (filteredParams[elem].split("=").length === 1 || filteredParams[elem].split("=")[1] === "alle") {
+          delete filteredParams[elem];
+          filtered = filteredParams.filter(function (e) {
+            return e;
+          });
+        }
+      }
 
-            if (filtered && selectedFilterOptions) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    filtered.length > 3 ? _react2.default.createElement(
-                        'div',
-                        { className: 'duplicate-header' },
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'duplicate-header__title' },
-                            'Filteroptionen'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { to: '/' + searchParamsArr, className: 'duplicate-header__link' },
-                            'Alle Filter entfernen'
-                        )
-                    ) : null,
-                    filtered.map(function (el, i) {
-                        var searchKey = el.split('=')[0];
-                        var searchValue = el.split('=')[1];
-                        var checkedValues = [];
+      if (filtered && selectedFilterOptions) {
+        return _react2.default.createElement(
+          "div",
+          null,
+          filtered.length > 3 ? _react2.default.createElement(
+            "div",
+            { className: "duplicate-header" },
+            _react2.default.createElement(
+              "span",
+              { className: "duplicate-header__title" },
+              "Filteroptionen"
+            ),
+            _react2.default.createElement(
+              _reactRouter.Link,
+              {
+                to: "/" + searchParamsArr,
+                className: "duplicate-header__link"
+              },
+              "Alle Filter entfernen"
+            )
+          ) : null,
+          filtered.map(function (el, i) {
+            var searchKey = el.split("=")[0];
+            var searchValue = el.split("=")[1];
+            var checkedValues = [];
 
-                        if (selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].name) {
-                            selectedFilterOptions[searchKey].values.forEach(function (el) {
-                                searchValue.split(',').forEach(function (el2) {
-                                    if (+el2 === +el.id) {
-                                        checkedValues.push(el);
-                                    }
-                                });
-                            });
-                        }
-
-                        var hasName = selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].name;
-                        var hasValues = selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].values;
-                        if (!hasName && !hasValues) return null;
-                        return _react2.default.createElement(
-                            'span',
-                            { className: 'duplicate-filter', key: i },
-                            hasName ? _react2.default.createElement(
-                                'span',
-                                { className: 'duplicate-filter__key' },
-                                _react2.default.createElement('img', { loading: 'lazy',
-                                    src: '/images/design/aside_filter_category_icons/' + mainModelGroupId + '/' + mainModelGroupId + '-' + searchKey + '.svg',
-                                    onError: function onError(e) {
-                                        e.target.src = '/images/design/aside_filter_category_icons/default-icon.svg';
-                                    } }),
-                                selectedFilterOptions[searchKey].name,
-                                ':'
-                            ) : null,
-                            hasValues ? _react2.default.createElement(
-                                'span',
-                                { className: 'duplicate-filter__values' },
-                                checkedValues.map(function (item, i2) {
-                                    return _react2.default.createElement(
-                                        'span',
-                                        { key: i2 },
-                                        item.name,
-                                        _react2.default.createElement('i', { 'data-target-key': searchKey,
-                                            'data-target-id': item.id,
-                                            onClick: function onClick(e) {
-                                                return _this.goTo(e);
-                                            },
-                                            className: 'fa fa-times',
-                                            style: { fontSize: '12px', paddingLeft: '10px' },
-                                            'aria-hidden': 'true' })
-                                    );
-                                })
-                            ) : null
-                        );
-                    })
-                );
-            }
-        };
-
-        _this.goTo = function (e) {
-            var path = _this.props.location.pathname;
-
-            var searchParamsArr = path.split('/').filter(function (x) {
-                return x;
-            });
-            var targetParam = e.target.dataset.targetId;
-            var targetKey = e.target.dataset.targetKey;
-
-            var searchParams = void 0;
-            var searchKey = void 0;
-            var replasedParam = void 0;
-            var filteredOption = void 0;
-
-            for (var i = 0; i < searchParamsArr.length; i++) {
-                searchKey = searchParamsArr[i].split('=')[0];
-                searchParams = searchParamsArr[i].split('=')[1];
-
-                if (searchParamsArr[i].substr(0, targetKey.length) === targetKey) {
-                    searchParamsArr.splice(i, 1);
-
-                    if (searchKey === targetKey) {
-                        replasedParam = searchParams.split(',').filter(function (elem) {
-                            return elem !== targetParam && elem !== ',';
-                        });
-
-                        if (replasedParam === 'alle' || replasedParam.length === 0) {
-                            filteredOption = searchKey + '=alle';
-                        } else filteredOption = searchKey + '=' + replasedParam.join(',');
-
-                        searchParamsArr.push(filteredOption);
-                        searchParamsArr = searchParamsArr.join('/');
-                        _reactRouter.browserHistory.push('/' + searchParamsArr);
-                    }
-                }
-            }
-        };
-
-        _this.mapSelectedCriteria = function (all, selected) {
-            var filtered = [];
-            var newAll = [];
-            var diff = new Set();
-
-            for (var item in selected) {
-                for (var item2 in all) {
-
-                    if ((0, _typeof3.default)(all[item2]) === 'object') newAll.push(all[item2]);
-
-                    newAll = newAll.filter(function (property) {
-                        return typeof property.name !== "undefined";
-                    });
-                }
-
-                if ((0, _typeof3.default)(selected[item]) === 'object') filtered.push(selected[item]);
-                filtered = filtered.filter(function (property) {
-                    return typeof property.name !== "undefined";
+            if (selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].name) {
+              selectedFilterOptions[searchKey].values.forEach(function (el) {
+                searchValue.split(",").forEach(function (el2) {
+                  if (+el2 === +el.id) {
+                    checkedValues.push(el);
+                  }
                 });
-            }
-        };
-
-        _this.state = {
-            pagination: {
-                activePage: 0,
-                totalItemsCount: 0,
-                pageCount: 0
-            },
-            options: _this.props.params.deviceCategory1 === 'zubehör' ? [{ label: "Nach Beliebtheit", value: 'popular' }, { label: "Günstige Preise zuerst anzeigen", value: 'niedrighoch' }, { label: "Hohe Preise zuerst anzeigen", value: 'hochniedrig' }, { label: "Nach Einstelldatum sortieren", value: 'neu' }] : [{ label: "Beliebteste Produkte", value: 'popular' }, { label: "Günstige Preise zuerst anzeigen", value: 'niedrighoch' }, { label: "Hohe Preise zuerst anzeigen", value: 'hochniedrig' }, { label: "Nach Einstelldatum sortieren", value: 'neu' }],
-            selectedFilterOptions: {
-                page: 1,
-                price: {
-                    min: 0,
-                    max: 1,
-                    maxSearch: 0,
-                    minSearch: 0
-                },
-                lagerort: { values: [] },
-                modell: { values: [] },
-                zustand: { values: [] },
-                sort: _this.props.params.deviceCategory1 === 'zubehör' ? 'popular' : 'popular'
-            },
-            availableFilterOptions: {
-                lagerort: { values: [] },
-                modell: { values: [] },
-                zustand: { values: [] }
-            },
-            mainModelGroupId: null,
-            modelCategoryId: 0,
-            viewMode: _this.props.params.deviceCategory1 !== 'zubehör' ? 'List' : 'Group',
-            totalCountModels: 0,
-            addBasketEffect: null,
-            quickViewPage: null,
-            capacityName: null,
-            infoNoModels: false,
-            showSidebar: false,
-            seoData: null,
-            successAddToBasket: null,
-            recommendProducts: null,
-            seoAccessoriesData: null,
-            productModels: [],
-            inputPriceMin: 0,
-            inputPriceMax: 0,
-            inputPriceErr: {
-                min: false,
-                max: false
-            }
-        };
-
-        _this.changeViewMode = _this.changeViewMode.bind(_this);
-        _this.changePrice = _this.changePrice.bind(_this);
-        _this.changeInputPrice = _this.changeInputPrice.bind(_this);
-        _this.applyInputPrice = _this.applyInputPrice.bind(_this);
-        _this.changeSortBy = _this.changeSortBy.bind(_this);
-        _this.handlePageChange = _this.handlePageChange.bind(_this);
-        _this.handleClickItemGroup = _this.handleClickItemGroup.bind(_this);
-        _this.handleChooseFilterItemMobile = _this.handleChooseFilterItemMobile.bind(_this);
-        _this.handleApplyFiltersMobile = _this.handleApplyFiltersMobile.bind(_this);
-        _this.addModelToBasket = _this.addModelToBasket.bind(_this);
-        _this.addModelToWishlist = _this.addModelToWishlist.bind(_this);
-        _this.openQuickView = _this.openQuickView.bind(_this);
-        _this.closeQuickView = _this.closeQuickView.bind(_this);
-        _this._parseUrl = _this._parseUrl.bind(_this);
-        _this._getBrowserUrl = _this._getBrowserUrl.bind(_this);
-        _this._getObjForRequest = _this._getObjForRequest.bind(_this);
-        _this._getObjForRequestByCategoryId = _this._getObjForRequestByCategoryId.bind(_this);
-
-        _this._setSelectedFilterOption = _this._setSelectedFilterOption.bind(_this);
-        _this._parseDevicesForUrl = _this._parseDevicesForUrl.bind(_this);
-        _this._getModelsData = _this._getModelsData.bind(_this);
-        _this._getModelsDataByCategoryId = _this._getModelsDataByCategoryId.bind(_this);
-        _this._getAccessoriesData = _this._getAccessoriesData.bind(_this);
-        _this._getSeoData = _this._getSeoData.bind(_this);
-        _this.openSuccessAddToBasket = _this.openSuccessAddToBasket.bind(_this);
-        _this.closeSuccessAddToBasket = _this.closeSuccessAddToBasket.bind(_this);
-        _this.showFilters = _this.showFilters.bind(_this);
-        return _this;
-    }
-
-    (0, _createClass3.default)(ModelsInnerPage, [{
-        key: '_getAccessoriesData',
-        value: function _getAccessoriesData(params) {
-            var _this2 = this;
-
-            var deviceName = null,
-                ifNoCriterias = false;
-            /*find device name*/
-            for (var key in params) {
-                if (key.includes('deviceCategory') && params[key]) deviceName = params[key].replace(/-/g, ' ');
-            }
-            var selectedFilterOptions = this._parseUrl(params);
-            var objForRequest = this._getObjForRequest(selectedFilterOptions, selectedFilterOptions.page, deviceName);
-            document.getElementById('spinner-box-load').style.display = 'block';
-            this.setState({ infoNoModels: false });
-            _index2.default.getModels('/api/getShopCategoryProducts', objForRequest).then(function (_ref) {
-                var data = _ref.data;
-
-                document.getElementById('spinner-box-load').style.display = 'none';
-                _this2.setState({ viewMode: 'Group' });
-                var filterOptions = {};
-                var availableFilterOptions = {};
-
-                selectedFilterOptions = _this2._setSelectedFilterOption(selectedFilterOptions, data);
-                data.meta.criteriasList.forEach(function (item) {
-                    if (!filterOptions['kategorie-' + item.id]) filterOptions['kategorie-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!availableFilterOptions['kategorie-' + item.id]) availableFilterOptions['kategorie-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!selectedFilterOptions['kategorie-' + item.id]) {
-                        selectedFilterOptions['kategorie-' + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
-                        if (selectedFilterOptions['kategorie-' + item.id].length === 0) selectedFilterOptions['kategorie-' + item.id] = item;
-                    }
-                });
-                var pagination = data.meta.pagination;
-                var capacityName = data.meta.capacityName;
-
-                selectedFilterOptions.price.max = data.meta.maxPrice;
-                selectedFilterOptions.price.min = data.meta.minPrice;
-                if (selectedFilterOptions.price.maxSearch === 0) selectedFilterOptions.price.maxSearch = data.meta.maxPrice;
-                if (selectedFilterOptions.price.minSearch === 0) selectedFilterOptions.price.minSearch = data.meta.minPrice;
-
-                _this2.props.shopActions.setFilterOptions(filterOptions);
-                _this2.props.shopActions.loadModels(data.data, data.meta.categoriesList);
-                var count = Math.ceil(pagination.total / pagination.per_page);
-                selectedFilterOptions.page = count > selectedFilterOptions.page ? selectedFilterOptions.page : count;
-                _this2.setState({
-                    pagination: (0, _extends3.default)({}, _this2.state.pagination, {
-                        activePage: selectedFilterOptions.page - 1,
-                        totalItemsCount: pagination.total,
-                        pageCount: count
-                    }),
-                    totalCountModels: data.meta.totalCount,
-                    selectedFilterOptions: selectedFilterOptions,
-                    availableFilterOptions: availableFilterOptions,
-                    capacityName: capacityName,
-                    infoNoModels: !ifNoCriterias && data.data.length === 0,
-                    showSidebar: data.meta.minPrice !== null,
-                    seoAccessoriesData: (0, _extends3.default)({}, _this2.state.seoAccessoriesData, {
-                        html_description: data.meta.html_description,
-                        meta_description: data.meta.meta_description,
-                        meta_keywords: data.meta.meta_keywords,
-                        title: data.meta.title
-                    })
-                });
-                if (window.isGoogleConnection) _this2.gtagEnhancedEcommerce();
-                document.getElementById('devicesListSmall').scrollIntoView();
-            }).catch(function () {
-                document.getElementById('spinner-box-load').style.display = 'none';
-                if (window.isGoogleConnection === true) {
-                    _this2.props.shopActions.setFilterOptions({
-                        lagerort: { values: [] },
-                        modell: { values: [] },
-                        zustand: { values: [] }
-                    });
-                    _this2.props.shopActions.loadModels([], []);
-                    _this2.setState({ infoNoModels: true });
-                    _this2.setState({ seoAccessoriesData: null });
-                }
-            });
-        }
-    }, {
-        key: '_getModelsDataByCategoryId',
-        value: function _getModelsDataByCategoryId(params) {
-            var modelCategoryId = 0;
-            for (var key in params) {
-                if (key.includes('param1') && params[key]) {
-                    modelCategoryId = params[key].split('=')[1];
-                }
-            }
-            if (modelCategoryId != 0) {
-                var selectedFilterOptions = this._parseUrl(params);
-                var objForRequest = this._getObjForRequestByCategoryId(selectedFilterOptions, selectedFilterOptions.page, modelCategoryId);
-                document.getElementById('spinner-box-load').style.display = 'block';
-                this.setState({
-                    infoNoModels: false,
-                    objForRequest: objForRequest
-                });
-
-                this.setState({
-                    modelCategoryId: modelCategoryId
-                });
-
-                // api.getModels(`/api/modelsByCategoryId`, objForRequest)
-                //     .then(({data}) => {
-                //         document.getElementById('spinner-box-load').style.display = 'none'
-                //         this.setState({
-                //             productModels: data.meta.namesList.values
-                //         });
-
-                //     })
-                //     .catch(() => {
-                //         document.getElementById('spinner-box-load').style.display = 'none'
-                //         this.setState({
-                //             productModels: []
-                //         });
-                //     })
-            }
-        }
-    }, {
-        key: '_getModelsData',
-        value: function _getModelsData(params) {
-            var _this3 = this;
-
-            var deviceName = null,
-                ifNoCriterias = false;
-            /*find device name*/
-            for (var key in params) {
-                if (key.includes('deviceCategory') && params[key]) deviceName = params[key].replace(/-/g, ' ');
+              });
             }
 
-            var selectedFilterOptions = this._parseUrl(params);
-            var objForRequest = this._getObjForRequest(selectedFilterOptions, selectedFilterOptions.page, deviceName);
-            document.getElementById('spinner-box-load').style.display = 'block';
-            this.setState({
-                infoNoModels: false,
-                objForRequest: objForRequest
-            });
-
-            _index2.default.getModels('/api/models', objForRequest).then(function (_ref2) {
-                var data = _ref2.data;
-
-                document.getElementById('spinner-box-load').style.display = 'none';
-
-                var filterOptions = {
-                    lagerort: data.meta.placesList,
-                    modell: data.meta.namesList,
-                    zustand: data.meta.conditionsList
-                };
-
-                var availableFilterOptions = {
-                    lagerort: data.meta.placesList,
-                    modell: data.meta.namesList,
-                    zustand: data.meta.conditionsList
-                };
-
-                selectedFilterOptions = _this3._setSelectedFilterOption(selectedFilterOptions, data);
-
-                data.meta.criteriasList.forEach(function (item) {
-                    if (!filterOptions['kategorie-' + item.id]) filterOptions['kategorie-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!availableFilterOptions['kategorie-' + item.id]) availableFilterOptions['kategorie-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!selectedFilterOptions['kategorie-' + item.id]) {
-                        selectedFilterOptions['kategorie-' + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
-                        if (selectedFilterOptions['kategorie-' + item.id].length === 0) selectedFilterOptions['kategorie-' + item.id] = item;
-                    }
-                });
-
-                data.meta.specificationsList.forEach(function (item) {
-                    if (!filterOptions['spezifikation-' + item.id]) filterOptions['spezifikation-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!availableFilterOptions['spezifikation-' + item.id]) availableFilterOptions['spezifikation-' + item.id] = (0, _extends3.default)({}, item);
-                    if (!selectedFilterOptions['spezifikation-' + item.id]) {
-                        selectedFilterOptions['spezifikation-' + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
-                        if (selectedFilterOptions['spezifikation-' + item.id].length === 0) selectedFilterOptions['spezifikation-' + item.id] = item;
-                    }
-                });
-
-                if (data.meta.warrantiesList.values.length > 0) {
-                    filterOptions.garantie = data.meta.warrantiesList;
-                    availableFilterOptions.garantie = data.meta.warrantiesList;
-                    if (!selectedFilterOptions.garantie) selectedFilterOptions.garantie = (0, _extends3.default)({}, data.meta.warrantiesList);
-                }
-
-                var pagination = data.meta.pagination;
-                var capacityName = data.meta.capacityName;
-
-                if (selectedFilterOptions.lagerort.length === 0) selectedFilterOptions.lagerort = data.meta.placesList;
-                if (selectedFilterOptions.modell.length === 0) selectedFilterOptions.modell = data.meta.namesList;
-                if (selectedFilterOptions.zustand.length === 0) selectedFilterOptions.zustand = data.meta.conditionsList;
-                if (data.meta.warrantiesList.values.length > 0 && selectedFilterOptions.garantie && selectedFilterOptions.garantie.length === 0) {
-                    selectedFilterOptions.garantie = data.meta.warrantiesList;
-                }
-                selectedFilterOptions.price.max = data.meta.maxPrice;
-                selectedFilterOptions.price.min = data.meta.minPrice;
-                if (selectedFilterOptions.price.maxSearch === 0) selectedFilterOptions.price.maxSearch = data.meta.maxPrice;
-                if (selectedFilterOptions.price.minSearch === 0) selectedFilterOptions.price.minSearch = data.meta.minPrice;
-                _this3.props.shopActions.setFilterOptions(filterOptions);
-                _this3.props.shopActions.loadModels(data.data, data.meta.categoriesList);
-                var count = Math.ceil(pagination.total / pagination.per_page);
-                selectedFilterOptions.page = count > selectedFilterOptions.page ? selectedFilterOptions.page : count;
-                _this3.setState({
-                    mainModelGroupId: data.meta.mainModelGroupId,
-                    pagination: (0, _extends3.default)({}, _this3.state.pagination, {
-                        activePage: selectedFilterOptions.page - 1,
-                        totalItemsCount: pagination.total,
-                        pageCount: count
-                    }),
-                    totalCountModels: data.meta.totalCount,
-                    selectedFilterOptions: selectedFilterOptions,
-                    availableFilterOptions: availableFilterOptions,
-                    capacityName: capacityName,
-                    infoNoModels: !ifNoCriterias && data.data.length === 0,
-                    showSidebar: data.meta.namesList.values.length > 0,
-                    viewMode: 'List'
-                });
-                if (window.isGoogleConnection) _this3.gtagEnhancedEcommerce();
-                // document.getElementById('devicesListSmall').scrollIntoView(); function that scroll to devicesListSmall id on page
-            }).catch(function () {
-                document.getElementById('spinner-box-load').style.display = 'none';
-                if (window.isGoogleConnection === true) {
-                    _this3.props.shopActions.setFilterOptions({
-                        lagerort: { values: [] },
-                        modell: { values: [] },
-                        zustand: { values: [] }
-                    });
-                    _this3.props.shopActions.loadModels([], []);
-                    _this3.setState({ infoNoModels: true });
-                }
-            });
-        }
-    }, {
-        key: '_getSeoData',
-        value: function _getSeoData(params) {
-            var _this4 = this;
-
-            var deviceName = null;
-            /*find device name*/
-            for (var key in params) {
-                if (key.includes('deviceCategory') && params[key]) deviceName = params[key].replace(/-/g, ' ');
-            }
-
-            _axios2.default.get('/api/deviceGroupMetaData?modelGroup=' + deviceName + '&pageType=buy').then(function (_ref3) {
-                var data = _ref3.data;
-
-                if (data[0]) {
-                    if (data[0].footer) $('.footerBottom p.seo').html(data[0].footer);else $('.footerBottom p.seo').empty();
-                    _this4.setState({
-                        seoData: {
-                            description: data[0].description,
-                            title: data[0].title,
-                            keywords: data[0].keywords
-                        }
-                    });
-                } else {
-                    $('.footerBottom p.seo').empty();
-                    _this4.setState({ seoData: null });
-                }
-                (0, _seoText.seoTextAdjustHeight)();
-            }).catch(function () {
-                document.getElementById('spinner-box-load').style.display = 'none';
-                $('.footerBottom p.seo').empty();
-                _this4.setState({ seoData: null });
-                (0, _seoText.seoTextAdjustHeight)();
-            });
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.props.shopActions.setFilterOptions({ lagerort: { values: [] }, modell: { values: [] }, zustand: { values: [] } });
-            this.props.shopActions.loadModels([], []);
-
-            //save checked filters
-            var categoriesParams = [];
-
-            for (var key in this.props.params) {
-                if (key.includes('deviceCategory') && this.props.params[key]) categoriesParams.push(this.props.params[key]);
-            }
-
-            var obj = {
-                values: this.state.selectedFilterOptions,
-                availableFilterOptions: this.state.availableFilterOptions,
-                categoriesParams: categoriesParams
-            };
-            window.localStorage.setItem('selectedFilterOptions', JSON.stringify(obj));
-            $('.footerBottom p.seo').empty();
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.inputPriceCallback = (0, _debounce3.default)(function () {
-                var selectedFilterOptions = this.state.selectedFilterOptions;
-
-                _reactRouter.browserHistory.push('/kaufen/' + this._getBrowserUrl(selectedFilterOptions));
-            }, 1000);
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.shopActions.loadDevices('/api/devices');
-            if (this.props.params.deviceCategory1) {
-                if (this.props.params.deviceCategory1 === 'zubehör') {
-                    this._getAccessoriesData(this.props.params);
-                    this._getModelsDataByCategoryId(this.props.params);
-                } else {
-                    this._getSeoData(this.props.params);
-                    this._getModelsData(this.props.params);
-                }
-            } else if (window.localStorage.getItem('selectedFilterOptions')) {
-                var obj = JSON.parse(window.localStorage.getItem('selectedFilterOptions'));
-                if (page = obj.values.page) {
-                    this.setState({
-                        pagination: (0, _extends3.default)({}, this.state.pagination, {
-                            activePage: page - 1
-                        })
-                    });
-                }
-                _reactRouter.browserHistory.push('/kaufen/' + obj.categoriesParams.join('/') + '/' + this._getBrowserUrl(obj.values, obj.availableFilterOptions));
-            }
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps, nextState) {
-
-            if (nextProps.devices !== this.props.devices && nextProps.devices.length > 0) {
-                if (!this.props.params.deviceCategory1) {
-                    var devices = nextProps.devices;
-
-                    this._parseDevicesForUrl(devices);
-                }
-            }
-            if (nextProps.params && nextProps.params !== this.props.params && nextProps.params.deviceCategory1) {
-                var selectedFilterOptions = this.state.selectedFilterOptions;
-                if (nextProps.params.deviceCategory1 === 'zubehör') {
-                    this._getAccessoriesData(nextProps.params);
-                    this._getModelsDataByCategoryId(nextProps.params);
-                    selectedFilterOptions.sort = 'popular';
-                    this.setState({
-                        options: [{ label: "Nach Beliebtheit", value: 'popular' }, { label: "Günstige Preise zuerst anzeigen", value: 'niedrighoch' }, { label: "Hohe Preise zuerst anzeigen", value: 'hochniedrig' }, { label: "Nach Einstelldatum sortieren", value: 'neu' }],
-                        selectedFilterOptions: selectedFilterOptions
-                    });
-                } else {
-                    this._getSeoData(nextProps.params);
-                    this._getModelsData(nextProps.params);
-                    selectedFilterOptions.sort = 'popular';
-                    this.setState({
-                        options: [{ label: "Nach Beliebtheit", value: 'popular' }, { label: "Günstige Preise zuerst anzeigen", value: 'niedrighoch' }, { label: "Hohe Preise zuerst anzeigen", value: 'hochniedrig' }, { label: "Nach Einstelldatum sortieren", value: 'neu' }],
-                        selectedFilterOptions: selectedFilterOptions
-                    });
-                }
-            }
-            if (nextState.selectedFilterOptions !== this.state.selectedFilterOptions || nextState.availableFilterOptions !== this.state.availableFilterOptions) {
-                this.mapSelectedCriteria(nextProps.availableFilterOptions, this.state.selectedFilterOptions);
-            }
-        }
-    }, {
-        key: '_parseDevicesForUrl',
-        value: function _parseDevicesForUrl(devices) {
-            var defaultDevice = devices.filter(function (item) {
-                return item.id === 23;
-            }),
-                defaultBrand = [],
-                otherCategories = [];
-            if (defaultDevice.length > 0) {
-                defaultBrand = defaultDevice[0].submodels.filter(function (item) {
-                    return item.id === 2;
-                });
-                otherCategories.push(defaultBrand[0].name.replace(/ /g, '-').toLowerCase());
-            }
-            if (defaultDevice.length === 0) {
-                defaultDevice = [devices[0]];
-                mapSubmodels(defaultDevice[0].submodels);
-            }
-            var strOtherCategories = otherCategories.join('/');
-            _reactRouter.browserHistory.push('/kaufen/' + defaultDevice[0].name.toLowerCase() + '/' + strOtherCategories + '/filter');
-
-            function mapSubmodels(submodels) {
-                otherCategories.push(submodels[0].name.replace(/ /g, '-').toLowerCase());
-                if (submodels[0].submodels) mapSubmodels(submodels[0].submodels);
-            }
-        }
-    }, {
-        key: '_setSelectedFilterOption',
-        value: function _setSelectedFilterOption(selectedFilterOptions, data) {
-            var _loop = function _loop(key) {
-                if (key === 'modell' && data.meta.namesList || key === 'garantie' && data.meta.conditionsList || key === 'zustand' && data.meta.warrantiesList || key === 'lagerort' && data.meta.placesList) {
-                    var arrayList = '',
-                        tmpArr = selectedFilterOptions[key];
-
-                    if (key === 'modell') arrayList = 'namesList';else if (key === 'lagerort') arrayList = 'placesList';else if (key === 'zustand') arrayList = 'conditionsList';else if (key === 'garantie') arrayList = 'warrantiesList';
-
-                    if (selectedFilterOptions[key][0] === 'alle') {
-                        selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
-                    } else if (selectedFilterOptions[key].length > 0) {
-                        selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
-                        selectedFilterOptions[key].values = selectedFilterOptions[key].values.filter(function (element) {
-                            return tmpArr.some(function (itemId) {
-                                return +itemId === element.id;
-                            });
-                        });
-                    } else selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
-                } else {
-                    var idOfKey = key.slice(key.lastIndexOf('-') + 1);
-                    if (key.includes('kategorie') || key.includes('spezifikation')) {
-                        var _arrayList = key.includes('kategorie') ? 'criteriasList' : 'specificationsList',
-                            filterTypePrefix = key.includes('kategorie') ? 'kategorie-' : 'spezifikation-';
-                        if (data.meta[_arrayList].some(function (item) {
-                            return item.id == idOfKey;
-                        })) {
-                            data.meta[_arrayList].forEach(function (item) {
-                                if (item.id == idOfKey) {
-                                    if (selectedFilterOptions[key][0] === 'alle') {
-                                        selectedFilterOptions[filterTypePrefix + item.id] = (0, _extends3.default)({}, item);
-                                    } else {
-                                        var tmpIds = selectedFilterOptions[key];
-                                        selectedFilterOptions[filterTypePrefix + item.id] = (0, _extends3.default)({}, item);
-                                        selectedFilterOptions[filterTypePrefix + item.id].values = selectedFilterOptions[filterTypePrefix + item.id].values.filter(function (element) {
-                                            return tmpIds.some(function (itemId) {
-                                                return +itemId === element.id;
-                                            });
-                                        });
-                                    }
-                                }
-                            });
-                        } else if (key !== 'price' && key !== 'sort' && key !== 'page') delete selectedFilterOptions[key];
-                    } else if (key !== 'price' && key !== 'sort' && key !== 'page') delete selectedFilterOptions[key];
-                }
-            };
-
-            for (var key in selectedFilterOptions) {
-                _loop(key);
-            }
-
-            return selectedFilterOptions;
-        }
-    }, {
-        key: '_getObjForRequest',
-        value: function _getObjForRequest(selectedFilterOptions, page, deviceName) {
-            var objForRequest = (0, _extends3.default)({}, selectedFilterOptions);
-            console.log(selectedFilterOptions);
-            for (var key in objForRequest) {
-                if (key !== 'price' && key !== 'sort' && key !== 'page') {
-                    objForRequest[key] = [].concat((0, _toConsumableArray3.default)(selectedFilterOptions[key]));
-                    console.log([].concat((0, _toConsumableArray3.default)(selectedFilterOptions[key])));
-                }
-            }
-
-            objForRequest['criterias'] = {};
-            objForRequest['specifications'] = {};
-            objForRequest['deviceName'] = deviceName;
-            objForRequest['page'] = page;
-            var arrKeys = ['lagerort', 'modell', 'deviceName', 'page', 'price', 'zustand', 'garantie', 'sort', 'page', 'criterias', 'specifications'];
-
-            var _loop2 = function _loop2(_key) {
-                if (arrKeys.every(function (item) {
-                    return item !== _key;
-                })) {
-                    var name = _key.slice(_key.lastIndexOf('-') + 1),
-                        currentFilterName = _key.slice(0, _key.lastIndexOf('-')),
-                        filterType = currentFilterName === 'kategorie' ? 'criterias' : 'specifications';
-
-                    objForRequest[filterType][name] = [].concat((0, _toConsumableArray3.default)(objForRequest[_key]));
-                    delete objForRequest[_key];
-                }
-            };
-
-            for (var _key in objForRequest) {
-                _loop2(_key);
-            }
-            console.log(objForRequest);
-            return objForRequest;
-        }
-    }, {
-        key: '_getObjForRequestByCategoryId',
-        value: function _getObjForRequestByCategoryId(selectedFilterOptions, page, modelCategoryId) {
-            var objForRequest = (0, _extends3.default)({}, selectedFilterOptions);
-
-            for (var key in objForRequest) {
-                if (key !== 'price' && key !== 'sort' && key !== 'page') objForRequest[key] = [].concat((0, _toConsumableArray3.default)(selectedFilterOptions[key]));
-            }
-
-            objForRequest['criterias'] = {};
-            objForRequest['specifications'] = {};
-            objForRequest['page'] = page;
-            objForRequest['modelCategoryId'] = parseInt(modelCategoryId);
-            objForRequest['sort'] = 'popular';
-            var arrKeys = ['lagerort', 'modell', 'deviceName', 'modelCategoryId', 'page', 'price', 'zustand', 'garantie', 'sort', 'page', 'criterias'];
-
-            var _loop3 = function _loop3(_key2) {
-                if (arrKeys.every(function (item) {
-                    return item !== _key2;
-                })) {
-                    var name = _key2.slice(_key2.lastIndexOf('-') + 1),
-                        currentFilterName = _key2.slice(0, _key2.lastIndexOf('-')),
-                        filterType = currentFilterName === 'kategorie' ? 'criterias' : 'specifications';
-
-                    objForRequest[filterType][name] = [].concat((0, _toConsumableArray3.default)(objForRequest[_key2]));
-                    delete objForRequest[_key2];
-                }
-            };
-
-            for (var _key2 in objForRequest) {
-                _loop3(_key2);
-            }
-            return objForRequest;
-        }
-    }, {
-        key: '_getBrowserUrl',
-        value: function _getBrowserUrl(selectedFilterOptions) {
-            var availableFilterOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.state.availableFilterOptions;
-            var s = '',
-                params = this.props.params;
-
-            for (var key in params) {
-                if (key.includes('deviceCategory') && params[key]) s += params[key] + '/';
-            }
-            s += 'filter/';
-
-            for (var _key3 in params) {
-                if (_key3.includes('param') && params[_key3] && params[_key3].includes('kategorie-compatibility-brand')) s += params[_key3] + '/';
-            }
-
-            var _loop4 = function _loop4(_key4) {
-                if (_key4 === 'price') {
-                    if (selectedFilterOptions[_key4].minSearch > 0 || selectedFilterOptions[_key4].maxSearch < selectedFilterOptions[_key4].max) {
-                        s += 'preis=' + selectedFilterOptions[_key4].minSearch + '-' + selectedFilterOptions[_key4].maxSearch + '/';
-                    }
-                } else if (_key4 === 'sort' || _key4 === 'page') {
-                    s += _key4 + '=' + selectedFilterOptions[_key4] + '/';
-                } else {
-                    var categoryName = _key4;
-
-                    if (selectedFilterOptions[_key4].values.length === availableFilterOptions[_key4].values.length) {
-                        s += categoryName + '=alle/';
-                    } else if (selectedFilterOptions[_key4].values.length > 0) {
-                        selectedFilterOptions[_key4].values.forEach(function (item, i) {
-                            if (i === 0) {
-                                if (selectedFilterOptions[_key4].values.length === 1) {
-                                    s += categoryName + '=' + (item.id || 'alle') + '/';
-                                } else s += categoryName + '=' + item.id;
-                            } else if (i === selectedFilterOptions[_key4].values.length - 1) {
-                                s += ',' + item.id + '/';
-                            } else s += ',' + item.id;
-                        });
-                    }
-                }
-            };
-
-            for (var _key4 in selectedFilterOptions) {
-                _loop4(_key4);
-            }
-            return s;
-        }
-    }, {
-        key: '_parseUrl',
-        value: function _parseUrl(nextPropsParams) {
-            var urlParams = nextPropsParams,
-                selectedFilterOptions = {
-                page: 1,
-                price: {
-                    min: 0,
-                    max: 1,
-                    maxSearch: 0,
-                    minSearch: 0
-                },
-                lagerort: { values: [] },
-                modell: { values: [] },
-                zustand: { values: [] },
-                sort: nextPropsParams.deviceCategory1 === 'zubehör' ? 'popular' : 'popular'
-
-            },
-                storageLocationData = JSON.parse(window.localStorage.getItem("locationData")),
-                currentLocationData = {};
-            this.props.places ? currentLocationData = this.props.places : storageLocationData ? storageLocationData.data.forEach(function (item) {
-                if (item.active === true) {
-                    currentLocationData = item;
-                }
-            }) : currentLocationData = null;
-            for (var key in urlParams) {
-                if (key.includes('param') && urlParams[key]) {
-                    (function () {
-                        var name = urlParams[key].slice(0, urlParams[key].indexOf('=')),
-                            paramsArr = [];
-
-                        if (name === "preis") {
-                            paramsArr = urlParams[key].slice(urlParams[key].indexOf('=') + 1).split('-');
-                            selectedFilterOptions.price.minSearch = paramsArr[0];
-                            selectedFilterOptions.price.maxSearch = paramsArr[1];
-                        } else if (name === "sort" || name === "page") {
-                            paramsArr = urlParams[key].slice(urlParams[key].indexOf('=') + 1);
-                            selectedFilterOptions[name] = paramsArr;
-                        } else {
-                            paramsArr = urlParams[key].slice(urlParams[key].indexOf('=') + 1).split(',');
-                            paramsArr.forEach(function (item, i) {
-                                return paramsArr[i] = item.replace(/-/g, ' ').replace(/\|/g, '/');
-                            });
-                            selectedFilterOptions[name] = paramsArr;
-                        }
-                    })();
-                }
-            }
-
-            /*!selectedFilterOptions.lagerort ?
-                !currentLocationData ?
-                selectedFilterOptions.lagerort = {values: []}
-                    :
-                selectedFilterOptions.lagerort = [currentLocationData.id]
-                    :
-                 selectedFilterOptions.lagerort = selectedFilterOptions.lagerort*/
-
-            return selectedFilterOptions;
-        }
-    }, {
-        key: 'handleChooseFilterItemMobile',
-        value: function handleChooseFilterItemMobile(e, name, value) {
-            e.preventDefault();
-            var filterOptions = this.props.filterOptions,
-                selectedFilterOptions = this.state.selectedFilterOptions;
-
-
-            if (value === 'allValues') {
-                selectedFilterOptions[name] ? selectedFilterOptions[name].values = [].concat((0, _toConsumableArray3.default)(filterOptions[name].values)) : null;
-            } else {
-                if (selectedFilterOptions[name] && selectedFilterOptions[name].values.length === filterOptions[name].values.length) {
-                    selectedFilterOptions[name].values = [];
-                    selectedFilterOptions[name].values.push(value);
-                } else {
-                    if (selectedFilterOptions[name] && selectedFilterOptions[name].values.some(function (option) {
-                        return option.id === value.id;
-                    })) {
-                        if (selectedFilterOptions[name].values.length === 1) selectedFilterOptions[name].values = [];else selectedFilterOptions[name].values = selectedFilterOptions[name].values.filter(function (item) {
-                            return item.id !== value.id;
-                        });
-                    } else if (selectedFilterOptions[name]) {
-                        selectedFilterOptions[name].values.push(value);
-                    }
-                }
-            }
-            this.setState({ selectedFilterOptions: selectedFilterOptions });
-        }
-    }, {
-        key: 'handleApplyFiltersMobile',
-        value: function handleApplyFiltersMobile() {
-            var selectedFilterOptions = this.state.selectedFilterOptions;
-
-
-            _reactRouter.browserHistory.push('/kaufen/' + this._getBrowserUrl(selectedFilterOptions));
-
-            $('.modelInnerPage-inner .contentPart').css({ display: 'block' });
-            $('.modelInnerPage #devicesListSmall').css({ display: 'block' });
-            // $('.modelInnerPage-inner .asideFilter').css({ display: 'none' })
-            this.props.defineTitleHeadMobile(this.props.params.deviceCategory1 || 'Categories');
-            this.props.handleBackFilter();
-        }
-    }, {
-        key: 'openQuickView',
-        value: function openQuickView(model) {
-            var models = this.props.models;
-
-            this.setState({
-                quickViewPage: _react2.default.createElement(_quickViewPage2.default, { model: model,
-                    allModels: models,
-                    openSuccessAddToBasket: this.openSuccessAddToBasket,
-                    capacityName: this.state.capacityName,
-                    closeQuickView: this.closeQuickView,
-                    deviceName: this.props.params.deviceCategory1
-                })
-            });
-        }
-    }, {
-        key: 'closeQuickView',
-        value: function closeQuickView() {
-            this.setState({ quickViewPage: null });
-        }
-    }, {
-        key: 'openSuccessAddToBasket',
-        value: function openSuccessAddToBasket(item, source) {
-            var _this5 = this;
-
-            var successAddToBasket = this.state.successAddToBasket;
-
-            var promise = new Promise(function (resolve, reject) {
-                if (item.modelId) {
-                    _axios2.default.get('/api/loadRecommendProducts?modelId=' + item.modelId).then(function (result) {
-                        resolve(result.data.data.length ? result.data.data : null);
-                    });
-                } else if (source === 'gridPage') {
-                    _axios2.default.get('/api/loadBestBuyProducts?shortcode=' + item.shortcode + '&deviceName=' + encodeURIComponent(item.deviceName)).then(function (result) {
-                        resolve(result.data.data.length ? result.data.data : null);
-                    });
-                } else {
-                    resolve(null);
-                }
-            });
-            promise.then(function (result) {
-                if (result && successAddToBasket == null && result.length > 0) {
-                    _this5.setState({ recommendProducts: result });
-
-                    _this5.setState({
-                        successAddToBasket: _react2.default.createElement(_successAddToBasket2.default, {
-                            addModelToBasket: _this5.addModelToBasket,
-                            basketData: _this5.props.basketData,
-                            source: source,
-                            model: item,
-                            recommendProducts: _this5.state.recommendProducts,
-                            closeSuccessAddToBasket: _this5.closeSuccessAddToBasket })
-                    });
-                }
-            });
-        }
-    }, {
-        key: 'closeSuccessAddToBasket',
-        value: function closeSuccessAddToBasket() {
-            this.setState({ successAddToBasket: null });
-        }
-    }, {
-        key: 'addModelToBasket',
-        value: function addModelToBasket(e, item) {
-            var _this6 = this;
-
-            e.stopPropagation();
-            e.preventDefault();
-            var status = e.target.getAttribute('data-status'),
-                source = e.target.getAttribute('data-source'),
-                _props = this.props,
-                basketData = _props.basketData,
-                params = _props.params,
-                newBasketData = null;
-
-            if (item.categoryName) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
-            } else if (basketData.every(function (itemBasket) {
-                return itemBasket.id != item.id;
-            })) {
-                newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
-            } else {
-                newBasketData = basketData.filter(function (itemBasket) {
-                    return itemBasket.shortcode != item.shortcode;
-                });
-            }
-            this.props.basketActions.changeBasketData(newBasketData);
-
-            var brands = void 0,
-                brand = void 0,
-                category = void 0;
-            if (source == "relevantProduct" || params.deviceCategory1 == "zubehör") {
-                brands = item.criterias.find(function (item) {
-                    return item.id === 'manufacturer';
-                }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
-            } else {
-                brand = item.deviceName, category = params.deviceCategory1 || '';
-            }
-            if (status === 'out') {
-                gtag('event', 'add_to_cart', {
-                    "items": [{
-                        "id": item.shortcode,
-                        "list_name": "Kaufen",
-                        "quantity": 1,
-                        "price": item.discountPrice || item.price,
-                        "name": item.descriptionLong || item.model || '',
-                        "brand": brand,
-                        "category": category
-                    }]
-                });
-                if (!window.isMobile) {
-                    this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, { startPosition: $(e.target).offset(),
-                        image: item.deviceImages.mainImg.src,
-                        basketType: 'kaufen' }));
-                    setTimeout(function () {
-                        if (source !== 'relevantProduct') {
-                            _this6.openSuccessAddToBasket(item, source);
-                        }
-                        _this6.props.basketActions.basketAddEffect(null);
-                    }, 2000);
-                } else {
-                    this.openSuccessAddToBasket(item, source);
-                    // browserHistory.push('/warenkorb')
-                }
-            }
-            if (status === 'in') {
-                gtag('event', 'remove_from_cart', {
-                    "items": [{
-                        "id": item.shortcode,
-                        "list_name": "Kaufen",
-                        "quantity": 1,
-                        "price": item.discountPrice || item.price,
-                        "name": item.descriptionLong || item.model || '',
-                        "brand": brand,
-                        "category": category
-                    }]
-                });
-                if (!newBasketData.length || !newBasketData.filter(function (item) {
-                    return item.productTypeId == 7;
-                }).length) {
-                    var deadline = JSON.parse(window.localStorage.getItem('deadline'));
-                    if (deadline) {
-                        deadline.isActive = 0;
-                        window.localStorage.setItem('deadline', JSON.stringify(deadline));
-                        newBasketData = newBasketData.filter(function (item) {
-                            return item.shortcode != deadline.couponShortcode;
-                        });
-                        this.props.basketActions.changeBasketData(newBasketData);
-                    }
-                }
-            }
-
-            this.props.basketData.map(function (el) {
-                return snaptr('track', 'ADD_CART', {
-                    'shortcode': el.shortcode,
-                    'name': el.name
-                });
-            });
-        }
-    }, {
-        key: 'addModelToWishlist',
-        value: function addModelToWishlist(e, item) {
-            var _this7 = this;
-
-            e.stopPropagation();
-            e.preventDefault();
-            var wishlistData = this.props.wishlistData,
-                newWishlistData = null;
-            var status = '';
-            if (wishlistData.every(function (itemWishlist) {
-                return itemWishlist.id != item.id;
-            })) {
-                newWishlistData = [].concat((0, _toConsumableArray3.default)(wishlistData), [item]);
-                status = 'add';
-            } else {
-                newWishlistData = wishlistData.filter(function (itemWishlist) {
-                    return itemWishlist.shortcode != item.shortcode;
-                });
-                status = 'remove';
-            }
-            this.props.basketActions.changeWishlisteData(newWishlistData);
-            if (!window.isMobile && status === 'add') {
-                this.props.basketActions.wishlistAddEffect(_react2.default.createElement(_addToWishlistEffect2.default, { startPosition: $(e.target).offset(),
-                    image: item.deviceImages.mainImg.src }));
-                setTimeout(function () {
-                    _this7.props.basketActions.wishlistAddEffect(null);
-                }, 2000);
-            }
-        }
-    }, {
-        key: 'handleClickItemGroup',
-        value: function handleClickItemGroup(e) {
-            var _state = this.state,
-                selectedFilterOptions = _state.selectedFilterOptions,
-                capacityName = _state.capacityName,
-                params = this.props.params,
-                model = e.currentTarget.getAttribute('data-model'),
-                capacity = e.currentTarget.getAttribute('data-capacity'),
-                color = e.currentTarget.getAttribute('data-color');
-
-
-            selectedFilterOptions.farbe = [color];
-            selectedFilterOptions[capacityName] = [capacity];
-            selectedFilterOptions.modell = [model];
-
-            _reactRouter.browserHistory.push('/kaufen/' + this._getBrowserUrl(selectedFilterOptions));
-
-            this.setState({ viewMode: 'List' });
-        }
-    }, {
-        key: 'handlePageChange',
-        value: function handlePageChange(pageNumber) {
-            var _this8 = this;
-
-            var params = this.props.params,
-                selectedFilterOptions = this._parseUrl(this.props.params),
-                deviceName = '',
-                url = '';
-            /*find device name*/
-            for (var key in params) {
-                if (key.includes('deviceCategory') && params[key]) deviceName = params[key].replace(/-/g, ' ');
-            }
-
-            document.getElementById('spinner-box-load').style.display = 'block';
-            selectedFilterOptions.page = pageNumber.selected + 1;
-            var objForRequest = this._getObjForRequest(selectedFilterOptions, pageNumber.selected + 1, deviceName);
-            this.props.params.deviceCategory1 === 'zubehör' ? url = '/api/getShopCategoryProducts' : url = '/api/models';
-            _index2.default.getModels(url, objForRequest).then(function (_ref4) {
-                var data = _ref4.data;
-
-                $(window, document).scrollTop(0);
-                document.getElementById('spinner-box-load').style.display = 'none';
-                _this8.setState({
-                    pagination: (0, _extends3.default)({}, _this8.state.pagination, { activePage: pageNumber.selected }),
-                    infoNoModels: data.data.length === 0,
-                    selectedFilterOptions: (0, _extends3.default)({}, _this8.state.selectedFilterOptions, { page: pageNumber.selected + 1 })
-                });
-                _this8.props.shopActions.loadModels(data.data, data.meta.categoriesList);
-                _reactRouter.browserHistory.push('/kaufen/' + _this8._getBrowserUrl(_this8.state.selectedFilterOptions));
-            });
-        }
-    }, {
-        key: 'gtagEnhancedEcommerce',
-        value: function gtagEnhancedEcommerce() {
-            var data = this.props,
-                gTagItems = data.models.map(function (item) {
-                var brand = '';
-                if (data.params.deviceCategory1 == "zubehör") {
-                    var brands = item.criterias.find(function (item) {
-                        return item.id === 'manufacturer';
-                    }).values;
-                    brand = brands.length ? brands[0].name : "";
-                }
-                return {
-                    "id": item.shortcode,
-                    "name": item.descriptionLong || item.model || '',
-                    "list_name": "Kaufen",
-                    "quantity": 1,
-                    "brand": data.params.deviceCategory1 == "zubehör" ? brand : item.deviceName,
-                    "category": data.params.deviceCategory1 == "zubehör" ? data.params.deviceCategory2 : data.params.deviceCategory1 || '',
-                    "price": item.discountPrice || item.price
-                };
-            });
-
-            gtag('event', 'view_item_list', {
-                "items": gTagItems
-            });
-        }
-    }, {
-        key: 'changeViewMode',
-        value: function changeViewMode(e) {
-            var viewMode = e.target.getAttribute('data-mode');
-            this.setState({ viewMode: viewMode });
-        }
-    }, {
-        key: 'changePrice',
-        value: function changePrice(e) {
-            var selectedFilterOptions = this.state.selectedFilterOptions;
-
-            if ((+e.min).toFixed(0) !== (+e.max).toFixed(0)) {
-                selectedFilterOptions.price.minSearch = (+e.min).toFixed(0);
-                selectedFilterOptions.price.maxSearch = (+e.max).toFixed(0);
-                this.setState({ inputPriceMin: (+e.min).toFixed(0) });
-                this.setState({ inputPriceMax: (+e.max).toFixed(0) });
-                selectedFilterOptions.page = 1;
-                if (!window.isMobile) this.inputPriceCallback(e);
-                this.setState({ selectedFilterOptions: selectedFilterOptions });
-            }
-        }
-    }, {
-        key: 'changeInputPrice',
-        value: function changeInputPrice(e, type) {
-            if (type === 'min') {
-                this.setState({ inputPriceMin: e.target.value });
-            }
-            if (type === 'max') {
-                this.setState({ inputPriceMax: e.target.value });
-            }
-        }
-    }, {
-        key: 'applyInputPrice',
-        value: function applyInputPrice(e, type) {
-            var _state2 = this.state,
-                inputPriceMin = _state2.inputPriceMin,
-                inputPriceMax = _state2.inputPriceMax,
-                selectedFilterOptions = _state2.selectedFilterOptions;
-
-            inputPriceMin = inputPriceMin != 0 ? inputPriceMin : selectedFilterOptions.price.minSearch;
-            inputPriceMax = inputPriceMax != 0 ? inputPriceMax : selectedFilterOptions.price.maxSearch;
-            this.setState({ inputPriceErr: {
-                    min: false,
-                    max: false
-                } });
-            if (type === 'min' && (parseInt(inputPriceMin) > parseInt(inputPriceMax) || parseInt(inputPriceMin) < parseInt(selectedFilterOptions.price.min))) {
-                this.setState({ inputPriceErr: {
-                        min: true,
-                        max: false
-                    } });
-                this.setState({ inputPriceMin: selectedFilterOptions.price.minSearch });
-                $("#price_min").focus();
-                return;
-            }
-            if (type === 'max' && (parseInt(inputPriceMax) < parseInt(inputPriceMin) || parseInt(inputPriceMax) > parseInt(selectedFilterOptions.price.max))) {
-                this.setState({ inputPriceErr: {
-                        min: false,
-                        max: true
-                    } });
-                this.setState({ inputPriceMax: selectedFilterOptions.price.maxSearch });
-                $("#price_max").focus();
-                return;
-            }
-
-            if (parseInt(inputPriceMin) != parseInt(selectedFilterOptions.price.minSearch) || parseInt(inputPriceMax) != parseInt(selectedFilterOptions.price.maxSearch)) {
-                selectedFilterOptions.price.minSearch = (+inputPriceMin).toFixed(0);
-                selectedFilterOptions.price.maxSearch = (+inputPriceMax).toFixed(0);
-                this.setState({ selectedFilterOptions: selectedFilterOptions });
-                if (!window.isMobile) this.inputPriceCallback(e);
-            }
-        }
-    }, {
-        key: 'changeInputPrice1',
-        value: function changeInputPrice1(e, type) {
-            var _state3 = this.state,
-                inputPriceMin = _state3.inputPriceMin,
-                inputPriceMax = _state3.inputPriceMax,
-                selectedFilterOptions = _state3.selectedFilterOptions;
-
-            this.setState({ inputPriceErr: {
-                    min: false,
-                    max: false
-                } });
-            if (type === 'min' && (parseInt(e.target.value) > parseInt(inputPriceMax != 0 ? inputPriceMax : selectedFilterOptions.price.maxSearch) || parseInt(e.target.value) < parseInt(selectedFilterOptions.price.min))) {
-                this.setState({ inputPriceErr: {
-                        min: true,
-                        max: false
-                    } });
-                return;
-            }
-            if (type === 'max' && (parseInt(e.target.value) < parseInt(inputPriceMin != 0 ? inputPriceMin : selectedFilterOptions.price.minSearch) || parseInt(e.target.value) > parseInt(selectedFilterOptions.price.max))) {
-                this.setState({ inputPriceErr: {
-                        min: false,
-                        max: true
-                    } });
-                return;
-            }
-            if (type === 'min') {
-                this.setState({ inputPriceMin: e.target.value });
-                selectedFilterOptions.price.minSearch = (+e.target.value).toFixed(0);
-                this.setState({ selectedFilterOptions: selectedFilterOptions });
-            }
-
-            if (type === 'max') {
-                this.setState({ inputPriceMax: e.target.value });
-                selectedFilterOptions.price.maxSearch = (+e.target.value).toFixed(0);
-                this.setState({ selectedFilterOptions: selectedFilterOptions });
-            }
-        }
-    }, {
-        key: 'changeSortBy',
-        value: function changeSortBy(e) {
-            var value = e.value,
-                selectedFilterOptions = this.state.selectedFilterOptions,
-                params = this.props.params;
-
-
-            selectedFilterOptions.sort = value;
-            // if (!window.isMobile) {
-            _reactRouter.browserHistory.push('/kaufen/' + this._getBrowserUrl(selectedFilterOptions));
-            // }
-            this.setState({ selectedFilterOptions: selectedFilterOptions });
-        }
-    }, {
-        key: 'showFilters',
-        value: function showFilters(event) {
-            event.preventDefault();
-
-            $('.modelInnerPage-inner .asideFilter').css({ display: 'block' });
-
-            if (!window.isMobile) {
-                $('.modelInnerPage-inner .filters-btn-mobile').css({ display: 'none' });
-            } else {
-                $('.modelInnerPage-inner .contentPart').css({ display: 'none' });
-                $('.modelInnerPage #devicesListSmall').css({ display: 'none' });
-
-                var height = $('.mobileFixedBtn').outerHeight() + 30;
-                $('#intercom-container .intercom-launcher-frame').attr('style', 'bottom:' + height + 'px !important');
-                height -= 30;
-                $('#tidio-chat #tidio-chat-iframe').css({ bottom: height, right: '10px' });
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _state4 = this.state,
-                viewMode = _state4.viewMode,
-                availableFilterOptions = _state4.availableFilterOptions,
-                selectedFilterOptions = _state4.selectedFilterOptions,
-                quickViewPage = _state4.quickViewPage,
-                addBasketEffect = _state4.addBasketEffect,
-                capacityName = _state4.capacityName,
-                pagination = _state4.pagination,
-                seoData = _state4.seoData,
-                totalCountModels = _state4.totalCountModels,
-                showSidebar = _state4.showSidebar,
-                mainModelGroupId = _state4.mainModelGroupId,
-                options = _state4.options,
-                successAddToBasket = _state4.successAddToBasket,
-                seoAccessoriesData = _state4.seoAccessoriesData,
-                productModels = _state4.productModels,
-                inputPriceMin = _state4.inputPriceMin,
-                inputPriceMax = _state4.inputPriceMax,
-                inputPriceErr = _state4.inputPriceErr,
-                _props2 = this.props,
-                filterOptions = _props2.filterOptions,
-                models = _props2.models,
-                modelsGroup = _props2.modelsGroup,
-                basketData = _props2.basketData,
-                wishlistData = _props2.wishlistData,
-                devices = _props2.devices,
-                deviceName = this.props.params.deviceCategory1,
-                content = void 0;
-
-
-            if (viewMode === "Group") content = _react2.default.createElement(_modelsGrid2.default, { models: models,
-                basketData: basketData,
-                wishlistData: wishlistData,
-                addModelToBasket: this.addModelToBasket,
-                addModelToWishlist: this.addModelToWishlist
-            });else content = _react2.default.createElement(_deviceModelsGrid2.default, { models: models,
-                openQuickView: this.openQuickView,
-                capacityName: capacityName,
-                basketData: basketData,
-                wishlistData: wishlistData,
-                addModelToBasket: this.addModelToBasket,
-                addModelToWishlist: this.addModelToWishlist,
-                deviceName: deviceName });
-            // else content = <ModelsList models={models}
-            //     openQuickView={this.openQuickView}
-            //     capacityName={capacityName}
-            //     basketData={basketData}
-            //     addModelToBasket={this.addModelToBasket}
-            //     deviceName={deviceName}/>
+            var hasName = selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].name;
+            var hasValues = selectedFilterOptions[searchKey] && selectedFilterOptions[searchKey].values;
+            if (!hasName && !hasValues) return null;
             return _react2.default.createElement(
-                'div',
-                { className: 'modelInnerPage' },
-                this.state.seoAccessoriesData && _react2.default.createElement(_reactHelmet.Helmet, {
-                    title: seoAccessoriesData.title || '',
-                    meta: [{ "name": "description", "content": seoAccessoriesData.meta_description || '' }, { "name": "keywords", "content": seoAccessoriesData.meta_keywords || '' }]
+              "span",
+              { className: "duplicate-filter", key: i },
+              hasName ? _react2.default.createElement(
+                "span",
+                { className: "duplicate-filter__key" },
+                _react2.default.createElement("img", {
+                  loading: "lazy",
+                  src: "/images/design/aside_filter_category_icons/" + mainModelGroupId + "/" + mainModelGroupId + "-" + searchKey + ".svg",
+                  onError: function onError(e) {
+                    e.target.src = "/images/design/aside_filter_category_icons/default-icon.svg";
+                  }
+                }),
+                selectedFilterOptions[searchKey].name,
+                ":"
+              ) : null,
+              hasValues ? _react2.default.createElement(
+                "span",
+                { className: "duplicate-filter__values" },
+                checkedValues.map(function (item, i2) {
+                  return _react2.default.createElement(
+                    "span",
+                    { key: i2 },
+                    item.name,
+                    _react2.default.createElement("i", {
+                      "data-target-key": searchKey,
+                      "data-target-id": item.id,
+                      onClick: function onClick(e) {
+                        return _this.goTo(e);
+                      },
+                      className: "fa fa-times",
+                      style: { fontSize: "12px", paddingLeft: "10px" },
+                      "aria-hidden": "true"
+                    })
+                  );
+                })
+              ) : null
+            );
+          })
+        );
+      }
+    };
+
+    _this.goTo = function (e) {
+      var path = _this.props.location.pathname;
+
+      var searchParamsArr = path.split("/").filter(function (x) {
+        return x;
+      });
+      var targetParam = e.target.dataset.targetId;
+      var targetKey = e.target.dataset.targetKey;
+
+      var searchParams = void 0;
+      var searchKey = void 0;
+      var replasedParam = void 0;
+      var filteredOption = void 0;
+
+      for (var i = 0; i < searchParamsArr.length; i++) {
+        searchKey = searchParamsArr[i].split("=")[0];
+        searchParams = searchParamsArr[i].split("=")[1];
+
+        if (searchParamsArr[i].substr(0, targetKey.length) === targetKey) {
+          searchParamsArr.splice(i, 1);
+
+          if (searchKey === targetKey) {
+            replasedParam = searchParams.split(",").filter(function (elem) {
+              return elem !== targetParam && elem !== ",";
+            });
+
+            if (replasedParam === "alle" || replasedParam.length === 0) {
+              filteredOption = searchKey + "=alle";
+            } else filteredOption = searchKey + "=" + replasedParam.join(",");
+
+            searchParamsArr.push(filteredOption);
+            searchParamsArr = searchParamsArr.join("/");
+            _reactRouter.browserHistory.push("/" + searchParamsArr);
+          }
+        }
+      }
+    };
+
+    _this.mapSelectedCriteria = function (all, selected) {
+      var filtered = [];
+      var newAll = [];
+      var diff = new Set();
+
+      for (var item in selected) {
+        for (var item2 in all) {
+          if ((0, _typeof3.default)(all[item2]) === "object") newAll.push(all[item2]);
+
+          newAll = newAll.filter(function (property) {
+            return typeof property.name !== "undefined";
+          });
+        }
+
+        if ((0, _typeof3.default)(selected[item]) === "object") filtered.push(selected[item]);
+        filtered = filtered.filter(function (property) {
+          return typeof property.name !== "undefined";
+        });
+      }
+    };
+
+    _this.state = {
+      pagination: {
+        activePage: 0,
+        totalItemsCount: 0,
+        pageCount: 0
+      },
+      options: _this.props.params.deviceCategory1 === "zubehör" ? [{ label: "Nach Beliebtheit", value: "popular" }, {
+        label: "Günstige Preise zuerst anzeigen",
+        value: "niedrighoch"
+      }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }] : [{ label: "Beliebteste Produkte", value: "popular" }, {
+        label: "Günstige Preise zuerst anzeigen",
+        value: "niedrighoch"
+      }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }],
+      selectedFilterOptions: {
+        page: 1,
+        price: {
+          min: 0,
+          max: 1,
+          maxSearch: 0,
+          minSearch: 0
+        },
+        lagerort: { values: [] },
+        modell: { values: [] },
+        zustand: { values: [] },
+        sort: _this.props.params.deviceCategory1 === "zubehör" ? "popular" : "popular"
+      },
+      availableFilterOptions: {
+        lagerort: { values: [] },
+        modell: { values: [] },
+        zustand: { values: [] }
+      },
+      mainModelGroupId: null,
+      modelCategoryId: 0,
+      viewMode: _this.props.params.deviceCategory1 !== "zubehör" ? "List" : "Group",
+      totalCountModels: 0,
+      addBasketEffect: null,
+      quickViewPage: null,
+      capacityName: null,
+      infoNoModels: false,
+      showSidebar: false,
+      seoData: null,
+      successAddToBasket: null,
+      recommendProducts: null,
+      seoAccessoriesData: null,
+      productModels: [],
+      inputPriceMin: 0,
+      inputPriceMax: 0,
+      inputPriceErr: {
+        min: false,
+        max: false
+      }
+    };
+
+    _this.changeViewMode = _this.changeViewMode.bind(_this);
+    _this.changePrice = _this.changePrice.bind(_this);
+    _this.changeInputPrice = _this.changeInputPrice.bind(_this);
+    _this.applyInputPrice = _this.applyInputPrice.bind(_this);
+    _this.changeSortBy = _this.changeSortBy.bind(_this);
+    _this.handlePageChange = _this.handlePageChange.bind(_this);
+    _this.handleClickItemGroup = _this.handleClickItemGroup.bind(_this);
+    _this.handleChooseFilterItemMobile = _this.handleChooseFilterItemMobile.bind(_this);
+    _this.handleApplyFiltersMobile = _this.handleApplyFiltersMobile.bind(_this);
+    _this.addModelToBasket = _this.addModelToBasket.bind(_this);
+    _this.addModelToWishlist = _this.addModelToWishlist.bind(_this);
+    _this.openQuickView = _this.openQuickView.bind(_this);
+    _this.closeQuickView = _this.closeQuickView.bind(_this);
+    _this._parseUrl = _this._parseUrl.bind(_this);
+    _this._getBrowserUrl = _this._getBrowserUrl.bind(_this);
+    _this._getObjForRequest = _this._getObjForRequest.bind(_this);
+    _this._getObjForRequestByCategoryId = _this._getObjForRequestByCategoryId.bind(_this);
+
+    _this._setSelectedFilterOption = _this._setSelectedFilterOption.bind(_this);
+    _this._parseDevicesForUrl = _this._parseDevicesForUrl.bind(_this);
+    _this._getModelsData = _this._getModelsData.bind(_this);
+    _this._getModelsDataByCategoryId = _this._getModelsDataByCategoryId.bind(_this);
+    _this._getAccessoriesData = _this._getAccessoriesData.bind(_this);
+    _this._getSeoData = _this._getSeoData.bind(_this);
+    _this.openSuccessAddToBasket = _this.openSuccessAddToBasket.bind(_this);
+    _this.closeSuccessAddToBasket = _this.closeSuccessAddToBasket.bind(_this);
+    _this.showFilters = _this.showFilters.bind(_this);
+    return _this;
+  }
+
+  (0, _createClass3.default)(ModelsInnerPage, [{
+    key: "_getAccessoriesData",
+    value: function _getAccessoriesData(params) {
+      var _this2 = this;
+
+      var deviceName = null,
+          ifNoCriterias = false;
+      /*find device name*/
+      for (var key in params) {
+        if (key.includes("deviceCategory") && params[key]) deviceName = params[key].replace(/-/g, " ");
+      }
+      var selectedFilterOptions = this._parseUrl(params);
+      var objForRequest = this._getObjForRequest(selectedFilterOptions, selectedFilterOptions.page, deviceName);
+      document.getElementById("spinner-box-load").style.display = "block";
+      this.setState({ infoNoModels: false });
+      _index2.default.getModels("/api/getShopCategoryProducts", objForRequest).then(function (_ref) {
+        var data = _ref.data;
+
+        document.getElementById("spinner-box-load").style.display = "none";
+        _this2.setState({ viewMode: "Group" });
+        var filterOptions = {};
+        var availableFilterOptions = {};
+
+        selectedFilterOptions = _this2._setSelectedFilterOption(selectedFilterOptions, data);
+        data.meta.criteriasList.forEach(function (item) {
+          if (!filterOptions["kategorie-" + item.id]) filterOptions["kategorie-" + item.id] = (0, _extends3.default)({}, item);
+          if (!availableFilterOptions["kategorie-" + item.id]) availableFilterOptions["kategorie-" + item.id] = (0, _extends3.default)({}, item);
+          if (!selectedFilterOptions["kategorie-" + item.id]) {
+            selectedFilterOptions["kategorie-" + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
+            if (selectedFilterOptions["kategorie-" + item.id].length === 0) selectedFilterOptions["kategorie-" + item.id] = item;
+          }
+        });
+        var pagination = data.meta.pagination;
+        var capacityName = data.meta.capacityName;
+
+        selectedFilterOptions.price.max = data.meta.maxPrice;
+        selectedFilterOptions.price.min = data.meta.minPrice;
+        if (selectedFilterOptions.price.maxSearch === 0) selectedFilterOptions.price.maxSearch = data.meta.maxPrice;
+        if (selectedFilterOptions.price.minSearch === 0) selectedFilterOptions.price.minSearch = data.meta.minPrice;
+
+        _this2.props.shopActions.setFilterOptions(filterOptions);
+        _this2.props.shopActions.loadModels(data.data, data.meta.categoriesList);
+        var count = Math.ceil(pagination.total / pagination.per_page);
+        selectedFilterOptions.page = count > selectedFilterOptions.page ? selectedFilterOptions.page : count;
+        _this2.setState({
+          pagination: (0, _extends3.default)({}, _this2.state.pagination, {
+            activePage: selectedFilterOptions.page - 1,
+            totalItemsCount: pagination.total,
+            pageCount: count
+          }),
+          totalCountModels: data.meta.totalCount,
+          selectedFilterOptions: selectedFilterOptions,
+          availableFilterOptions: availableFilterOptions,
+          capacityName: capacityName,
+          infoNoModels: !ifNoCriterias && data.data.length === 0,
+          showSidebar: data.meta.minPrice !== null,
+          seoAccessoriesData: (0, _extends3.default)({}, _this2.state.seoAccessoriesData, {
+            html_description: data.meta.html_description,
+            meta_description: data.meta.meta_description,
+            meta_keywords: data.meta.meta_keywords,
+            title: data.meta.title
+          })
+        });
+        if (window.isGoogleConnection) _this2.gtagEnhancedEcommerce();
+        document.getElementById("devicesListSmall").scrollIntoView();
+      }).catch(function () {
+        document.getElementById("spinner-box-load").style.display = "none";
+        if (window.isGoogleConnection === true) {
+          _this2.props.shopActions.setFilterOptions({
+            lagerort: { values: [] },
+            modell: { values: [] },
+            zustand: { values: [] }
+          });
+          _this2.props.shopActions.loadModels([], []);
+          _this2.setState({ infoNoModels: true });
+          _this2.setState({ seoAccessoriesData: null });
+        }
+      });
+    }
+  }, {
+    key: "_getModelsDataByCategoryId",
+    value: function _getModelsDataByCategoryId(params) {
+      var modelCategoryId = 0;
+      for (var key in params) {
+        if (key.includes("param1") && params[key]) {
+          modelCategoryId = params[key].split("=")[1];
+        }
+      }
+      if (modelCategoryId != 0) {
+        var selectedFilterOptions = this._parseUrl(params);
+        var objForRequest = this._getObjForRequestByCategoryId(selectedFilterOptions, selectedFilterOptions.page, modelCategoryId);
+        document.getElementById("spinner-box-load").style.display = "block";
+        this.setState({
+          infoNoModels: false,
+          objForRequest: objForRequest
+        });
+
+        this.setState({
+          modelCategoryId: modelCategoryId
+        });
+
+        // api.getModels(`/api/modelsByCategoryId`, objForRequest)
+        //     .then(({data}) => {
+        //         document.getElementById('spinner-box-load').style.display = 'none'
+        //         this.setState({
+        //             productModels: data.meta.namesList.values
+        //         });
+
+        //     })
+        //     .catch(() => {
+        //         document.getElementById('spinner-box-load').style.display = 'none'
+        //         this.setState({
+        //             productModels: []
+        //         });
+        //     })
+      }
+    }
+  }, {
+    key: "_getModelsData",
+    value: function _getModelsData(params) {
+      var _this3 = this;
+
+      var deviceName = null,
+          ifNoCriterias = false;
+      /*find device name*/
+      for (var key in params) {
+        if (key.includes("deviceCategory") && params[key]) deviceName = params[key].replace(/-/g, " ");
+      }
+
+      var selectedFilterOptions = this._parseUrl(params);
+      var objForRequest = this._getObjForRequest(selectedFilterOptions, selectedFilterOptions.page, deviceName);
+      document.getElementById("spinner-box-load").style.display = "block";
+      this.setState({
+        infoNoModels: false,
+        objForRequest: objForRequest
+      });
+
+      _index2.default.getModels("/api/models", objForRequest).then(function (_ref2) {
+        var data = _ref2.data;
+
+        document.getElementById("spinner-box-load").style.display = "none";
+
+        var filterOptions = {
+          lagerort: data.meta.placesList,
+          modell: data.meta.namesList,
+          zustand: data.meta.conditionsList
+        };
+
+        var availableFilterOptions = {
+          lagerort: data.meta.placesList,
+          modell: data.meta.namesList,
+          zustand: data.meta.conditionsList
+        };
+
+        selectedFilterOptions = _this3._setSelectedFilterOption(selectedFilterOptions, data);
+
+        data.meta.criteriasList.forEach(function (item) {
+          if (!filterOptions["kategorie-" + item.id]) filterOptions["kategorie-" + item.id] = (0, _extends3.default)({}, item);
+          if (!availableFilterOptions["kategorie-" + item.id]) availableFilterOptions["kategorie-" + item.id] = (0, _extends3.default)({}, item);
+          if (!selectedFilterOptions["kategorie-" + item.id]) {
+            selectedFilterOptions["kategorie-" + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
+            if (selectedFilterOptions["kategorie-" + item.id].length === 0) selectedFilterOptions["kategorie-" + item.id] = item;
+          }
+        });
+
+        data.meta.specificationsList.forEach(function (item) {
+          if (!filterOptions["spezifikation-" + item.id]) filterOptions["spezifikation-" + item.id] = (0, _extends3.default)({}, item);
+          if (!availableFilterOptions["spezifikation-" + item.id]) availableFilterOptions["spezifikation-" + item.id] = (0, _extends3.default)({}, item);
+          if (!selectedFilterOptions["spezifikation-" + item.id]) {
+            selectedFilterOptions["spezifikation-" + item.id] = []; //if no such criteria, then add to object SelectedFilterOptions
+            if (selectedFilterOptions["spezifikation-" + item.id].length === 0) selectedFilterOptions["spezifikation-" + item.id] = item;
+          }
+        });
+
+        if (data.meta.warrantiesList.values.length > 0) {
+          filterOptions.garantie = data.meta.warrantiesList;
+          availableFilterOptions.garantie = data.meta.warrantiesList;
+          if (!selectedFilterOptions.garantie) selectedFilterOptions.garantie = (0, _extends3.default)({}, data.meta.warrantiesList);
+        }
+
+        var pagination = data.meta.pagination;
+        var capacityName = data.meta.capacityName;
+
+        if (selectedFilterOptions.lagerort.length === 0) selectedFilterOptions.lagerort = data.meta.placesList;
+        if (selectedFilterOptions.modell.length === 0) selectedFilterOptions.modell = data.meta.namesList;
+        if (selectedFilterOptions.zustand.length === 0) selectedFilterOptions.zustand = data.meta.conditionsList;
+        if (data.meta.warrantiesList.values.length > 0 && selectedFilterOptions.garantie && selectedFilterOptions.garantie.length === 0) {
+          selectedFilterOptions.garantie = data.meta.warrantiesList;
+        }
+        selectedFilterOptions.price.max = data.meta.maxPrice;
+        selectedFilterOptions.price.min = data.meta.minPrice;
+        if (selectedFilterOptions.price.maxSearch === 0) selectedFilterOptions.price.maxSearch = data.meta.maxPrice;
+        if (selectedFilterOptions.price.minSearch === 0) selectedFilterOptions.price.minSearch = data.meta.minPrice;
+        _this3.props.shopActions.setFilterOptions(filterOptions);
+        _this3.props.shopActions.loadModels(data.data, data.meta.categoriesList);
+        var count = Math.ceil(pagination.total / pagination.per_page);
+        selectedFilterOptions.page = count > selectedFilterOptions.page ? selectedFilterOptions.page : count;
+        _this3.setState({
+          mainModelGroupId: data.meta.mainModelGroupId,
+          pagination: (0, _extends3.default)({}, _this3.state.pagination, {
+            activePage: selectedFilterOptions.page - 1,
+            totalItemsCount: pagination.total,
+            pageCount: count
+          }),
+          totalCountModels: data.meta.totalCount,
+          selectedFilterOptions: selectedFilterOptions,
+          availableFilterOptions: availableFilterOptions,
+          capacityName: capacityName,
+          infoNoModels: !ifNoCriterias && data.data.length === 0,
+          showSidebar: data.meta.namesList.values.length > 0,
+          viewMode: "List"
+        });
+        if (window.isGoogleConnection) _this3.gtagEnhancedEcommerce();
+        // document.getElementById('devicesListSmall').scrollIntoView(); function that scroll to devicesListSmall id on page
+      }).catch(function () {
+        document.getElementById("spinner-box-load").style.display = "none";
+        if (window.isGoogleConnection === true) {
+          _this3.props.shopActions.setFilterOptions({
+            lagerort: { values: [] },
+            modell: { values: [] },
+            zustand: { values: [] }
+          });
+          _this3.props.shopActions.loadModels([], []);
+          _this3.setState({ infoNoModels: true });
+        }
+      });
+    }
+  }, {
+    key: "_getSeoData",
+    value: function _getSeoData(params) {
+      var _this4 = this;
+
+      var deviceName = null;
+      /*find device name*/
+      for (var key in params) {
+        if (key.includes("deviceCategory") && params[key]) deviceName = params[key].replace(/-/g, " ");
+      }
+
+      _axios2.default.get("/api/deviceGroupMetaData?modelGroup=" + deviceName + "&pageType=buy").then(function (_ref3) {
+        var data = _ref3.data;
+
+        if (data[0]) {
+          if (data[0].footer) $(".footerBottom p.seo").html(data[0].footer);else $(".footerBottom p.seo").empty();
+          _this4.setState({
+            seoData: {
+              description: data[0].description,
+              title: data[0].title,
+              keywords: data[0].keywords
+            }
+          });
+        } else {
+          $(".footerBottom p.seo").empty();
+          _this4.setState({ seoData: null });
+        }
+        (0, _seoText.seoTextAdjustHeight)();
+      }).catch(function () {
+        document.getElementById("spinner-box-load").style.display = "none";
+        $(".footerBottom p.seo").empty();
+        _this4.setState({ seoData: null });
+        (0, _seoText.seoTextAdjustHeight)();
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.shopActions.setFilterOptions({
+        lagerort: { values: [] },
+        modell: { values: [] },
+        zustand: { values: [] }
+      });
+      this.props.shopActions.loadModels([], []);
+
+      //save checked filters
+      var categoriesParams = [];
+
+      for (var key in this.props.params) {
+        if (key.includes("deviceCategory") && this.props.params[key]) categoriesParams.push(this.props.params[key]);
+      }
+
+      var obj = {
+        values: this.state.selectedFilterOptions,
+        availableFilterOptions: this.state.availableFilterOptions,
+        categoriesParams: categoriesParams
+      };
+      window.localStorage.setItem("selectedFilterOptions", JSON.stringify(obj));
+      $(".footerBottom p.seo").empty();
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.inputPriceCallback = (0, _debounce3.default)(function () {
+        var selectedFilterOptions = this.state.selectedFilterOptions;
+
+        _reactRouter.browserHistory.push("/kaufen/" + this._getBrowserUrl(selectedFilterOptions));
+      }, 1000);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.shopActions.loadDevices("/api/devices");
+      if (this.props.params.deviceCategory1) {
+        if (this.props.params.deviceCategory1 === "zubehör") {
+          this._getAccessoriesData(this.props.params);
+          this._getModelsDataByCategoryId(this.props.params);
+        } else {
+          this._getSeoData(this.props.params);
+          this._getModelsData(this.props.params);
+        }
+      } else if (window.localStorage.getItem("selectedFilterOptions")) {
+        var obj = JSON.parse(window.localStorage.getItem("selectedFilterOptions"));
+        if (page = obj.values.page) {
+          this.setState({
+            pagination: (0, _extends3.default)({}, this.state.pagination, {
+              activePage: page - 1
+            })
+          });
+        }
+        _reactRouter.browserHistory.push("/kaufen/" + obj.categoriesParams.join("/") + "/" + this._getBrowserUrl(obj.values, obj.availableFilterOptions));
+      }
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps, nextState) {
+      if (nextProps.devices !== this.props.devices && nextProps.devices.length > 0) {
+        if (!this.props.params.deviceCategory1) {
+          var devices = nextProps.devices;
+
+          this._parseDevicesForUrl(devices);
+        }
+      }
+      if (nextProps.params && nextProps.params !== this.props.params && nextProps.params.deviceCategory1) {
+        var selectedFilterOptions = this.state.selectedFilterOptions;
+        if (nextProps.params.deviceCategory1 === "zubehör") {
+          this._getAccessoriesData(nextProps.params);
+          this._getModelsDataByCategoryId(nextProps.params);
+          selectedFilterOptions.sort = "popular";
+          this.setState({
+            options: [{ label: "Nach Beliebtheit", value: "popular" }, { label: "Günstige Preise zuerst anzeigen", value: "niedrighoch" }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }],
+            selectedFilterOptions: selectedFilterOptions
+          });
+        } else {
+          this._getSeoData(nextProps.params);
+          this._getModelsData(nextProps.params);
+          selectedFilterOptions.sort = "popular";
+          this.setState({
+            options: [{ label: "Nach Beliebtheit", value: "popular" }, { label: "Günstige Preise zuerst anzeigen", value: "niedrighoch" }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }],
+            selectedFilterOptions: selectedFilterOptions
+          });
+        }
+      }
+      if (nextState.selectedFilterOptions !== this.state.selectedFilterOptions || nextState.availableFilterOptions !== this.state.availableFilterOptions) {
+        this.mapSelectedCriteria(nextProps.availableFilterOptions, this.state.selectedFilterOptions);
+      }
+    }
+  }, {
+    key: "_parseDevicesForUrl",
+    value: function _parseDevicesForUrl(devices) {
+      var defaultDevice = devices.filter(function (item) {
+        return item.id === 23;
+      }),
+          defaultBrand = [],
+          otherCategories = [];
+      if (defaultDevice.length > 0) {
+        defaultBrand = defaultDevice[0].submodels.filter(function (item) {
+          return item.id === 2;
+        });
+        otherCategories.push(defaultBrand[0].name.replace(/ /g, "-").toLowerCase());
+      }
+      if (defaultDevice.length === 0) {
+        defaultDevice = [devices[0]];
+        mapSubmodels(defaultDevice[0].submodels);
+      }
+      var strOtherCategories = otherCategories.join("/");
+      _reactRouter.browserHistory.push("/kaufen/" + defaultDevice[0].name.toLowerCase() + "/" + strOtherCategories + "/filter");
+
+      function mapSubmodels(submodels) {
+        otherCategories.push(submodels[0].name.replace(/ /g, "-").toLowerCase());
+        if (submodels[0].submodels) mapSubmodels(submodels[0].submodels);
+      }
+    }
+  }, {
+    key: "_setSelectedFilterOption",
+    value: function _setSelectedFilterOption(selectedFilterOptions, data) {
+      var _loop = function _loop(key) {
+        if (key === "modell" && data.meta.namesList || key === "garantie" && data.meta.conditionsList || key === "zustand" && data.meta.warrantiesList || key === "lagerort" && data.meta.placesList) {
+          var arrayList = "",
+              tmpArr = selectedFilterOptions[key];
+
+          if (key === "modell") arrayList = "namesList";else if (key === "lagerort") arrayList = "placesList";else if (key === "zustand") arrayList = "conditionsList";else if (key === "garantie") arrayList = "warrantiesList";
+
+          if (selectedFilterOptions[key][0] === "alle") {
+            selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
+          } else if (selectedFilterOptions[key].length > 0) {
+            selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
+            selectedFilterOptions[key].values = selectedFilterOptions[key].values.filter(function (element) {
+              return tmpArr.some(function (itemId) {
+                return +itemId === element.id;
+              });
+            });
+          } else selectedFilterOptions[key] = (0, _extends3.default)({}, data.meta[arrayList]);
+        } else {
+          var idOfKey = key.slice(key.lastIndexOf("-") + 1);
+          if (key.includes("kategorie") || key.includes("spezifikation")) {
+            var _arrayList = key.includes("kategorie") ? "criteriasList" : "specificationsList",
+                filterTypePrefix = key.includes("kategorie") ? "kategorie-" : "spezifikation-";
+            if (data.meta[_arrayList].some(function (item) {
+              return item.id == idOfKey;
+            })) {
+              data.meta[_arrayList].forEach(function (item) {
+                if (item.id == idOfKey) {
+                  if (selectedFilterOptions[key][0] === "alle") {
+                    selectedFilterOptions[filterTypePrefix + item.id] = (0, _extends3.default)({}, item);
+                  } else {
+                    var tmpIds = selectedFilterOptions[key];
+                    selectedFilterOptions[filterTypePrefix + item.id] = (0, _extends3.default)({}, item);
+                    selectedFilterOptions[filterTypePrefix + item.id].values = selectedFilterOptions[filterTypePrefix + item.id].values.filter(function (element) {
+                      return tmpIds.some(function (itemId) {
+                        return +itemId === element.id;
+                      });
+                    });
+                  }
+                }
+              });
+            } else if (key !== "price" && key !== "sort" && key !== "page") delete selectedFilterOptions[key];
+          } else if (key !== "price" && key !== "sort" && key !== "page") delete selectedFilterOptions[key];
+        }
+      };
+
+      for (var key in selectedFilterOptions) {
+        _loop(key);
+      }
+
+      return selectedFilterOptions;
+    }
+  }, {
+    key: "_getObjForRequest",
+    value: function _getObjForRequest(selectedFilterOptions, page, deviceName) {
+      var objForRequest = (0, _extends3.default)({}, selectedFilterOptions);
+      for (var key in objForRequest) {
+        if (key !== "price" && key !== "sort" && key !== "page") {
+          objForRequest[key] = [].concat((0, _toConsumableArray3.default)(selectedFilterOptions[key]));
+        }
+      }
+
+      objForRequest["criterias"] = {};
+      objForRequest["specifications"] = {};
+      objForRequest["deviceName"] = deviceName;
+      objForRequest["page"] = page;
+      var arrKeys = ["lagerort", "modell", "deviceName", "page", "price", "zustand", "garantie", "sort", "page", "criterias", "specifications"];
+
+      var _loop2 = function _loop2(_key) {
+        if (arrKeys.every(function (item) {
+          return item !== _key;
+        })) {
+          var name = _key.slice(_key.lastIndexOf("-") + 1),
+              currentFilterName = _key.slice(0, _key.lastIndexOf("-")),
+              filterType = currentFilterName === "kategorie" ? "criterias" : "specifications";
+
+          objForRequest[filterType][name] = [].concat((0, _toConsumableArray3.default)(objForRequest[_key]));
+          delete objForRequest[_key];
+        }
+      };
+
+      for (var _key in objForRequest) {
+        _loop2(_key);
+      }
+      return objForRequest;
+    }
+  }, {
+    key: "_getObjForRequestByCategoryId",
+    value: function _getObjForRequestByCategoryId(selectedFilterOptions, page, modelCategoryId) {
+      var objForRequest = (0, _extends3.default)({}, selectedFilterOptions);
+
+      for (var key in objForRequest) {
+        if (key !== "price" && key !== "sort" && key !== "page") objForRequest[key] = [].concat((0, _toConsumableArray3.default)(selectedFilterOptions[key]));
+      }
+
+      objForRequest["criterias"] = {};
+      objForRequest["specifications"] = {};
+      objForRequest["page"] = page;
+      objForRequest["modelCategoryId"] = parseInt(modelCategoryId);
+      objForRequest["sort"] = "popular";
+      var arrKeys = ["lagerort", "modell", "deviceName", "modelCategoryId", "page", "price", "zustand", "garantie", "sort", "page", "criterias"];
+
+      var _loop3 = function _loop3(_key2) {
+        if (arrKeys.every(function (item) {
+          return item !== _key2;
+        })) {
+          var name = _key2.slice(_key2.lastIndexOf("-") + 1),
+              currentFilterName = _key2.slice(0, _key2.lastIndexOf("-")),
+              filterType = currentFilterName === "kategorie" ? "criterias" : "specifications";
+
+          objForRequest[filterType][name] = [].concat((0, _toConsumableArray3.default)(objForRequest[_key2]));
+          delete objForRequest[_key2];
+        }
+      };
+
+      for (var _key2 in objForRequest) {
+        _loop3(_key2);
+      }
+      return objForRequest;
+    }
+  }, {
+    key: "_getBrowserUrl",
+    value: function _getBrowserUrl(selectedFilterOptions) {
+      var availableFilterOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.state.availableFilterOptions;
+      var s = "",
+          params = this.props.params;
+
+      for (var key in params) {
+        if (key.includes("deviceCategory") && params[key]) s += params[key] + "/";
+      }
+      s += "filter/";
+
+      for (var _key3 in params) {
+        if (_key3.includes("param") && params[_key3] && params[_key3].includes("kategorie-compatibility-brand")) s += params[_key3] + "/";
+      }
+
+      var _loop4 = function _loop4(_key4) {
+        if (_key4 === "price") {
+          if (selectedFilterOptions[_key4].minSearch > 0 || selectedFilterOptions[_key4].maxSearch < selectedFilterOptions[_key4].max) {
+            s += "preis=" + selectedFilterOptions[_key4].minSearch + "-" + selectedFilterOptions[_key4].maxSearch + "/";
+          }
+        } else if (_key4 === "sort" || _key4 === "page") {
+          s += _key4 + "=" + selectedFilterOptions[_key4] + "/";
+        } else {
+          var categoryName = _key4;
+
+          if (selectedFilterOptions[_key4].values.length === availableFilterOptions[_key4].values.length) {
+            s += categoryName + "=alle/";
+          } else if (selectedFilterOptions[_key4].values.length > 0) {
+            selectedFilterOptions[_key4].values.forEach(function (item, i) {
+              if (i === 0) {
+                if (selectedFilterOptions[_key4].values.length === 1) {
+                  s += categoryName + "=" + (item.id || "alle") + "/";
+                } else s += categoryName + "=" + item.id;
+              } else if (i === selectedFilterOptions[_key4].values.length - 1) {
+                s += "," + item.id + "/";
+              } else s += "," + item.id;
+            });
+          }
+        }
+      };
+
+      for (var _key4 in selectedFilterOptions) {
+        _loop4(_key4);
+      }
+      return s;
+    }
+  }, {
+    key: "_parseUrl",
+    value: function _parseUrl(nextPropsParams) {
+      var urlParams = nextPropsParams,
+          selectedFilterOptions = {
+        page: 1,
+        price: {
+          min: 0,
+          max: 1,
+          maxSearch: 0,
+          minSearch: 0
+        },
+        lagerort: { values: [] },
+        modell: { values: [] },
+        zustand: { values: [] },
+        sort: nextPropsParams.deviceCategory1 === "zubehör" ? "popular" : "popular"
+      },
+          storageLocationData = JSON.parse(window.localStorage.getItem("locationData")),
+          currentLocationData = {};
+      this.props.places ? currentLocationData = this.props.places : storageLocationData ? storageLocationData.data.forEach(function (item) {
+        if (item.active === true) {
+          currentLocationData = item;
+        }
+      }) : currentLocationData = null;
+      for (var key in urlParams) {
+        if (key.includes("param") && urlParams[key]) {
+          (function () {
+            var name = urlParams[key].slice(0, urlParams[key].indexOf("=")),
+                paramsArr = [];
+
+            if (name === "preis") {
+              paramsArr = urlParams[key].slice(urlParams[key].indexOf("=") + 1).split("-");
+              selectedFilterOptions.price.minSearch = paramsArr[0];
+              selectedFilterOptions.price.maxSearch = paramsArr[1];
+            } else if (name === "sort" || name === "page") {
+              paramsArr = urlParams[key].slice(urlParams[key].indexOf("=") + 1);
+              selectedFilterOptions[name] = paramsArr;
+            } else {
+              paramsArr = urlParams[key].slice(urlParams[key].indexOf("=") + 1).split(",");
+              paramsArr.forEach(function (item, i) {
+                return paramsArr[i] = item.replace(/-/g, " ").replace(/\|/g, "/");
+              });
+              selectedFilterOptions[name] = paramsArr;
+            }
+          })();
+        }
+      }
+
+      /*!selectedFilterOptions.lagerort ?
+              !currentLocationData ?
+              selectedFilterOptions.lagerort = {values: []}
+                  :
+              selectedFilterOptions.lagerort = [currentLocationData.id]
+                  :
+               selectedFilterOptions.lagerort = selectedFilterOptions.lagerort*/
+
+      return selectedFilterOptions;
+    }
+  }, {
+    key: "handleChooseFilterItemMobile",
+    value: function handleChooseFilterItemMobile(e, name, value) {
+      e.preventDefault();
+      var filterOptions = this.props.filterOptions,
+          selectedFilterOptions = this.state.selectedFilterOptions;
+
+
+      if (value === "allValues") {
+        selectedFilterOptions[name] ? selectedFilterOptions[name].values = [].concat((0, _toConsumableArray3.default)(filterOptions[name].values)) : null;
+      } else {
+        if (selectedFilterOptions[name] && selectedFilterOptions[name].values.length === filterOptions[name].values.length) {
+          selectedFilterOptions[name].values = [];
+          selectedFilterOptions[name].values.push(value);
+        } else {
+          if (selectedFilterOptions[name] && selectedFilterOptions[name].values.some(function (option) {
+            return option.id === value.id;
+          })) {
+            if (selectedFilterOptions[name].values.length === 1) selectedFilterOptions[name].values = [];else selectedFilterOptions[name].values = selectedFilterOptions[name].values.filter(function (item) {
+              return item.id !== value.id;
+            });
+          } else if (selectedFilterOptions[name]) {
+            selectedFilterOptions[name].values.push(value);
+          }
+        }
+      }
+      this.setState({ selectedFilterOptions: selectedFilterOptions });
+    }
+  }, {
+    key: "handleApplyFiltersMobile",
+    value: function handleApplyFiltersMobile() {
+      var selectedFilterOptions = this.state.selectedFilterOptions;
+
+
+      _reactRouter.browserHistory.push("/kaufen/" + this._getBrowserUrl(selectedFilterOptions));
+
+      $(".modelInnerPage-inner .contentPart").css({ display: "block" });
+      $(".modelInnerPage #devicesListSmall").css({ display: "block" });
+      // $('.modelInnerPage-inner .asideFilter').css({ display: 'none' })
+      this.props.defineTitleHeadMobile(this.props.params.deviceCategory1 || "Categories");
+      this.props.handleBackFilter();
+    }
+  }, {
+    key: "openQuickView",
+    value: function openQuickView(model) {
+      var models = this.props.models;
+
+      this.setState({
+        quickViewPage: _react2.default.createElement(_quickViewPage2.default, {
+          model: model,
+          allModels: models,
+          openSuccessAddToBasket: this.openSuccessAddToBasket,
+          capacityName: this.state.capacityName,
+          closeQuickView: this.closeQuickView,
+          deviceName: this.props.params.deviceCategory1
+        })
+      });
+    }
+  }, {
+    key: "closeQuickView",
+    value: function closeQuickView() {
+      this.setState({ quickViewPage: null });
+    }
+  }, {
+    key: "openSuccessAddToBasket",
+    value: function openSuccessAddToBasket(item, source) {
+      var _this5 = this;
+
+      var successAddToBasket = this.state.successAddToBasket;
+
+      var promise = new Promise(function (resolve, reject) {
+        if (item.modelId) {
+          _axios2.default.get("/api/loadRecommendProducts?modelId=" + item.modelId).then(function (result) {
+            resolve(result.data.data.length ? result.data.data : null);
+          });
+        } else if (source === "gridPage") {
+          _axios2.default.get("/api/loadBestBuyProducts?shortcode=" + item.shortcode + "&deviceName=" + encodeURIComponent(item.deviceName)).then(function (result) {
+            resolve(result.data.data.length ? result.data.data : null);
+          });
+        } else {
+          resolve(null);
+        }
+      });
+      promise.then(function (result) {
+        if (result && successAddToBasket == null && result.length > 0) {
+          _this5.setState({ recommendProducts: result });
+
+          _this5.setState({
+            successAddToBasket: _react2.default.createElement(_successAddToBasket2.default, {
+              addModelToBasket: _this5.addModelToBasket,
+              basketData: _this5.props.basketData,
+              source: source,
+              model: item,
+              recommendProducts: _this5.state.recommendProducts,
+              closeSuccessAddToBasket: _this5.closeSuccessAddToBasket
+            })
+          });
+        }
+      });
+    }
+  }, {
+    key: "closeSuccessAddToBasket",
+    value: function closeSuccessAddToBasket() {
+      this.setState({ successAddToBasket: null });
+    }
+  }, {
+    key: "addModelToBasket",
+    value: function addModelToBasket(e, item) {
+      var _this6 = this;
+
+      e.stopPropagation();
+      e.preventDefault();
+      var status = e.target.getAttribute("data-status"),
+          source = e.target.getAttribute("data-source"),
+          _props = this.props,
+          basketData = _props.basketData,
+          params = _props.params,
+          newBasketData = null;
+
+      if (item.categoryName) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
+      } else if (basketData.every(function (itemBasket) {
+        return itemBasket.id != item.id;
+      })) {
+        newBasketData = [].concat((0, _toConsumableArray3.default)(basketData), [item]);
+      } else {
+        newBasketData = basketData.filter(function (itemBasket) {
+          return itemBasket.shortcode != item.shortcode;
+        });
+      }
+      this.props.basketActions.changeBasketData(newBasketData);
+
+      var brands = void 0,
+          brand = void 0,
+          category = void 0;
+      if (source == "relevantProduct" || params.deviceCategory1 == "zubehör") {
+        brands = item.criterias.find(function (item) {
+          return item.id === "manufacturer";
+        }).values, brand = brands.length ? brands[0].name : "", category = item.categoryName;
+      } else {
+        brand = item.deviceName, category = params.deviceCategory1 || "";
+      }
+      if (status === "out") {
+        gtag("event", "add_to_cart", {
+          items: [{
+            id: item.shortcode,
+            list_name: "Kaufen",
+            quantity: 1,
+            price: item.discountPrice || item.price,
+            name: item.descriptionLong || item.model || "",
+            brand: brand,
+            category: category
+          }]
+        });
+        if (!window.isMobile) {
+          this.props.basketActions.basketAddEffect(_react2.default.createElement(_addToBasketEffect2.default, {
+            startPosition: $(e.target).offset(),
+            image: item.deviceImages.mainImg.src,
+            basketType: "kaufen"
+          }));
+          setTimeout(function () {
+            if (source !== "relevantProduct") {
+              _this6.openSuccessAddToBasket(item, source);
+            }
+            _this6.props.basketActions.basketAddEffect(null);
+          }, 2000);
+        } else {
+          this.openSuccessAddToBasket(item, source);
+          // browserHistory.push('/warenkorb')
+        }
+      }
+      if (status === "in") {
+        gtag("event", "remove_from_cart", {
+          items: [{
+            id: item.shortcode,
+            list_name: "Kaufen",
+            quantity: 1,
+            price: item.discountPrice || item.price,
+            name: item.descriptionLong || item.model || "",
+            brand: brand,
+            category: category
+          }]
+        });
+        if (!newBasketData.length || !newBasketData.filter(function (item) {
+          return item.productTypeId == 7;
+        }).length) {
+          var deadline = JSON.parse(window.localStorage.getItem("deadline"));
+          if (deadline) {
+            deadline.isActive = 0;
+            window.localStorage.setItem("deadline", JSON.stringify(deadline));
+            newBasketData = newBasketData.filter(function (item) {
+              return item.shortcode != deadline.couponShortcode;
+            });
+            this.props.basketActions.changeBasketData(newBasketData);
+          }
+        }
+      }
+
+      this.props.basketData.map(function (el) {
+        return snaptr("track", "ADD_CART", {
+          shortcode: el.shortcode,
+          name: el.name
+        });
+      });
+    }
+  }, {
+    key: "addModelToWishlist",
+    value: function addModelToWishlist(e, item) {
+      var _this7 = this;
+
+      e.stopPropagation();
+      e.preventDefault();
+      var wishlistData = this.props.wishlistData,
+          newWishlistData = null;
+
+      var status = "";
+      if (wishlistData.every(function (itemWishlist) {
+        return itemWishlist.id != item.id;
+      })) {
+        newWishlistData = [].concat((0, _toConsumableArray3.default)(wishlistData), [item]);
+        status = "add";
+      } else {
+        newWishlistData = wishlistData.filter(function (itemWishlist) {
+          return itemWishlist.shortcode != item.shortcode;
+        });
+        status = "remove";
+      }
+      this.props.basketActions.changeWishlisteData(newWishlistData);
+      if (!window.isMobile && status === "add") {
+        this.props.basketActions.wishlistAddEffect(_react2.default.createElement(_addToWishlistEffect2.default, {
+          startPosition: $(e.target).offset(),
+          image: item.deviceImages.mainImg.src
+        }));
+        setTimeout(function () {
+          _this7.props.basketActions.wishlistAddEffect(null);
+        }, 2000);
+      }
+    }
+  }, {
+    key: "handleClickItemGroup",
+    value: function handleClickItemGroup(e) {
+      var _state = this.state,
+          selectedFilterOptions = _state.selectedFilterOptions,
+          capacityName = _state.capacityName,
+          params = this.props.params,
+          model = e.currentTarget.getAttribute("data-model"),
+          capacity = e.currentTarget.getAttribute("data-capacity"),
+          color = e.currentTarget.getAttribute("data-color");
+
+
+      selectedFilterOptions.farbe = [color];
+      selectedFilterOptions[capacityName] = [capacity];
+      selectedFilterOptions.modell = [model];
+
+      _reactRouter.browserHistory.push("/kaufen/" + this._getBrowserUrl(selectedFilterOptions));
+
+      this.setState({ viewMode: "List" });
+    }
+  }, {
+    key: "handlePageChange",
+    value: function handlePageChange(pageNumber) {
+      var _this8 = this;
+
+      var params = this.props.params,
+          selectedFilterOptions = this._parseUrl(this.props.params),
+          deviceName = "",
+          url = "";
+      /*find device name*/
+      for (var key in params) {
+        if (key.includes("deviceCategory") && params[key]) deviceName = params[key].replace(/-/g, " ");
+      }
+
+      document.getElementById("spinner-box-load").style.display = "block";
+      selectedFilterOptions.page = pageNumber.selected + 1;
+      var objForRequest = this._getObjForRequest(selectedFilterOptions, pageNumber.selected + 1, deviceName);
+      this.props.params.deviceCategory1 === "zubehör" ? url = "/api/getShopCategoryProducts" : url = "/api/models";
+      _index2.default.getModels(url, objForRequest).then(function (_ref4) {
+        var data = _ref4.data;
+
+        $(window, document).scrollTop(0);
+        document.getElementById("spinner-box-load").style.display = "none";
+        _this8.setState({
+          pagination: (0, _extends3.default)({}, _this8.state.pagination, {
+            activePage: pageNumber.selected
+          }),
+          infoNoModels: data.data.length === 0,
+          selectedFilterOptions: (0, _extends3.default)({}, _this8.state.selectedFilterOptions, {
+            page: pageNumber.selected + 1
+          })
+        });
+        _this8.props.shopActions.loadModels(data.data, data.meta.categoriesList);
+        _reactRouter.browserHistory.push("/kaufen/" + _this8._getBrowserUrl(_this8.state.selectedFilterOptions));
+      });
+    }
+  }, {
+    key: "gtagEnhancedEcommerce",
+    value: function gtagEnhancedEcommerce() {
+      var data = this.props,
+          gTagItems = data.models.map(function (item) {
+        var brand = "";
+        if (data.params.deviceCategory1 == "zubehör") {
+          var brands = item.criterias.find(function (item) {
+            return item.id === "manufacturer";
+          }).values;
+          brand = brands.length ? brands[0].name : "";
+        }
+        return {
+          id: item.shortcode,
+          name: item.descriptionLong || item.model || "",
+          list_name: "Kaufen",
+          quantity: 1,
+          brand: data.params.deviceCategory1 == "zubehör" ? brand : item.deviceName,
+          category: data.params.deviceCategory1 == "zubehör" ? data.params.deviceCategory2 : data.params.deviceCategory1 || "",
+          price: item.discountPrice || item.price
+        };
+      });
+
+      gtag("event", "view_item_list", {
+        items: gTagItems
+      });
+    }
+  }, {
+    key: "changeViewMode",
+    value: function changeViewMode(e) {
+      var viewMode = e.target.getAttribute("data-mode");
+      this.setState({ viewMode: viewMode });
+    }
+  }, {
+    key: "changePrice",
+    value: function changePrice(e) {
+      var selectedFilterOptions = this.state.selectedFilterOptions;
+
+      if ((+e.min).toFixed(0) !== (+e.max).toFixed(0)) {
+        selectedFilterOptions.price.minSearch = (+e.min).toFixed(0);
+        selectedFilterOptions.price.maxSearch = (+e.max).toFixed(0);
+        this.setState({ inputPriceMin: (+e.min).toFixed(0) });
+        this.setState({ inputPriceMax: (+e.max).toFixed(0) });
+        selectedFilterOptions.page = 1;
+        if (!window.isMobile) this.inputPriceCallback(e);
+        this.setState({ selectedFilterOptions: selectedFilterOptions });
+      }
+    }
+  }, {
+    key: "changeInputPrice",
+    value: function changeInputPrice(e, type) {
+      if (type === "min") {
+        this.setState({ inputPriceMin: e.target.value });
+      }
+      if (type === "max") {
+        this.setState({ inputPriceMax: e.target.value });
+      }
+    }
+  }, {
+    key: "applyInputPrice",
+    value: function applyInputPrice(e, type) {
+      var _state2 = this.state,
+          inputPriceMin = _state2.inputPriceMin,
+          inputPriceMax = _state2.inputPriceMax,
+          selectedFilterOptions = _state2.selectedFilterOptions;
+
+      inputPriceMin = inputPriceMin != 0 ? inputPriceMin : selectedFilterOptions.price.minSearch;
+      inputPriceMax = inputPriceMax != 0 ? inputPriceMax : selectedFilterOptions.price.maxSearch;
+      this.setState({
+        inputPriceErr: {
+          min: false,
+          max: false
+        }
+      });
+      if (type === "min" && (parseInt(inputPriceMin) > parseInt(inputPriceMax) || parseInt(inputPriceMin) < parseInt(selectedFilterOptions.price.min))) {
+        this.setState({
+          inputPriceErr: {
+            min: true,
+            max: false
+          }
+        });
+        this.setState({ inputPriceMin: selectedFilterOptions.price.minSearch });
+        $("#price_min").focus();
+        return;
+      }
+      if (type === "max" && (parseInt(inputPriceMax) < parseInt(inputPriceMin) || parseInt(inputPriceMax) > parseInt(selectedFilterOptions.price.max))) {
+        this.setState({
+          inputPriceErr: {
+            min: false,
+            max: true
+          }
+        });
+        this.setState({ inputPriceMax: selectedFilterOptions.price.maxSearch });
+        $("#price_max").focus();
+        return;
+      }
+
+      if (parseInt(inputPriceMin) != parseInt(selectedFilterOptions.price.minSearch) || parseInt(inputPriceMax) != parseInt(selectedFilterOptions.price.maxSearch)) {
+        selectedFilterOptions.price.minSearch = (+inputPriceMin).toFixed(0);
+        selectedFilterOptions.price.maxSearch = (+inputPriceMax).toFixed(0);
+        this.setState({ selectedFilterOptions: selectedFilterOptions });
+        if (!window.isMobile) this.inputPriceCallback(e);
+      }
+    }
+  }, {
+    key: "changeInputPrice1",
+    value: function changeInputPrice1(e, type) {
+      var _state3 = this.state,
+          inputPriceMin = _state3.inputPriceMin,
+          inputPriceMax = _state3.inputPriceMax,
+          selectedFilterOptions = _state3.selectedFilterOptions;
+
+      this.setState({
+        inputPriceErr: {
+          min: false,
+          max: false
+        }
+      });
+      if (type === "min" && (parseInt(e.target.value) > parseInt(inputPriceMax != 0 ? inputPriceMax : selectedFilterOptions.price.maxSearch) || parseInt(e.target.value) < parseInt(selectedFilterOptions.price.min))) {
+        this.setState({
+          inputPriceErr: {
+            min: true,
+            max: false
+          }
+        });
+        return;
+      }
+      if (type === "max" && (parseInt(e.target.value) < parseInt(inputPriceMin != 0 ? inputPriceMin : selectedFilterOptions.price.minSearch) || parseInt(e.target.value) > parseInt(selectedFilterOptions.price.max))) {
+        this.setState({
+          inputPriceErr: {
+            min: false,
+            max: true
+          }
+        });
+        return;
+      }
+      if (type === "min") {
+        this.setState({ inputPriceMin: e.target.value });
+        selectedFilterOptions.price.minSearch = (+e.target.value).toFixed(0);
+        this.setState({ selectedFilterOptions: selectedFilterOptions });
+      }
+
+      if (type === "max") {
+        this.setState({ inputPriceMax: e.target.value });
+        selectedFilterOptions.price.maxSearch = (+e.target.value).toFixed(0);
+        this.setState({ selectedFilterOptions: selectedFilterOptions });
+      }
+    }
+  }, {
+    key: "changeSortBy",
+    value: function changeSortBy(e) {
+      var value = e.value,
+          selectedFilterOptions = this.state.selectedFilterOptions,
+          params = this.props.params;
+
+
+      selectedFilterOptions.sort = value;
+      // if (!window.isMobile) {
+      _reactRouter.browserHistory.push("/kaufen/" + this._getBrowserUrl(selectedFilterOptions));
+      // }
+      this.setState({ selectedFilterOptions: selectedFilterOptions });
+    }
+  }, {
+    key: "showFilters",
+    value: function showFilters(event) {
+      event.preventDefault();
+
+      $(".modelInnerPage-inner .asideFilter").css({ display: "block" });
+
+      if (!window.isMobile) {
+        $(".modelInnerPage-inner .filters-btn-mobile").css({ display: "none" });
+      } else {
+        $(".modelInnerPage-inner .contentPart").css({ display: "none" });
+        $(".modelInnerPage #devicesListSmall").css({ display: "none" });
+
+        var height = $(".mobileFixedBtn").outerHeight() + 30;
+        $("#intercom-container .intercom-launcher-frame").attr("style", "bottom:" + height + "px !important");
+        height -= 30;
+        $("#tidio-chat #tidio-chat-iframe").css({
+          bottom: height,
+          right: "10px"
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _state4 = this.state,
+          viewMode = _state4.viewMode,
+          availableFilterOptions = _state4.availableFilterOptions,
+          selectedFilterOptions = _state4.selectedFilterOptions,
+          quickViewPage = _state4.quickViewPage,
+          addBasketEffect = _state4.addBasketEffect,
+          capacityName = _state4.capacityName,
+          pagination = _state4.pagination,
+          seoData = _state4.seoData,
+          totalCountModels = _state4.totalCountModels,
+          showSidebar = _state4.showSidebar,
+          mainModelGroupId = _state4.mainModelGroupId,
+          options = _state4.options,
+          successAddToBasket = _state4.successAddToBasket,
+          seoAccessoriesData = _state4.seoAccessoriesData,
+          productModels = _state4.productModels,
+          inputPriceMin = _state4.inputPriceMin,
+          inputPriceMax = _state4.inputPriceMax,
+          inputPriceErr = _state4.inputPriceErr,
+          _props2 = this.props,
+          filterOptions = _props2.filterOptions,
+          models = _props2.models,
+          modelsGroup = _props2.modelsGroup,
+          basketData = _props2.basketData,
+          wishlistData = _props2.wishlistData,
+          devices = _props2.devices,
+          deviceName = this.props.params.deviceCategory1,
+          content = void 0;
+
+
+      if (viewMode === "Group") content = _react2.default.createElement(_modelsGrid2.default, {
+        models: models,
+        basketData: basketData,
+        wishlistData: wishlistData,
+        addModelToBasket: this.addModelToBasket,
+        addModelToWishlist: this.addModelToWishlist
+      });else content = _react2.default.createElement(_deviceModelsGrid2.default, {
+        models: models,
+        openQuickView: this.openQuickView,
+        capacityName: capacityName,
+        basketData: basketData,
+        wishlistData: wishlistData,
+        addModelToBasket: this.addModelToBasket,
+        addModelToWishlist: this.addModelToWishlist,
+        deviceName: deviceName
+      });
+      // else content = <ModelsList models={models}
+      //     openQuickView={this.openQuickView}
+      //     capacityName={capacityName}
+      //     basketData={basketData}
+      //     addModelToBasket={this.addModelToBasket}
+      //     deviceName={deviceName}/>
+      return _react2.default.createElement(
+        "div",
+        { className: "modelInnerPage" },
+        this.state.seoAccessoriesData && _react2.default.createElement(_reactHelmet.Helmet, {
+          title: seoAccessoriesData.title || "",
+          meta: [{
+            name: "description",
+            content: seoAccessoriesData.meta_description || ""
+          }, {
+            name: "keywords",
+            content: seoAccessoriesData.meta_keywords || ""
+          }]
+        }),
+        _react2.default.createElement(
+          "div",
+          { className: "container-fluid" },
+          _react2.default.createElement(
+            "div",
+            { className: "row" },
+            deviceName && _react2.default.createElement(_topDeviceMenu2.default, {
+              filterOptions: filterOptions,
+              devices: devices,
+              params: this.props.params,
+              currentDevice: deviceName,
+              models: this.state.availableFilterOptions.modell ? this.state.availableFilterOptions.modell.values : "",
+              productModels: this.state.productModels,
+              modelCategoryId: this.state.modelCategoryId
+            })
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "modelInnerPage-inner" },
+          _react2.default.createElement(
+            "div",
+            { className: "container-fluid" },
+            _react2.default.createElement(
+              "div",
+              { style: { width: "95%", margin: "0 auto" } },
+              _react2.default.createElement(
+                "div",
+                { className: "row row-flex" },
+                showSidebar && _react2.default.createElement(_asideFilter2.default, {
+                  filterOptions: filterOptions,
+                  mainModelGroupId: mainModelGroupId,
+                  selectedFilterOptions: selectedFilterOptions,
+                  availableFilterOptions: availableFilterOptions,
+                  inputPriceMin: inputPriceMin,
+                  inputPriceMax: inputPriceMax,
+                  inputPriceErr: inputPriceErr,
+                  changePrice: this.changePrice,
+                  changeInputPrice: this.changeInputPrice,
+                  applyInputPrice: this.applyInputPrice,
+                  mobileApply: this.handleApplyFiltersMobile,
+                  mobileChoseItemFilter: this.handleChooseFilterItemMobile,
+                  routeParams: this.props.params,
+                  changeSortBy: this.changeSortBy,
+                  viewMode: viewMode,
+                  totalItems: totalCountModels,
+                  currentValue: selectedFilterOptions.sort,
+                  options: options,
+                  handleBackFilter: this.props.handleBackFilter
                 }),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-fluid' },
+                  "div",
+                  { className: "col-md-9 contentPart" },
+                  window.isMobile && this.mapDuplicateFilter(),
+                  window.isMobile && _react2.default.createElement(
+                    "div",
+                    { className: "topFilter-mobile" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'row' },
-                        deviceName && _react2.default.createElement(_topDeviceMenu2.default, { filterOptions: filterOptions,
-                            devices: devices,
-                            params: this.props.params,
-                            currentDevice: deviceName,
-                            models: this.state.availableFilterOptions.modell ? this.state.availableFilterOptions.modell.values : '',
-                            productModels: this.state.productModels,
-                            modelCategoryId: this.state.modelCategoryId
+                      "div",
+                      {
+                        className: "filters-btn-mobile",
+                        onClick: this.showFilters /*onClick={this.props.showFiltersMobile}*/
+                      },
+                      "Filter"
+                    ),
+                    _react2.default.createElement(
+                      "div",
+                      { className: "text-right sortBy for-mobile" },
+                      _react2.default.createElement(
+                        "div",
+                        { className: "select" },
+                        _react2.default.createElement(_reactSelect2.default, {
+                          options: options,
+                          onChange: this.changeSortBy,
+                          value: selectedFilterOptions.sort,
+                          searchable: false
                         })
+                      )
                     )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'modelInnerPage-inner' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-fluid' },
-                        _react2.default.createElement(
-                            'div',
-                            { style: { width: '95%', margin: "0 auto" } },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row row-flex' },
-                                showSidebar && _react2.default.createElement(_asideFilter2.default, { filterOptions: filterOptions,
-                                    mainModelGroupId: mainModelGroupId,
-                                    selectedFilterOptions: selectedFilterOptions,
-                                    availableFilterOptions: availableFilterOptions,
-                                    inputPriceMin: inputPriceMin,
-                                    inputPriceMax: inputPriceMax,
-                                    inputPriceErr: inputPriceErr,
-                                    changePrice: this.changePrice,
-                                    changeInputPrice: this.changeInputPrice,
-                                    applyInputPrice: this.applyInputPrice,
-                                    mobileApply: this.handleApplyFiltersMobile,
-                                    mobileChoseItemFilter: this.handleChooseFilterItemMobile,
-                                    routeParams: this.props.params,
-                                    changeSortBy: this.changeSortBy,
-                                    viewMode: viewMode,
-                                    totalItems: totalCountModels,
-                                    currentValue: selectedFilterOptions.sort,
-                                    options: options,
-                                    handleBackFilter: this.props.handleBackFilter }),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-md-9 contentPart' },
-                                    window.isMobile && this.mapDuplicateFilter(),
-                                    window.isMobile && _react2.default.createElement(
-                                        'div',
-                                        { className: 'topFilter-mobile' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'filters-btn-mobile', onClick: this.showFilters /*onClick={this.props.showFiltersMobile}*/ },
-                                            'Filter'
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'text-right sortBy for-mobile' },
-                                            _react2.default.createElement(
-                                                'div',
-                                                { className: 'select' },
-                                                _react2.default.createElement(_reactSelect2.default, {
-                                                    options: options,
-                                                    onChange: this.changeSortBy,
-                                                    value: selectedFilterOptions.sort,
-                                                    searchable: false
-                                                })
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'redisplay' },
-                                        this.mapSelectedCriteria(availableFilterOptions, selectedFilterOptions)
-                                    ),
-                                    _react2.default.createElement(_topFilter2.default, { changeSortBy: this.changeSortBy
-                                        //    showSearchBar={this.props.params.deviceCategory1}
-                                        , showSearchBar: false,
-                                        viewMode: viewMode,
-                                        changeViewMode: this.changeViewMode,
-                                        totalItems: pagination.totalItemsCount,
-                                        currentValue: selectedFilterOptions.sort,
-                                        options: options,
-                                        mapDuplicateFilter: this.mapDuplicateFilter(),
-                                        valueSelected: this.valueSelected }),
-                                    _react2.default.createElement(
-                                        'div',
-                                        null,
-                                        models.length > 0 && content,
-                                        this.state.infoNoModels && _react2.default.createElement(
-                                            'div',
-                                            { className: 'col-md-12 text-center' },
-                                            _react2.default.createElement(
-                                                'h1',
-                                                null,
-                                                'Information'
-                                            ),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                'Aktuell sind von diesem Typ keine Produkte an Lager.'
-                                            )
-                                        ),
-                                        models.length > 0 && _react2.default.createElement(
-                                            'div',
-                                            { className: 'col-md-12 text-center' },
-                                            _react2.default.createElement(_reactPaginate2.default, { previousLabel: "<",
-                                                nextLabel: ">",
-                                                breakLabel: _react2.default.createElement(
-                                                    'a',
-                                                    { href: '' },
-                                                    '...'
-                                                ),
-                                                breakClassName: "break-me",
-                                                pageCount: this.state.pagination.pageCount,
-                                                forcePage: pagination.activePage,
-                                                marginPagesDisplayed: 5,
-                                                pageRangeDisplayed: 5,
-                                                onPageChange: this.handlePageChange,
-                                                containerClassName: "pagination",
-                                                subContainerClassName: "pages pagination",
-                                                activeClassName: "active"
-                                            })
-                                        )
-                                    )
-                                )
-                            )
-                        )
+                  ),
+                  _react2.default.createElement(
+                    "div",
+                    { className: "redisplay" },
+                    this.mapSelectedCriteria(availableFilterOptions, selectedFilterOptions)
+                  ),
+                  _react2.default.createElement(_topFilter2.default, {
+                    changeSortBy: this.changeSortBy
+                    //    showSearchBar={this.props.params.deviceCategory1}
+                    , showSearchBar: false,
+                    viewMode: viewMode,
+                    changeViewMode: this.changeViewMode,
+                    totalItems: pagination.totalItemsCount,
+                    currentValue: selectedFilterOptions.sort,
+                    options: options,
+                    mapDuplicateFilter: this.mapDuplicateFilter(),
+                    valueSelected: this.valueSelected
+                  }),
+                  _react2.default.createElement(
+                    "div",
+                    null,
+                    models.length > 0 && content,
+                    this.state.infoNoModels && _react2.default.createElement(
+                      "div",
+                      { className: "col-md-12 text-center" },
+                      _react2.default.createElement(
+                        "h1",
+                        null,
+                        "Information"
+                      ),
+                      _react2.default.createElement(
+                        "p",
+                        null,
+                        "Aktuell sind von diesem Typ keine Produkte an Lager."
+                      )
+                    ),
+                    models.length > 0 && _react2.default.createElement(
+                      "div",
+                      { className: "col-md-12 text-center" },
+                      _react2.default.createElement(_reactPaginate2.default, {
+                        previousLabel: "<",
+                        nextLabel: ">",
+                        breakLabel: _react2.default.createElement(
+                          "a",
+                          { href: "" },
+                          "..."
+                        ),
+                        breakClassName: "break-me",
+                        pageCount: this.state.pagination.pageCount,
+                        forcePage: pagination.activePage,
+                        marginPagesDisplayed: 5,
+                        pageRangeDisplayed: 5,
+                        onPageChange: this.handlePageChange,
+                        containerClassName: "pagination",
+                        subContainerClassName: "pages pagination",
+                        activeClassName: "active"
+                      })
                     )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container margin-line-20' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-sm-12' },
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'seo' },
-                            this.state.seoAccessoriesData ? this.state.seoAccessoriesData.html_description : ''
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container customersAboutUs' },
-                    _react2.default.createElement(_customerAboutUs2.default, { notShowLoader: 'true' })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container banner-area' },
-                    _react2.default.createElement(_banner2.default, null)
-                ),
-                addBasketEffect,
-                quickViewPage,
-                successAddToBasket
-            );
-        }
-    }]);
-    return ModelsInnerPage;
+                  )
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "container margin-line-20" },
+          _react2.default.createElement(
+            "div",
+            { className: "col-sm-12" },
+            _react2.default.createElement(
+              "p",
+              { className: "seo" },
+              this.state.seoAccessoriesData ? this.state.seoAccessoriesData.html_description : ""
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "container customersAboutUs" },
+          _react2.default.createElement(_customerAboutUs2.default, { notShowLoader: "true" })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "container banner-area" },
+          _react2.default.createElement(_banner2.default, null)
+        ),
+        addBasketEffect,
+        quickViewPage,
+        successAddToBasket
+      );
+    }
+  }]);
+  return ModelsInnerPage;
 }(_react.Component);
 
 ModelsInnerPage.propTypes = {};
 ModelsInnerPage.defaultProps = {};
 
 function mapStateToProps(state) {
-    return {
-        filterOptions: state.shop.filterOptions,
-        models: state.shop.models,
-        devices: state.shop.devices,
-        modelsGroup: state.shop.modelsGroup,
-        basketData: state.basket.basketData,
-        places: state.places.currentLocation,
-        wishlistData: state.basket.wishlistData
-    };
+  return {
+    filterOptions: state.shop.filterOptions,
+    models: state.shop.models,
+    devices: state.shop.devices,
+    modelsGroup: state.shop.modelsGroup,
+    basketData: state.basket.basketData,
+    places: state.places.currentLocation,
+    wishlistData: state.basket.wishlistData
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        shopActions: (0, _redux.bindActionCreators)(shopActions, dispatch),
-        basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
-    };
+  return {
+    shopActions: (0, _redux.bindActionCreators)(shopActions, dispatch),
+    basketActions: (0, _redux.bindActionCreators)(basketActions, dispatch)
+  };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ModelsInnerPage);
@@ -26758,7 +27321,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -26815,7 +27378,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -26983,7 +27546,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -27178,9 +27741,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -27309,9 +27872,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -27476,7 +28039,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -27621,7 +28184,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -29189,7 +29752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 

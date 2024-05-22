@@ -1342,7 +1342,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1608,7 +1608,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1857,7 +1857,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -1903,7 +1903,7 @@ var _searchBar = __webpack_require__(1205);
 
 var _searchBar2 = _interopRequireDefault(_searchBar);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -2018,6 +2018,8 @@ var HeaderBottomMainPage = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
 
       return _react2.default.createElement(
         _react2.default.Fragment,
@@ -2040,7 +2042,7 @@ var HeaderBottomMainPage = function (_Component) {
                   _react2.default.createElement("h2", {
                     className: "col-md-9 col-sm-10 title-heading",
                     dangerouslySetInnerHTML: {
-                      __html: this.props.t("headerTop.leftMainTitle")
+                      __html: t("headerTop.leftMainTitle")
                     }
                   }),
                   _react2.default.createElement(
@@ -2056,7 +2058,7 @@ var HeaderBottomMainPage = function (_Component) {
                 _react2.default.createElement(
                   "p",
                   { className: "row m-0 description" },
-                  this.props.t("headerTop.leftMainDesc")
+                  t("headerTop.leftMainDesc")
                 ),
                 _react2.default.createElement(
                   "section",
@@ -2113,13 +2115,12 @@ var HeaderBottomMainPage = function (_Component) {
                       })
                     )
                   ),
-                  _react2.default.createElement(
-                    "div",
-                    { className: "satisfied-custormers" },
-                    "\xDCber 100'000 zufriedene",
-                    _react2.default.createElement("br", null),
-                    "Kunden vertrauen remarket.ch"
-                  )
+                  _react2.default.createElement("div", {
+                    className: "satisfied-custormers",
+                    dangerouslySetInnerHTML: {
+                      __html: t("homepageGoogleRatingText")
+                    }
+                  })
                 ),
                 _react2.default.createElement(
                   "section",
@@ -2134,7 +2135,7 @@ var HeaderBottomMainPage = function (_Component) {
                       setResults: this.setResultsFromSearchBar,
                       showButton: true,
                       option: { name: "header-search" },
-                      placeHolder: this.props.t('headerTop.leftSearchText')
+                      placeHolder: t("headerTop.leftSearchText")
                     })
                   )
                 ),
@@ -2150,7 +2151,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.smartphone')
+                      t("headerTop.smartphone")
                     )
                   ),
                   _react2.default.createElement(
@@ -2162,7 +2163,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.tablet')
+                      t("headerTop.tablet")
                     )
                   ),
                   _react2.default.createElement(
@@ -2174,7 +2175,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.computer')
+                      t("headerTop.computer")
                     )
                   )
                 ),
@@ -2182,7 +2183,7 @@ var HeaderBottomMainPage = function (_Component) {
                   setResults: this.setResultsFromSearchBar,
                   showButton: true,
                   option: { name: "header-search" },
-                  placeHolder: this.props.t('headerTop.leftSearchText')
+                  placeHolder: t("headerTop.leftSearchText")
                 })
               )
             ),
@@ -2199,7 +2200,7 @@ var HeaderBottomMainPage = function (_Component) {
                     className: "col-md-9 col-sm-8 title-heading",
                     style: { paddingTop: "15px" },
                     dangerouslySetInnerHTML: {
-                      __html: this.props.t('headerTop.rightMainTitle')
+                      __html: t("headerTop.rightMainTitle")
                     }
                   }),
                   _react2.default.createElement(
@@ -2218,7 +2219,7 @@ var HeaderBottomMainPage = function (_Component) {
                 _react2.default.createElement(
                   "p",
                   { className: "row m-0 color-black" },
-                  this.props.t('headerTop.rightMainDesc')
+                  t("headerTop.rightMainDesc")
                 ),
                 _react2.default.createElement(
                   _reactRouter.Link,
@@ -2226,10 +2227,12 @@ var HeaderBottomMainPage = function (_Component) {
                   _react2.default.createElement(
                     "div",
                     { id: "discount-on-header" },
-                    _react2.default.createElement("div", { className: "content",
+                    _react2.default.createElement("div", {
+                      className: "content",
                       dangerouslySetInnerHTML: {
-                        __html: this.props.t('headerTop.circle')
-                      } }),
+                        __html: t("headerTop.circle")
+                      }
+                    }),
                     _react2.default.createElement("div", { className: "circle" }),
                     _react2.default.createElement("div", { className: "circle-2" })
                   )
@@ -2241,7 +2244,7 @@ var HeaderBottomMainPage = function (_Component) {
                     "label",
                     null,
                     _react2.default.createElement(_searchBarKaufen2.default, {
-                      placeholder: this.props.t('headerTop.rightSearchText'),
+                      placeholder: t("headerTop.rightSearchText"),
                       showBtn: true
                     })
                   )
@@ -2261,7 +2264,7 @@ var HeaderBottomMainPage = function (_Component) {
                       _react2.default.createElement(
                         "span",
                         null,
-                        this.props.t('headerTop.smartphone')
+                        t("headerTop.smartphone")
                       )
                     ),
                     _react2.default.createElement(
@@ -2273,7 +2276,7 @@ var HeaderBottomMainPage = function (_Component) {
                       _react2.default.createElement(
                         "span",
                         null,
-                        this.props.t('headerTop.tablet')
+                        t("headerTop.tablet")
                       )
                     )
                   ),
@@ -2289,7 +2292,7 @@ var HeaderBottomMainPage = function (_Component) {
                       _react2.default.createElement(
                         "span",
                         null,
-                        this.props.t('headerTop.computer')
+                        t("headerTop.computer")
                       )
                     ),
                     _react2.default.createElement(
@@ -2301,7 +2304,7 @@ var HeaderBottomMainPage = function (_Component) {
                       _react2.default.createElement(
                         "span",
                         null,
-                        this.props.t('headerTop.accessories')
+                        t("headerTop.accessories")
                       )
                     )
                   )
@@ -2318,7 +2321,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.smartphone')
+                      t("headerTop.smartphone")
                     )
                   ),
                   _react2.default.createElement(
@@ -2330,7 +2333,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.tablet')
+                      t("headerTop.tablet")
                     )
                   ),
                   _react2.default.createElement(
@@ -2342,7 +2345,7 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.computer')
+                      t("headerTop.computer")
                     )
                   ),
                   _react2.default.createElement(
@@ -2354,12 +2357,12 @@ var HeaderBottomMainPage = function (_Component) {
                     _react2.default.createElement(
                       "span",
                       null,
-                      this.props.t('headerTop.accessories')
+                      t("headerTop.accessories")
                     )
                   )
                 ),
                 window.isMobile && _react2.default.createElement(_searchBarKaufen2.default, {
-                  placeholder: this.props.t('headerTop.rightSearchText'),
+                  placeholder: t("headerTop.rightSearchText"),
                   showBtn: true
                 })
               )
@@ -3209,7 +3212,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HeaderTop = undefined;
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3263,7 +3266,7 @@ var _user = __webpack_require__(217);
 
 var userActions = _interopRequireWildcard(_user);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _headerBottomFaqPage = __webpack_require__(1509);
 
@@ -3307,11 +3310,11 @@ var _headerMobile2 = _interopRequireDefault(_headerMobile);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -4111,6 +4114,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       headerClassName = webshopDiscountData.desktop_topbar_active == 1 ? headerClassName + ' desktop-topbar-activate' : headerClassName;
 
       var customStyles = {};
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -4187,7 +4192,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Mo :'
+                            t('openingHoursHover.Mon'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
@@ -4201,7 +4207,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Di :'
+                            t('openingHoursHover.Tue'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
@@ -4215,7 +4222,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Mi :'
+                            t('openingHoursHover.Wed'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
@@ -4229,7 +4237,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Do :'
+                            t('openingHoursHover.Thu'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
@@ -4243,7 +4252,8 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Fr :'
+                            t('openingHoursHover.Fri'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
@@ -4257,12 +4267,13 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'Sa :'
+                            t('openingHoursHover.Sat'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
                             null,
-                            active.place.openingHours.sat ? active.place.openingHours.sat : 'geschlossen'
+                            active.place.openingHours.sat ? active.place.openingHours.sat : t('openingHoursHover.Closed')
                           )
                         ),
                         _react2.default.createElement(
@@ -4271,12 +4282,13 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                           _react2.default.createElement(
                             'span',
                             null,
-                            'So :'
+                            t('openingHoursHover.Sun'),
+                            ' :'
                           ),
                           _react2.default.createElement(
                             'span',
                             null,
-                            active.place.openingHours.sun ? active.place.openingHours.sun : 'geschlossen'
+                            active.place.openingHours.sun ? active.place.openingHours.sun : t('openingHoursHover.Closed')
                           )
                         )
                       ) : ''
@@ -4430,7 +4442,7 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'show-desktop col-md-3 search-section' },
-                _react2.default.createElement(_searchBarKaufenV4.default, { placeholder: 'Suchbegriff eingeben...' })
+                _react2.default.createElement(_searchBarKaufenV4.default, { placeholder: t('expandedSearchFieldTitle') })
               ),
               _react2.default.createElement(
                 'div',
@@ -4639,7 +4651,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps, null, { pure: false })(HeaderTop)));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps, null, { pure: false })((0, _reactI18next.withTranslation)()(HeaderTop))));
 
 /***/ }),
 
@@ -4811,7 +4823,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -4853,7 +4865,7 @@ var _shop = __webpack_require__(873);
 
 var shopActions = _interopRequireWildcard(_shop);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _reactAutosuggest = __webpack_require__(907);
 
@@ -5951,7 +5963,7 @@ exports.f = __webpack_require__(43);
 
 var global         = __webpack_require__(67)
   , core           = __webpack_require__(65)
-  , LIBRARY        = __webpack_require__(317)
+  , LIBRARY        = __webpack_require__(318)
   , wksExt         = __webpack_require__(863)
   , defineProperty = __webpack_require__(110).f;
 module.exports = function(name){
@@ -6008,7 +6020,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 var pIE            = __webpack_require__(314)
   , createDesc     = __webpack_require__(152)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , has            = __webpack_require__(112)
   , IE8_DOM_DEFINE = __webpack_require__(324)
   , gOPD           = Object.getOwnPropertyDescriptor;
@@ -6176,7 +6188,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -6371,9 +6383,9 @@ var global         = __webpack_require__(67)
   , isArray        = __webpack_require__(885)
   , anObject       = __webpack_require__(84)
   , toIObject      = __webpack_require__(147)
-  , toPrimitive    = __webpack_require__(318)
+  , toPrimitive    = __webpack_require__(319)
   , createDesc     = __webpack_require__(152)
-  , _create        = __webpack_require__(319)
+  , _create        = __webpack_require__(320)
   , gOPNExt        = __webpack_require__(886)
   , $GOPD          = __webpack_require__(868)
   , $DP            = __webpack_require__(110)
@@ -6502,9 +6514,9 @@ if(!USE_NATIVE){
   $DP.f   = $defineProperty;
   __webpack_require__(867).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(314).f  = $propertyIsEnumerable;
-  __webpack_require__(320).f = $getOwnPropertySymbols;
+  __webpack_require__(321).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(317)){
+  if(DESCRIPTORS && !__webpack_require__(318)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -6669,7 +6681,7 @@ module.exports = function(object, el){
 
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(207)
-  , gOPS    = __webpack_require__(320)
+  , gOPS    = __webpack_require__(321)
   , pIE     = __webpack_require__(314);
 module.exports = function(it){
   var result     = getKeys(it)
@@ -6814,7 +6826,7 @@ module.exports = function create(P, D){
 
 var $export = __webpack_require__(146)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(319)});
+$export($export.S, 'Object', {create: __webpack_require__(320)});
 
 /***/ }),
 
@@ -7076,7 +7088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 
 
@@ -13443,11 +13455,11 @@ var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -13606,6 +13618,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
           active.place = data.data[0];
         }
       }
+      var t = this.props.t;
+
       return _react2.default.createElement(
         'div',
         { className: 'menuMobile' },
@@ -13754,7 +13768,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mo:'
+                          t("openingHoursHover.Mon"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13776,7 +13791,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Di:'
+                          t("openingHoursHover.Tue"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13798,7 +13814,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Mi:'
+                          t("openingHoursHover.Wed"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13820,7 +13837,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Do:'
+                          t("openingHoursHover.Thu"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13842,7 +13860,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Fr:'
+                          t("openingHoursHover.Fri"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13864,7 +13883,8 @@ var MenuMobile = exports.MenuMobile = function (_Component) {
                         _react2.default.createElement(
                           'span',
                           { style: { color: '#8B8B8B' } },
-                          'Sa:'
+                          t("openingHoursHover.Sat"),
+                          ':'
                         )
                       ),
                       _react2.default.createElement(
@@ -13920,7 +13940,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MenuMobile));
+exports.default = (0, _reactI18next.withTranslation)()((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(MenuMobile)));
 
 /***/ }),
 
@@ -13939,7 +13959,7 @@ var _extends2 = __webpack_require__(66);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _toConsumableArray2 = __webpack_require__(316);
+var _toConsumableArray2 = __webpack_require__(317);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -13985,7 +14005,7 @@ var _reactAutosuggest = __webpack_require__(907);
 
 var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -14593,11 +14613,13 @@ var _couponFromAds = __webpack_require__(927);
 
 var _couponFromAds2 = _interopRequireDefault(_couponFromAds);
 
-var _helpersFunction = __webpack_require__(315);
+var _helpersFunction = __webpack_require__(316);
 
 var _searchBarKaufenV = __webpack_require__(931);
 
 var _searchBarKaufenV2 = _interopRequireDefault(_searchBarKaufenV);
+
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14734,6 +14756,8 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
 
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
       var webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData'));
+      var t = this.props.t;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -14746,7 +14770,7 @@ var HeaderMobile = exports.HeaderMobile = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'mobile-search-section' },
-              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: 'Suchbegriff eingeben...', hideSearchBar: this.hideSearchBar })
+              _react2.default.createElement(_searchBarKaufenV2.default, { placeholder: t('expandedSearchFieldTitle'), hideSearchBar: this.hideSearchBar })
             )
           )
         ),
@@ -14902,7 +14926,7 @@ function mapStateToProps(state) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMobile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactI18next.withTranslation)()(HeaderMobile));
 
 /***/ }),
 
@@ -14939,11 +14963,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(323);
 
-var _i18next = __webpack_require__(210);
+var _i18next = __webpack_require__(209);
 
 var _i18next2 = _interopRequireDefault(_i18next);
 
-var _reactI18next = __webpack_require__(322);
+var _reactI18next = __webpack_require__(315);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
