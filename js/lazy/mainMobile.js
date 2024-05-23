@@ -12949,6 +12949,545 @@ exports.push([module.i, "/**\n * Owl Carousel v2.3.4\n * Copyright 2013-2018 Dav
 
 /***/ }),
 
+/***/ 765:
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
+/***/ 767:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ 768:
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(selector) {
+		if (typeof memo[selector] === "undefined") {
+			memo[selector] = fn.call(this, selector);
+		}
+
+		return memo[selector]
+	};
+})(function (target) {
+	return document.querySelector(target)
+});
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(765);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton) options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+	if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	options.attrs.type = "text/css";
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	options.attrs.type = "text/css";
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
 /***/ 785:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13833,6 +14372,29 @@ var DESCRIPTION_CH = 'Verkaufen und kaufen Sie Ihr neues und gebrauchtes iPhone,
 var DESCRIPTION_DE = 'Verkaufen und kaufen Sie neue und gebrauchte Tablets, Smartphones oder Macbooks schnell und unkompliziert auf remarket.de';
 var FOOTER_SEO_CH = '<div>\n        <h1>iPhone, Samsung Galaxy, iPad, MacBook gebraucht kaufen und verkaufen per Knopfdruck.</h1>\n        <p>Viele elektronische Ger\xE4te wie <strong>Handys, Smartphones, Tablets oder Computer</strong> werden bereits nach kurzer Zeit der Nutzung durch neue Ger\xE4te ersetzt. Nicht selten landen die alten Ger\xE4te beim lokalen Entsorgungsbetrieb oder einfach in der Schublade oder im Schrank, sofern es sich um kleine Ger\xE4te wie beispielsweise <strong>Smartphones</strong> handelt. Dabei ist auch gebrauchte Elektronik noch sehr gefragt. Ger\xE4te wie das <strong>iPhone, iPad, ein Samsung Galaxy sowie tragbare Computer und Desktopcomputer</strong> k\xF6nnen durchaus noch einiges an Geld bringen, wenn sie \xFCber Shops wie unserem angeboten und verkauft werden. Viele Menschen k\xF6nnen sich neue Ger\xE4te namhafter Hersteller nicht leisten und greifen deshalb auf <strong>gebrauchte Ger\xE4te</strong> zur\xFCck. Anstatt nun eventuell defekte Ger\xE4te von Privatleuten ohne Garantie oder Sicherheit zu kaufen, sollten Sie gebrauchte und gepr\xFCfte <strong>Computer, Smartphones oder Tablets gebraucht und gepr\xFCft kaufen</strong>, die in zahlreichen Ausf\xFChrungen auf unserer Homepage erh\xE4ltlich sind. Die Ger\xE4te werden zu deutlich g\xFCnstigeren Preisen als den ehemaligen Neupreisen angeboten, so dass sich noch jede Menge Geld sparen l\xE4sst.</p>\n        <h2>Verkaufen Sie Ihre Elektronik, wenn Sie neue Ger\xE4te gekauft haben</h2>\n        <p>Anstatt Ihr nicht mehr ben\xF6tigtes Smartphone, Tablet oder ein Notebook im Schrank einstauben zu lassen, bieten Sie es doch einfach \xFCber unseren <strong>Onlineshop</strong> zum Verkauf an. Es funktioniert ganz einfach. Sie w\xE4hlen einfach den entsprechenden Ger\xE4tetyp wie beispielsweise Ihr <strong>iPhone, MacBook oder den Apple Mac mini</strong> aus und machen weitere Angaben zu den Ausstattungsmerkmalen und den Zustand des Ger\xE4tes. Innerhalb weniger Minuten und mit nur <strong>wenigen Klicks</strong> ist der aktuelle Preis f\xFCr das von Ihnen angebotene Ger\xE4t ermittelt. Sie wissen also sofort, was Sie bekommen. Einfacher geht es nicht. Der Versand ist auch unkompliziert, da Sie die Kosten daf\xFCr ersetzt bekommen. Wurde das Ger\xE4t durch uns \xFCberpr\xFCft, erhalten Sie Ihr <strong>Geld innerhalb k\xFCrzester Zeit</strong> ohne weitere Abz\xFCge.</p>\n        <h2>M\xF6chten Sie ein gebrauchtes Smartphone oder Notebook kaufen?</h2>\n        <p>Wenn Sie auf der Suche nach einem preisg\xFCnstigen <strong>iPhone, iPad, Samsung Galaxy</strong> oder einem anderen Mac-Computer sind, sollten Sie sich in unserem Onlineangebot umschauen. Sie bekommen zahlreiche Ger\xE4te namhafter Hersteller <strong>g\xFCnstig gebraucht und gepr\xFCft</strong>. Falls doch etwas nicht in Ordnung sein sollte, nutzen Sie einfach die einj\xE4hrige <strong>Garantie</strong>, die wir auf die Ger\xE4te aus unserem Angebot geben. Die Ger\xE4te werden <strong>versandkostenfrei</strong> an Sie geliefert.</p>\n    </div>';
 var FOOTER_SEO_DE = '<div>\n        <h1>So einfach kaufen und verkaufen Sie gebrauchte Elektronik</h1>\n        <p>Der Handel mit gebrauchter Elektronik ist ein durchaus eintr\xE4gliches Gesch\xE4ft. <strong>Gebrauchte Elektronik</strong> ist sowohl bei den Verk\xE4ufern als auch bei den K\xE4ufern beliebt. Sicher besitzen Sie noch einige elektronische Ger\xE4te wie beispielsweise ein nicht mehr ben\xF6tigtes Tablet, ein Smartphone oder vielleicht sogar ein Macbook. Warum sollten diese Ger\xE4te in einer Schublade ihr Dasein fristen, wenn Sie diese ebenso zu Geld machen k\xF6nnten? Statt sich nun mit privaten K\xE4ufern herum zu \xE4rgern, <strong>verkaufen Sie Ihr iPhone, iPad, MacBook</strong> oder Ihre anderen Ger\xE4te einfach \xFCber unsere Homepage. Wir sind auf den <strong>An- und Verkauf gebrauchter Elektronik</strong> spezialisiert. Wir bieten Ihnen einen einfachen und unkomplizierten Ablauf des Ankaufs an. Ebenso sind wir Ihr Ansprechpartner, m\xF6chten Sie bares Geld sparen und auf gebrauchte Elektronik statt entsprechender Neuwaren zur\xFCckgreifen. Ihre Vorteile durch den Kauf gebrauchter Elektronik in unserem Onlineshop sind vielf\xE4ltig. Sie erhalten ausschlie\xDFlich <strong>gepr\xFCfte Ware</strong> statt eventuell defekte Ger\xE4te, wie diese h\xE4ufig von privaten Verk\xE4ufern unter Vorspiegelung falscher Tatsachen angeboten werden. Au\xDFerdem k\xF6nnen Sie sich jederzeit an uns wenden, sollte etwas mit Ihrer Lieferung nicht stimmen.</p>\n        <h2>Verkaufen Sie gebrauchte und nicht mehr ben\xF6tigte Elektronik</h2>\n        <p>Der Verkauf Ihrer gebrauchten Ger\xE4te \xFCber unsere Webseite ist sehr einfach f\xFCr Sie. Sie w\xE4hlen einfach das Ger\xE4t aus. Der sp\xE4tere Versand erfolgt selbstverst\xE4ndlich <strong>kostenfrei</strong> f\xFCr Sie. Nachdem Sie das entsprechende Ger\xE4t, beispielsweise ein <strong>iPhone</strong> oder Smartphone, ausgew\xE4hlt haben, w\xE4hlen Sie die Artikelmerkmale aus, die auf Ihr angebotenes Ger\xE4t am besten zutreffen. Die Berechnung des Verkaufspreises erfolgt mit nur wenigen Klicks, so dass Sie sofort wissen, was Ihr Ger\xE4t noch wert ist. \xDCber den Versand m\xFCssen Sie sich keine Sorgen machen, da dieser f\xFCr Sie <strong>gratis</strong> erfolgt. Auf Ihr Geld m\xFCssen Sie keineswegs lange warten. Die Zahlung des ermittelten Kaufbetrages erfolgt <strong>per Express</strong> und ohne weitere Abz\xFCge an Sie.</p>\n        <h2>Der Kauf gebrauchter und gepr\xFCfter Elektronik in unserem Onlineshop</h2>\n        <p>Sind Sie auf der Suche nach einem preisg\xFCnstigen und <strong>gebrauchten Smartphone, MacBook, iMac, iPad</strong>, einem anderen Tablet oder tragbaren Computer, so sind Sie hier ebenfalls gut aufgehoben. Sie erhalten <strong>gebrauchte und gepr\xFCfte Elektronik</strong>, auf die wir eine <strong>einj\xE4hrige Garantie</strong> geben. Sie gehen \xFCberhaupt kein Risiko ein, wenn Sie gebrauchte Elektronik \xFCber unseren Onlineshop kaufen. Der Versand erfolgt kostenlos, ebenso der R\xFCckversand, sollte wider Erwarten etwas nicht mit dem neu erworbenen Ger\xE4t stimmen.</p>\n    </div>';
+
+/***/ }),
+
+/***/ 802:
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
 
 /***/ }),
 
