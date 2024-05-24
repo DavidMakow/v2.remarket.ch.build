@@ -5879,7 +5879,7 @@ var ModelInfoBlockImage = function (_Component) {
 
       return _react2.default.createElement(
         "div",
-        { className: "col-md-6 modelInfoBlock-img " },
+        { className: "col-md-6 modelInfoBlock-img", "data-content": t("discountLabelTopLeftEachCard") },
         _react2.default.createElement(_reactHelmet.Helmet, {
           meta: [{ property: "og:image:width", content: imgWidth }, { property: "og:image:height", content: imgHeight }]
         }),
@@ -6179,6 +6179,8 @@ var _usefullProductItem2 = _interopRequireDefault(_usefullProductItem);
 
 var _helpersFunction = __webpack_require__(316);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -6420,12 +6422,12 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                 conditionId = _props$currentModel$.conditionId,
                 dataArr = [];
 
-            criterias.forEach(function (item) {
+            criterias.forEach(function (item, index) {
                 if (conditionId === 1) return false;
                 if (item.name !== _this4.props.capacityName) {
                     dataArr.push(_react2.default.createElement(
                         "span",
-                        { key: item.id, className: "modelValues-small criteria-" + item.id + " col-xs-4" },
+                        { key: index, className: "modelValues-small criteria-" + item.id + " col-xs-4" },
                         _react2.default.createElement(
                             "span",
                             null,
@@ -6750,6 +6752,9 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                 month12 = (sellPrice / 12).toFixed(2);
             }
 
+            var t = this.props.t;
+
+
             return _react2.default.createElement(
                 "div",
                 { style: { marginTop: 10 } },
@@ -6769,9 +6774,14 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                     }) ? model.criterias.find(function (item) {
                         return item.name == 'Arbeitsspeicher';
                     }).values[0].name : '';
+                    var newWarranty = model.warranty.split(" ");
+                    var checkLang = localStorage.getItem("lang");
+                    var checkCondition = '';
+                    if (checkLang == "de") checkCondition = model.condition;else if (checkLang == "en") checkCondition = model.condition_en;else if (checkLang == "fr") checkCondition = model.condition_fr;else if (checkLang == "it") checkCondition = model.condition_it;
+                    var condition = checkCondition.length > 24 ? checkCondition.substr(0, 24) + "..." : checkCondition;
                     return _react2.default.createElement(
                         "div",
-                        { className: model.discountPrice ? "modelInfoBlock discount-label col-xs-12" : "modelInfoBlock col-xs-12", key: "modelInfoBlock-" + i },
+                        { className: model.discountPrice ? "modelInfoBlock discount-label col-xs-12" : "modelInfoBlock col-xs-12", key: "modelInfoBlock-" + i, "data-content": t("discountLabelTopLeftEachCard") },
                         _react2.default.createElement(
                             "div",
                             { className: "col-xs-12 modelInfo for-mobile" },
@@ -7053,7 +7063,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "h4",
                                                                 null,
-                                                                "Farbe"
+                                                                t('detailModelPage.modelInfoBlock.color')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "span",
@@ -7069,7 +7079,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "h4",
                                                                 null,
-                                                                "Kapazit\xE4t"
+                                                                t('detailModelPage.modelInfoBlock.capacity')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "span",
@@ -7116,7 +7126,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Zustand"
+                                                                t('detailModelPage.modelInfoBlock.condition')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7129,7 +7139,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    model.condition
+                                                                    condition
                                                                 )
                                                             )
                                                         )
@@ -7144,7 +7154,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Garantie"
+                                                                t('detailModelPage.modelInfoBlock.warranty')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7160,9 +7170,12 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
-                                                                        model.warranty
+                                                                        newWarranty[0],
+                                                                        " ",
+                                                                        newWarranty[0] < 2 ? t('detailModelPage.modelInfoBlock.warranty1') : t('detailModelPage.modelInfoBlock.warranty2')
                                                                     ),
-                                                                    " Garantie"
+                                                                    " ",
+                                                                    t('detailModelPage.modelInfoBlock.warranty')
                                                                 )
                                                             )
                                                         ),
@@ -7177,7 +7190,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Kapazit\xE4t"
+                                                                t('detailModelPage.modelInfoBlock.capacity')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7209,7 +7222,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Batterie"
+                                                                t('detailModelPage.modelInfoBlock.battery')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7222,7 +7235,8 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    "Ladezyklen: ",
+                                                                    t('detailModelPage.modelInfoBlock.chargingBattery'),
+                                                                    ": ",
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
@@ -7232,7 +7246,8 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    "Kapazitat: ",
+                                                                    t('detailModelPage.modelInfoBlock.capacityBattery'),
+                                                                    ": ",
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
@@ -7251,7 +7266,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Farbe"
+                                                                t('detailModelPage.modelInfoBlock.color')
                                                             ),
                                                             _react2.default.createElement("span", { className: model.colorCode == '#FFFFFF' ? "color-img whiteColor" : "color-img", style: { backgroundColor: model.colorCode } }),
                                                             _react2.default.createElement(
@@ -7324,7 +7339,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Zustand"
+                                                                t('detailModelPage.modelInfoBlock.condition')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7337,7 +7352,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    model.condition
+                                                                    condition
                                                                 )
                                                             )
                                                         )
@@ -7352,7 +7367,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Garantie"
+                                                                t('detailModelPage.modelInfoBlock.warranty')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7368,9 +7383,12 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
-                                                                        model.warranty
+                                                                        newWarranty[0],
+                                                                        " ",
+                                                                        newWarranty[0] < 2 ? t('detailModelPage.modelInfoBlock.warranty1') : t('detailModelPage.modelInfoBlock.warranty2')
                                                                     ),
-                                                                    " Garantie"
+                                                                    " ",
+                                                                    t('detailModelPage.modelInfoBlock.warranty')
                                                                 )
                                                             )
                                                         ),
@@ -7385,7 +7403,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Kapazit\xE4t"
+                                                                t('detailModelPage.modelInfoBlock.capacity')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7417,7 +7435,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Batterie"
+                                                                t('detailModelPage.modelInfoBlock.battery')
                                                             ),
                                                             _react2.default.createElement(
                                                                 "div",
@@ -7430,7 +7448,8 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    "Ladezyklen: ",
+                                                                    t('detailModelPage.modelInfoBlock.chargingBattery'),
+                                                                    ": ",
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
@@ -7440,7 +7459,8 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                                 _react2.default.createElement(
                                                                     "span",
                                                                     { className: "description" },
-                                                                    "Kapazitat: ",
+                                                                    t('detailModelPage.modelInfoBlock.capacityBattery'),
+                                                                    ": ",
                                                                     _react2.default.createElement(
                                                                         "span",
                                                                         { className: "green" },
@@ -7459,7 +7479,7 @@ var ModelInfoBlock = exports.ModelInfoBlock = function (_Component) {
                                                             _react2.default.createElement(
                                                                 "span",
                                                                 { className: "title" },
-                                                                "Farbe"
+                                                                t('detailModelPage.modelInfoBlock.color')
                                                             ),
                                                             _react2.default.createElement("span", { className: model.colorCode == '#FFFFFF' ? "color-img whiteColor" : "color-img", style: { backgroundColor: model.colorCode } }),
                                                             _react2.default.createElement(
@@ -7755,7 +7775,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ModelInfoBlock);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(ModelInfoBlock));
 
 /***/ }),
 

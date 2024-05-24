@@ -4753,7 +4753,7 @@ var ModelInfoBlockImage = function (_Component) {
 
       return _react2.default.createElement(
         "div",
-        { className: "col-md-6 modelInfoBlock-img " },
+        { className: "col-md-6 modelInfoBlock-img", "data-content": t("discountLabelTopLeftEachCard") },
         _react2.default.createElement(_reactHelmet.Helmet, {
           meta: [{ property: "og:image:width", content: imgWidth }, { property: "og:image:height", content: imgHeight }]
         }),
