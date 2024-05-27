@@ -3326,21 +3326,21 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
   function HeaderTop(props) {
     (0, _classCallCheck3.default)(this, HeaderTop);
 
-    var lang = window.localStorage.getItem('lang');
-    if (typeof lang == 'undefined' || !lang || lang == '') lang = 'de';
+    var lang = window.localStorage.getItem("lang");
+    if (typeof lang == "undefined" || !lang || lang == "") lang = "de";
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderTop.__proto__ || Object.getPrototypeOf(HeaderTop)).call(this, props));
 
     _this.globalClick = function (e) {
-      if (e.target.tagName.toLowerCase() === 'a') {
-        _this.props.shopActions.definedCounerForSearchInput(' ');
+      if (e.target.tagName.toLowerCase() === "a") {
+        _this.props.shopActions.definedCounerForSearchInput(" ");
       }
     };
 
     _this.handleChangePlace = function (selectedOption) {
       _this.setState({ selectedOption: selectedOption });
 
-      var _JSON$parse = JSON.parse(window.localStorage.getItem('locationData')),
+      var _JSON$parse = JSON.parse(window.localStorage.getItem("locationData")),
           data = _JSON$parse.data;
 
       data.forEach(function (item) {
@@ -3349,27 +3349,32 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       var setLocation = _this.props.placesActions.setLocation;
 
       setLocation(selectedOption);
-      window.localStorage.setItem('locationData', JSON.stringify({ data: data }));
+      window.localStorage.setItem("locationData", JSON.stringify({ data: data }));
     };
 
     _this.optionRenderer = function (item) {
       return _react2.default.createElement(
-        'div',
-        { className: 'img-item item-' + item.id },
-        _react2.default.createElement('img', { loading: 'lazy', alt: '', src: '/images/' + item.id + '.png', marginBottom: 10 }),
+        "div",
+        { className: "img-item item-" + item.id },
+        _react2.default.createElement("img", {
+          loading: "lazy",
+          alt: "",
+          src: "/images/" + item.id + ".png",
+          marginBottom: 10
+        }),
         _react2.default.createElement(
-          'div',
+          "div",
           null,
           _react2.default.createElement(
-            'strong',
-            { className: 'hover-green' },
+            "strong",
+            { className: "hover-green" },
             item.descriptionBranch
           ),
-          _react2.default.createElement('br', null),
+          _react2.default.createElement("br", null),
           item.address,
-          ',',
+          ",",
           item.zip,
-          ' ',
+          " ",
           item.city
         )
       );
@@ -3377,27 +3382,40 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
 
     _this.valueSelected = function (item) {
       return _react2.default.createElement(
-        'div',
-        { className: 'valueSelected' },
+        "div",
+        { className: "valueSelected" },
         _react2.default.createElement(
-          'span',
+          "span",
           null,
-          _react2.default.createElement('img', { loading: 'lazy', src: '/images/location.svg', width: 14, height: 18, alt: 'Standort', style: { marginRight: '5px' } })
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/location.svg",
+            width: 14,
+            height: 18,
+            alt: "Standort",
+            style: { marginRight: "5px" }
+          })
         ),
         _react2.default.createElement(
-          'span',
+          "span",
           null,
-          _react2.default.createElement('img', { loading: 'lazy', src: '/images/store-' + item.id + '-black.svg', width: 18, height: 18, alt: '' })
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/store-" + item.id + "-black.svg",
+            width: 18,
+            height: 18,
+            alt: ""
+          })
         ),
         _react2.default.createElement(
-          'div',
+          "div",
           null,
           _react2.default.createElement(
-            'span',
-            { style: { borderBottom: '1px dashed #9D9D9D', fontWeight: '400' } },
+            "span",
+            { style: { borderBottom: "1px dashed #9D9D9D", fontWeight: "400" } },
             item.descriptionBranch
           ),
-          _react2.default.createElement('span', null)
+          _react2.default.createElement("span", null)
         )
       );
     };
@@ -3405,26 +3423,26 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
     _this.handleChangeLang = function (selectedOption) {
       // let urlPathName = window.location.pathname
       _this.setState({ lang: selectedOption });
-      window.localStorage.setItem('lang', selectedOption.value);
+      window.localStorage.setItem("lang", selectedOption.value);
       _i18next2.default.changeLanguage(selectedOption.value);
       // browserHistory.push(urlPathName);
     };
 
     _this.langOptionRenderer = function (item) {
       return _react2.default.createElement(
-        'div',
-        { className: 'img-item item-' + item.value },
+        "div",
+        { className: "img-item item-" + item.value },
         _react2.default.createElement(
-          'span',
+          "span",
           null,
-          _react2.default.createElement('img', { loading: 'lazy', src: item.image })
+          _react2.default.createElement("img", { loading: "lazy", src: item.image })
         ),
         _react2.default.createElement(
-          'div',
-          { style: { marginLeft: '0px' } },
+          "div",
+          { style: { marginLeft: "0px" } },
           _react2.default.createElement(
-            'span',
-            { style: { fontWeight: '400' } },
+            "span",
+            { style: { fontWeight: "400" } },
             item.title
           )
         )
@@ -3433,40 +3451,40 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
 
     _this.langValueSelected = function (item) {
       return _react2.default.createElement(
-        'div',
-        { className: 'valueSelected' },
+        "div",
+        { className: "valueSelected" },
         _react2.default.createElement(
-          'span',
+          "span",
           null,
-          _react2.default.createElement('img', { loading: 'lazy', src: item.image })
+          _react2.default.createElement("img", { loading: "lazy", src: item.image })
         ),
         _react2.default.createElement(
-          'div',
-          { style: { marginLeft: '8px' } },
+          "div",
+          { style: { marginLeft: "8px" } },
           _react2.default.createElement(
-            'span',
-            { style: { fontWeight: '400' } },
+            "span",
+            { style: { fontWeight: "400" } },
             item.title
           )
         ),
-        _react2.default.createElement('div', { id: 'lang-menu-arrow' })
+        _react2.default.createElement("div", { id: "lang-menu-arrow" })
       );
     };
 
     _this.state = {
       errorRegistration: {
-        email: '',
-        phone: '',
-        password: '',
-        password_confirmation: '',
-        code: ''
+        email: "",
+        phone: "",
+        password: "",
+        password_confirmation: "",
+        code: ""
       },
       errorLogin: {
-        infoMsg: '',
-        login: '',
-        password: '',
-        resendActivationLink: '',
-        successResend: ''
+        infoMsg: "",
+        login: "",
+        password: "",
+        resendActivationLink: "",
+        successResend: ""
       },
       showInputCode: false,
       spinner: null,
@@ -3475,24 +3493,24 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       lang: {
         title: lang.toUpperCase(),
         value: lang,
-        image: '/images/design/lang/' + lang + '.svg'
+        image: "/images/design/lang/" + lang + ".svg"
       },
       langOptions: [{
-        title: 'DE',
-        value: 'de',
-        image: '/images/design/lang/de.svg'
+        title: "DE",
+        value: "de",
+        image: "/images/design/lang/de.svg"
       }, {
-        title: 'FR',
-        value: 'fr',
-        image: '/images/design/lang/fr.svg'
+        title: "FR",
+        value: "fr",
+        image: "/images/design/lang/fr.svg"
       }, {
-        title: 'IT',
-        value: 'it',
-        image: '/images/design/lang/it.svg'
+        title: "IT",
+        value: "it",
+        image: "/images/design/lang/it.svg"
       }, {
-        title: 'EN',
-        value: 'en',
-        image: '/images/design/lang/en.svg'
+        title: "EN",
+        value: "en",
+        image: "/images/design/lang/en.svg"
       }]
     };
 
@@ -3518,32 +3536,31 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
   }
 
   (0, _createClass3.default)(HeaderTop, [{
-    key: 'showMenu',
+    key: "showMenu",
     value: function showMenu(e) {
-      var headerHeight = $('.header-mobile.scrolling-header').innerHeight();
-      if ($(e.currentTarget).hasClass('open')) {
-
-        $('.menuMobile').css({ top: 0, transform: 'translateY(-100%)' });
-        $('#mobile > .mainPage > .headerBottom-mobile .header-bottom').css('display', 'block');
-        $('#mobile > .mainPage > .mainPage').css('display', 'block');
-        $('#mobile footer').css('display', 'block');
+      var headerHeight = $(".header-mobile.scrolling-header").innerHeight();
+      if ($(e.currentTarget).hasClass("open")) {
+        $(".menuMobile").css({ top: 0, transform: "translateY(-100%)" });
+        $("#mobile > .mainPage > .headerBottom-mobile .header-bottom").css("display", "block");
+        $("#mobile > .mainPage > .mainPage").css("display", "block");
+        $("#mobile footer").css("display", "block");
       } else {
-        $('.menuMobile').css({
-          top: headerHeight + 'px',
-          maxHeight: 'calc( 100vh - ' + headerHeight + 'px',
-          transform: 'translateY(0)'
+        $(".menuMobile").css({
+          top: headerHeight + "px",
+          maxHeight: "calc( 100vh - " + headerHeight + "px",
+          transform: "translateY(0)"
         });
 
         setTimeout(function () {
-          $('#mobile > .mainPage > .headerBottom-mobile .header-bottom').css('display', 'none');
-          $('#mobile > .mainPage > .mainPage').css('display', 'none');
-          $('#mobile footer').css('display', 'none');
+          $("#mobile > .mainPage > .headerBottom-mobile .header-bottom").css("display", "none");
+          $("#mobile > .mainPage > .mainPage").css("display", "none");
+          $("#mobile footer").css("display", "none");
         }, 1000);
       }
-      $(e.currentTarget).toggleClass('open');
+      $(e.currentTarget).toggleClass("open");
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       var user = this.props.user;
 
@@ -3559,29 +3576,33 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       _helpersFunction.LoginModalController.initialize();
       _helpersFunction.headerController.initialize();
       if (user.redirectTo) {
-        document.getElementById('op').checked = true;
+        document.getElementById("op").checked = true;
       }
       // headerScrollFixed();
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       var user = this.props.user;
 
       if (nextProps.user.redirectTo !== user.redirectTo && !user.redirectTo) {
-        document.getElementById('op').checked = true;
+        document.getElementById("op").checked = true;
       }
 
       if (nextProps.user.isLogin !== user.isLogin && nextProps.user.isLogin === false) {
         this.setState({
           formData: {
-            firstName: '', lastName: '', email: '', phone: '', colorValue: ''
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            colorValue: ""
           }
         });
       }
     }
   }, {
-    key: 'checkAdsSource',
+    key: "checkAdsSource",
 
 
     /* global FB gapi gapiAuth2 */
@@ -3591,25 +3612,25 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
 
       var search_params = new URL(document.URL).searchParams;
 
-      if (search_params.has('coupon') && !window.localStorage.hasOwnProperty("coupon")) {
-        var coupon = search_params.get('coupon');
+      if (search_params.has("coupon") && !window.localStorage.hasOwnProperty("coupon")) {
+        var coupon = search_params.get("coupon");
 
-        _axios2.default.get('/api/checkAdsCoupon?coupon=' + coupon).then(function (data) {
+        _axios2.default.get("/api/checkAdsCoupon?coupon=" + coupon).then(function (data) {
           if (data.data.status == "ok") {
             _this2.toggleCouponFromAds();
-            document.getElementById('coupon_text').innerHTML = coupon;
-            window.localStorage.setItem('coupon', coupon);
+            document.getElementById("coupon_text").innerHTML = coupon;
+            window.localStorage.setItem("coupon", coupon);
           }
         }).catch(function (error) {});
       }
     }
   }, {
-    key: 'toggleCouponFromAds',
+    key: "toggleCouponFromAds",
     value: function toggleCouponFromAds() {
       this.setState({ showCouponFromAds: !this.state.showCouponFromAds });
     }
   }, {
-    key: 'loginFacebook',
+    key: "loginFacebook",
     value: function loginFacebook(e) {
       var _this3 = this;
 
@@ -3618,42 +3639,46 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           errorLogin = _state.errorLogin,
           errorRegistration = _state.errorRegistration;
 
-      document.getElementById('op').checked = false;
+      document.getElementById("op").checked = false;
       this.setState({
-        errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: '' }),
-        errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: '' })
+        errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: "" }),
+        errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: "" })
       });
       FB.login(function (response) {
         var token = response.authResponse.accessToken;
         var body = {
           token: token,
-          provider: 'facebook'
+          provider: "facebook"
         };
-        document.getElementById('spinner-box-load').style.display = 'block';
-        _axios2.default.post('/api/socialAuth', body).then(function (result) {
-          window.localStorage.setItem('token', result.data.token);
-          window.axios.defaults.headers.common['Authorization-Token'] = result.data.token;
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.post("/api/socialAuth", body).then(function (result) {
+          window.localStorage.setItem("token", result.data.token);
+          window.axios.defaults.headers.common["Authorization-Token"] = result.data.token;
           _this3.loadPersonalData(result.data.token);
         }).catch(function (error) {
           if (error.response.status === 404) {
-            document.getElementById('spinner-box-load').style.display = 'none';
-            document.getElementById('op').checked = true;
+            document.getElementById("spinner-box-load").style.display = "none";
+            document.getElementById("op").checked = true;
             _this3.setState({
-              errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: error.response.data }),
-              errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: error.response.data })
+              errorLogin: (0, _extends3.default)({}, errorLogin, {
+                socialNoEmail: error.response.data
+              }),
+              errorRegistration: (0, _extends3.default)({}, errorRegistration, {
+                socialNoEmail: error.response.data
+              })
             });
           }
         });
-      }, { scope: 'email' });
+      }, { scope: "email" });
     }
   }, {
-    key: 'initFb',
+    key: "initFb",
     value: function initFb() {
       window.fbAsyncInit = function () {
         FB.init({
           appId: window.oauthIds.facebookId,
           xfbml: true,
-          version: 'v2.9'
+          version: "v2.9"
         });
       };
       (function (d, s, id) {
@@ -3662,17 +3687,18 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
         if (d.getElementById(id)) {
           return;
         }
-        js = d.createElement(s);js.id = id;
-        js.src = '//connect.facebook.net/en_US/sdk.js';
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
-      })(document, 'script', 'facebook-jssdk');
+      })(document, "script", "facebook-jssdk");
     }
   }, {
-    key: 'initGoogle',
+    key: "initGoogle",
     value: function initGoogle() {
       window.gapiAuth2 = null;
-      if (typeof gapi !== 'undefined') {
-        gapi.load('auth2', function () {
+      if (typeof gapi !== "undefined") {
+        gapi.load("auth2", function () {
           gapi.auth2.init({
             client_id: window.oauthIds.googleId
           }).then(function (data) {
@@ -3682,7 +3708,7 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       }
     }
   }, {
-    key: 'loginGoogle',
+    key: "loginGoogle",
     value: function loginGoogle(e) {
       var _this4 = this;
 
@@ -3692,94 +3718,105 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           errorRegistration = _state2.errorRegistration;
 
       this.setState({
-        errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: '' }),
-        errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: '' })
+        errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: "" }),
+        errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: "" })
       });
-      document.getElementById('op').checked = false;
+      document.getElementById("op").checked = false;
       window.gapiAuth2.signIn().then(function (data) {
         var token = data.Zi.access_token;
         var body = {
           token: token,
-          provider: 'google'
+          provider: "google"
         };
-        document.getElementById('spinner-box-load').style.display = 'block';
-        _axios2.default.post('/api/socialAuth', body).then(function (result) {
-          window.localStorage.setItem('token', result.data.token);
-          window.axios.defaults.headers.common['Authorization-Token'] = result.data.token;
+        document.getElementById("spinner-box-load").style.display = "block";
+        _axios2.default.post("/api/socialAuth", body).then(function (result) {
+          window.localStorage.setItem("token", result.data.token);
+          window.axios.defaults.headers.common["Authorization-Token"] = result.data.token;
           _this4.loadPersonalData(result.data.token);
         }).catch(function (error) {
           if (error.response.status === 404) {
-            document.getElementById('spinner-box-load').style.display = 'none';
-            document.getElementById('op').checked = true;
+            document.getElementById("spinner-box-load").style.display = "none";
+            document.getElementById("op").checked = true;
             _this4.setState({
               errorLogin: (0, _extends3.default)({}, errorLogin, { socialNoEmail: error.response.data }),
-              errorRegistration: (0, _extends3.default)({}, errorRegistration, { socialNoEmail: error.response.data })
+              errorRegistration: (0, _extends3.default)({}, errorRegistration, {
+                socialNoEmail: error.response.data
+              })
             });
           }
         });
       });
     }
   }, {
-    key: 'closeLoginForm',
+    key: "closeLoginForm",
     value: function closeLoginForm() {
       var _props$userActions = this.props.userActions,
           setRedirectTo = _props$userActions.setRedirectTo,
           cancelRedirectToMyAccount = _props$userActions.cancelRedirectToMyAccount;
 
-      [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('.simform input:not([type=submit])'))).forEach(function (item) {
-        item.value = '';
+      [].concat((0, _toConsumableArray3.default)(document.querySelectorAll(".simform input:not([type=submit])"))).forEach(function (item) {
+        item.value = "";
       });
       this.setState({
         errorRegistration: {
-          email: '', phone: '', password: '', password_confirmation: '', socialNoEmail: ''
+          email: "",
+          phone: "",
+          password: "",
+          password_confirmation: "",
+          socialNoEmail: ""
         },
         errorLogin: {
-          infoMsg: '', login: '', password: '', socialNoEmail: '', resendActivationLink: '', successResend: ''
+          infoMsg: "",
+          login: "",
+          password: "",
+          socialNoEmail: "",
+          resendActivationLink: "",
+          successResend: ""
         },
         showInputCode: false,
         spinner: null
       });
       setRedirectTo(false);
       cancelRedirectToMyAccount(false);
-      $('.login-box-wrapper').css({ display: 'none' });
+      $(".login-box-wrapper").css({ display: "none" });
     }
   }, {
-    key: 'handleChangeRegistration',
+    key: "handleChangeRegistration",
     value: function handleChangeRegistration(e) {
       var _e$target = e.target,
           name = _e$target.name,
           value = _e$target.value,
           errorRegistration = this.state.errorRegistration;
 
-      if (name === 'password' || name === 'password_confirmation') {
+      if (name === "password" || name === "password_confirmation") {
         var regular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
         var isValid = regular.test(value.trim());
         var isSame = name !== "password_confirmation" || $("#customer-pw").val() === $("#customer-pw-repeat").val();
         if (isValid && isSame) {
-          $(e.target).parents('.input').find('.statusBarPassword').css({ background: '#00cb94' });
+          $(e.target).parents(".input").find(".statusBarPassword").css({ background: "#00cb94" });
         } else {
-          $(e.target).parents('.input').find('.statusBarPassword').css({ background: '#ff0000' });
+          $(e.target).parents(".input").find(".statusBarPassword").css({ background: "#ff0000" });
         }
       }
       errorRegistration[name] = null;
       this.setState({ errorRegistration: errorRegistration });
     }
   }, {
-    key: 'handleChangeLogin',
+    key: "handleChangeLogin",
     value: function handleChangeLogin(e) {
       var name = e.target.name,
           errorLogin = this.state.errorLogin;
 
-      errorLogin.infoMsg = '';
+      errorLogin.infoMsg = "";
       errorLogin[name] = null;
-      if (name === 'login') {
+      if (name === "login") {
         errorLogin.successResend = null;
         errorLogin.resendActivationLink = null;
       }
       this.setState({ errorLogin: errorLogin });
     }
   }, {
-    key: 'registerUser',
+    key: "registerUser",
     value: function registerUser(e) {
       var _this5 = this;
 
@@ -3789,24 +3826,34 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           errorRegistration = _state3.errorRegistration;
 
       if (!showInputCode) {
-        var url = '/api/register';
+        var url = "/api/register";
         var data = new FormData(document.forms.registrationForm);
-        document.getElementById('spinner-box-load').style.display = 'block';
+        document.getElementById("spinner-box-load").style.display = "block";
         _axios2.default.post(url, data).then(function (result) {
-          document.getElementById('spinner-box-load').style.display = 'none';
-          if (result.data.status === 'false') {
-            if (result.data.errorType === 'phone') {
+          document.getElementById("spinner-box-load").style.display = "none";
+          if (result.data.status === "false") {
+            if (result.data.errorType === "phone") {
               var phone = result.data.message;
               _this5.setState({
-                errorRegistration: (0, _extends3.default)({}, errorRegistration, { email: '', phone: phone, password: '', password_confirmation: '', code: ''
+                errorRegistration: (0, _extends3.default)({}, errorRegistration, {
+                  email: "",
+                  phone: phone,
+                  password: "",
+                  password_confirmation: "",
+                  code: ""
                 }),
                 spinner: null
               });
             }
-            if (result.data.errorType === 'email') {
+            if (result.data.errorType === "email") {
               var email = result.data.message;
               _this5.setState({
-                errorRegistration: (0, _extends3.default)({}, errorRegistration, { email: email, phone: '', password: '', password_confirmation: '', code: ''
+                errorRegistration: (0, _extends3.default)({}, errorRegistration, {
+                  email: email,
+                  phone: "",
+                  password: "",
+                  password_confirmation: "",
+                  code: ""
                 }),
                 spinner: null
               });
@@ -3814,12 +3861,12 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           } else if (result.data.smsWasSent) {
             _this5.setState({ showInputCode: true, spinner: null });
           } else {
-            document.getElementById('op').checked = false;
+            document.getElementById("op").checked = false;
             _this5.closeLoginForm();
-            _reactRouter.browserHistory.push('/confirm-email');
+            _reactRouter.browserHistory.push("/confirm-email");
           }
         }).catch(function (error) {
-          document.getElementById('spinner-box-load').style.display = 'none';
+          document.getElementById("spinner-box-load").style.display = "none";
           var errors = error.response.data.errors;
 
           var email = void 0,
@@ -3827,102 +3874,115 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
               password = void 0,
               passwordConfirmation = void 0;
           if (errors) {
-            errors.email ? phone = errors.email[0] : '';
-            errors.phone ? phone = errors.phone[0] : '';
-            errors.password ? password = passwordConfirmation = errors.password[0] : '';
+            errors.email ? phone = errors.email[0] : "";
+            errors.phone ? phone = errors.phone[0] : "";
+            errors.password ? password = passwordConfirmation = errors.password[0] : "";
           }
           _this5.setState({
-            errorRegistration: (0, _extends3.default)({}, errorRegistration, { email: email, phone: phone, password: password, passwordConfirmation: passwordConfirmation
+            errorRegistration: (0, _extends3.default)({}, errorRegistration, {
+              email: email,
+              phone: phone,
+              password: password,
+              passwordConfirmation: passwordConfirmation
             }),
             spinner: null
           });
         });
       } else {
-        var _url = '/api/confirm/phone';
+        var _url = "/api/confirm/phone";
         var _data = new FormData(document.forms.registrationForm);
-        document.getElementById('spinner-box-load').style.display = 'block';
+        document.getElementById("spinner-box-load").style.display = "block";
         _axios2.default.post(_url, _data).then(function (response) {
-          window.localStorage.setItem('token', response.data.token);
-          window.axios.defaults.headers.common['Authorization-Token'] = response.data.token;
+          window.localStorage.setItem("token", response.data.token);
+          window.axios.defaults.headers.common["Authorization-Token"] = response.data.token;
           _this5.loadPersonalData(response.data.token);
         }).catch(function (error) {
-          document.getElementById('spinner-box-load').style.display = 'none';
+          document.getElementById("spinner-box-load").style.display = "none";
           if (error.response.status === 404) {
             var err = error.response.data;
             var code = void 0;
             if (err) {
               code = err;
             }
-            _this5.setState({ errorRegistration: (0, _extends3.default)({}, errorRegistration, { code: code }), spinner: null });
+            _this5.setState({
+              errorRegistration: (0, _extends3.default)({}, errorRegistration, { code: code }),
+              spinner: null
+            });
           } else {
             var _err = error.response.data.message;
             var _code = void 0;
             if (_err) {
               _code = _err;
             }
-            _this5.setState({ errorRegistration: (0, _extends3.default)({}, errorRegistration, { code: _code }), spinner: null });
+            _this5.setState({
+              errorRegistration: (0, _extends3.default)({}, errorRegistration, { code: _code }),
+              spinner: null
+            });
           }
         });
       }
     }
   }, {
-    key: 'loginUser',
+    key: "loginUser",
     value: function loginUser(e) {
       var _this6 = this;
 
       e.preventDefault();
       var errorLogin = this.state.errorLogin;
 
-      var url = '/api/login';
+      var url = "/api/login";
       var data = new FormData(document.forms.loginForm);
-      document.getElementById('spinner-box-load').style.display = 'block';
+      document.getElementById("spinner-box-load").style.display = "block";
       _axios2.default.post(url, data).then(function (result) {
-        if (result.data.status === 'false') {
-          document.getElementById('spinner-box-load').style.display = 'none';
+        if (result.data.status === "false") {
+          document.getElementById("spinner-box-load").style.display = "none";
           errorLogin[result.data.field] = result.data.message;
           if (result.data.resendActivationLink) {
             errorLogin.resendActivationLink = result.data.resendActivationLink;
           }
           _this6.setState({ errorLogin: errorLogin });
         } else {
-          window.localStorage.setItem('token', result.data.token);
-          window.axios.defaults.headers.common['Authorization-Token'] = result.data.token;
+          window.localStorage.setItem("token", result.data.token);
+          window.axios.defaults.headers.common["Authorization-Token"] = result.data.token;
           _this6.loadPersonalData(result.data.token);
         }
       }).catch(function (error) {
-        document.getElementById('spinner-box-load').style.display = 'none';
+        document.getElementById("spinner-box-load").style.display = "none";
         var err = error.response.data.errors;
         var login = void 0,
             password = void 0;
         if (err) {
-          err.login ? login = err.login[0] : '';
-          err.password ? password = err.password[0] : '';
+          err.login ? login = err.login[0] : "";
+          err.password ? password = err.password[0] : "";
         }
-        _this6.setState({ errorLogin: (0, _extends3.default)({}, errorLogin, { login: login, password: password }), spinner: null });
+        _this6.setState({
+          errorLogin: (0, _extends3.default)({}, errorLogin, { login: login, password: password }),
+          spinner: null
+        });
       });
     }
   }, {
-    key: 'logOut',
+    key: "logOut",
     value: function logOut() {
       if (window.gapiAuth2) window.gapiAuth2.disconnect();
-      window.localStorage.removeItem('token');
-      delete window.axios.defaults.headers.common['Authorization-Token'];
+      window.localStorage.removeItem("token");
+      delete window.axios.defaults.headers.common["Authorization-Token"];
       var logOut = this.props.userActions.logOut;
 
       logOut();
     }
   }, {
-    key: 'mapSubcategories',
+    key: "mapSubcategories",
     value: function mapSubcategories(device) {
-      if (device.name === 'Zubehör') return '';
+      if (device.name === "Zubehör") return "";
       var params = this.props.params,
-          currentDeviceName = params.deviceCategory1 && params.deviceCategory1.replace(/-/g, ' '),
-          deviceCategories = [device.name.replace(/ /g, '-').toLowerCase()],
+          currentDeviceName = params.deviceCategory1 && params.deviceCategory1.replace(/-/g, " "),
+          deviceCategories = [device.name.replace(/ /g, "-").toLowerCase()],
           computerIds = [8, 15, 23, 24];
 
-      var className = '';
+      var className = "";
       function mapSubmodels(submodels) {
-        deviceCategories.push(submodels[0].name.replace(/ /g, '-').toLowerCase());
+        deviceCategories.push(submodels[0].name.replace(/ /g, "-").toLowerCase());
         if (submodels[0].submodels) mapSubmodels(submodels[0].submodels);
       }
       if (device.submodels && computerIds.every(function (item) {
@@ -3930,87 +3990,108 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       })) {
         mapSubmodels(device.submodels);
       }
-      var strUrl = deviceCategories.join('/') + '/filter';
+      var strUrl = deviceCategories.join("/") + "/filter";
 
-      device.name.toLowerCase() === currentDeviceName ? className = 'current item-sub-menu' : className = 'item-sub-menu';
-
+      device.name.toLowerCase() === currentDeviceName ? className = "current item-sub-menu" : className = "item-sub-menu";
+      var checkLang = (0, _helpersFunction.getLang)();
+      var deviceName = "";
+      if (checkLang == "de") deviceName = device.name;else if (checkLang == "en") deviceName = device.nameEn;else if (checkLang == "fr") deviceName = device.nameFr;else if (checkLang == "it") deviceName = device.nameIt;
       return _react2.default.createElement(
         _reactRouter.Link,
-        {
-          to: '/kaufen/' + strUrl,
-          className: className,
-          key: device.id
-        },
+        { to: "/kaufen/" + strUrl, className: className, key: device.id },
         _react2.default.createElement(
-          'span',
-          { className: 'image' },
-          _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/' + device.id + 'device.svg', alt: '' })
+          "span",
+          { className: "image" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/design/" + device.id + "device.svg",
+            alt: ""
+          })
         ),
         _react2.default.createElement(
-          'span',
-          { className: 'image' },
-          _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/' + device.id + 'activeDevice.svg', alt: '' })
+          "span",
+          { className: "image" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: "/images/design/" + device.id + "activeDevice.svg",
+            alt: ""
+          })
         ),
         _react2.default.createElement(
-          'span',
-          { className: 'name' },
-          device.name
+          "span",
+          { className: "name" },
+          deviceName
         )
       );
     }
   }, {
-    key: 'mapAccessories',
+    key: "mapAccessories",
     value: function mapAccessories(item, i) {
       var params = this.props.params,
           index = 2,
-          className = '',
-          strPrevUrl = '';
+          className = "",
+          strPrevUrl = "";
       /*get prev url*/
       for (var key in params) {
         var paramKeyIndex = key.slice(14);
-        if (key.includes('deviceCategory') && params[key] && +paramKeyIndex < index) strPrevUrl += params[key] + '/';
+        if (key.includes("deviceCategory") && params[key] && +paramKeyIndex < index) strPrevUrl += params[key] + "/";
       }
       /*add current name*/
-      strPrevUrl += item.name.toLowerCase().replace(/ /g, '-') + '/';
+      strPrevUrl += item.name.toLowerCase().replace(/ /g, "-") + "/";
       /*add submodels url*/
       function mapSubmodels(submodels) {
-        strPrevUrl += submodels[0].name.replace(/ /g, '-').toLowerCase() + '/';
+        strPrevUrl += submodels[0].name.replace(/ /g, "-").toLowerCase() + "/";
         if (submodels[0].submodels) mapSubmodels(submodels[0].submodels);
       }
       if (item.submodels) mapSubmodels(item.submodels);
 
-      if (params['deviceCategory' + index] && params['deviceCategory' + index].replace(/-/g, ' ') === item.name.toLowerCase()) className = 'current item-sub-menu';else className = 'item-sub-menu';
+      if (params["deviceCategory" + index] && params["deviceCategory" + index].replace(/-/g, " ") === item.name.toLowerCase()) className = "current item-sub-menu";else className = "item-sub-menu";
+      var checkLang = (0, _helpersFunction.getLang)();
+      var accessoriesName = "";
+      if (checkLang == "de") accessoriesName = item.name;else if (checkLang == "en") accessoriesName = item.nameEn;else if (checkLang == "fr") accessoriesName = item.nameFr;else if (checkLang == "it") accessoriesName = item.nameIt;
       return _react2.default.createElement(
         _reactRouter.Link,
-        { to: '/kaufen/zubeh\xF6r/' + strPrevUrl + 'filter',
+        {
+          to: "/kaufen/zubeh\xF6r/" + strPrevUrl + "filter",
           className: className,
-          key: item.id },
+          key: item.id
+        },
         item.image && _react2.default.createElement(
-          'span',
-          { className: 'image' },
-          _react2.default.createElement('img', { loading: 'lazy', src: item.image, className: 'deviceIcon', alt: '' })
+          "span",
+          { className: "image" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: item.image,
+            className: "deviceIcon",
+            alt: ""
+          })
         ),
         item.image && _react2.default.createElement(
-          'span',
-          { className: 'image' },
-          _react2.default.createElement('img', { loading: 'lazy', src: item.image, className: 'deviceIcon', alt: '' })
+          "span",
+          { className: "image" },
+          _react2.default.createElement("img", {
+            loading: "lazy",
+            src: item.image,
+            className: "deviceIcon",
+            alt: ""
+          })
         ),
         _react2.default.createElement(
-          'span',
-          { className: 'name' },
-          item.name
+          "span",
+          { className: "name" },
+          accessoriesName
         )
       );
     }
   }, {
-    key: 'loadPersonalData',
+    key: "loadPersonalData",
     value: function loadPersonalData(token) {
       var _this7 = this;
 
       if (token) {
-        _axios2.default.get('/api/customerAgileData').then(function (data) {
-          document.getElementById('spinner-box-load').style.display = 'none';
-          document.getElementById('op').checked = false;
+        _axios2.default.get("/api/customerAgileData").then(function (data) {
+          document.getElementById("spinner-box-load").style.display = "none";
+          document.getElementById("op").checked = false;
           if (data.status === 200) {
             var _props = _this7.props,
                 loginSuccess = _props.userActions.loginSuccess,
@@ -4022,41 +4103,41 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
             loginSuccess(data.data);
             if (redirectUrl) {
               _reactRouter.browserHistory.push(redirectUrl);
-            } else if (!cancelRedirectToMyAccount) _reactRouter.browserHistory.push('/kundenkonto');
+            } else if (!cancelRedirectToMyAccount) _reactRouter.browserHistory.push("/kundenkonto");
           }
         }).catch(function (error) {});
       }
     }
   }, {
-    key: 'resendActivationEmail',
+    key: "resendActivationEmail",
     value: function resendActivationEmail() {
       var _this8 = this;
 
-      var email = $('#customer-email-login').val(),
+      var email = $("#customer-email-login").val(),
           errorLogin = this.state.errorLogin;
 
-      document.getElementById('spinner-box-load').style.display = 'block';
-      _axios2.default.get('/api/resendActivationLink?login=' + email).then(function (result) {
-        document.getElementById('spinner-box-load').style.display = 'none';
+      document.getElementById("spinner-box-load").style.display = "block";
+      _axios2.default.get("/api/resendActivationLink?login=" + email).then(function (result) {
+        document.getElementById("spinner-box-load").style.display = "none";
         _this8.setState({
           errorLogin: (0, _extends3.default)({}, errorLogin, {
             successResend: result.data,
-            login: '',
-            resendActivationLink: ''
+            login: "",
+            resendActivationLink: ""
           })
         });
       }).catch(function (error) {
-        document.getElementById('spinner-box-load').style.display = 'none';
+        document.getElementById("spinner-box-load").style.display = "none";
         _this8.setState({
           errorLogin: (0, _extends3.default)({}, errorLogin, {
-            resendActivationLink: '',
+            resendActivationLink: "",
             login: error.response.data.errors.login[0]
           })
         });
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _state4 = this.state,
           spinner = _state4.spinner,
@@ -4076,12 +4157,11 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           zubenhor = devices.find(function (item) {
         return item.name === "Zubehör";
       }),
-          domain = window.domainName.name.split('.')[window.domainName.name.split('.').length - 1],
+          domain = window.domainName.name.split(".")[window.domainName.name.split(".").length - 1],
           urlPathName = window.location.pathname,
-          data = JSON.parse(window.localStorage.getItem('locationData')),
-          webshopDiscountData = JSON.parse(window.localStorage.getItem('webshopDiscountData')),
+          data = JSON.parse(window.localStorage.getItem("locationData")),
+          webshopDiscountData = JSON.parse(window.localStorage.getItem("webshopDiscountData")),
           active = {};
-
 
       if (data) {
         active.place = data.data.find(function (item) {
@@ -4093,67 +4173,87 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
       }
 
       var headerClassName = void 0;
-      var logoSrc = domain === 'ch' ? '/images/design/logo_all_pages.svg' : '/images/design/logo_de.svg';
-      var logoSrcAllPages = domain === 'ch' ? '/images/design/logo_all_pages.svg' : '/images/design/logo_all_pages_de.svg';
+      var logoSrc = domain === "ch" ? "/images/design/logo_all_pages.svg" : "/images/design/logo_de.svg";
+      var logoSrcAllPages = domain === "ch" ? "/images/design/logo_all_pages.svg" : "/images/design/logo_all_pages_de.svg";
       var backBtnUrl = this.props.backColorGreen ? "/images/design/mobile/back-btn-green.svg" : "/images/design/mobile/back-btn.svg";
 
-      if (urlPathName === '/') {
-        headerClassName = 'headerMainPage';
-      } else if (urlPathName === '/jobs') {
-        headerClassName = 'headerMainPage jobs';
-      } else if (urlPathName === '/ueber-uns/qualitaet') {
-        headerClassName = 'headerMainPage jobs qualitaet_header';
-      } else if (urlPathName === '/versichern') {
-        logoSrc = '/images/logo/remarket-care.jpg';
-        logoSrcAllPages = '/images/logo/remarket-care.jpg';
-        headerClassName = 'headerMainPage';
+      if (urlPathName === "/") {
+        headerClassName = "headerMainPage";
+      } else if (urlPathName === "/jobs") {
+        headerClassName = "headerMainPage jobs";
+      } else if (urlPathName === "/ueber-uns/qualitaet") {
+        headerClassName = "headerMainPage jobs qualitaet_header";
+      } else if (urlPathName === "/versichern") {
+        logoSrc = "/images/logo/remarket-care.jpg";
+        logoSrcAllPages = "/images/logo/remarket-care.jpg";
+        headerClassName = "headerMainPage";
       } else {
-        headerClassName = 'headerMainPage ';
+        headerClassName = "headerMainPage ";
       }
 
-      headerClassName = webshopDiscountData.desktop_topbar_active == 1 ? headerClassName + ' desktop-topbar-activate' : headerClassName;
+      headerClassName = webshopDiscountData.desktop_topbar_active == 1 ? headerClassName + " desktop-topbar-activate" : headerClassName;
 
       var customStyles = {};
       var t = this.props.t;
 
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
         _react2.default.createElement(
-          'nav',
-          { id: 'top_1', className: webshopDiscountData.desktop_topbar_active == 1 ? "top-header navbar navbar-default navbar-fixed-top visible-md-block visible-lg-block desktop-topbar-activate" : "top-header navbar navbar-default navbar-fixed-top visible-md-block visible-lg-block" },
+          "nav",
+          {
+            id: "top_1",
+            className: webshopDiscountData.desktop_topbar_active == 1 ? "top-header navbar navbar-default navbar-fixed-top visible-md-block visible-lg-block desktop-topbar-activate" : "top-header navbar navbar-default navbar-fixed-top visible-md-block visible-lg-block"
+          },
           webshopDiscountData.desktop_topbar_active == 1 && _react2.default.createElement(
-            'div',
-            { style: { position: "relative" }, className: 'notification-top-bar' },
-            _react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: (0, _helpersFunction.discountCode)(webshopDiscountData.desktop_topbar_text, 'discount-code') } })
+            "div",
+            {
+              style: { position: "relative" },
+              className: "notification-top-bar"
+            },
+            _react2.default.createElement("p", {
+              dangerouslySetInnerHTML: {
+                __html: (0, _helpersFunction.discountCode)(webshopDiscountData.desktop_topbar_text, "discount-code")
+              }
+            })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'container-fluid header-desktop-style d-flex', style: { display: 'flex', justifyContent: 'end' } },
-            _react2.default.createElement('div', { className: 'col-xs-none col-md-5' }),
+            "div",
+            {
+              className: "container-fluid header-desktop-style d-flex",
+              style: { display: "flex", justifyContent: "end" }
+            },
+            _react2.default.createElement("div", { className: "col-xs-none col-md-5" }),
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-none col-md-7' },
+              "div",
+              { className: "col-xs-none col-md-7" },
               _react2.default.createElement(
-                'div',
-                { className: 'top-header scrolling-header' },
+                "div",
+                { className: "top-header scrolling-header" },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'row' },
+                  "div",
+                  { className: "row" },
                   _react2.default.createElement(
-                    'div',
-                    { className: 'headerMainPage-container', style: { display: 'flex', alignItems: 'center', justifyContent: 'end' } },
+                    "div",
+                    {
+                      className: "headerMainPage-container",
+                      style: {
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "end"
+                      }
+                    },
                     _react2.default.createElement(
-                      'div',
-                      { className: 'select-input-place d-xs-none d-sm-none d-md-none d-lg-block' },
+                      "div",
+                      { className: "select-input-place d-xs-none d-sm-none d-md-none d-lg-block" },
                       data && _react2.default.createElement(
-                        'label',
+                        "label",
                         null,
                         _react2.default.createElement(_reactSelect2.default, {
                           value: selectedOption || active.place,
                           onChange: this.handleChangePlace,
                           options: data.data,
-                          classNamePrefix: 'Select-input-place',
+                          classNamePrefix: "Select-input-place",
                           optionRenderer: this.optionRenderer,
                           valueRenderer: this.valueSelected,
                           styles: customStyles,
@@ -4162,159 +4262,185 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                       )
                     ),
                     _react2.default.createElement(
-                      'div',
-                      { className: 'place-open d-sm-none d-md-none d-lg-block', style: { background: 'transparent', color: 'black' } },
+                      "div",
+                      {
+                        className: "place-open d-sm-none d-md-none d-lg-block",
+                        style: { background: "transparent", color: "black" }
+                      },
                       _react2.default.createElement(
-                        'span',
+                        "span",
                         null,
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/time-clock.svg', width: 16, height: 16, alt: '\xD6ffnungszeiten' })
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/time-clock.svg",
+                          width: 16,
+                          height: 16,
+                          alt: "\xD6ffnungszeiten"
+                        })
                       ),
                       _react2.default.createElement(
-                        'span',
-                        { className: 'place-open-menu', style: { color: 'black', background: 'transparent', cursor: 'pointer', borderBottom: '1px dashed #9D9D9D' } },
-                        this.props.t('headerTop.openinghours')
+                        "span",
+                        {
+                          className: "place-open-menu",
+                          style: {
+                            color: "black",
+                            background: "transparent",
+                            cursor: "pointer",
+                            borderBottom: "1px dashed #9D9D9D"
+                          }
+                        },
+                        this.props.t("headerTop.openinghours")
                       ),
                       active.place ? _react2.default.createElement(
-                        'ul',
+                        "ul",
                         null,
                         _react2.default.createElement(
-                          'span',
-                          { className: 'place-open-title' },
+                          "span",
+                          { className: "place-open-title" },
                           active.place.address,
-                          _react2.default.createElement('br', null),
+                          _react2.default.createElement("br", null),
                           active.place.zip,
-                          ' ',
+                          " ",
                           active.place.city
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Mon'),
-                            ' :'
+                            t("openingHoursHover.Mon"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
                             active.place.openingHours.mon
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Tue'),
-                            ' :'
+                            t("openingHoursHover.Tue"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
                             active.place.openingHours.tue
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Wed'),
-                            ' :'
+                            t("openingHoursHover.Wed"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
                             active.place.openingHours.wed
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Thu'),
-                            ' :'
+                            t("openingHoursHover.Thu"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
                             active.place.openingHours.thu
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Fri'),
-                            ' :'
+                            t("openingHoursHover.Fri"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
                             active.place.openingHours.fri
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Sat'),
-                            ' :'
+                            t("openingHoursHover.Sat"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            active.place.openingHours.sat ? active.place.openingHours.sat : t('openingHoursHover.Closed')
+                            active.place.openingHours.sat ? active.place.openingHours.sat : t("openingHoursHover.Closed")
                           )
                         ),
                         _react2.default.createElement(
-                          'li',
-                          { className: 'green-hover' },
+                          "li",
+                          { className: "green-hover" },
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            t('openingHoursHover.Sun'),
-                            ' :'
+                            t("openingHoursHover.Sun"),
+                            " :"
                           ),
                           _react2.default.createElement(
-                            'span',
+                            "span",
                             null,
-                            active.place.openingHours.sun ? active.place.openingHours.sun : t('openingHoursHover.Closed')
+                            active.place.openingHours.sun ? active.place.openingHours.sun : t("openingHoursHover.Closed")
                           )
                         )
-                      ) : ''
+                      ) : ""
                     ),
                     _react2.default.createElement(
-                      'a',
-                      { href: active.place ? 'tel:' + active.place.phoneFull : '', className: 'place-mobile d-sm-none d-md-none d-lg-block text-decoration-none',
-                        style: { background: 'transparent', color: 'black' } },
-                      _react2.default.createElement('img', { loading: 'lazy', src: '/images/phone.svg', width: 21, height: 16, alt: 'Telefon' }),
+                      "a",
+                      {
+                        href: active.place ? "tel:" + active.place.phoneFull : "",
+                        className: "place-mobile d-sm-none d-md-none d-lg-block text-decoration-none",
+                        style: { background: "transparent", color: "black" }
+                      },
+                      _react2.default.createElement("img", {
+                        loading: "lazy",
+                        src: "/images/phone.svg",
+                        width: 21,
+                        height: 16,
+                        alt: "Telefon"
+                      }),
                       _react2.default.createElement(
-                        'span',
+                        "span",
                         null,
-                        active.place ? active.place.phone : ''
+                        active.place ? active.place.phone : ""
                       )
                     ),
                     _react2.default.createElement(
-                      'div',
-                      { className: 'select-input-lang d-xs-none d-sm-none d-md-none d-lg-block' },
+                      "div",
+                      { className: "select-input-lang d-xs-none d-sm-none d-md-none d-lg-block" },
                       _react2.default.createElement(
-                        'label',
+                        "label",
                         null,
                         _react2.default.createElement(_reactSelect2.default, {
                           value: lang,
                           onChange: this.handleChangeLang,
                           options: langOptions,
-                          classNamePrefix: 'Select-input-lang',
+                          classNamePrefix: "Select-input-lang",
                           optionRenderer: this.langOptionRenderer,
                           valueRenderer: this.langValueSelected,
                           styles: customStyles,
@@ -4329,163 +4455,204 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: headerClassName, onClick: this.props.forClearingSearchInput },
+          "div",
+          {
+            className: headerClassName,
+            onClick: this.props.forClearingSearchInput
+          },
           _react2.default.createElement(
-            'nav',
-            { id: 'top_2', className: webshopDiscountData.desktop_topbar_active == 1 ? "main-header navbar navbar-default desktop-topbar-activate" : "main-header navbar navbar-default" },
+            "nav",
+            {
+              id: "top_2",
+              className: webshopDiscountData.desktop_topbar_active == 1 ? "main-header navbar navbar-default desktop-topbar-activate" : "main-header navbar navbar-default"
+            },
             _react2.default.createElement(
-              'div',
-              { className: 'container-fluid' },
+              "div",
+              { className: "container-fluid" },
               _react2.default.createElement(
-                'div',
-                { className: 'show-desktop navbar-header col-md-2 allign-section' },
-                _react2.default.createElement('button', { type: 'button', className: 'collapsed navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-6', 'aria-expanded': 'false' }),
+                "div",
+                { className: "show-desktop navbar-header col-md-2 allign-section" },
+                _react2.default.createElement("button", {
+                  type: "button",
+                  className: "collapsed navbar-toggle",
+                  "data-toggle": "collapse",
+                  "data-target": "#bs-example-navbar-collapse-6",
+                  "aria-expanded": "false"
+                }),
                 _react2.default.createElement(
-                  'div',
-                  { className: 'header-logo navbar-brand', style: { height: '79px' } },
+                  "div",
+                  {
+                    className: "header-logo navbar-brand",
+                    style: { height: "79px" }
+                  },
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/' },
-                    _react2.default.createElement('span', { className: domain === 'ch' ? "header-image" : "header-image-de" })
+                    { to: "/" },
+                    _react2.default.createElement("span", {
+                      className: domain === "ch" ? "header-image" : "header-image-de"
+                    })
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'show-desktop col-md-5 menu-section', style: { height: '80px', display: 'flex', alignItems: 'center' } },
+                "div",
+                {
+                  className: "show-desktop col-md-5 menu-section",
+                  style: {
+                    height: "80px",
+                    display: "flex",
+                    alignItems: "center"
+                  }
+                },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'collapse navbar-collapse header-collapse-style', id: 'bs-example-navbar-collapse-6' },
+                  "div",
+                  {
+                    className: "collapse navbar-collapse header-collapse-style",
+                    id: "bs-example-navbar-collapse-6"
+                  },
                   _react2.default.createElement(
-                    'ul',
-                    { className: 'nav navbar-nav header-ul' },
+                    "ul",
+                    { className: "nav navbar-nav header-ul" },
                     _react2.default.createElement(
-                      'li',
-                      { className: 'header-li' },
+                      "li",
+                      { className: "header-li" },
                       _react2.default.createElement(
                         _reactRouter.Link,
-                        { to: '/verkaufen', activeClassName: 'active' },
-                        this.props.t('headerTop.sell')
+                        { to: "/verkaufen", activeClassName: "active" },
+                        this.props.t("headerTop.sell")
                       )
                     ),
                     _react2.default.createElement(
-                      'li',
-                      { className: 'header-li' },
+                      "li",
+                      { className: "header-li" },
                       _react2.default.createElement(
                         _reactRouter.Link,
-                        { to: '/kaufen', activeClassName: 'active', className: 'kaufen-icon-tag' },
-                        this.props.t('headerTop.buy'),
-                        ' ',
-                        _react2.default.createElement('i', { className: 'fa fa-chevron-down', 'aria-hidden': 'true' })
+                        {
+                          to: "/kaufen",
+                          activeClassName: "active",
+                          className: "kaufen-icon-tag"
+                        },
+                        this.props.t("headerTop.buy"),
+                        " ",
+                        _react2.default.createElement("i", {
+                          className: "fa fa-chevron-down",
+                          "aria-hidden": "true"
+                        })
                       ),
                       !window.isMobile && _react2.default.createElement(
-                        'div',
-                        { className: 'wrap-sub-category main-page' },
+                        "div",
+                        { className: "wrap-sub-category main-page" },
                         _react2.default.createElement(
-                          'div',
-                          { className: 'sub-category' },
+                          "div",
+                          { className: "sub-category" },
                           _react2.default.createElement(
-                            'div',
-                            { className: 'title' },
+                            "div",
+                            { className: "title" },
                             _react2.default.createElement(
-                              'span',
+                              "span",
                               null,
-                              'Ger\xE4te'
+                              this.props.t("header.headerTop.devices")
                             ),
-                            _react2.default.createElement('div', { className: 'line' })
+                            _react2.default.createElement("div", { className: "line" })
                           ),
                           _react2.default.createElement(
-                            'div',
-                            { className: 'devices' },
+                            "div",
+                            { className: "devices" },
                             devices.map(this.mapSubcategories)
                           ),
                           _react2.default.createElement(
-                            'div',
-                            { className: 'title' },
+                            "div",
+                            { className: "title" },
                             _react2.default.createElement(
-                              'span',
+                              "span",
                               null,
-                              'Zubeh\xF6r'
+                              this.props.t("header.headerTop.accessories")
                             ),
-                            _react2.default.createElement('div', { className: 'line' })
+                            _react2.default.createElement("div", { className: "line" })
                           ),
                           _react2.default.createElement(
-                            'div',
-                            { className: 'devices' },
-                            zubenhor ? zubenhor.submodels.map(this.mapAccessories) : ''
+                            "div",
+                            { className: "devices" },
+                            zubenhor ? zubenhor.submodels.map(this.mapAccessories) : ""
                           )
                         )
                       )
                     ),
                     _react2.default.createElement(
-                      'li',
-                      { className: 'header-li' },
+                      "li",
+                      { className: "header-li" },
                       _react2.default.createElement(
-                        'a',
-                        { href: 'https://www.ireparatur.ch/', className: 'active', target: '_blank', style: { cursor: 'pointer' } },
-                        this.props.t('headerTop.repair')
+                        "a",
+                        {
+                          href: "https://www.ireparatur.ch/",
+                          className: "active",
+                          target: "_blank",
+                          style: { cursor: "pointer" }
+                        },
+                        this.props.t("headerTop.repair")
                       )
                     ),
                     _react2.default.createElement(
-                      'li',
-                      { className: 'header-li' },
+                      "li",
+                      { className: "header-li" },
                       _react2.default.createElement(
                         _reactRouter.Link,
-                        { to: '/kontakt', activeClassName: 'active' },
-                        this.props.t('headerTop.contact')
+                        { to: "/kontakt", activeClassName: "active" },
+                        this.props.t("headerTop.contact")
                       )
                     )
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'show-desktop col-md-3 search-section' },
-                _react2.default.createElement(_searchBarKaufenV4.default, { placeholder: t('expandedSearchFieldTitle') })
+                "div",
+                { className: "show-desktop col-md-3 search-section" },
+                _react2.default.createElement(_searchBarKaufenV4.default, {
+                  placeholder: t("expandedSearchFieldTitle")
+                })
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-md-2 user-section' },
-                urlPathName === '/versichern' ? null : _react2.default.createElement(
-                  'div',
-                  { className: 'row fr allign-section' },
-                  !user.isLogin ? _react2.default.createElement('span', { className: 'show-desktop lower' }) : _react2.default.createElement(
-                    'span',
-                    { className: 'show-desktop userButtons lower' },
+                "div",
+                { className: "col-md-2 user-section" },
+                urlPathName === "/versichern" ? null : _react2.default.createElement(
+                  "div",
+                  { className: "row fr allign-section" },
+                  !user.isLogin ? _react2.default.createElement("span", { className: "show-desktop lower" }) : _react2.default.createElement(
+                    "span",
+                    { className: "show-desktop userButtons lower" },
                     _react2.default.createElement(
-                      'span',
-                      { className: 'image' },
+                      "span",
+                      { className: "image" },
                       user.data && user.data.systemAddress.first_name && user.data.systemAddress.first_name.slice(0, 1).toUpperCase()
                     ),
                     _react2.default.createElement(
-                      'span',
-                      { className: 'userHello' },
-                      domain === 'de' ? 'Hallo' : 'Grüezi',
-                      user.data && user.data.systemAddress.first_name ? ', ' : '',
+                      "span",
+                      { className: "userHello" },
+                      domain === "de" ? "Hallo" : "Grüezi",
+                      user.data && user.data.systemAddress.first_name ? ", " : "",
                       _react2.default.createElement(
-                        'span',
-                        { className: 'user-name' },
+                        "span",
+                        { className: "user-name" },
                         user.data && user.data.systemAddress.first_name,
-                        '!'
+                        "!"
                       ),
                       _react2.default.createElement(
-                        'div',
-                        { className: 'userLinks' },
+                        "div",
+                        { className: "userLinks" },
                         _react2.default.createElement(
                           _reactRouter.Link,
-                          { to: '/kundenkonto' },
-                          'Mein Konto'
+                          { to: "/kundenkonto" },
+                          "Mein Konto"
                         ),
                         _react2.default.createElement(
-                          'span',
+                          "span",
                           { onClick: this.logOut },
-                          'Ausloggen'
+                          "Ausloggen"
                         )
                       )
                     )
                   ),
-                  _react2.default.createElement('input', { type: 'checkbox', id: 'op', className: 'op' }),
+                  _react2.default.createElement("input", { type: "checkbox", id: "op", className: "op" }),
                   _react2.default.createElement(_loginForm2.default, {
                     registerUser: this.registerUser,
                     showInputCode: showInputCode,
@@ -4499,54 +4666,74 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
                     loginFacebook: this.loginFacebook,
                     loginGoogle: this.loginGoogle
                   }),
-                  _react2.default.createElement('input', { type: 'checkbox', id: 'forgotPassword' }),
+                  _react2.default.createElement("input", { type: "checkbox", id: "forgotPassword" }),
                   _react2.default.createElement(_loginFormForgotPassword2.default, null),
                   !user.isLogin && _react2.default.createElement(
-                    'label',
-                    { onClick: function onClick() {
-                        return $('.login-box-wrapper').css({ display: 'block' });
-                      }, className: pageNotFound ? 'show-desktop login-page404 basket' : 'show-desktop login basket', htmlFor: 'op' },
+                    "label",
+                    {
+                      onClick: function onClick() {
+                        return $(".login-box-wrapper").css({ display: "block" });
+                      },
+                      className: pageNotFound ? "show-desktop login-page404 basket" : "show-desktop login basket",
+                      htmlFor: "op"
+                    },
                     _react2.default.createElement(
-                      'span',
+                      "span",
                       null,
-                      _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/person-top.svg', alt: '' })
+                      _react2.default.createElement("img", {
+                        loading: "lazy",
+                        src: "/images/design/person-top.svg",
+                        alt: ""
+                      })
                     )
                   ),
                   _react2.default.createElement(
-                    'span',
-                    { className: pageNotFound ? 'show-desktop basketButtons-page404' : 'show-desktop basketButtons' },
+                    "span",
+                    {
+                      className: pageNotFound ? "show-desktop basketButtons-page404" : "show-desktop basketButtons"
+                    },
                     _react2.default.createElement(
                       _reactRouter.Link,
-                      { to: '/warenkorb' },
+                      { to: "/warenkorb" },
                       _react2.default.createElement(
-                        'span',
-                        { className: 'basket cart-icon' },
+                        "span",
+                        { className: "basket cart-icon" },
                         _react2.default.createElement(
-                          'span',
+                          "span",
                           null,
-                          _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/cart-new.svg', alt: '' })
+                          _react2.default.createElement("img", {
+                            loading: "lazy",
+                            src: "/images/design/cart-new.svg",
+                            alt: ""
+                          })
                         ),
                         basket.countVerkaufen + basket.count > 0 && _react2.default.createElement(
-                          'span',
-                          { className: 'count cart-total-kaufen' },
+                          "span",
+                          { className: "count cart-total-kaufen" },
                           basket.countVerkaufen + basket.count
                         )
                       )
                     )
                   ),
                   _react2.default.createElement(
-                    'span',
-                    { className: pageNotFound ? 'show-desktop wishButton-page404' : 'show-desktop wishButtons' },
+                    "span",
+                    {
+                      className: pageNotFound ? "show-desktop wishButton-page404" : "show-desktop wishButtons"
+                    },
                     _react2.default.createElement(
                       _reactRouter.Link,
-                      { to: '/wunschliste' },
+                      { to: "/wunschliste" },
                       _react2.default.createElement(
-                        'span',
+                        "span",
                         null,
-                        _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/wishIcon.svg', alt: '' }),
+                        _react2.default.createElement("img", {
+                          loading: "lazy",
+                          src: "/images/design/wishIcon.svg",
+                          alt: ""
+                        }),
                         basket.wishlistCount > 0 && _react2.default.createElement(
-                          'span',
-                          { className: 'count wish-total-kaufen' },
+                          "span",
+                          { className: "count wish-total-kaufen" },
                           basket.wishlistCount
                         )
                       )
@@ -4556,65 +4743,72 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
               )
             )
           ),
-          _react2.default.createElement(_headerMobile2.default, { menu: true, title: '<img loading="lazy" alt="Logo" src="/images/design/logo_all_pages.svg"/>' }),
+          _react2.default.createElement(_headerMobile2.default, {
+            menu: true,
+            title: "<img loading=\"lazy\" alt=\"Logo\" src=\"/images/design/logo_all_pages.svg\"/>"
+          }),
           false && _react2.default.createElement(
-            'div',
-            { className: 'row d-none header-mobile scrolling-header show-ipad' },
+            "div",
+            { className: "row d-none header-mobile scrolling-header show-ipad" },
             _react2.default.createElement(
-              'div',
-              { className: 'wrap-header' },
+              "div",
+              { className: "wrap-header" },
               _react2.default.createElement(
-                'div',
-                { className: 'col-xs-2' },
+                "div",
+                { className: "col-xs-2" },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'hamburger', onClick: this.showMenu },
+                  "div",
+                  { className: "hamburger", onClick: this.showMenu },
                   _react2.default.createElement(
-                    'svg',
-                    { viewBox: '0 0 64 48' },
-                    _react2.default.createElement('path', { d: 'M19,15 L45,15 C70,15 58,-2 49.0177126,7 L19,37' }),
-                    _react2.default.createElement('path', { d: 'M19,24 L45,24 C61.2371586,24 57,49 41,33 L32,24' }),
-                    _react2.default.createElement('path', { d: 'M45,33 L19,33 C-8,33 6,-2 22,14 L45,37' })
+                    "svg",
+                    { viewBox: "0 0 64 48" },
+                    _react2.default.createElement("path", { d: "M19,15 L45,15 C70,15 58,-2 49.0177126,7 L19,37" }),
+                    _react2.default.createElement("path", { d: "M19,24 L45,24 C61.2371586,24 57,49 41,33 L32,24" }),
+                    _react2.default.createElement("path", { d: "M45,33 L19,33 C-8,33 6,-2 22,14 L45,37" })
                   )
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-xs-8 text-center' },
+                "div",
+                { className: "col-xs-8 text-center" },
                 _react2.default.createElement(
-                  'p',
-                  { className: 'title' },
-                  _react2.default.createElement('img', { loading: 'lazy', alt: 'Logo', src: '/images/design/logo_all_pages.svg' })
+                  "p",
+                  { className: "title" },
+                  _react2.default.createElement("img", {
+                    loading: "lazy",
+                    alt: "Logo",
+                    src: "/images/design/logo_all_pages.svg"
+                  })
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'col-xs-2 text-right' },
+                "div",
+                { className: "col-xs-2 text-right" },
                 _react2.default.createElement(
-                  'span',
-                  { className: 'basketButtons' },
+                  "span",
+                  { className: "basketButtons" },
                   _react2.default.createElement(
-                    'span',
-                    { className: 'basket' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/cart-new.svg' })
+                    "span",
+                    { className: "basket" },
+                    _react2.default.createElement("img", { loading: "lazy", src: "/images/design/cart-new.svg" })
                   ),
                   basket.countVerkaufen + basket.count > 0 && _react2.default.createElement(
-                    'span',
-                    { className: 'count cart-total-kaufen' },
+                    "span",
+                    { className: "count cart-total-kaufen" },
                     basket.countVerkaufen + basket.count
                   ),
                   _react2.default.createElement(
-                    'div',
-                    { className: 'basketLinks' },
+                    "div",
+                    { className: "basketLinks" },
                     _react2.default.createElement(
-                      'a',
-                      { href: '/warenkorb' },
-                      'Warenkorb'
+                      "a",
+                      { href: "/warenkorb" },
+                      "Warenkorb"
                     ),
                     _react2.default.createElement(
-                      'a',
-                      { href: '/verkaufen/warenkorb' },
-                      'Verkaufskorb'
+                      "a",
+                      { href: "/verkaufen/warenkorb" },
+                      "Verkaufskorb"
                     )
                   )
                 )
@@ -4622,9 +4816,9 @@ var HeaderTop = exports.HeaderTop = function (_Component) {
             ),
             _react2.default.createElement(_menuMobile2.default, { showLangMenu: null })
           ),
-          urlPathName === '/' && !window.isMobile && _react2.default.createElement(_headerBottomMainPage2.default, null),
-          urlPathName === '/jobs' && _react2.default.createElement(_headerBottomJobsPage2.default, null),
-          urlPathName === '/faq' && _react2.default.createElement(_headerBottomFaqPage2.default, null),
+          urlPathName === "/" && !window.isMobile && _react2.default.createElement(_headerBottomMainPage2.default, null),
+          urlPathName === "/jobs" && _react2.default.createElement(_headerBottomJobsPage2.default, null),
+          urlPathName === "/faq" && _react2.default.createElement(_headerBottomFaqPage2.default, null),
           spinner,
           msgInfo,
           this.state.showCouponFromAds && _react2.default.createElement(_couponFromAds2.default, { toggleLightbox: this.toggleCouponFromAds })

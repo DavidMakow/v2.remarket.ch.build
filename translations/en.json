@@ -222,5 +222,9 @@
     "detailModelPage.modelInfoBlock.warranty2": "Years",
     "detailModelPage.modelInfoBlock.battery": "Battery",
     "detailModelPage.modelInfoBlock.capacityBattery": "Capacity",
-    "detailModelPage.modelInfoBlock.chargingBattery": "Charging Cycles"
+    "detailModelPage.modelInfoBlock.chargingBattery": "Charging Cycles",    
+    "header.headerTop.devices": "Devices",
+    "header.headerTop.accessories": "Accessories",
+    "kaufen.h1": "Which device would you like to buy?",
+    "kaufen.p": "Select product"
 }

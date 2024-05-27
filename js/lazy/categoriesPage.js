@@ -3942,6 +3942,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouter = __webpack_require__(206);
 
+var _helpersFunction = __webpack_require__(316);
+
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SubcategoriesComponent = function (_Component) {
@@ -3973,9 +3977,13 @@ var SubcategoriesComponent = function (_Component) {
                 var paramKeyIndex = key.slice(14);
                 if (key.includes('deviceCategory') && params[key] && +paramKeyIndex < index) strPrevUrl += params[key] + '/';
             }
-
+            var checkLang = (0, _helpersFunction.getLang)();
+            var deviceName = "";
+            if (checkLang == "de") deviceName = element.name;else if (checkLang == "en") deviceName = element.nameEn;else if (checkLang == "fr") deviceName = element.nameFr;else if (checkLang == "it") deviceName = element.nameIt;
+            if (element.name == 'Zubehör') {
+                if (checkLang == "de") deviceName = element.name;else if (checkLang == "en") deviceName = this.props.t('header.headerTop.accessories');else if (checkLang == "fr") deviceName = this.props.t('header.headerTop.accessories');else if (checkLang == "it") deviceName = this.props.t('header.headerTop.accessories');
+            }
             var strForLastCategory = element.submodels ? '' : '/filter';
-            // if(element.name !== 'Zubehör') {
             return _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/kaufen/' + strPrevUrl + element.name.toLowerCase().replace(/ /g, '-') + strForLastCategory,
@@ -3986,15 +3994,15 @@ var SubcategoriesComponent = function (_Component) {
                     _react2.default.createElement('img', { loading: 'lazy', src: '/images/design/' + element.id + 'activeDevice.svg', alt: '' })
                 ),
                 this.props.index !== 1 && element.logoContent && _react2.default.createElement('div', { className: 'image', dangerouslySetInnerHTML: { __html: element.logoContent } }),
-                this.props.index !== 1 && element.images && _react2.default.createElement(
+                this.props.index !== 1 && element.image && _react2.default.createElement(
                     'div',
                     { className: 'image' },
-                    _react2.default.createElement('img', { loading: 'lazy', src: element.images[0], alt: '' })
+                    _react2.default.createElement('img', { loading: 'lazy', src: element.image, alt: '' })
                 ),
                 _react2.default.createElement(
                     'p',
                     { className: 'name' },
-                    element.name
+                    deviceName
                 )
             );
             // }
@@ -4052,7 +4060,7 @@ var SubcategoriesComponent = function (_Component) {
 
 SubcategoriesComponent.propTypes = {};
 SubcategoriesComponent.defaultProps = {};
-exports.default = SubcategoriesComponent;
+exports.default = (0, _reactI18next.withTranslation)()(SubcategoriesComponent);
 
 /***/ }),
 
@@ -4113,6 +4121,8 @@ var _redux = __webpack_require__(148);
 
 var _helpersFunction = __webpack_require__(316);
 
+var _reactI18next = __webpack_require__(315);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -4151,7 +4161,7 @@ var CategoriesPage = exports.CategoriesPage = function (_Component) {
         };
 
         _this.state = {
-            categoryName: _this.props.params.deviceCategory1 || 'Welches Gerät möchten Sie kaufen?',
+            categoryName: _this.props.params.deviceCategory1 || _this.props.t('kaufen.h1'),
             searchData: [],
             searchValue: '' || _this.props.helperCounter,
             totalSearchItems: 0,
@@ -4395,7 +4405,7 @@ var CategoriesPage = exports.CategoriesPage = function (_Component) {
                                         _react2.default.createElement(
                                             'p',
                                             { className: 'category' },
-                                            'Produkt ausw\xE4hlen'
+                                            this.props.t('kaufen.p')
                                         ),
                                         _react2.default.createElement(
                                             'p',
@@ -4485,7 +4495,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CategoriesPage);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactI18next.withTranslation)()(CategoriesPage));
 
 /***/ }),
 

@@ -22807,7 +22807,7 @@ var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
   }
 
   function conditionCheck(conditionLang) {
-    if (checkLang == "de") return conditionLang.condition;else if (checkLang == "en") return conditionLang.condition_en;else if (checkLang == "fr") return conditionLang.condition_fr;else if (checkLang == "it") return conditionLang.condition_it;
+    if (checkLang == "de") return conditionLang.condition;else if (checkLang == "en") return conditionLang.condition_en;else if (checkLang == "fr") return conditionLang.condition_fr;else if (checkLang == "it") return conditionLang.condition_it;else return "";
   }
 
   function mapCriterias(criterias) {
@@ -22857,6 +22857,7 @@ var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
     if (description != "") description += ", ";
     description += model.warranty !== "" ? "Garantie: " + model.warranty : "";
     description = description.length > 28 ? description.substr(0, 28) + "..." : description;
+    console.log('model = ', model);
     var checkCondition = conditionCheck(model);
     var condition = checkCondition.length > 24 ? checkCondition.substr(0, 24) + "..." : checkCondition;
     var placeDescription = model.placeDescription.length > 24 ? model.placeDescription.substr(0, 24) + "..." : model.placeDescription;

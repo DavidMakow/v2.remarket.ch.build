@@ -55169,7 +55169,7 @@ var ProductOverview = function ProductOverview(_ref) {
   };
 
   function conditionCheck(conditionLang) {
-    if (checkLang == "de") return conditionLang.condition;else if (checkLang == "en") return conditionLang.condition_en;else if (checkLang == "fr") return conditionLang.condition_fr;else if (checkLang == "it") return conditionLang.condition_it;
+    if (checkLang == "de") return conditionLang.condition;else if (checkLang == "en") return conditionLang.condition_en;else if (checkLang == "fr") return conditionLang.condition_fr;else if (checkLang == "it") return conditionLang.condition_it;else return "";
   }
 
   function mapBasketData(item, i) {
