@@ -2583,7 +2583,6 @@ var Basket = exports.Basket = function (_PureComponent) {
                     if (typeof sub_result.data.invoiceNumber === "string" && sub_result.data.invoiceNumber != "") {
                       _reactRouter.browserHistory.push("/danke");
                     } else {
-                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=115");
                       _reactRouter.browserHistory.push("/error-payment");
                     }
                   }).catch(function (error) {
@@ -2597,10 +2596,9 @@ var Basket = exports.Basket = function (_PureComponent) {
                   document.getElementById("spinner-box-load").style.display = "block";
                   _axios2.default.get("/api/idealPaymentRatenzahlung?basketShortcode=" + result.data.basketShortcode + "&basketOrderInfoId=" + result.data.basketOrderInfoId).then(function (sub_result) {
                     document.getElementById("spinner-box-load").style.display = "none";
-                    if (sub_result.status === 200) {
+                    if (typeof sub_result.data.invoiceNumber === "string" && sub_result.data.invoiceNumber != "") {
                       _reactRouter.browserHistory.push("/danke");
                     } else {
-                      _axios2.default.get("/api/errorOrder?basketOrderInfoId=" + result.data.basketOrderInfoId + "&payment_type_id=116");
                       _reactRouter.browserHistory.push("/error-payment");
                     }
                   }).catch(function (error) {
@@ -2788,6 +2786,12 @@ var Basket = exports.Basket = function (_PureComponent) {
             })
           });
           $(".paymentMethod h3.title").addClass("answering");
+          if (e.target.value == "IdealPaymentRechnung" || e.target.value == "IdealPaymentRatenzahlung") {
+            var inputCheckbox = this.state.inputCheckbox;
+
+            inputCheckbox.company = false;
+            this.setState({ inputCheckbox: inputCheckbox });
+          }
         }
       }
     }
@@ -3425,6 +3429,7 @@ var Basket = exports.Basket = function (_PureComponent) {
                     user: user,
                     error: errors,
                     inputCheckbox: inputCheckbox,
+                    payMethod: this.state.payMethod,
                     changeCountry: this.changeCountry,
                     showTabs: showTabs,
                     handlerNextTab: this.nextTab,
@@ -47244,6 +47249,7 @@ var PersonalData = function PersonalData(_ref) {
   var changeCountry = _ref.changeCountry,
       country = _ref.country,
       inputCheckbox = _ref.inputCheckbox,
+      payMethod = _ref.payMethod,
       changeCheckbox = _ref.changeCheckbox,
       ifErrorPayment = _ref.ifErrorPayment,
       error = _ref.error,
@@ -47430,7 +47436,7 @@ var PersonalData = function PersonalData(_ref) {
             ),
             _react2.default.createElement(
               "label",
-              null,
+              { className: payMethod && (payMethod.method == "IdealPaymentRechnung" || payMethod.method == "IdealPaymentRatenzahlung") ? "hide" : "" },
               _react2.default.createElement("input", {
                 type: "checkbox",
                 name: "company",
@@ -47491,14 +47497,15 @@ var PersonalData = function PersonalData(_ref) {
                 name: "firstname",
                 className: validateError.firstname.error ? clickBtn === true ? "error purple" : "error" : null,
                 placeholder: "Vorname",
+                id: "isVorname",
                 onChange: function onChange() {
                   return validateForm();
                 },
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "isVorname" },
                 "Vorname"
               ),
               _react2.default.createElement(
@@ -47514,6 +47521,7 @@ var PersonalData = function PersonalData(_ref) {
                 type: "text",
                 name: "lastname",
                 className: validateError.lastname.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "isNachname",
                 placeholder: "Nachname",
                 onChange: function onChange() {
                   return validateForm();
@@ -47521,8 +47529,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "isNachname" },
                 "Nachname"
               ),
               _react2.default.createElement(
@@ -47546,6 +47554,7 @@ var PersonalData = function PersonalData(_ref) {
                 type: "email",
                 name: "email",
                 className: error.info || validateError.email.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "isE-Mail",
                 placeholder: "E-Mail",
                 onChange: function onChange() {
                   return validateForm();
@@ -47553,8 +47562,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "isE-Mail" },
                 "E-Mail"
               ),
               _react2.default.createElement(
@@ -47570,6 +47579,7 @@ var PersonalData = function PersonalData(_ref) {
                 type: "tel",
                 name: "phone",
                 className: validateError.phone.error ? clickBtn === true ? "error purple" : "error" : null,
+                id: "isTelefon",
                 placeholder: "Telefon (mobil)",
                 minLength: "10",
                 onChange: function onChange() {
@@ -47578,8 +47588,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "isTelefon" },
                 "Telefon (mobil)"
               ),
               _react2.default.createElement(
@@ -47611,8 +47621,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "route" },
                 "Strasse"
               ),
               _react2.default.createElement(
@@ -47636,8 +47646,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "street_number" },
                 "Nr."
               ),
               _react2.default.createElement(
@@ -47665,8 +47675,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "postal_code" },
                 "PLZ"
               ),
               _react2.default.createElement(
@@ -47690,8 +47700,8 @@ var PersonalData = function PersonalData(_ref) {
                 required: true
               }),
               _react2.default.createElement(
-                "span",
-                { className: "placeholder" },
+                "label",
+                { className: "placeholder", "for": "locality" },
                 "Stadt"
               ),
               _react2.default.createElement(

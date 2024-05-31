@@ -22846,6 +22846,9 @@ var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
         deviceName = model.deviceName.toLowerCase().replace(/ /g, "-") || "deviceName",
         color = model.color ? model.color.toLowerCase() : "color",
         capacity = model.capacity ? model.capacity.toLowerCase() : "capacity";
+    var longWarranty = "";
+    var newWarranty = model.warranty.split(" ");
+    if (newWarranty[0] < 2) longWarranty = t("kaufen.innerPage.deviceModelsGrid.warranty1");else longWarranty = t("kaufen.innerPage.deviceModelsGrid.warranty2");
 
     var mainImages = [].concat(model.deviceImages.mainImg);
     var realImages = [].concat(model.deviceImages.realImg);
@@ -22855,9 +22858,8 @@ var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
     if (description != "") description += ", ";
     description += model.color !== "" ? model.color : "";
     if (description != "") description += ", ";
-    description += model.warranty !== "" ? "Garantie: " + model.warranty : "";
+    description += model.warranty !== "" ? t("kaufen.innerPage.deviceModelsGrid.warranty") + " " + newWarranty[0] + " " + longWarranty : "";
     description = description.length > 28 ? description.substr(0, 28) + "..." : description;
-    console.log('model = ', model);
     var checkCondition = conditionCheck(model);
     var condition = checkCondition.length > 24 ? checkCondition.substr(0, 24) + "..." : checkCondition;
     var placeDescription = model.placeDescription.length > 24 ? model.placeDescription.substr(0, 24) + "..." : model.placeDescription;
@@ -22903,7 +22905,6 @@ var DeviceModelsGrid = function DeviceModelsGrid(_ref) {
       textTransform: "initial",
       zIndex: "2"
     };
-    var newWarranty = model.warranty.split(" ");
     return _react2.default.createElement(
       "div",
       {
@@ -25403,7 +25404,7 @@ exports.default = ProductModelMenuRowNew;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(16);
@@ -25427,55 +25428,67 @@ var _reactI18next = __webpack_require__(315);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TopFilter = function TopFilter(_ref) {
-    var changeSortBy = _ref.changeSortBy,
-        viewMode = _ref.viewMode,
-        changeViewMode = _ref.changeViewMode,
-        currentValue = _ref.currentValue,
-        totalItems = _ref.totalItems,
-        showSearchBar = _ref.showSearchBar,
-        options = _ref.options,
-        mapDuplicateFilter = _ref.mapDuplicateFilter,
-        t = _ref.t;
+  var changeSortBy = _ref.changeSortBy,
+      viewMode = _ref.viewMode,
+      changeViewMode = _ref.changeViewMode,
+      currentValue = _ref.currentValue,
+      totalItems = _ref.totalItems,
+      showSearchBar = _ref.showSearchBar,
+      mapDuplicateFilter = _ref.mapDuplicateFilter,
+      deviceName = _ref.deviceName,
+      t = _ref.t;
 
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'row topFilter' },
+  var options = deviceName === "zubehör" ? [{ label: t("dropDownFilterSortBy1"), value: "popular" }, {
+    label: t("dropDownFilterSortBy2"),
+    value: "niedrighoch"
+  }, {
+    label: t("dropDownFilterSortBy3"),
+    value: "hochniedrig"
+  }, { label: t("dropDownFilterSortBy4"), value: "neu" }] : [{ label: t("dropDownFilterSortBy5"), value: "popular" }, {
+    label: t("dropDownFilterSortBy2"),
+    value: "niedrighoch"
+  }, {
+    label: t("dropDownFilterSortBy3"),
+    value: "hochniedrig"
+  }, { label: t("dropDownFilterSortBy4"), value: "neu" }];
+  return _react2.default.createElement(
+    "div",
+    { className: "row topFilter" },
+    _react2.default.createElement(
+      "div",
+      { className: "col-sm-12 sortBy" },
+      mapDuplicateFilter,
+      _react2.default.createElement("div", { className: "flex-grow-1" }),
+      _react2.default.createElement(
+        "div",
+        { className: "text-center countProducts" },
         _react2.default.createElement(
-            'div',
-            { className: 'col-sm-12 sortBy' },
-            mapDuplicateFilter,
-            _react2.default.createElement('div', { className: 'flex-grow-1' }),
-            _react2.default.createElement(
-                'div',
-                { className: 'text-center countProducts' },
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    totalItems,
-                    ' ',
-                    totalItems < 2 ? t("totalArtikel") : t("totalArtikels"),
-                    ' '
-                )
-            ),
-            _react2.default.createElement(
-                'span',
-                null,
-                t('dropDownFilterSortBy')
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'select' },
-                _react2.default.createElement(_reactSelect2.default, {
-                    options: options,
-                    onChange: changeSortBy,
-                    value: currentValue,
-                    searchable: false,
-                    clearable: false
-                })
-            )
+          "p",
+          null,
+          totalItems,
+          " ",
+          totalItems < 2 ? t("totalArtikel") : t("totalArtikels"),
+          " "
         )
-    );
+      ),
+      _react2.default.createElement(
+        "span",
+        null,
+        t("dropDownFilterSortBy")
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "select" },
+        _react2.default.createElement(_reactSelect2.default, {
+          options: options,
+          onChange: changeSortBy,
+          value: currentValue,
+          searchable: false,
+          clearable: false
+        })
+      )
+    )
+  );
 };
 
 TopFilter.propTypes = {};
@@ -26768,7 +26781,7 @@ var ModelsInnerPage = exports.ModelsInnerPage = function (_Component) {
           this._getModelsDataByCategoryId(nextProps.params);
           selectedFilterOptions.sort = "popular";
           this.setState({
-            options: [{ label: "Nach Beliebtheit", value: "popular" }, { label: "Günstige Preise zuerst anzeigen", value: "niedrighoch" }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }],
+            options: [{ label: this.props.t('dropDownFilterSortBy1'), value: "popular" }, { label: this.props.t('dropDownFilterSortBy2'), value: "niedrighoch" }, { label: this.props.t('dropDownFilterSortBy3'), value: "hochniedrig" }, { label: this.props.t('dropDownFilterSortBy4'), value: "neu" }],
             selectedFilterOptions: selectedFilterOptions
           });
         } else {
@@ -26776,7 +26789,7 @@ var ModelsInnerPage = exports.ModelsInnerPage = function (_Component) {
           this._getModelsData(nextProps.params);
           selectedFilterOptions.sort = "popular";
           this.setState({
-            options: [{ label: "Nach Beliebtheit", value: "popular" }, { label: "Günstige Preise zuerst anzeigen", value: "niedrighoch" }, { label: "Hohe Preise zuerst anzeigen", value: "hochniedrig" }, { label: "Nach Einstelldatum sortieren", value: "neu" }],
+            options: [{ label: this.props.t('dropDownFilterSortBy1'), value: "popular" }, { label: this.props.t('dropDownFilterSortBy2'), value: "niedrighoch" }, { label: this.props.t('dropDownFilterSortBy3'), value: "hochniedrig" }, { label: this.props.t('dropDownFilterSortBy4'), value: "neu" }],
             selectedFilterOptions: selectedFilterOptions
           });
         }
@@ -27671,6 +27684,7 @@ var ModelsInnerPage = exports.ModelsInnerPage = function (_Component) {
                     this.mapSelectedCriteria(availableFilterOptions, selectedFilterOptions)
                   ),
                   _react2.default.createElement(_topFilter2.default, {
+                    deviceName: deviceName,
                     changeSortBy: this.changeSortBy
                     //    showSearchBar={this.props.params.deviceCategory1}
                     , showSearchBar: false,
